@@ -8,17 +8,15 @@ $UserObj = new User();
 $error = [];
 
 if (isset($_POST['submit'])) {
-    print_r($_POST);
-
     if (isset($_POST['email']) && !empty($_POST['email'])) {
         $UserObj->email = $_POST['email'];
     } else {
-        $error['email'] = "Please enter your email!!";
+        $error['msg'] = "Cannot be left empty!!";
     }
     if (isset($_POST['password']) && !empty($_POST['password'])) {
         $UserObj->password = $_POST['password'];
     } else {
-        $error['password'] = "Please enter your password!!";
+        $error['msg'] = "Cannot be left empty!!";
     }
     if (count($error) < 1) {
         $status = $UserObj->Login();
@@ -40,25 +38,31 @@ if (isset($_POST['submit'])) {
         <div class="head">
             <h2> Admin Login Panel</h2>
         </div>
-        <form action="" method="post">
+        <form action="" id="loginForm" method="post" novalidate>
             <?php
             if (isset($status)) {
-                echo "<div >$status</div>";
+                echo "<label class='error' >$status</label>";
             }
             ?>
+            <?php if(isset($error['msg']) && !empty($error['msg'])) {?>
+                <label class="error"><?php echo $error['msg'] ;?></label>
+                <?php }?>
             <div class="form-group">
                 <input type="email" placeholder="Email:" name="email" id="email" required>
 
                 <input type="password" placeholder="Password:" name="password" id="pwd" required>
-                <input type="submit" value="submit" class="btn">
+                <input type="submit" name="submit"  class="btn">
             </div>
-            <div class="text">
+            <div class="text"> 
                 <p>Forgot password? <a href="reset_pwd.php"> Click here</a></p>
                 <p>Don't have an account? <a href="signup.php"> Create one</a></p>
             </div>
         </form>
     </div>
     <style>
+        .error{
+            color:red;
+        }
         * {
             padding: 0;
             margin: 0;
@@ -115,27 +119,13 @@ if (isset($_POST['submit'])) {
             text-align: center;
         }
     </style>
-
+    <script src="js/jqueryt/jquery.validate.min.js"></script>
+    <script src="js/jquery/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#loginForm').validate();
+        })
+    </script>
 </body>
 
 </html>
-<?php
-// include 'footer.php';
-
-
-// if (isset($_POST['submit'])) {
-//     $user = $_POST['uname'];
-//     $pwd = $_POST['pwd'];
-
-//     $query = "Select * from admin where uname = '$user' and pwd = '$pwd' ";
-//     $run = mysqli_query($conn, $query);
-
-//     $row = mysqli_num_rows($run);
-//     if ($row == 1) {
-//         $_SESSION['Login_success'] = 1;
-//         echo "success";
-//     } else {
-//         echo "Wrong";
-//     }
-// }
-?>
