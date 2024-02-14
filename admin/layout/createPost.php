@@ -1,12 +1,5 @@
 <?php
- include('headerFooter/header.php');
- include('../class/category.class.php');
- include('../class/news.class.php');
-
- $category = new Category();
- $categoryList = $category->retrieve();
-
- $news = new News();
+ include('header_footer/header.php');
 
  @session_start();
  if(isset($_POST['submit'])){
@@ -150,7 +143,7 @@
         </div>
     </div>
    <?php
-     include('headerFooter/footer.php');
+     include('header_footer/footer.php');
    ?>
    <script src="../js/ckeditor/ckeditor.js"></script>  
 
