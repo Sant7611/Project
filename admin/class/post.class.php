@@ -3,7 +3,7 @@ include('common.class.php');
 class Post extends Common
 {
     private $conn;
-    public $id, $title, $type, $episodes, $status, $sypnosis, $genre_id, $studio_id, $release_date, $image_url;
+    private $id, $title, $type, $episodes, $status, $sypnosis, $genre_id, $studio_id, $release_date, $image_url;
 
     public function __construct()
     {
