@@ -3,7 +3,7 @@
 include('common.class.php');
 class Genre extends Common{
 
-    private $id, $genre, $conn;
+    public $id, $genre, $conn;
     public function __construct()
     {
         $this->conn = mysqli_connect('localhost', 'root', '', 'anidb');

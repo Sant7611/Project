@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
         $category->set('created_date', date('Y-m-d H:i:s'));
         $result = $category->save();
         if ($result) {
-            $ErrMs = "";
+            $ErrMsg = "";
             $msg = "Category inserted Successfully with id " . $result;
         } else {
             $msg = "";
