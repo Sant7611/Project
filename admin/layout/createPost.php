@@ -16,9 +16,12 @@ if (isset($_POST['submit'])) {
     $post->set('type', $_POST['type']);
     $post->set('episodes', $_POST['episodes']);
     $post->set('status', $_POST['status']);
+    $post->set('slider_key', $_POST['slider_key']);
+    $post->set('featured', $_POST['featured']);
     $post->set('sypnosis', $_POST['sypnosis']);
     $post->set('genre_id', $_POST['genre_id']);
     $post->set('studio_id', $_POST['studio_id']);
+    $post->set('created_date', date('y-m-d H:i:s'));
     if ($_FILES['image']['error'] == 0) {
         if (
             $_FILES['image']['type'] == "image/png" ||

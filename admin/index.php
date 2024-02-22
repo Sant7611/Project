@@ -3,23 +3,23 @@
 if (array_key_exists('username', $_SESSION) && array_key_exists('username', $_COOKIE)) {
     header('Location:layout/dashboard.php');
 }
-include('class/user.class.php');
-$UserObj = new User();
+include('class/admin.class.php');
+$AdminObj = new Admin();
 $error = [];
 
 if (isset($_POST['submit'])) {
     if (isset($_POST['email']) && !empty($_POST['email'])) {
-        $UserObj->email = $_POST['email'];
+        $AdminObj->email = $_POST['email'];
     } else {
         $error['msg'] = "Cannot be left empty!!";
     }
     if (isset($_POST['password']) && !empty($_POST['password'])) {
-        $UserObj->password = $_POST['password'];
+        $AdminObj->password = $_POST['password'];
     } else {
         $error['msg'] = "Cannot be left empty!!";
     }
     if (count($error) < 1) {
-        $status = $UserObj->Login();
+        $status = $AdminObj->Login();
     }
 }
 ?>

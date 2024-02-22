@@ -12,6 +12,11 @@ $dataList = $postObj->fetch();
 
 include('sideBar.php');
 ?>
+<style>
+    tr {
+        text-align: center;
+    }
+</style>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
@@ -39,7 +44,7 @@ include('sideBar.php');
                 </thead>
                 <tbody>
                     <?php foreach ($dataList as $key => $post) { ?>
-                        <tr class="odd gradeX">
+                        <tr>
                             <td> <?php echo $key + 1; ?></td>
                             <td> <?php echo $post['title']; ?> </td>
                             <td> <?php echo $post['type']; ?> </td>
@@ -71,11 +76,9 @@ include('sideBar.php');
                         </tr>
                     <?php  } ?>
                 </tbody>
-
             </table>
         </div>
     </div>
-</div>
 </div>
 <?php
 include('header_footer/footer.php');
