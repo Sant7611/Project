@@ -7,13 +7,13 @@ $studio = new Studio();
 $datalist = $studio->fetch();
 
 ?>
-    <style>
-        .center {
-            text-align: center;
-        }
-    </style>
+<style>
+    .center {
+        text-align: center;
+    }
+</style>
 
-    <div class="main">
+<div id="page-wrapper">
 
     <?php echo "<pre>";
     print_r($datalist);

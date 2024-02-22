@@ -7,8 +7,9 @@ $post = new Post();
 $genre = new Genre();
 $studio = new Studio();
 
-$studios = $studio->fetch();
-$genres = $genre->fetch();
+$studioList = $studio->fetch();
+$genreList = $genre->fetch();
+
 @session_start();
 if (isset($_POST['submit'])) {
     $post->set('title', $_POST['title']);
@@ -18,8 +19,6 @@ if (isset($_POST['submit'])) {
     $post->set('sypnosis', $_POST['sypnosis']);
     $post->set('genre_id', $_POST['genre_id']);
     $post->set('studio_id', $_POST['studio_id']);
-    $post->set('image_url', $_POST['image']);
-
     if ($_FILES['image']['error'] == 0) {
         if (
             $_FILES['image']['type'] == "image/png" ||
@@ -40,6 +39,9 @@ if (isset($_POST['submit'])) {
             $imageError = "Invalid Image!";
         }
     }
+    echo "<pre>";
+    print_r($_FILES['image']);
+    echo "</pre>";
     $result = $post->save();
     if (is_integer($result)) {
         $ErrMs = "";
@@ -72,68 +74,46 @@ include('sideBar.php');
                     <input type="text" class="form-control" name="title" id="title" required>
                 </div>
                 <div class="form-group">
-                    <label>News Category</label>
-                    <select class="form-control" name="category_id" required>
-                        <option value="">Select Category</option>
-                        <?php foreach ($categoryList as $category) {  ?>
-                            <option value="<?php echo $category['id'];  ?>">
-                                <?php echo $category['name'];  ?>
+                    <label>Post Studio</label>
+                    <select class="form-control" name="studio_id" required>
+                        <option value="">Select Studio</option>
+                        <?php foreach ($studioList as $studios) {  ?>
+                            <option value="<?php echo $studios['id'];  ?>">
+                                <?php echo $studios['studio'];  ?>
                             </option>
                         <?php  } ?>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Short Detail</label>
-                    <textarea class="form-control" rows="3" name="short_detail" required></textarea>
+                    <label>Post Genre</label>
+                    <select class="form-control" name="genre_id" required>
+                        <option value="">Select Genre</option>
+                        <?php foreach ($genreList as $genres) {  ?>
+                            <option value="<?php echo $genres['id'];  ?>">
+                                <?php echo $genres['genre'];  ?>
+                            </option>
+                        <?php  } ?>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label>Detail</label>
-                    <textarea class="form-control ckeditor" rows="3" name="detail"></textarea>
+                    <label>Type</label>
+                    <textarea class="form-control" rows="3" name="type" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Sypnosis</label>
+                    <textarea class="form-control ckeditor" rows="3" name="sypnosis"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="episodes">Episodes: </label>
+                    <input type="number" name="episodes" id="">
                 </div>
                 <div class="form-group" enctype="multipart/form-data">
                     <label>Image</label>
                     <!-- using multiple helps to upload multiple images -->
                     <input type="file" name="image" required>
                 </div>
-                <div class="form-group">
-                    <label>Featured News</label>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="featured" id="optionsRadios1" value="1" checked>Yes
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="featured" id="optionsRadios2" value="0">No
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Breaking News</label>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="breaking" id="optionsRadios1" value="1" checked>Yes
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="breaking" id="optionsRadios2" value="0">No
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Slider Key</label>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="slider_key" id="optionsRadios1" value="1" checked>Yes
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="slider_key" id="optionsRadios2" value="0">No
-                        </label>
-                    </div>
-                </div>
+                
+                
                 <div class="form-group">
                     <label>Status</label>
                     <div class="radio">
@@ -153,13 +133,12 @@ include('sideBar.php');
         </div>
     </div>
 </div>
-</div>
 <?php
 include('header_footer/footer.php');
 ?>
 <script src="../js/ckeditor/ckeditor.js"></script>
 
-<script>
+<!-- <script>
     $(document).ready(function() {
         $('#name').keyup(function() {
             const value = $("#name").val();
@@ -183,4 +162,4 @@ include('header_footer/footer.php');
             })
         })
     })
-</script>
+</script> -->

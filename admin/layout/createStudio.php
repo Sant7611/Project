@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
-<div class="main">
+<div id="page-wrapper">
 
     <div id="Genre-main">
         <form action="" class="Genre" method="post">

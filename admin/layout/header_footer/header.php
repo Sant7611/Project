@@ -10,4 +10,3 @@
 </head>
 
 <body>
-<div class="main-body">
