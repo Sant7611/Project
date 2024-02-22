@@ -1,5 +1,5 @@
 <?php
-include('common.class.php');
+require_once('common.class.php');
 class Post extends Common
 {
     private $conn;
@@ -12,7 +12,7 @@ class Post extends Common
 
     public function save()
     {
-        $sql = "insert into post (title, type, episodes, status, sypnosis, genre_id, studio_id, release_date,image_url) values ($this->title,$this->episodes,$this->status,$this->sypnosis,$this->genre_id	,$this->studio_id	,$this->release_date	,$this->image_url); ";
+        $sql = "insert into post (title, type, episodes, status, sypnosis, genre_id, studio_id, release_date,image_url) values ('$this->title',$this->episodes,'$this->status','$this->sypnosis',$this->genre_id	,$this->studio_id	,$this->release_date	,'$this->image_url'); ";
         $this->conn->query($sql);
         if ($this->conn->affected_rows == 1 && $this->conn->insert_id > 0) {
             return $this->conn->insert_id;

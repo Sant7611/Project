@@ -1,16 +1,16 @@
 <?php
 
 require_once('common.class.php');
-class Genre extends Common{
+class Studio extends Common{
 
-    public $id, $genre, $conn;
+    public $id, $studio, $conn;
     public function __construct()
     {
         $this->conn = mysqli_connect('localhost', 'root', '', 'anidb');
     }
 
     public function save(){
-        $sql = "insert into genre(genre) values ('$this->genre');";
+        $sql = "insert into studio(studio) values ('$this->studio');";
         $this->conn->query($sql);
         if($this->conn->affected_rows ==1){
             return $this->conn->insert_id;
@@ -19,14 +19,14 @@ class Genre extends Common{
         }
     }
     public function edit(){
-        $sql = "update genre set genre = '$this->genre' where id = $this->id;";
+        $sql = "update studio set studio = '$this->studio' where id = $this->id;";
         $this->conn->query($sql);
         if($this->conn->affected_rows == 1){
 
         }
     }
     public function delete(){
-        $sql = "delete from genre where id = $this->id;";
+        $sql = "delete from studio where id = $this->id;";
         $this->conn->query($sql);
         if($this->conn->affected_rows == 1){
             return $this->conn->insert_id;
@@ -35,7 +35,7 @@ class Genre extends Common{
         }
     }
     public function fetch(){
-        $sql = "select * from genre;";
+        $sql = "select * from studio;";
         $var = $this->conn->query($sql);
         if($var->num_rows > 0){
             $datalist = $var->fetch_all(MYSQLI_ASSOC);

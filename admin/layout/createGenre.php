@@ -21,20 +21,22 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
+<div class="main">
 
-<div id="Genre-main">
-    <form action="" class="Genre" method="post">
-        <?php if (isset($msg)) { ?>
+    <div id="Genre-main">
+        <form action="" class="Genre" method="post">
+            <?php if (isset($msg)) { ?>
             <div><?php echo $msg; ?> </div>
             <?php } ?>
         <?php if (isset($Err)) { ?>
             <div><?php echo $Err; ?> </div>
             <?php } ?>
-        <label class="label-block">Genre Name</label>
-        <input type="text" name="genre" class="input-genre">
-        <input type="submit" value="submit" name="submit">
-        <input type="reset">
+            <label class="label-block">Genre Name</label>
+            <input type="text" name="genre" class="input-genre">
+            <input type="submit" value="submit" name="submit">
+            <input type="reset">
     </form>
+</div>
 </div>
 
 <?php

@@ -5,12 +5,6 @@ abstract class Common{
       abstract function delete();
       abstract function fetch();
 
-      private $conn;
-      public function __construct()
-    {
-        $this->conn = mysqli_connect('localhost', 'root', '', 'anidb');
-    }
-
       public function set($key, $value){
         $this->$key = $this->validate($value);
       }

@@ -9,8 +9,8 @@ include('header_footer/header.php')
     }
 </style>
 
-<div class="sidebar">
-    <div class="sidebar-inner">
+    <div class="sidebar">
+        <div class="sidebar-inner">
         <div class="sidebar-inner-i">
             <ul>
                 <li>Dashboard</li>
@@ -32,6 +32,17 @@ include('header_footer/header.php')
                     <ul>
                         <li><a href="createGenre.php">Create Genre</a></li>
                         <li><a href="listGenre.php">List Genre</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+        <div class="sidebar-inner-i">
+            <ul>
+                <li>Studio Management
+                    <ul>
+                        <li><a href="createStudio.php">Create Studio</a></li>
+                        <li><a href="listStudio.php">List Studio</a></li>
                     </ul>
                 </li>
 
