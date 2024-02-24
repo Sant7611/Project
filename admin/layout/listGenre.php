@@ -2,9 +2,17 @@
 include('../class/genre.class.php');
 include('header_footer/header.php');
 include('sideBar.php');
+session_start();
+
 
 $genre = new Genre();
 $datalist = $genre->fetch();
+
+
+if (isset($_SESSION['message']) && $_SESSION['message'] != "") {
+    $msg = $_SESSION['message'];
+    $_SESSION['message'] = "";
+}
 
 ?>
 
@@ -16,9 +24,15 @@ $datalist = $genre->fetch();
 
 <div id="page-wrapper">
 
-    <?php echo "<pre>";
-    print_r($datalist);
-    echo "</pre>"; ?>
+    <?php
+    if (isset($msg)) {
+        echo '<div class="msg">' . $msg . ' </div>';
+    }
+    ?>
+
+    <div class="title">
+        <h1>List Genre</h1>
+    </div>
     <table>
         <tr>
             <th>S.No</th>
@@ -30,11 +44,10 @@ $datalist = $genre->fetch();
                 <td><?php echo $key + 1; ?></td>
                 <td><?php echo $genres['genre']; ?></td>
                 <td width="20%">
-                    <a href="editGenre.php?msg=<?php echo $genres['id'] ?>">Edit</a>
-                    <a href="deleteGenre.php?msg=<?php $genres['id'] ?>">Delete</a>
+                    <a href="editGenre.php?id=<?php echo $genres['id'] ?>">Edit</a>
+                    <a href="deleteGenre.php?id=<?php $genres['id'] ?>">Delete</a>
                 </td>
             </tr>
-
         <?php } ?>
     </table>
 </div>

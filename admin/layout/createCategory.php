@@ -2,7 +2,7 @@
 include('headerFooter/header.php');
 include('../class/category.class.php');
 
-$category = new Category();
+// $category = new Category();
 @session_start();
 if (isset($_POST['submit'])) {
     if (isset($_POST['CategoryEntry']) && !empty($_POST['CategoryEntry'])) {
