@@ -3,7 +3,7 @@ require_once('common.class.php');
 class Post extends Common
 {
     private $conn;
-    public $id, $title, $type, $episodes, $status, $slider_key, $featured, $sypnosis, $genre_id, $studio_id, $release_date, $image_url;
+    public $id, $title, $type, $episodes, $status, $slider_key, $featured, $sypnosis, $genre_id, $studio_id, $release_date, $image_url, $created_date;
 
     public function __construct()
     {
@@ -33,7 +33,7 @@ class Post extends Common
     {
         $sql = "delete from post where id = '$this->id';";
         $this->conn->query($sql);
-        if ($this->conn->affected_rows == 1 && $this->conn->insert_id > 0) {
+        if ($this->conn->affected_rows == 1 ) {
             $msg = "Success";
             return $msg;
         }
@@ -51,7 +51,7 @@ class Post extends Common
                     studio_id = '$this->studio_id',
                     release_date = '$this->release_date',
                     image_url = '$this->image_url'
-                    where id = $this->id;    ";
+                    where id = '$this->id';    ";
         $this->conn->query($sql);
         if ($this->conn->affected_rows > 0) {
             return $this->conn->insert_id;

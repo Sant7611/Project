@@ -23,10 +23,10 @@ if (isset($_POST['submit'])) {
     $post->set('title', $_POST['title']);
     $post->set('type', $_POST['type']);
     $post->set('episodes', $_POST['episodes']);
-    $post->set('status', $_POST['status']);
     $post->set('slider_key', $_POST['slider_key']);
-    $post->set('featured', $_POST['featured']);
+    $post->set('status', $_POST['status']);
     $post->set('sypnosis', $_POST['sypnosis']);
+    $post->set('featured', $_POST['featured']);
     $post->set('genre_id', $_POST['genre_id']);
     $post->set('studio_id', $_POST['studio_id']);
     $post->set('created_date', date('y-m-d H:i:s'));
@@ -57,7 +57,7 @@ if (isset($_POST['submit'])) {
     print_r($_FILES['image']);
     echo "</pre>";
     $result = $post->edit();
-    if (is_integer($result)) {
+    if ($result) {
         $ErrMs = "";
         $msg = "Post successfully updated with id " . $result;
     } else {
@@ -132,7 +132,7 @@ include('sideBar.php');
                 </div>
                 <div class="form-group" enctype="multipart/form-data">
                     <label>Image</label><br>
-                    <input type="hidden" value="<?php echo $data->image;  ?>" name="old_image">
+                    <input type="hidden" value="<?php echo $data->image_url;  ?>" name="old_image">
                     <img src="../images/<?php echo $data->image_url;  ?>" height="100" width="200" alt="" srcset=""><br>
                     <br><input type="file" name="image">
                 </div>
@@ -156,28 +156,19 @@ include('sideBar.php');
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Status</label>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="status" id="statusOption1" value="1" checked>Active
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="status" id="statusOption1" value="0">Inactive
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label>Featured</label>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="featured" id="featuredOption1" value="1" checked>Active
+                            <input type="radio" name="featured" id="featuredOption1" value="1" <?php if ($data->featured == 1) {
+                                                                                                    echo 'checked';
+                                                                                                } ?>>Active
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="featured" id="featuredOption2" value="0">Inactive
+                            <input type="radio" name="featured" id="featuredOption2" value="0" <?php if ($data->featured != 1) {
+                                                                                                    echo 'checked';
+                                                                                                } ?>>Inactive
                         </label>
                     </div>
                 </div>
@@ -185,16 +176,20 @@ include('sideBar.php');
                     <label>Slider Key</label>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="slider_key" id="sliderOption1" value="1" <?php if($data->slider_key == 1){echo 'checked';} ?>>Active
+                            <input type="radio" name="slider_key" id="sliderOption1" value="1" <?php if ($data->slider_key == 1) {
+                                                                                                    echo 'checked';
+                                                                                                } ?>>Active
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="slider_key" id="sliderOption2" value="0" <?php if($data->slider_key != 1){echo 'checked';} ?>>Inactive
+                            <input type="radio" name="slider_key" id="sliderOption2" value="0" <?php if ($data->slider_key != 1) {
+                                                                                                    echo 'checked';
+                                                                                                } ?>>Inactive
                         </label>
                     </div>
                 </div>
-               
+
                 <button type="submit" name="submit" value='submit' class="btn btn-success">Submit Button</button>
                 <button type="reset" class="btn btn-danger">Reset Button</button>
             </form>
