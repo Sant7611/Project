@@ -50,10 +50,11 @@ class Post extends Common
                     featured = '$this->featured',
                     studio_id = '$this->studio_id',
                     release_date = '$this->release_date',
-                    image_url = '$this->image_url';    ";
+                    image_url = '$this->image_url'
+                    where id = $this->id;    ";
         $this->conn->query($sql);
         if ($this->conn->affected_rows > 0) {
-            return 1;
+            return $this->conn->insert_id;
         } else {
             return false;
         }
@@ -75,7 +76,7 @@ class Post extends Common
         $sql = "select * from post where id = '$this->id';";
         $var = $this->conn->query($sql);
         if ($this->conn->affected_rows == 1) {
-            $result = $var->fetch_all(MYSQLI_ASSOC);
+            $result = $var->fetch_object();
             return $result;
         } else {
             return [];
