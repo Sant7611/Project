@@ -41,8 +41,9 @@ if (isset($_SESSION['message']) && $_SESSION['message'] != "") {
                 <td><?php echo $key + 1; ?></td>
                 <td><?php echo $studios['studio']; ?></td>
                 <td width="20%">
-                    <a href="editStudio.php?id=<?php echo $studios['id'] ?>">Edit</a>
-                    <a href="deleteStudio.php?id=<?php $studios['id'] ?>">Delete</a>
+                    <?php echo $studios['id']; ?>
+                    <a href="editStudio.php?id=<?php echo $studios['id'] ;?>">Edit</a>
+                    <a href="deleteStudio.php?id=<?php echo $studios['id']; ?>">Delete</a>
                 </td>
             </tr>
         <?php } ?>

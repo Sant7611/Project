@@ -3,7 +3,8 @@
 require_once('common.class.php');
 class Studio extends Common{
 
-    public $id, $studio, $conn;
+    public $id, $studio; 
+    private $conn;
     public function __construct()
     {
         $this->conn = mysqli_connect('localhost', 'root', '', 'anidb');
@@ -22,16 +23,18 @@ class Studio extends Common{
         $sql = "update studio set studio = '$this->studio' where id = $this->id;";
         $this->conn->query($sql);
         if($this->conn->affected_rows == 1){
-
+            
         }
+        
     }
     public function delete(){
-        $sql = "delete from studio where id = $this->id;";
+        $sql = "delete from studio where id = '$this->id';";
         $this->conn->query($sql);
         if($this->conn->affected_rows == 1){
-            return $this->conn->insert_id;
+            
+            return 'success';
         }else{
-            return false;
+            return 'failed';
         }
     }
     public function fetch(){

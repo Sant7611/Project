@@ -2,12 +2,12 @@
 
 class User
 {
-    public $id, $username, $email, $password;
+    public $id, $username, $email, $password, $created_date;
 
     public function signup()
     {
         $conn = mysqli_connect('localhost', 'root', '', 'anidb');
-        $sql = "insert into users(username, email, password) values ('$this->username', '$this->email', '$this->password');";
+        $sql = "insert into users(username, email, password) values ('$this->username', '$this->email', '$this->password';";
         mysqli_query($conn, $sql);
         if ($conn->affected_rows > 0) {
             header('location:login.php');
