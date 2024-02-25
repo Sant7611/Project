@@ -23,9 +23,11 @@ class Studio extends Common{
         $sql = "update studio set studio = '$this->studio' where id = $this->id;";
         $this->conn->query($sql);
         if($this->conn->affected_rows == 1){
-            
+            return "success";    
+        }else{
+            return "failed";
         }
-        
+
     }
     public function delete(){
         $sql = "delete from studio where id = '$this->id';";

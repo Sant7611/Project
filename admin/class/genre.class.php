@@ -22,7 +22,9 @@ class Genre extends Common{
         $sql = "update genre set genre = '$this->genre' where id = $this->id;";
         $this->conn->query($sql);
         if($this->conn->affected_rows == 1){
-
+            return "success";
+        }else{
+            return "failed";
         }
     }
     public function delete(){

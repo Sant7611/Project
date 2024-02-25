@@ -9,8 +9,8 @@ if (isset($_POST['submit'])) {
     // echo $_POST['studio'];
     if (isset($_POST['studio']) && !empty($_POST['studio'])) {
         $studio->set('studio', $_POST['studio']);
-        $res = $studio->save();
-        if ($res) {
+        $res = $studio->edit();
+        if ($res == "success") {
             $msg = "Studio successfully added with id " . $res;
             $Err = "";
         } else {
@@ -22,6 +22,7 @@ if (isset($_POST['submit'])) {
 }
 ?>
 <div id="page-wrapper">
+
     <div id="create-main">
         <form action="" class="studio" method="post">
             <?php if (isset($msg)) { ?>
