@@ -2,18 +2,12 @@
 include('header_footer/header.php')
 ?>
 
-<style>
-    .sidebar{
-        width: 15%;
-        background: grey;
-    }
-</style>
 
     <div class="sidebar">
         <div class="sidebar-inner">
         <div class="sidebar-inner-i">
             <ul>
-                <li>Dashboard</li>
+                <li><a href="dashboard.php">Dashboard</a></li>
             </ul>
         </div>
         <div class="sidebar-inner-i">

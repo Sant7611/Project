@@ -17,6 +17,7 @@ if (isset($_POST['submit'])) {
     $post->set('episodes', $_POST['episodes']);
     $post->set('status', $_POST['status']);
     $post->set('slider_key', $_POST['slider_key']);
+    $post->set('release_date', $_POST['release_date']);
     $post->set('featured', $_POST['featured']);
     $post->set('sypnosis', $_POST['sypnosis']);
     $post->set('genre_id', $_POST['genre_id']);
@@ -100,11 +101,16 @@ include('sideBar.php');
                 </div>
                 <div class="form-group">
                     <label>Type</label>
-                    <textarea class="form-control" rows="3" name="type" required></textarea>
+                    <input class="form-control" type="text" name="type" required></input>
                 </div>
                 <div class="form-group">
                     <label>Sypnosis</label>
                     <textarea class="form-control ckeditor" rows="3" name="sypnosis"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="release_date"> Release date: 
+                        <input type="date" name="release_date" id="release_date" value="<?php echo $data->release_date; ?>">
+                    </label>
                 </div>
                 <div class="form-group">
                     <label for="episodes">Episodes: </label>
@@ -115,8 +121,8 @@ include('sideBar.php');
                     <!-- using multiple helps to upload multiple images -->
                     <input type="file" name="image" required>
                 </div>
-                
-                
+
+
                 <div class="form-group">
                     <label>Status</label>
                     <div class="radio">

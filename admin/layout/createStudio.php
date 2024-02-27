@@ -21,7 +21,11 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
-<div id="page-wrapper">
+<div id="page-wrapper"><div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Create Studio</h1>
+        </div>
+    </div>
     <div id="create-main">
         <form action="" class="studio" method="post">
             <?php if (isset($msg)) { ?>

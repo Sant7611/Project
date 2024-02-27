@@ -22,7 +22,11 @@ if (isset($_POST['submit'])) {
 }
 ?>
 <div id="page-wrapper">
-
+<div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Create Genre</h1>
+        </div>
+    </div>
     <div id="Genre-main">
         <form action="" class="Genre" method="post">
             <?php if (isset($msg)) { ?>

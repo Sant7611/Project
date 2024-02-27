@@ -1,0 +1,25 @@
+#page-wrapper {
+  position: absolute;
+  top: 40px;
+  padding-bottom: 30px;
+  margin-left: 210px;
+}
+/* * {
+  margin: 0px;
+  padding: 0;
+} */
+.sidebar {
+  top: 40px;
+  position: absolute;
+  width: 200px;
+}
+.sidebar-inner {
+  height: 80vh;
+  width: 100%;
+  background: grey;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}

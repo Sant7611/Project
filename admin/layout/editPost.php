@@ -9,9 +9,9 @@ $post = new Post();
 
 $post->set('id', $id);
 $data = $post->getById();
-echo "<pre>";
-print_r($data);
-echo "</pre>";
+// echo "<pre>";
+// print_r($data);
+// echo "</pre>";
 $genre = new Genre();
 $studio = new Studio();
 
@@ -23,12 +23,13 @@ if (isset($_POST['submit'])) {
     $post->set('title', $_POST['title']);
     $post->set('type', $_POST['type']);
     $post->set('episodes', $_POST['episodes']);
-    $post->set('slider_key', $_POST['slider_key']);
-    $post->set('status', $_POST['status']);
     $post->set('sypnosis', $_POST['sypnosis']);
-    $post->set('featured', $_POST['featured']);
     $post->set('genre_id', $_POST['genre_id']);
+    $post->set('slider_key', $_POST['slider_key']);
+    $post->set('featured', $_POST['featured']);
     $post->set('studio_id', $_POST['studio_id']);
+    $post->set('release_date', $_POST['release_date']);
+    $post->set('status', $_POST['status']);
     $post->set('created_date', date('y-m-d H:i:s'));
     if (empty($_FILES['image']['name'])) {
         $post->set('image_url', $_POST['old_image']);
@@ -53,15 +54,16 @@ if (isset($_POST['submit'])) {
             $imageError = "Invalid Image!";
         }
     }
-    echo "<pre>";
-    print_r($_FILES['image']);
-    echo "</pre>";
+    // echo "<pre>";
+    // print_r($_FILES['image']);
+    // echo "</pre>";
     $result = $post->edit();
-    if ($result) {
+    // echo $result;
+    if ($result == 'success') {
         $ErrMs = "";
-        $msg = "Post successfully updated with id " . $result;
+        $msg = "Post successfully updated  ";
     } else {
-        $msg = "";
+        $msg = "Post cannot be updated";
     }
 }
 include('sideBar.php');
@@ -91,30 +93,25 @@ include('sideBar.php');
                     <label>Post Studio</label>
                     <select class="form-control" name="studio_id" required>
                         <?php foreach ($studioList as $studios) { ?>
-                            <option value="<?php echo $data->id; ?>" <?php if ($data->id == $studios['id']) {
-                                                                            echo 'selected';
-                                                                        } ?>>
+                            <option value="<?php echo $studios['id']; ?>" <?php if ($data->id == $studios['id']) {
+                                                                                echo 'selected';
+                                                                            } ?>>
                                 <?php echo $studios['studio']; ?>
                             </option>
-                            <option value="<?php echo $studios['id'];  ?>">
-                                <?php echo $studios['studio'];  ?>
-                            </option>
+
                         <?php  } ?>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>Post Genre</label>
                     <select class="form-control" name="genre_id" required>
-                        <option value="">Select Genre</option>
-                        <?php foreach ($genreList as $genres) {  ?>
-                            <option value="<?php echo $genres['id'] ?>" <?php if ($genres['id'] == $data->id) {
+                        <?php foreach ($genreList as $genre) { ?>
+                            <option value="<?php echo $genre['id']; ?>" <?php if ($data->id == $genre['id']) {
                                                                             echo 'selected';
                                                                         } ?>>
-                                <?php echo $genres['genre'] ?>
+                                <?php echo $genre['genre']; ?>
                             </option>
-                            <option value="<?php echo $genres['id'];  ?>">
-                                <?php echo $genres['genre'];  ?>
-                            </option>
+
                         <?php  } ?>
                     </select>
                 </div>
@@ -125,6 +122,11 @@ include('sideBar.php');
                 <div class="form-group">
                     <label>Sypnosis</label>
                     <textarea class="form-control ckeditor" rows="3" name="sypnosis"> <?php echo $data->sypnosis; ?></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="release_date"> Release Date:
+                        <input type="date" name="release_date" id="release_date" value="<?php echo $data->release_date; ?>">
+                    </label>
                 </div>
                 <div class="form-group">
                     <label for="episodes">Episodes: </label>

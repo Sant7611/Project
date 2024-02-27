@@ -33,7 +33,7 @@ class Post extends Common
     {
         $sql = "delete from post where id = '$this->id';";
         $this->conn->query($sql);
-        if ($this->conn->affected_rows == 1 ) {
+        if ($this->conn->affected_rows == 1) {
             $msg = "Success";
             return $msg;
         }
@@ -46,6 +46,7 @@ class Post extends Common
                     episodes = '$this->episodes',
                     sypnosis = '$this->sypnosis',
                     genre_id = '$this->genre_id',
+                    status= '$this->status',
                     slider_key = '$this->slider_key',
                     featured = '$this->featured',
                     studio_id = '$this->studio_id',
@@ -54,7 +55,7 @@ class Post extends Common
                     where id = '$this->id';    ";
         $this->conn->query($sql);
         if ($this->conn->affected_rows > 0) {
-            return $this->conn->insert_id;
+            return "success";
         } else {
             return false;
         }
@@ -83,13 +84,14 @@ class Post extends Common
         }
     }
 
-    public function selectPostById(){
+    public function selectPostById()
+    {
         $sql = "select * from post where id = '$this->id';";
         $result = $this->conn->query($sql);
-        if($result->num_rows == 1){
+        if ($result->num_rows == 1) {
             $var = $result->fetch_all(MYSQLI_ASSOC);
             return $var;
-        }else{
+        } else {
             return [];
         }
     }
@@ -105,12 +107,14 @@ class Post extends Common
         return $this->select($sql);
     }
 
-    public function selectSliderPost(){
+    public function selectSliderPost()
+    {
         $sql = "select * from post where status = 1 and slider_key = 1 order by created_date desc limit 3;";
         return $this->select($sql);
     }
 
-    public function selectPostByGenre(){
+    public function selectPostByGenre()
+    {
         $sql = "select * from post where genre_id = '$this->genre_id' order by created_date desc limit 3;";
     }
 }
