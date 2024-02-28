@@ -1,24 +1,25 @@
 <?php
 include('header_footer/header.php');
 include('../class/admin.class.php');
+session_start();
 include('sidebar.php');
-
+// echo $_SESSION['password'];
 $admin = new Admin();
-
 if (isset($_POST['submit'])) {
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
+    // echo "<pre>";
+    // print_r($_POST);
+    // echo "</pre>";
     $curr = $_POST['current_pw'];
     $new = $_POST['new_pw'];
     $confirm = $_POST['confirm_pw'];
 
     if (!empty($curr) && !empty($new) && !empty($confirm)) {
         if ($curr == $_SESSION['password']) {
+
             if ($confirm == $new) {
-                $_SESSION['password'] = $new;
-                $admin->$newPassword = $new;
+                $admin->newPassword = $new;
                 $res = $admin->ResetPw();
+                echo $res;
                 if ($res == "success") {
                     $msg = "Password successfully Updated.";
                 } else {
@@ -37,7 +38,7 @@ if (isset($_POST['submit'])) {
 ?>
 
 <div id="page-wrapper">
-    <form action="">
+    <form action="" method="post" novalidate>
         <div>
             <?php if (isset($msg)) { ?>
                 <div class="msg">
@@ -64,3 +65,7 @@ if (isset($_POST['submit'])) {
         <input type="submit" name="submit" value="submit">
     </form>
 </div>
+
+<?php
+include('header_footer/footer.php');
+?>

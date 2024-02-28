@@ -21,7 +21,7 @@ class Admin
             $_SESSION['id'] = $data->id;
             $_SESSION['username'] = $data->username;
             $_SESSION['email'] = $data->email;
-            $_SESSION['password'] = $data->password;
+            $_SESSION['password'] = $this->password;
             setcookie('username', $data->username, time() + 60 * 60);
             header('Location:layout/dashboard.php');
         } else {
@@ -35,6 +35,7 @@ class Admin
         $encpw = md5($this->newPassword);
         $sql = "update admin set password = '$encpw' where id = '$this->id';";
         $res = $this->conn->query($sql);
+        $_SESSION['password'] = $this->newPassword;
         if($res){
             return 'success';
         }else{

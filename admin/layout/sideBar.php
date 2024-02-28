@@ -1,10 +1,5 @@
-<?php 
-include('header_footer/header.php')
-?>
-
-
-    <div class="sidebar">
-        <div class="sidebar-inner">
+<div class="sidebar">
+    <div class="sidebar-inner">
         <div class="sidebar-inner-i">
             <ul>
                 <li><a href="dashboard.php">Dashboard</a></li>
@@ -14,7 +9,7 @@ include('header_footer/header.php')
             <ul>
                 <li>Post Management
                     <ul>
-                    <li><a href="createPost.php">Create Post</a></li>
+                        <li><a href="createPost.php">Create Post</a></li>
                         <li><a href="listPost.php">List Post</a></li>
                     </ul>
                 </li>
@@ -44,6 +39,6 @@ include('header_footer/header.php')
         </div>
     </div>
 </div>
-<?php 
+<?php
 include('header_footer/footer.php')
 ?>

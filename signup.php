@@ -1,7 +1,7 @@
 <?php
 include('admin/class/user.class.php');
 
-if(isset($_POST["submit"])){
+if (isset($_POST["submit"])) {
     $uname = $_POST['uname'];
     $pass = $_POST['pwd'];
     $email = $_POST['email'];
@@ -9,34 +9,40 @@ if(isset($_POST["submit"])){
 
     $userObj = new User();
 
-    if(isset($uname) && !empty($uname)){
+    if (isset($uname) && !empty($uname)) {
         $userObj->username =  $uname;
-    }else{
+    } else {
         $err['msg'] = 'Enter your username';
     }
-    if(isset($pass) && !empty($pass)){
+    if (isset($pass) && !empty($pass)) {
         $userObj->password = $pass;
-    }else{
+    } else {
         $err['msg'] = 'Enter your password';
     }
-    if(isset($email) && !empty($email)){
+    if (isset($email) && !empty($email)) {
         $userObj->email = $email;
-    }else{
+    } else {
         $err['msg'] = "Enter your email";
     }
+    try {
 
-    if(count($err) == 0){
-        $userObj->signup();
+        if (count($err) == 0) {
+            $userObj->signup();
+        }
+    } catch (exception $e) {
+        echo "not available username";
     }
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign-up Page</title>
 </head>
+
 <body>
     <div class="main">
         <form action="" method="post">
@@ -50,4 +56,5 @@ if(isset($_POST["submit"])){
         </form>
     </div>
 </body>
+
 </html>

@@ -17,7 +17,7 @@
             </div>
             <div class="profile">
                 <ul>
-                    <!-- <li><a href="logout.php">Logout</a></li> -->
+                    <li><a href="logout.php">Logout</a></li>
                     <li><a href="changepw.php">Change Password</a></li>
                 </ul>
             </div>
