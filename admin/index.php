@@ -44,25 +44,27 @@ if (isset($_POST['submit'])) {
                 echo "<label class='error' >$status</label>";
             }
             ?>
-            <?php if(isset($error['msg']) && !empty($error['msg'])) {?>
-                <label class="error"><?php echo $error['msg'] ;?></label>
-                <?php }?>
+            <?php if (isset($error['msg']) && !empty($error['msg'])) { ?>
+                <label class="error"><?php echo $error['msg']; ?></label>
+            <?php } ?>
             <div class="form-group">
                 <input type="email" placeholder="Email:" name="email" id="email" required>
 
                 <input type="password" placeholder="Password:" name="password" id="pwd" required>
-                <input type="submit" name="submit"  class="btn">
+                <!-- <input type="submit" name="submit"  class="btn"> -->
+                <button type="submit" name="submit">Submit</button>
             </div>
-            <div class="text"> 
+            <div class="text">
                 <p>Forgot password? <a href="reset_pwd.php"> Click here</a></p>
                 <p>Don't have an account? <a href="signup.php"> Create one</a></p>
             </div>
         </form>
     </div>
     <style>
-        .error{
-            color:red;
+        .error {
+            color: red;
         }
+
         * {
             padding: 0;
             margin: 0;
@@ -122,7 +124,7 @@ if (isset($_POST['submit'])) {
     <script src="js/jqueryt/jquery.validate.min.js"></script>
     <script src="js/jquery/jquery.min.js"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('#loginForm').validate();
         })
     </script>

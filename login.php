@@ -1,6 +1,8 @@
 <?php
 include('admin/class/user.class.php');
-
+if (isset($_GET['message'])) {
+    $message = $_GET['message'];
+}
 $userObj = new User();
 
 if (isset($_POST['submit'])) {
@@ -11,22 +13,21 @@ if (isset($_POST['submit'])) {
     if (isset($password) && !empty($password)) {
         $userObj->password = $password;
     } else {
-        $err['msg'] = 'Enter your password';
+        $err['msg'] = 1;
     }
     if (isset($email) && !empty($email)) {
         $userObj->email = $email;
     } else {
-        $err['msg'] = "Enter your email";
+        $err['msg'] = 1;
     }
-
     if (count($err) == 0) {
-        $stat = $userObj->login();
-        
-        echo "<pre>";
-        print_r($stat);
-        echo "</pre>";
+        $res = $userObj->login();
+        if ($res) {
+        } else {
+            $err['msg'] = "Invalaid Credentials!!!";
+        }
     } else {
-        echo "Invalid Credentials!!!!";
+        $err['msg'] = "Enter correct details!!!!";
     }
 }
 
@@ -43,6 +44,16 @@ if (isset($_POST['submit'])) {
 
 <body>
     <div class="main">
+        <?php if (isset($message)) { ?>
+            <div class="message">
+                <?php echo $message; ?>
+            </div>
+        <?php } ?>
+        <?php if (isset($err['msg'])) { ?>
+            <div class="message">
+                <?php echo $err['msg']; ?>
+            </div>
+        <?php } ?>
         <form action="" method="post">
             <fieldset>
                 <legend>Login</legend>

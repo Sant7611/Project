@@ -16,7 +16,9 @@ class Admin
         $var = $this->conn->query($sql);
         if ($var->num_rows > 0) {
             $data = $var->fetch_object();
-            print_r($var);
+            // echo "<pre>";
+            // print_r($data);
+            // echo "</pre>";
             session_start();
             $_SESSION['id'] = $data->id;
             $_SESSION['username'] = $data->username;

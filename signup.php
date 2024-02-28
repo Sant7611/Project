@@ -28,9 +28,11 @@ if (isset($_POST["submit"])) {
 
         if (count($err) == 0) {
             $userObj->signup();
+        } else {
+            $err['msg'] = "Please try again...";
         }
-    } catch (exception $e) {
-        echo "not available username";
+    } catch (mysqli_sql_exception $e) {
+        echo "Not available username or email!! Try another";
     }
 }
 ?>
@@ -45,6 +47,12 @@ if (isset($_POST["submit"])) {
 
 <body>
     <div class="main">
+        <?php if (isset($err['msg'])) { ?>
+            <div class="message">
+                <?php echo $err['msg'];
+                $err['msg'] = ""; ?>
+            </div>
+        <?php } ?>
         <form action="" method="post">
             <fieldset>
                 <legend>Sign-up form</legend>
