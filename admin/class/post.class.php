@@ -4,7 +4,7 @@ class Post extends Common
 {
     private $conn;
     public $id, $title, $type, $episodes, $status,
-    $source, $producers, $aired, $duration, $slider_key, $featured, $sypnosis, $genre_id, $studio_id, $release_date, $image_url, $created_date;
+        $source, $producers, $aired, $duration, $slider_key, $featured, $sypnosis, $genre_id, $studio_id, $release_date, $image_url, $created_date;
 
     public function __construct()
     {
@@ -47,12 +47,11 @@ class Post extends Common
     {
         $sql = "update post set 
                     title = '$this->title',
-                    type = '$this->type',
-                    
-        source = '$this->source',
-        duration = '$this->duration',
-        aired = '$this->aired',
-        producers = '$this->producers',
+                    type = '$this->type',      
+                    source = '$this->source',
+                    duration = '$this->duration',
+                    aired = '$this->aired',
+                    producers = '$this->producers',
                     episodes = '$this->episodes',
                     sypnosis = '$this->sypnosis',
                     genre_id = '$this->genre_id',
