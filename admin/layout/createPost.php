@@ -108,8 +108,8 @@ include('sideBar.php');
                     <textarea class="form-control ckeditor" rows="3" name="sypnosis"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="release_date"> Release date: 
-                        <input type="date" name="release_date" id="release_date" value="<?php echo $data->release_date; ?>">
+                    <label for="release_date"> Release date:
+                        <input type="date" name="release_date" id="release_date" value="">
                     </label>
                 </div>
                 <div class="form-group">

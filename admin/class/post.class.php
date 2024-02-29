@@ -3,7 +3,8 @@ require_once('common.class.php');
 class Post extends Common
 {
     private $conn;
-    public $id, $title, $type, $episodes, $status, $slider_key, $featured, $sypnosis, $genre_id, $studio_id, $release_date, $image_url, $created_date;
+    public $id, $title, $type, $episodes, $status,
+    $source, $producers, $aired, $duration, $slider_key, $featured, $sypnosis, $genre_id, $studio_id, $release_date, $image_url, $created_date;
 
     public function __construct()
     {
@@ -14,6 +15,10 @@ class Post extends Common
     {
         $sql = "insert into post (title, type, episodes, status, slider_key, featured, sypnosis, genre_id, studio_id, release_date,image_url) values ('$this->title', 
         '$this->type',
+        '$this->source',
+        '$this->duration',
+        '$this->aired',
+        '$this->producers',
          $this->episodes, 
          '$this->status', 
          '$this->slider_key', 
@@ -43,6 +48,11 @@ class Post extends Common
         $sql = "update post set 
                     title = '$this->title',
                     type = '$this->type',
+                    
+        source = '$this->source',
+        duration = '$this->duration',
+        aired = '$this->aired',
+        producers = '$this->producers',
                     episodes = '$this->episodes',
                     sypnosis = '$this->sypnosis',
                     genre_id = '$this->genre_id',
