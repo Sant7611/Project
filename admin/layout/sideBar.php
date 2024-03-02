@@ -37,6 +37,28 @@
 
             </ul>
         </div>
+        <div class="sidebar-inner-i">
+            <ul>
+                <li>Producer Management
+                    <ul>
+                        <li><a href="createProducer.php">Create Producer</a></li>
+                        <li><a href="listProducer.php">List Producer</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+        <div class="sidebar-inner-i">
+            <ul>
+                <li>Source Management
+                    <ul>
+                        <li><a href="createSource.php">Create Source</a></li>
+                        <li><a href="listSource.php">List Source</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
     </div>
 </div>
 <?php

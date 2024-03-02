@@ -3,10 +3,17 @@ include('header_footer/header.php');
 include('../class/post.class.php');
 include('../class/studio.class.php');
 include('../class/genre.class.php');
+include('../class/source.class.php');
+include('../class/producer.class.php');
+
 $post = new Post();
 $genre = new Genre();
 $studio = new Studio();
+$producer = new Producer();
+$source = new Source();
 
+$sourceList = $source->fetch(); 
+$producerList = $producer->fetch(); 
 $studioList = $studio->fetch();
 $genreList = $genre->fetch();
 
@@ -19,6 +26,10 @@ if (isset($_POST['submit'])) {
     $post->set('slider_key', $_POST['slider_key']);
     $post->set('release_date', $_POST['release_date']);
     $post->set('featured', $_POST['featured']);
+    $post->set('producers', $_POST['producers_id']);
+    $post->set('aired', $_POST['aired']);
+    $post->set('duration', $_POST['duration']);
+    $post->set('source', $_POST['source_id']);
     $post->set('sypnosis', $_POST['sypnosis']);
     $post->set('genre_id', $_POST['genre_id']);
     $post->set('studio_id', $_POST['studio_id']);
@@ -79,7 +90,7 @@ include('sideBar.php');
                 </div>
                 <div class="form-group">
                     <label>Post Studio</label>
-                    <select class="form-control" name="studio_id" required>
+                    <select class="form-control" name="studio_id[]" multiple required>
                         <option value="">Select Studio</option>
                         <?php foreach ($studioList as $studios) {  ?>
                             <option value="<?php echo $studios['id'];  ?>">
@@ -90,7 +101,7 @@ include('sideBar.php');
                 </div>
                 <div class="form-group">
                     <label>Post Genre</label>
-                    <select class="form-control" name="genre_id" required>
+                    <select class="form-control" name="genre_id[]" multiple required>
                         <option value="">Select Genre</option>
                         <?php foreach ($genreList as $genres) {  ?>
                             <option value="<?php echo $genres['id'];  ?>">
@@ -100,8 +111,35 @@ include('sideBar.php');
                     </select>
                 </div>
                 <div class="form-group">
+                    <label>Post Producers</label>
+                    <select class="form-control" name="producers_id[]" multiple required>
+                        <option value="">Select Producers</option>
+                        <?php foreach ($producerList as $producer) {  ?>
+                            <option value="<?php echo $producer['id'];  ?>">
+                                <?php echo $producer['producers'];  ?>
+                            </option>
+                        <?php  } ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Post Source</label>
+                    <select class="form-control" name="source_id[]" multiple required>
+                        <option value="">Select Source</option>
+                        <?php foreach ($sourceList as $source) {  ?>
+                            <option value="<?php echo $source['id'];  ?>">
+                                <?php echo $source['source'];  ?>
+                            </option>
+                        <?php  } ?>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label>Type</label>
                     <input class="form-control" type="text" name="type" required></input>
+                </div>
+                </div>
+                <div class="form-group">
+                    <label>Duration </label>
+                    <input class="form-control" type="text" name="duration" required></input>
                 </div>
                 <div class="form-group">
                     <label>Sypnosis</label>
@@ -110,6 +148,12 @@ include('sideBar.php');
                 <div class="form-group">
                     <label for="release_date"> Release date:
                         <input type="date" name="release_date" id="release_date" value="">
+                    </label>
+                </div>
+                </div>
+                <div class="form-group">
+                    <label for="aired"> Aired:
+                        <input type="date" name="aired" id="aired" value="">
                     </label>
                 </div>
                 <div class="form-group">

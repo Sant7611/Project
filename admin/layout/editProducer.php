@@ -8,34 +8,29 @@ $producer = new Producer();
 if (isset($_POST['submit'])) {
     // echo $_POST['producer'];
     if (isset($_POST['producer']) && !empty($_POST['producer'])) {
-        $producer->set('producers', $_POST['producer']);
-        $res = $producer->save();
-        if ($res) {
+        $producer->set('producer', $_POST['producer']);
+        $res = $producer->edit();
+        if ($res == "success") {
             $msg = "Producer successfully added with id " . $res;
             $Err = "";
         } else {
             $msg = "Producer insertion unsuccessful";
         }
     } else {
-        $Err = 'Producer type already taken';
+        $Err = 'Producer name already exist';
     }
 }
 ?>
 <div id="page-wrapper">
-<div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Create Producer</h1>
-        </div>
-    </div>
-    <div id="Producer-main">
-        <form action="" class="Producer" method="post">
+    <div id="create-main">
+        <form action="" class="producer" method="post">
             <?php if (isset($msg)) { ?>
                 <div><?php echo $msg; ?> </div>
             <?php } ?>
             <?php if (isset($Err)) { ?>
                 <div><?php echo $Err; ?> </div>
             <?php } ?>
-            <label class="label-block">Producer Name</label>
+            <label class="label-block">producer Name</label>
             <input type="text" name="producer" class="input-producer">
             <input type="submit" value="submit" name="submit">
             <input type="reset">
