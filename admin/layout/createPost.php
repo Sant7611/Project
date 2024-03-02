@@ -12,8 +12,8 @@ $studio = new Studio();
 $producer = new Producer();
 $source = new Source();
 
-$sourceList = $source->fetch(); 
-$producerList = $producer->fetch(); 
+$sourceList = $source->fetch();
+$producerList = $producer->fetch();
 $studioList = $studio->fetch();
 $genreList = $genre->fetch();
 
@@ -54,18 +54,19 @@ if (isset($_POST['submit'])) {
             $imageError = "Invalid Image!";
         }
     }
-    echo "<pre>";
-    print_r($_FILES['image']);
-    echo "</pre>";
+    // echo "<pre>";
+    // print_r($_FILES['image']);
+    // echo "</pre>";
     $result = $post->save();
+    echo $result;
     if (is_integer($result)) {
         $ErrMs = "";
-        $msg = "News inserted Successfully with id " . $result;
+        $msg = "Post inserted Successfully with id " . $result;
     } else {
         $msg = "";
     }
 }
-include('sideBar.php');
+// include('sideBar.php');
 ?>
 
 
@@ -136,81 +137,81 @@ include('sideBar.php');
                     <label>Type</label>
                     <input class="form-control" type="text" name="type" required></input>
                 </div>
-                </div>
-                <div class="form-group">
-                    <label>Duration </label>
-                    <input class="form-control" type="text" name="duration" required></input>
-                </div>
-                <div class="form-group">
-                    <label>Sypnosis</label>
-                    <textarea class="form-control ckeditor" rows="3" name="sypnosis"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="release_date"> Release date:
-                        <input type="date" name="release_date" id="release_date" value="">
-                    </label>
-                </div>
-                </div>
-                <div class="form-group">
-                    <label for="aired"> Aired:
-                        <input type="date" name="aired" id="aired" value="">
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label for="episodes">Episodes: </label>
-                    <input type="number" name="episodes" id="">
-                </div>
-                <div class="form-group" enctype="multipart/form-data">
-                    <label>Image</label>
-                    <!-- using multiple helps to upload multiple images -->
-                    <input type="file" name="image" required>
-                </div>
-
-
-                <div class="form-group">
-                    <label>Status</label>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="status" id="statusOption1" value="1" checked>Active
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="status" id="statusOption1" value="0">Inactive
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Featured</label>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="featured" id="featuredOption1" value="1" checked>Active
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="featured" id="featuredOption2" value="0">Inactive
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Slider Key</label>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="slider_key" id="sliderOption1" value="1" checked>Active
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="slider_key" id="sliderOption2" value="0">Inactive
-                        </label>
-                    </div>
-                </div>
-                <button type="submit" name="submit" value='submit' class="btn btn-success">Submit Button</button>
-                <button type="reset" class="btn btn-danger">Reset Button</button>
-            </form>
+        </div>
+        <div class="form-group">
+            <label>Duration </label>
+            <input class="form-control" type="text" name="duration" required></input>
+        </div>
+        <div class="form-group">
+            <label>Sypnosis</label>
+            <textarea class="form-control ckeditor" rows="3" name="sypnosis"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="release_date"> Release date:
+                <input type="date" name="release_date" id="release_date" value="">
+            </label>
         </div>
     </div>
+    <div class="form-group">
+        <label for="aired"> Aired:
+            <input type="date" name="aired" id="aired" value="">
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="episodes">Episodes: </label>
+        <input type="number" name="episodes" id="">
+    </div>
+    <div class="form-group" enctype="multipart/form-data">
+        <label>Image</label>
+        <!-- using multiple helps to upload multiple images -->
+        <input type="file" name="image" required>
+    </div>
+
+
+    <div class="form-group">
+        <label>Status</label>
+        <div class="radio">
+            <label>
+                <input type="radio" name="status" id="statusOption1" value="1" checked>Active
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="status" id="statusOption1" value="0">Inactive
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Featured</label>
+        <div class="radio">
+            <label>
+                <input type="radio" name="featured" id="featuredOption1" value="1" checked>Active
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="featured" id="featuredOption2" value="0">Inactive
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Slider Key</label>
+        <div class="radio">
+            <label>
+                <input type="radio" name="slider_key" id="sliderOption1" value="1" checked>Active
+            </label>
+        </div>
+        <div class="radio">
+            <label>
+                <input type="radio" name="slider_key" id="sliderOption2" value="0">Inactive
+            </label>
+        </div>
+    </div>
+    <button type="submit" name="submit" value='submit' class="btn btn-success">Submit Button</button>
+    <button type="reset" class="btn btn-danger">Reset Button</button>
+    </form>
+</div>
+</div>
 </div>
 <?php
 include('header_footer/footer.php');

@@ -18,8 +18,8 @@ abstract class Common
     $var = $conn->query($sql);
     if ($var->num_rows > 0) {
       $row = $var->fetch_assoc();
+      return $row;
     }
-    return $row;
   }
 
   public function validate($value)

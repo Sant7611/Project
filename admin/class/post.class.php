@@ -11,27 +11,59 @@ class Post extends Common
         $this->conn = mysqli_connect('localhost', 'root', '', 'anidb');
     }
 
+
     public function save()
     {
-        // genre_id, studio_id,
-        $sql = "insert into post (title, type,duration, aired, episodes, status, slider_key, featured, sypnosis,  release_date,image_url) values ('$this->title', 
-        '$this->type',
-        '$this->duration',
-        '$this->aired',
-         $this->episodes, 
-         '$this->status', 
-         '$this->slider_key', 
-         '$this->featured', 
-         '$this->sypnosis',
-         '$this->release_date',
-         '$this->image_url'); ";
-        //  '$this->genre_id',	
-        //  '$this->studio_id',
+        $sql = "insert into post (title, type, duration, aired, episodes, status, slider_key, featured, sypnosis, release_date, image_url) 
+                values ('$this->title', '$this->type', '$this->duration', '$this->aired', $this->episodes, '$this->status', '$this->slider_key', 
+                '$this->featured', '$this->sypnosis', '$this->release_date', '$this->image_url');";
         $this->conn->query($sql);
+
+        $saveId = $this->conn->insert_id;
+        echo $saveId;
+        if ($saveId > 0) {
+            echo "id valid";
+            $this->addGenre($this->genre_id, $saveId);
+            $this->addSource($this->source, $saveId);
+            $this->addProducer($this->producers, $saveId);
+            $this->addStudio($this->studio_id, $saveId);
+        } else {
+            echo "id invalid";
+        }
         if ($this->conn->affected_rows == 1 && $this->conn->insert_id > 0) {
-            return $this->conn->insert_id;
+            return $saveId;
         }
     }
+
+
+    ########################################done by myself
+
+    // public function save()
+    // {
+    //     // genre_id, studio_id,
+    //     $sql = "insert into post (title, type,duration, aired, episodes, status, slider_key, featured, sypnosis,  release_date,image_url) values ('$this->title', 
+    //     '$this->type',
+    //     '$this->duration',
+    //     '$this->aired',
+    //     $this->episodes, 
+    //     '$this->status', 
+    //     '$this->slider_key', 
+    //     '$this->featured', 
+    //      '$this->sypnosis',
+    //      '$this->release_date',
+    //      '$this->image_url'); ";
+    //      //  '$this->genre_id',	
+    //      $this->conn->query($sql);
+    //      $saveId = $this->conn->insert_id;
+    //      //  '$this->studio_id',
+    //      $this->addGenre($this->genre_id, $saveId);
+    //      $this->addSource($this->source,$saveId);
+    //      $this->addProducer($this->producers,$saveId);
+    //      $this->addStudio($this->studio_id,$saveId);
+    //     if ($this->conn->affected_rows == 1 && $this->conn->insert_id > 0) {
+    //         return $this->conn->insert_id;
+    //     }
+    // }
 
     public function delete()
     {
@@ -62,7 +94,7 @@ class Post extends Common
         $source_res = $this->updateSource();
         $producer_res = $this->updateProducer();
         $studio_res = $this->updateStudio();
-        if($genre_res && $source_res && $producer_res && $studio_res){
+        if ($genre_res && $source_res && $producer_res && $studio_res) {
             echo "true";
         }
         // $current_genre = "select genre_id from post_joins where post_id = '$this->id';";
@@ -88,7 +120,6 @@ class Post extends Common
 
     public function updateSource()
     {
-
         $sql = "select source_id from post_joins where post_id = '$this->id';";
         $currentSource = $this->select($sql);
         $sourceToDelete = array_diff($currentSource, $this->source);
@@ -102,8 +133,16 @@ class Post extends Common
                 return false;
             }
         }
+        $this->addSource($sourceToAdd, $this->id);
+    }
+    public function addSource($sourceToAdd, $newId)
+    {
+        // if(empty($this->id)){
+        //     $newId = $this->conn->insert_id;
+        // }
+        // $newId = $this->id;
         foreach ($sourceToAdd as $addSource) {
-            $sql = "insert into post_joins(post_id, source_id) values('$this->id',  '$addSource');";
+            $sql = "insert into post_joins(post_id, source_id) values('$newId',  '$addSource');";
             $this->conn->query($sql);
             if ($this->conn->affected_rows > 0) {
                 return true;
@@ -127,8 +166,16 @@ class Post extends Common
                 return false;
             }
         }
-        foreach ($studioToAdd as $addGenre) {
-            $sql = "insert into post_joins(post_id, studio_id) values('$this->id',  '$addGenre');";
+        $this->addStudio($studioToAdd, $this->id);
+    }
+    public function addStudio($studioToAdd, $newId)
+    {
+        // if(empty($this->id)){
+        //     $newId = $this->conn->insert_id;
+        // }
+        // $newId = $this->id;
+        foreach ($studioToAdd as $addStudio) {
+            $sql = "insert into post_joins(post_id, studio_id) values('$newId',  '$addStudio');";
             $this->conn->query($sql);
             if ($this->conn->affected_rows > 0) {
                 return true;
@@ -152,8 +199,17 @@ class Post extends Common
                 return false;
             }
         }
+        $this->addGenre($genreToAdd, $this->id);
+    }
+
+    public function addGenre($genreToAdd, $newId)
+    {
+        // if(empty($this->id)){
+        //     $newId = $this->conn->insert_id;
+        // }
+        // $newId = $this->id;
         foreach ($genreToAdd as $addGenre) {
-            $sql = "insert into post_joins(post_id, genre_id) values('$this->id',  '$addGenre');";
+            $sql = "insert into post_joins(post_id, genre_id) values('$newId',  '$addGenre');";
             $this->conn->query($sql);
             if ($this->conn->affected_rows > 0) {
                 return true;
@@ -178,8 +234,17 @@ class Post extends Common
                 return false;
             }
         }
+        $this->addProducer($producerToAdd, $this->id);
+    }
+
+    public function addProducer($producerToAdd, $newId)
+    {
+        // if(empty($this->id)){
+        //     $newId = $this->conn->insert_id;
+        // }
+        // $newId = $this->id;
         foreach ($producerToAdd as $addProducer) {
-            $sql = "insert into post_joins(post_id, producer_id) values('$this->id',  '$addProducer');";
+            $sql = "insert into post_joins(post_id, producer_id) values('$newId',  '$addProducer');";
             $this->conn->query($sql);
             if ($this->conn->affected_rows > 0) {
                 return true;
@@ -245,5 +310,6 @@ class Post extends Common
     public function selectPostByGenre()
     {
         $sql = "select * from post where genre_id = '$this->genre_id' order by created_date desc limit 3;";
+        return $this->select($sql);
     }
 }
