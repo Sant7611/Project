@@ -69,10 +69,10 @@ class Post extends Common
     {
         // $sql = "delete from post where id = '$this->id';";
         // Delete associated rows from post_joins
-$this->conn->query("DELETE FROM post_joins WHERE post_id = $this->id");
+        $this->conn->query("DELETE FROM post_joins WHERE post_id = $this->id");
 
-// Now delete the post
-$this->conn->query("DELETE FROM post WHERE id = $this->id");
+        // Now delete the post
+        $this->conn->query("DELETE FROM post WHERE id = $this->id");
 
         // $this->conn->query($sql);
         if ($this->conn->affected_rows == 1) {
@@ -271,6 +271,9 @@ $this->conn->query("DELETE FROM post WHERE id = $this->id");
         $sql = "select p.*, group_concat(s.source) as source, group_concat(pr.producers) as producer, group_concat(st.studio) as studio, group_concat(g.genre) as genre from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
         $result = $this->conn->query($sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
         if ($result->num_rows > 0) {
             return $data;
         } else {
@@ -280,7 +283,8 @@ $this->conn->query("DELETE FROM post WHERE id = $this->id");
 
     public function getById()
     {
-        $sql = "select * from post where id = '$this->id';";
+        $sql = "select p.*, group_concat(s.source) as source, group_concat(pr.producers) as producer, group_concat(st.studio) as studio, group_concat(g.genre) as genre from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id
+        where p.id = '$this->id';";
         $var = $this->conn->query($sql);
         if ($this->conn->affected_rows == 1) {
             $result = $var->fetch_object();

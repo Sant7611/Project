@@ -12,11 +12,11 @@ $data = $post->getById();
 // echo "<pre>";
 // print_r($data);
 // echo "</pre>";
-$genre = new Genre();
-$studio = new Studio();
+// $genre = new Genre();
+// $studio = new Studio();
 
-$studioList = $studio->fetch();
-$genreList = $genre->fetch();
+// $studioList = $studio->fetch();
+// $genreList = $genre->fetch();
 
 @session_start();
 if (isset($_POST['submit'])) {
@@ -28,6 +28,9 @@ if (isset($_POST['submit'])) {
     $post->set('slider_key', $_POST['slider_key']);
     $post->set('featured', $_POST['featured']);
     $post->set('studio_id', $_POST['studio_id']);
+    $post->set('genre_id', $_POST['genre_id']);
+    $post->set('producers', $_POST['producers']);
+    $post->set('source', $_POST['source']);
     $post->set('release_date', $_POST['release_date']);
     $post->set('status', $_POST['status']);
     $post->set('created_date', date('y-m-d H:i:s'));
