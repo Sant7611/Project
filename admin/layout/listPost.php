@@ -10,7 +10,11 @@ $postObj = new Post();
 
 $dataList = $postObj->fetch();
 
-include('sideBar.php');
+echo "<pre>";
+print_r($dataList);
+echo "</pre>";
+
+// include('sideBar.php');
 ?>
 <style>
     tr {
@@ -36,6 +40,9 @@ include('sideBar.php');
                         <th>S.NO</th>
                         <th>Title</th>
                         <th>Type</th>
+                        <th>Genre</th>
+                        <th>Studio</th>
+                        <th>producer</th>
                         <th>Image</th>
                         <th>Featured</th>
                         <th>Status</th>
@@ -48,6 +55,21 @@ include('sideBar.php');
                             <td> <?php echo $key + 1; ?></td>
                             <td> <?php echo $post['title']; ?> </td>
                             <td> <?php echo $post['type']; ?> </td>
+                            <td><?php $post['genre'];
+                                // foreach ($genres as $genre) {
+                                //     echo $genre . "<br>";
+                                ?>
+                            </td>
+                            <td><?php echo $post['studio'];
+                                // print_r($studios);
+                                // foreach ($studios as $studio) {
+                                //     echo $studio;
+                            } ?></td>
+                            <td><?php echo $post['producer'];
+                                // foreach ($producers as $producer) {
+                                //     echo $producer;
+                                ?></td>
+                            <td>
                             <td>
                                 <img height='100' width='100' src="../images/<?php echo $post['image_url']; ?>" alt="" srcset="">
                             </td>
@@ -74,7 +96,7 @@ include('sideBar.php');
                                 <a href="deletePost.php?id=<?php echo $post['id']; ?>" role="btn"><i class="fa fa-trash"></i>Delete</a>
                             </td>
                         </tr>
-                    <?php  } ?>
+                        <?php   ?>
                 </tbody>
             </table>
         </div>

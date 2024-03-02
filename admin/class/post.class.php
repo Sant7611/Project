@@ -67,8 +67,14 @@ class Post extends Common
 
     public function delete()
     {
-        $sql = "delete from post where id = '$this->id';";
-        $this->conn->query($sql);
+        // $sql = "delete from post where id = '$this->id';";
+        // Delete associated rows from post_joins
+$this->conn->query("DELETE FROM post_joins WHERE post_id = $this->id");
+
+// Now delete the post
+$this->conn->query("DELETE FROM post WHERE id = $this->id");
+
+        // $this->conn->query($sql);
         if ($this->conn->affected_rows == 1) {
             $msg = "Success";
             return $msg;
@@ -91,12 +97,12 @@ class Post extends Common
                     where id = '$this->id';    ";
 
         $genre_res = $this->updateGenre();
-        $source_res = $this->updateSource();
-        $producer_res = $this->updateProducer();
+        // $source_res = $this->updateSource();
+        // $producer_res = $this->updateProducer();
         $studio_res = $this->updateStudio();
-        if ($genre_res && $source_res && $producer_res && $studio_res) {
-            echo "true";
-        }
+        // if ($genre_res && $source_res && $producer_res && $studio_res) {
+        //     echo "true";
+        // }
         // $current_genre = "select genre_id from post_joins where post_id = '$this->id';";
         // $genres = $this->select($current_genre);
 
@@ -127,13 +133,13 @@ class Post extends Common
         foreach ($sourceToDelete as $deleteSource) {
             $sql = "delete from post_joins where post_id = '$this->id' and source_id = '$deleteSource';";
             $this->conn->query($sql);
-            if ($this->conn->affected_rows > 0) {
-                return true;
-            } else {
-                return false;
-            }
         }
         $this->addSource($sourceToAdd, $this->id);
+        if ($this->conn->affected_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
     public function addSource($sourceToAdd, $newId)
     {
@@ -141,14 +147,18 @@ class Post extends Common
         //     $newId = $this->conn->insert_id;
         // }
         // $newId = $this->id;
-        foreach ($sourceToAdd as $addSource) {
+        print_r($sourceToAdd);
+        echo $newId;
+        foreach ($sourceToAdd as $key => $addSource) {
+            echo $addSource;
             $sql = "insert into post_joins(post_id, source_id) values('$newId',  '$addSource');";
             $this->conn->query($sql);
-            if ($this->conn->affected_rows > 0) {
-                return true;
-            } else {
-                return false;
-            }
+        }
+        if ($this->conn->affected_rows > 0) {
+            echo 'added 1';
+            return true;
+        } else {
+            return false;
         }
     }
     public function updateStudio()
@@ -160,13 +170,13 @@ class Post extends Common
         foreach ($studioToDelete as $deleteGenre) {
             $sql = "delete from post_joins where post_id = '$this->id' and studio_id = '$deleteGenre';";
             $this->conn->query($sql);
-            if ($this->conn->affected_rows > 0) {
-                return true;
-            } else {
-                return false;
-            }
         }
         $this->addStudio($studioToAdd, $this->id);
+        if ($this->conn->affected_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
     public function addStudio($studioToAdd, $newId)
     {
@@ -177,11 +187,11 @@ class Post extends Common
         foreach ($studioToAdd as $addStudio) {
             $sql = "insert into post_joins(post_id, studio_id) values('$newId',  '$addStudio');";
             $this->conn->query($sql);
-            if ($this->conn->affected_rows > 0) {
-                return true;
-            } else {
-                return false;
-            }
+        }
+        if ($this->conn->affected_rows > 0) {
+            return true;
+        } else {
+            return false;
         }
     }
     public function updateGenre()
@@ -193,13 +203,13 @@ class Post extends Common
         foreach ($genreToDelete as $deleteGenre) {
             $sql = "delete from post_joins where post_id = '$this->id' and genre_id = '$deleteGenre';";
             $this->conn->query($sql);
-            if ($this->conn->affected_rows > 0) {
-                return true;
-            } else {
-                return false;
-            }
         }
         $this->addGenre($genreToAdd, $this->id);
+        if ($this->conn->affected_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function addGenre($genreToAdd, $newId)
@@ -211,11 +221,11 @@ class Post extends Common
         foreach ($genreToAdd as $addGenre) {
             $sql = "insert into post_joins(post_id, genre_id) values('$newId',  '$addGenre');";
             $this->conn->query($sql);
-            if ($this->conn->affected_rows > 0) {
-                return true;
-            } else {
-                return false;
-            }
+        }
+        if ($this->conn->affected_rows > 0) {
+            return true;
+        } else {
+            return false;
         }
     }
     public function updateProducer()
@@ -228,13 +238,13 @@ class Post extends Common
         foreach ($producerToDelete as $deleteProducer) {
             $sql = "delete from post_joins where post_id = '$this->id' and producer_id = '$deleteProducer';";
             $this->conn->query($sql);
-            if ($this->conn->affected_rows > 0) {
-                return true;
-            } else {
-                return false;
-            }
         }
         $this->addProducer($producerToAdd, $this->id);
+        if ($this->conn->affected_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function addProducer($producerToAdd, $newId)
@@ -246,17 +256,19 @@ class Post extends Common
         foreach ($producerToAdd as $addProducer) {
             $sql = "insert into post_joins(post_id, producer_id) values('$newId',  '$addProducer');";
             $this->conn->query($sql);
-            if ($this->conn->affected_rows > 0) {
-                return true;
-            } else {
-                return false;
-            }
+        }
+        if ($this->conn->affected_rows > 0) {
+            return true;
+        } else {
+            return false;
         }
     }
 
     public function fetch()
     {
-        $sql = "select * from post;";
+        // $sql = "select * from post;";
+        // $sql = "SELECT p.*, s.source, pr.producers, st.studio, g.genre FROM post p INNER JOIN post_joins pj ON p.id = pj.post_id LEFT JOIN source s ON pj.source_id = s.id LEFT JOIN producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
+        $sql = "select p.*, group_concat(s.source) as source, group_concat(pr.producers) as producer, group_concat(st.studio) as studio, group_concat(g.genre) as genre from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
         $result = $this->conn->query($sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);
         if ($result->num_rows > 0) {

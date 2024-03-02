@@ -91,7 +91,7 @@ include('sideBar.php');
                 </div>
                 <div class="form-group">
                     <label>Post Studio</label>
-                    <select class="form-control" name="studio_id" required>
+                    <select class="form-control" name="studio_id[]" multiple required>
                         <?php foreach ($studioList as $studios) { ?>
                             <option value="<?php echo $studios['id']; ?>" <?php if ($data->id == $studios['id']) {
                                                                                 echo 'selected';
@@ -104,7 +104,7 @@ include('sideBar.php');
                 </div>
                 <div class="form-group">
                     <label>Post Genre</label>
-                    <select class="form-control" name="genre_id" required>
+                    <select class="form-control" name="genre_id[]" multiple required>
                         <?php foreach ($genreList as $genre) { ?>
                             <option value="<?php echo $genre['id']; ?>" <?php if ($data->id == $genre['id']) {
                                                                             echo 'selected';

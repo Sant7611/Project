@@ -35,6 +35,9 @@ if (isset($_POST['submit'])) {
     $post->set('studio_id', $_POST['studio_id']);
     $post->set('created_date', date('y-m-d H:i:s'));
     if ($_FILES['image']['error'] == 0) {
+        echo "<pre>";
+        print_r($_POST);
+        echo "</pre>";
         if (
             $_FILES['image']['type'] == "image/png" ||
             $_FILES['image']['type'] == "image/jpg" ||
