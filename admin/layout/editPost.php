@@ -4,6 +4,8 @@ $id = $_GET['id'];
 include('header_footer/header.php');
 include('../class/post.class.php');
 include('../class/studio.class.php');
+include('../class/producer.class.php');
+include('../class/source.class.php');
 include('../class/genre.class.php');
 $post = new Post();
 
@@ -13,12 +15,21 @@ echo "<pre>";
 print_r($data);
 echo "</pre>";
 
-echo $data->studio_id;
+$studioid = explode(',', $data->studio_id);
+$genreid = explode(',', $data->genre_id);
+$producerid = explode(',', $data->producer_id);
+$sourceid = explode(',', $data->source_id);
+print_r($producerid);
+echo "<br>" . $data->studio_id;
 $genre = new Genre();
 $studio = new Studio();
+$source = new Source();
+$producer = new Producer();
 
 $studioList = $studio->fetch();
 $genreList = $genre->fetch();
+$producerList = $producer->fetch();
+$sourceList = $source->fetch();
 
 @session_start();
 if (isset($_POST['submit'])) {
@@ -59,6 +70,7 @@ if (isset($_POST['submit'])) {
             $imageError = "Invalid Image!";
         }
     }
+
     // echo "<pre>";
     // print_r($_FILES['image']);
     // echo "</pre>";
@@ -98,7 +110,7 @@ if (isset($_POST['submit'])) {
                     <label>Post Studio</label>
                     <select class="form-control" name="studio_id[]" multiple required>
                         <?php foreach ($studioList as $studios) {
-                            $studioid[] = $data->studio_id;
+
                         ?>
                             <option value="<?php echo $studios['id']; ?>" <?php if (in_array($studios['id'], $studioid)) {
                                                                                 echo 'selected';
@@ -110,11 +122,41 @@ if (isset($_POST['submit'])) {
                     </select>
                 </div>
                 <div class="form-group">
+                    <label>Post Source</label>
+                    <select class="form-control" name="source_id[]" multiple required>
+                        <?php foreach ($sourceList as $source) {
+
+                        ?>
+                            <option value="<?php echo $source['id']; ?>" <?php if (in_array($source['id'], $studioid)) {
+                                                                                echo 'selected';
+                                                                            } ?>>
+                                <?php echo $source['source']; ?>
+                            </option>
+
+                        <?php  } ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Post Producer</label>
+                    <select class="form-control" name="producer_id[]" multiple required>
+                        <?php foreach ($producerList as $producer) {
+
+                        ?>
+                            <option value="<?php echo $producer['id']; ?>" <?php $res = (in_array($producer['id'], $producer)) ?  "selected" : false; //if (in_array($producer['id'], $producer)) {
+                                                                            echo $res;
+                                                                            ?>>
+                                <?php echo $producer['producers'] . "-" . $producer['id']; ?>
+                            </option>
+
+                        <?php   } ?>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label>Post Genre</label>
                     <select class="form-control" name="genre_id[]" multiple required>
                         <?php foreach ($genreList as $key => $genre) { ?>
 
-                            <option value="<?php echo $genre['id']; ?>" <?php if ($data->genre_id[$key] == $genre['id']) {
+                            <option value="<?php echo $genre['id']; ?>" <?php if (in_array($genre['id'], $genreid)) {
                                                                             echo 'selected';
                                                                         } ?>>
                                 <?php echo $genre['genre']; ?>
