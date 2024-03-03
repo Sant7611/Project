@@ -42,8 +42,8 @@ if (isset($_POST['submit'])) {
     $post->set('featured', $_POST['featured']);
     $post->set('studio_id', $_POST['studio_id']);
     $post->set('genre_id', $_POST['genre_id']);
-    // $post->set('producers', $_POST['producers']);
-    // $post->set('source', $_POST['source']);
+    $post->set('producers', $_POST['producer_id']);
+    $post->set('source', $_POST['source_id']);
     $post->set('release_date', $_POST['release_date']);
     $post->set('status', $_POST['status']);
     $post->set('created_date', date('y-m-d H:i:s'));
@@ -139,13 +139,11 @@ if (isset($_POST['submit'])) {
                 <div class="form-group">
                     <label>Post Producer</label>
                     <select class="form-control" name="producer_id[]" multiple required>
-                        <?php foreach ($producerList as $producer) {
-
-                        ?>
-                            <option value="<?php echo $producer['id']; ?>" <?php $res = (in_array($producer['id'], $producer)) ?  "selected" : false; //if (in_array($producer['id'], $producer)) {
+                        <?php foreach ($producerList as $prod) { ?>
+                            <option value="<?php echo $prod['id']; ?>" <?php $res = (in_array($prod['id'], $producerid)) ?  "selected" : false; //if (in_array($producer['id'], $producer)) {
                                                                             echo $res;
                                                                             ?>>
-                                <?php echo $producer['producers'] . "-" . $producer['id']; ?>
+                                <?php echo $prod['producers']  ?>
                             </option>
 
                         <?php   } ?>
@@ -154,7 +152,7 @@ if (isset($_POST['submit'])) {
                 <div class="form-group">
                     <label>Post Genre</label>
                     <select class="form-control" name="genre_id[]" multiple required>
-                        <?php foreach ($genreList as $key => $genre) { ?>
+                        <?php foreach ($genreList as  $genre) { ?>
 
                             <option value="<?php echo $genre['id']; ?>" <?php if (in_array($genre['id'], $genreid)) {
                                                                             echo 'selected';
@@ -177,6 +175,11 @@ if (isset($_POST['submit'])) {
                 <div class="form-group">
                     <label for="release_date"> Release Date:
                         <input type="date" name="release_date" id="release_date" value="<?php echo $data->release_date; ?>">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="aired"> Aired :
+                        <input type="date" name="aired" id="aired" value="<?php echo $data->aired; ?>">
                     </label>
                 </div>
                 <div class="form-group">
