@@ -97,8 +97,8 @@ class Post extends Common
                     where id = '$this->id';    ";
 
         $genre_res = $this->updateGenre();
-        // $source_res = $this->updateSource();
-        // $producer_res = $this->updateProducer();
+        $source_res = $this->updateSource();
+        $producer_res = $this->updateProducer();
         $studio_res = $this->updateStudio();
         // if ($genre_res && $source_res && $producer_res && $studio_res) {
         //     echo "true";
@@ -130,11 +130,15 @@ class Post extends Common
         $currentSource = $this->select($sql);
         $sourceToDelete = array_diff($currentSource, $this->source);
         $sourceToAdd = array_diff($this->source, $currentSource);
-        foreach ($sourceToDelete as $deleteSource) {
-            $sql = "delete from post_joins where post_id = '$this->id' and source_id = '$deleteSource';";
-            $this->conn->query($sql);
+        if (!empty($sourceToDelete)) {
+            foreach ($sourceToDelete as $deleteSource) {
+                $sql = "delete from post_joins where post_id = '$this->id' and source_id = '$deleteSource';";
+                $this->conn->query($sql);
+            }
         }
-        $this->addSource($sourceToAdd, $this->id);
+        if (!empty($sourceToAdd)) {
+            $this->addSource($sourceToAdd, $this->id);
+        }
         if ($this->conn->affected_rows > 0) {
             return true;
         } else {
@@ -168,14 +172,18 @@ class Post extends Common
         $studioToDelete = array_diff($currentStudio, $this->studio_id);
         $studioToAdd = array_diff($this->studio_id, $currentStudio);
         echo "<pre>";
-        print_r( $studioToAdd);
-        print_r( $studioToDelete);
+        print_r($studioToAdd);
+        print_r($studioToDelete);
         echo "<pre>";
-        foreach ($studioToDelete as $deleteGenre) {
-            $sql = "delete from post_joins where post_id = '$this->id' and studio_id = '$deleteGenre';";
-            $this->conn->query($sql);
+        if (!empty($studioToDelete)) {
+            foreach ($studioToDelete as $deleteGenre) {
+                $sql = "delete from post_joins where post_id = '$this->id' and studio_id = '$deleteGenre';";
+                $this->conn->query($sql);
+            }
         }
-        $this->addStudio($studioToAdd, $this->id);
+        if (!empty($studioToAdd)) {
+            $this->addStudio($studioToAdd, $this->id);
+        }
         if ($this->conn->affected_rows > 0) {
             return true;
         } else {
@@ -204,11 +212,15 @@ class Post extends Common
         $currentGenre = $this->select($sql);
         $genreToDelete = array_diff($currentGenre, $this->genre_id);
         $genreToAdd = array_diff($this->genre_id, $currentGenre);
-        foreach ($genreToDelete as $deleteGenre) {
-            $sql = "delete from post_joins where post_id = '$this->id' and genre_id = '$deleteGenre';";
-            $this->conn->query($sql);
+        if (!empty($genreToDelete)) {
+            foreach ($genreToDelete as $deleteGenre) {
+                $sql = "delete from post_joins where post_id = '$this->id' and genre_id = '$deleteGenre';";
+                $this->conn->query($sql);
+            }
         }
-        $this->addGenre($genreToAdd, $this->id);
+        if (!empty($genreToDelete)) {
+            $this->addGenre($genreToAdd, $this->id);
+        }
         if ($this->conn->affected_rows > 0) {
             return true;
         } else {
@@ -239,12 +251,16 @@ class Post extends Common
         $currentProducer = $this->select($sql);
         $producerToDelete = array_diff($currentProducer, $this->producers);
         $producerToAdd = array_diff($this->producers, $currentProducer);
-        foreach ($producerToDelete as $deleteProducer) {
-            $sql = "delete from post_joins where post_id = '$this->id' and producer_id = '$deleteProducer';";
-            $this->conn->query($sql);
+        if (!empty($producerToDelete)) {
+            foreach ($producerToDelete as $deleteProducer) {
+                $sql = "delete from post_joins where post_id = '$this->id' and producer_id = '$deleteProducer';";
+                $this->conn->query($sql);
+            }
         }
-        $this->addProducer($producerToAdd, $this->id);
-        if ($this->conn->affected_rows > 0) {
+        if(!empty($producerToAdd)){
+            $this->addProducer($producerToAdd, $this->id);
+        }
+            if ($this->conn->affected_rows > 0) {
             return true;
         } else {
             return false;

@@ -32,8 +32,7 @@ class Source extends Common{
     public function delete(){
         $sql = "delete from source where id = '$this->id';";
         $this->conn->query($sql);
-        if($this->conn->affected_rows == 1){
-            
+        if($this->conn->affected_rows == 1){            
             return 'success';
         }else{
             return 'failed';
@@ -48,6 +47,5 @@ class Source extends Common{
         }else{
             return false;
         }
-        
     }
 }
