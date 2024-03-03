@@ -45,7 +45,7 @@ if (isset($_SESSION['message']) && $_SESSION['message'] != "") {
                 <td><?php echo $genres['genre']; ?></td>
                 <td width="20%">
                     <a href="editGenre.php?id=<?php echo $genres['id'] ?>">Edit</a>
-                    <a href="deleteGenre.php?id=<?php $genres['id'] ?>">Delete</a>
+                    <a href="deleteGenre.php?id=<?php echo $genres['id'] ?>">Delete</a>
                 </td>
             </tr>
         <?php } ?>

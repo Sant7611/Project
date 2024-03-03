@@ -19,6 +19,7 @@ echo "</pre>";
 <style>
     tr {
         text-align: center;
+        border: 2px solid black;
     }
 </style>
 <div id="page-wrapper">

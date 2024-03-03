@@ -9,14 +9,16 @@ $post = new Post();
 
 $post->set('id', $id);
 $data = $post->getById();
-// echo "<pre>";
-// print_r($data);
-// echo "</pre>";
-// $genre = new Genre();
-// $studio = new Studio();
+echo "<pre>";
+print_r($data);
+echo "</pre>";
 
-// $studioList = $studio->fetch();
-// $genreList = $genre->fetch();
+echo $data->studio_id;
+$genre = new Genre();
+$studio = new Studio();
+
+$studioList = $studio->fetch();
+$genreList = $genre->fetch();
 
 @session_start();
 if (isset($_POST['submit'])) {
@@ -29,8 +31,8 @@ if (isset($_POST['submit'])) {
     $post->set('featured', $_POST['featured']);
     $post->set('studio_id', $_POST['studio_id']);
     $post->set('genre_id', $_POST['genre_id']);
-    $post->set('producers', $_POST['producers']);
-    $post->set('source', $_POST['source']);
+    // $post->set('producers', $_POST['producers']);
+    // $post->set('source', $_POST['source']);
     $post->set('release_date', $_POST['release_date']);
     $post->set('status', $_POST['status']);
     $post->set('created_date', date('y-m-d H:i:s'));
@@ -69,14 +71,14 @@ if (isset($_POST['submit'])) {
         $msg = "Post cannot be updated";
     }
 }
-include('sideBar.php');
+// include('sideBar.php');
 ?>
 
 
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Create News</h1>
+            <h1 class="page-header">Edit Post</h1>
         </div>
     </div>
     <div class="row">
@@ -95,8 +97,10 @@ include('sideBar.php');
                 <div class="form-group">
                     <label>Post Studio</label>
                     <select class="form-control" name="studio_id[]" multiple required>
-                        <?php foreach ($studioList as $studios) { ?>
-                            <option value="<?php echo $studios['id']; ?>" <?php if ($data->id == $studios['id']) {
+                        <?php foreach ($studioList as $studios) {
+                            $studioid[] = $data->studio_id;
+                        ?>
+                            <option value="<?php echo $studios['id']; ?>" <?php if (in_array($studios['id'], $studioid)) {
                                                                                 echo 'selected';
                                                                             } ?>>
                                 <?php echo $studios['studio']; ?>
@@ -108,14 +112,16 @@ include('sideBar.php');
                 <div class="form-group">
                     <label>Post Genre</label>
                     <select class="form-control" name="genre_id[]" multiple required>
-                        <?php foreach ($genreList as $genre) { ?>
-                            <option value="<?php echo $genre['id']; ?>" <?php if ($data->id == $genre['id']) {
+                        <?php foreach ($genreList as $key => $genre) { ?>
+
+                            <option value="<?php echo $genre['id']; ?>" <?php if ($data->genre_id[$key] == $genre['id']) {
                                                                             echo 'selected';
                                                                         } ?>>
                                 <?php echo $genre['genre']; ?>
                             </option>
 
-                        <?php  } ?>
+                        <?php echo $key;
+                        } ?>
                     </select>
                 </div>
                 <div class="form-group">

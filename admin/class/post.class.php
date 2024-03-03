@@ -167,6 +167,10 @@ class Post extends Common
         $currentStudio = $this->select($sql);
         $studioToDelete = array_diff($currentStudio, $this->studio_id);
         $studioToAdd = array_diff($this->studio_id, $currentStudio);
+        echo "<pre>";
+        print_r( $studioToAdd);
+        print_r( $studioToDelete);
+        echo "<pre>";
         foreach ($studioToDelete as $deleteGenre) {
             $sql = "delete from post_joins where post_id = '$this->id' and studio_id = '$deleteGenre';";
             $this->conn->query($sql);
@@ -268,7 +272,7 @@ class Post extends Common
     {
         // $sql = "select * from post;";
         // $sql = "SELECT p.*, s.source, pr.producers, st.studio, g.genre FROM post p INNER JOIN post_joins pj ON p.id = pj.post_id LEFT JOIN source s ON pj.source_id = s.id LEFT JOIN producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
-        $sql = "select p.*, group_concat(s.source) as source, group_concat(pr.producers) as producer, group_concat(st.studio) as studio, group_concat(g.genre) as genre from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
+        $sql = "select p.*, group_concat(s.source) as source, group_concat(s.id) as source_id, group_concat(pr.producers) as producer,group_concat(pr.id) as producer_id, group_concat(st.studio) as studio,group_concat(st.id) as studio_id, group_concat(g.genre) as genre, group_concat(g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
         $result = $this->conn->query($sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);
         echo "<pre>";
@@ -283,8 +287,10 @@ class Post extends Common
 
     public function getById()
     {
-        $sql = "select p.*, group_concat(s.source) as source, group_concat(pr.producers) as producer, group_concat(st.studio) as studio, group_concat(g.genre) as genre from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id
-        where p.id = '$this->id';";
+        // $sql = "select p.*, group_concat(s.source) as source, group_concat(pr.producers) as producer, group_concat(st.studio) as studio, group_concat(g.genre) as genre from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id
+        // where p.id = '$this->id';";
+
+        $sql = "select p.*, group_concat(s.source) as source, group_concat(s.id) as source_id, group_concat(pr.producers) as producer,group_concat(pr.id) as producer_id, group_concat(st.studio) as studio,group_concat(st.id) as studio_id, group_concat(g.genre) as genre, group_concat(g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
         $var = $this->conn->query($sql);
         if ($this->conn->affected_rows == 1) {
             $result = $var->fetch_object();
