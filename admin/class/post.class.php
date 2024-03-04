@@ -126,19 +126,29 @@ class Post extends Common
 
     public function updateSource()
     {
-        $sql = "select source_id from post_joins where post_id = '$this->id';";
+        $sql = "select group_concat(source_id) from post_joins where post_id = '$this->id';";
         $currentSource = $this->select($sql);
         $sourceToDelete = array_diff($currentSource, $this->source);
         $sourceToAdd = array_diff($this->source, $currentSource);
-        if (!empty($sourceToDelete)) {
-            foreach ($sourceToDelete as $deleteSource) {
-                $sql = "delete from post_joins where post_id = '$this->id' and source_id = '$deleteSource';";
-                $this->conn->query($sql);
-            }
-        }
-        if (!empty($sourceToAdd)) {
-            $this->addSource($sourceToAdd, $this->id);
-        }
+
+        echo "<pre>";
+        echo "current Source ";
+        print_r($currentSource);
+        echo "del Source ";
+        print_r($sourceToDelete);
+        echo "add Source ";
+        print_r($sourceToAdd);
+        echo "<pre>";
+
+        // if (!empty($sourceToDelete)) {
+        //     foreach ($sourceToDelete as $deleteSource) {
+        //         $sql = "delete from post_joins where post_id = '$this->id' and source_id = '$deleteSource';";
+        //         $this->conn->query($sql);
+        //     }
+        // }
+        // if (!empty($sourceToAdd)) {
+        //     $this->addSource($sourceToAdd, $this->id);
+        // }
         if ($this->conn->affected_rows > 0) {
             return true;
         } else {
@@ -167,23 +177,29 @@ class Post extends Common
     }
     public function updateStudio()
     {
-        $sql = "select studio_id from post_joins where post_id = '$this->id';";
+        $sql = "select group_concat(studio_id) from post_joins where post_id = '$this->id';";
         $currentStudio = $this->select($sql);
         $studioToDelete = array_diff($currentStudio, $this->studio_id);
         $studioToAdd = array_diff($this->studio_id, $currentStudio);
         echo "<pre>";
+        echo "cur studio";
+        print_r($currentStudio);
+        echo "add";
+
         print_r($studioToAdd);
+        echo "del";
+
         print_r($studioToDelete);
         echo "<pre>";
-        if (!empty($studioToDelete)) {
-            foreach ($studioToDelete as $deleteGenre) {
-                $sql = "delete from post_joins where post_id = '$this->id' and studio_id = '$deleteGenre';";
-                $this->conn->query($sql);
-            }
-        }
-        if (!empty($studioToAdd)) {
-            $this->addStudio($studioToAdd, $this->id);
-        }
+        // if (!empty($studioToDelete)) {
+        //     foreach ($studioToDelete as $deleteGenre) {
+        //         $sql = "delete from post_joins where post_id = '$this->id' and studio_id = '$deleteGenre';";
+        //         $this->conn->query($sql);
+        //     }
+        // }
+        // if (!empty($studioToAdd)) {
+        //     $this->addStudio($studioToAdd, $this->id);
+        // }
         if ($this->conn->affected_rows > 0) {
             return true;
         } else {
@@ -208,19 +224,30 @@ class Post extends Common
     }
     public function updateGenre()
     {
-        $sql = "select genre_id from post_joins where post_id = '$this->id';";
+        $sql = "select group_concat(genre_id) from post_joins where post_id = '$this->id';";
         $currentGenre = $this->select($sql);
         $genreToDelete = array_diff($currentGenre, $this->genre_id);
         $genreToAdd = array_diff($this->genre_id, $currentGenre);
-        if (!empty($genreToDelete)) {
-            foreach ($genreToDelete as $deleteGenre) {
-                $sql = "delete from post_joins where post_id = '$this->id' and genre_id = '$deleteGenre';";
-                $this->conn->query($sql);
-            }
-        }
-        if (!empty($genreToDelete)) {
-            $this->addGenre($genreToAdd, $this->id);
-        }
+
+        echo "<pre>";
+        echo 'c genre';
+        print_r($currentGenre);
+        echo "del";
+
+        print_r($genreToDelete);
+        echo "add";
+
+        print_r($genreToAdd);
+        echo "<pre>";
+        // if (!empty($genreToDelete)) {
+        //     foreach ($genreToDelete as $deleteGenre) {
+        //         $sql = "delete from post_joins where post_id = '$this->id' and genre_id = '$deleteGenre';";
+        //         $this->conn->query($sql);
+        //     }
+        // }
+        // if (!empty($genreToDelete)) {
+        //     $this->addGenre($genreToAdd, $this->id);
+        // }
         if ($this->conn->affected_rows > 0) {
             return true;
         } else {
@@ -247,20 +274,29 @@ class Post extends Common
     public function updateProducer()
     {
 
-        $sql = "select producers from post_joins where post_id = '$this->id';";
+        $sql = "select group_concat(producer_id) from post_joins where post_id = '$this->id';";
         $currentProducer = $this->select($sql);
         $producerToDelete = array_diff($currentProducer, $this->producers);
         $producerToAdd = array_diff($this->producers, $currentProducer);
-        if (!empty($producerToDelete)) {
-            foreach ($producerToDelete as $deleteProducer) {
-                $sql = "delete from post_joins where post_id = '$this->id' and producer_id = '$deleteProducer';";
-                $this->conn->query($sql);
-            }
-        }
-        if(!empty($producerToAdd)){
-            $this->addProducer($producerToAdd, $this->id);
-        }
-            if ($this->conn->affected_rows > 0) {
+
+        echo "<pre>";
+        echo "c producer";
+        print_r($currentProducer);
+        echo "del";
+        print_r($producerToDelete);
+        echo "add";
+        print_r($producerToAdd);
+        echo "<pre>";
+        // if (!empty($producerToDelete)) {
+        //     foreach ($producerToDelete as $deleteProducer) {
+        //         $sql = "delete from post_joins where post_id = '$this->id' and producer_id = '$deleteProducer';";
+        //         $this->conn->query($sql);
+        //     }
+        // }
+        // if(!empty($producerToAdd)){
+        //     $this->addProducer($producerToAdd, $this->id);
+        // }
+        if ($this->conn->affected_rows > 0) {
             return true;
         } else {
             return false;

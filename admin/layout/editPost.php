@@ -46,6 +46,7 @@ if (isset($_POST['submit'])) {
     $post->set('source', $_POST['source_id']);
     $post->set('release_date', $_POST['release_date']);
     $post->set('status', $_POST['status']);
+    $post->set('aired', $_POST['aired']);
     $post->set('created_date', date('y-m-d H:i:s'));
     if (empty($_FILES['image']['name'])) {
         $post->set('image_url', $_POST['old_image']);
@@ -112,9 +113,9 @@ if (isset($_POST['submit'])) {
                         <?php foreach ($studioList as $studios) {
 
                         ?>
-                            <option value="<?php echo $studios['id']; ?>" <?php if (in_array($studios['id'], $studioid)) {
-                                                                                echo 'selected';
-                                                                            } ?>>
+                            <option value="<?php echo $studios['id']; ?>" class="mark" <?php if (in_array($studios['id'], $studioid)) {
+                                                                                            echo 'selected';
+                                                                                        } ?>>
                                 <?php echo $studios['studio']; ?>
                             </option>
 
@@ -127,9 +128,9 @@ if (isset($_POST['submit'])) {
                         <?php foreach ($sourceList as $source) {
 
                         ?>
-                            <option value="<?php echo $source['id']; ?>" <?php if (in_array($source['id'], $studioid)) {
-                                                                                echo 'selected';
-                                                                            } ?>>
+                            <option value="<?php echo $source['id']; ?>" class="mark" <?php if (in_array($source['id'], $studioid)) {
+                                                                                            echo 'selected';
+                                                                                        } ?>>
                                 <?php echo $source['source']; ?>
                             </option>
 
@@ -140,9 +141,9 @@ if (isset($_POST['submit'])) {
                     <label>Post Producer</label>
                     <select class="form-control" name="producer_id[]" multiple required>
                         <?php foreach ($producerList as $prod) { ?>
-                            <option value="<?php echo $prod['id']; ?>" <?php $res = (in_array($prod['id'], $producerid)) ?  "selected" : false; //if (in_array($producer['id'], $producer)) {
-                                                                            echo $res;
-                                                                            ?>>
+                            <option value="<?php echo $prod['id']; ?>" class="mark" <?php $res = (in_array($prod['id'], $producerid)) ?  "selected" : false; //if (in_array($producer['id'], $producer)) {
+                                                                                    echo $res;
+                                                                                    ?>>
                                 <?php echo $prod['producers']  ?>
                             </option>
 
@@ -154,9 +155,9 @@ if (isset($_POST['submit'])) {
                     <select class="form-control" name="genre_id[]" multiple required>
                         <?php foreach ($genreList as  $genre) { ?>
 
-                            <option value="<?php echo $genre['id']; ?>" <?php if (in_array($genre['id'], $genreid)) {
-                                                                            echo 'selected';
-                                                                        } ?>>
+                            <option value="<?php echo $genre['id']; ?> " class="mark" <?php if (in_array($genre['id'], $genreid)) {
+                                                                                            echo 'selected';
+                                                                                        } ?>>
                                 <?php echo $genre['genre']; ?>
                             </option>
 
@@ -256,7 +257,18 @@ if (isset($_POST['submit'])) {
 include('header_footer/footer.php');
 ?>
 <script src="../js/ckeditor/ckeditor.js"></script>
-
+<script>
+    // script for selected.
+    const clicks = document.getElementsByClassName('mark');
+const clickArray = array.from(clicks);
+    click.addEventListener('click', function() {
+        if (this.hasAttribute('selected')) {
+            this.removeAttribute('selected');
+        } else {
+            this.setAttribute('selected')
+        }
+    })
+</script>
 <!-- <script>
     $(document).ready(function() {
         $('#name').keyup(function() {
