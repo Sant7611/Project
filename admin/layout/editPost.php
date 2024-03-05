@@ -31,16 +31,16 @@ $genreList = $genre->fetch();
 $producerList = $producer->fetch();
 $sourceList = $source->fetch();
 
-echo "<pre>";
-echo 'producer';
-print_r($_POST['producer_id']);
-echo 'source';
-print_r($_POST['source_id']);
-echo 'genre';
-print_r($_POST['genre_id']);
-echo 'studio';
-print_r($_POST['studio_id']);
-echo "</pre>";
+// echo "<pre>";
+// echo 'producer';
+// print_r($_POST['producer_id']);
+// echo 'source';
+// print_r($_POST['source_id']);
+// echo 'genre';
+// print_r($_POST['genre_id']);
+// echo 'studio';
+// print_r($_POST['studio_id']);
+// echo "</pre>";
 
 @session_start();
 if (isset($_POST['submit'])) {
@@ -121,74 +121,61 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <label>Post Studio
-                        <select class="form-control" name="studio_id[]" multiple required>
-                            <?php foreach ($studioList as $studios) {
+                        <?php foreach ($studioList as $studios) {
 
-                            ?>
-                                <option value="<?php echo $studios['id']; ?>" <?php if (in_array($studios['id'], $studioid)) {
+                        ?>
+                            <label>
+                                <input type="checkbox" name="studio_id[]" value="<?php echo $studios['id']; ?>" class="mark" <?php if (in_array($studios['id'], $studioid)) {
 
-                                                                                    echo 'selected class="mark marked"';
-                                                                                } else {
-                                                                                    echo 'class= "mark"';
-                                                                                } ?>>
-                                    <?php echo $studios['studio']; ?>
-                                </option>
-
-                            <?php  } ?>
-                        </select>
+                                                                                                                    echo 'checked ';
+                                                                                                                } ?>>
+                                <?php echo $studios['studio']; ?>
+                                </input>
+                            </label>
+                        <?php  } ?>
                     </label>
                 </div>
                 <div class="form-group">
                     <label>Post Source
-                        <select class="form-control" name="source_id[]" multiple required>
-                            <?php foreach ($sourceList as $source) {
+                        <?php foreach ($sourceList as $source) {
 
-                            ?>
-                                <option value="<?php echo $source['id']; ?>" <?php if (in_array($source['id'], $studioid)) {
+                        ?>
+                            <label>
+                                <input name="source_id[]" type="checkbox" value="<?php echo $source['id']; ?>" class="mark" <?php if (in_array($source['id'], $studioid)) {
 
-                                                                                    echo 'selected class="mark marked"';
-                                                                                } else {
-                                                                                    echo 'class= "mark"';
-                                                                                } ?>>
-                                    <?php echo $source['source']; ?>
-                                </option>
-
-                            <?php  } ?>
-                        </select>
+                                                                                                                                echo 'checked ';
+                                                                                                                            } ?>>
+                                <?php echo $source['source']; ?>
+                                </input>
+                            </label>
+                        <?php  } ?>
                     </label>
                 </div>
                 <div class="form-group">
                     <label>Post Producer
-                        <select class="form-control" name="producer_id[]" multiple required>
-                            <?php foreach ($producerList as $prod) { ?>
-                                <option value="<?php echo $prod['id']; ?>" <?php if (in_array($prod['id'], $producerid)) {
-                                                                                echo 'selected class="mark marked"';
-                                                                            } else {
-                                                                                echo 'class= "mark"';
-                                                                            } ?>>
-                                    <?php echo $prod['producers']  ?>
-                                </option>
-
-                            <?php   } ?>
-                        </select>
+                        <?php foreach ($producerList as $prod) { ?>
+                            <label>
+                                <input type="checkbox" class="mark" name="producer_id[]" value="<?php echo $prod['id']; ?>" class="mark" <?php if (in_array($prod['id'], $producerid)) {
+                                                                                                                                echo 'checked';
+                                                                                                                            } ?>>
+                                <?php echo $prod['producers']  ?>
+                                </input>
+                            </label>
+                        <?php   } ?>
                     </label>
                 </div>
                 <div class="form-group">
                     <label>Post Genre
-                        <select class="form-control" name="genre_id[]" multiple required>
-                            <?php foreach ($genreList as  $genre) { ?>
-
-                                <option value="<?php echo $genre['id']; ?> " <?php if (in_array($genre['id'], $genreid)) {
-                                                                                    echo 'selected class="mark marked"';
-                                                                                } else {
-                                                                                    echo 'class= "mark"';
-                                                                                } ?>>
-                                    <?php echo $genre['genre']; ?>
-                                </option>
-
-                            <?php echo $key;
-                            } ?>
-                        </select>
+                        <?php foreach ($genreList as  $genre) { ?>
+                            <label>
+                                <input type="checkbox" name="genre_id[]" value="<?php echo $genre['id']; ?> " class="mark" <?php if (in_array($genre['id'], $genreid)) {
+                                                                                                                                echo 'checked';
+                                                                                                                            } ?>>
+                                <?php echo $genre['genre']; ?>
+                                </input>
+                            </label>
+                        <?php
+                        } ?>
                     </label>
                 </div>
                 <div class="form-group">
@@ -292,21 +279,19 @@ include('header_footer/footer.php');
 <script src="../js/ckeditor/ckeditor.js"></script>
 <script>
     // script for selected.
-    const clicks = document.getElementsByClassName('mark');
-    clickArray = [...clicks];
-    console.log(clickArray);
-    clickArray.forEach(click => {
-        click.addEventListener('click', function() {
-            console.log(click);
-            if (this.hasAttribute('selected')) {
-                this.removeAttribute('selected');
-                this.classList.remove('marked');
-            } else {
-                this.classList.add('marked');
-                this.setAttribute('selected', '')
-            }
-        });
-    })
+    // const clicks = document.getElementsByClassName('mark');
+    // clickArray = [...clicks];
+    // console.log(clickArray);
+    // clickArray.forEach(click => {
+    //     click.addEventListener('click', function() {
+    //         console.log(click);
+    //         if (this.hasAttribute('checked')) {
+    //             this.removeAttribute('checked');
+    //         } else {
+    //             this.setAttribute('checked', '')
+    //         }
+    //     });
+    // })
 </script>
 <!-- <script>
     $(document).ready(function() {

@@ -17,6 +17,8 @@ $producerList = $producer->fetch();
 $studioList = $studio->fetch();
 $genreList = $genre->fetch();
 
+
+
 @session_start();
 if (isset($_POST['submit'])) {
     $post->set('title', $_POST['title']);
@@ -93,48 +95,53 @@ if (isset($_POST['submit'])) {
                     <input type="text" class="form-control" name="title" id="title" required>
                 </div>
                 <div class="form-group">
-                    <label>Post Studio</label>
-                    <select class="form-control" name="studio_id[]" multiple required>
-                        <option value="">Select Studio</option>
-                        <?php foreach ($studioList as $studios) {  ?>
-                            <option value="<?php echo $studios['id'];  ?>">
-                                <?php echo $studios['studio'];  ?>
-                            </option>
+                    <label>Post Studio
+                        <?php foreach ($studioList as $studios) {
+
+                        ?>
+                            <label>
+                                <input type="checkbox" name="studio_id[]" value="<?php echo $studios['id']; ?>">
+                                <?php echo $studios['studio']; ?>
+                                </input>
+                            </label>
                         <?php  } ?>
-                    </select>
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label>Post Genre</label>
-                    <select class="form-control" name="genre_id[]" multiple required>
-                        <option value="">Select Genre</option>
-                        <?php foreach ($genreList as $genres) {  ?>
-                            <option value="<?php echo $genres['id'];  ?>">
-                                <?php echo $genres['genre'];  ?>
-                            </option>
+                    <label>Post Source
+                        <?php foreach ($sourceList as $source) {
+
+                        ?>
+                            <label>
+                                <input name="source_id[]" type="checkbox" value="<?php echo $source['id']; ?>" >
+                                <?php echo $source['source']; ?>
+                                </input>
+                            </label>
                         <?php  } ?>
-                    </select>
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label>Post Producers</label>
-                    <select class="form-control" name="producers_id[]" multiple required>
-                        <option value="">Select Producers</option>
-                        <?php foreach ($producerList as $producer) {  ?>
-                            <option value="<?php echo $producer['id'];  ?>">
-                                <?php echo $producer['producers'];  ?>
-                            </option>
-                        <?php  } ?>
-                    </select>
+                    <label>Post Producer
+                        <?php foreach ($producerList as $prod) { ?>
+                            <label>
+                                <input type="checkbox" class="mark" name="producer_id[]" value="<?php echo $prod['id']; ?>" >
+                                <?php echo $prod['producers']  ?>
+                                </input>
+                            </label>
+                        <?php   } ?>
+                    </label>
                 </div>
                 <div class="form-group">
-                    <label>Post Source</label>
-                    <select class="form-control" name="source_id[]" multiple required>
-                        <option value="">Select Source</option>
-                        <?php foreach ($sourceList as $source) {  ?>
-                            <option value="<?php echo $source['id'];  ?>">
-                                <?php echo $source['source'];  ?>
-                            </option>
-                        <?php  } ?>
-                    </select>
+                    <label>Post Genre
+                            <?php foreach ($genreList as  $genre) { ?>
+                                <label>
+                                    <input type="checkbox" name="genre_id[]" value="<?php echo $genre['id']; ?> " >
+                                    <?php echo $genre['genre']; ?>
+                                    </input>
+                                </label>
+                            <?php
+                            } ?>
+                    </label>
                 </div>
                 <div class="form-group">
                     <label>Type</label>

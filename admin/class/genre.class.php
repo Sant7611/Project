@@ -39,7 +39,7 @@ class Genre extends Common
 
         if ($this->conn->affected_rows == 1) {
             return 'success';
-        } else {    
+        } else {
             return 'failed';
         }
     }

@@ -226,6 +226,7 @@ class Post extends Common
     {
         $sql = "select group_concat(genre_id) from post_joins where post_id = '$this->id';";
         $currentGenre = $this->select($sql);
+        $dbGenre = explode(',', $currentGenre);
         $genreToDelete = array_diff($currentGenre, $this->genre_id);
         $genreToAdd = array_diff($this->genre_id, $currentGenre);
 

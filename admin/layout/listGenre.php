@@ -1,12 +1,16 @@
 <?php
 include('../class/genre.class.php');
 include('header_footer/header.php');
-include('sideBar.php');
+// include('sideBar.php');
 session_start();
 
 
 $genre = new Genre();
 $datalist = $genre->fetch();
+
+echo "<pre>";
+print_r($datalist);
+echo "</pre>";
 
 
 if (isset($_SESSION['message']) && $_SESSION['message'] != "") {
