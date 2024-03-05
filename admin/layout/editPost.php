@@ -16,6 +16,8 @@ print_r($data);
 echo "</pre>";
 
 $studioid = explode(',', $data->studio_id);
+echo gettype($studioid);
+echo gettype($data->studio_id);
 $genreid = explode(',', $data->genre_id);
 $producerid = explode(',', $data->producer_id);
 $sourceid = explode(',', $data->source_id);

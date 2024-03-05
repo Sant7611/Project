@@ -124,16 +124,24 @@ class Post extends Common
         }
     }
 
+
     public function updateSource()
     {
         $sql = "select group_concat(source_id) from post_joins where post_id = '$this->id';";
         $currentSource = $this->select($sql);
-        $sourceToDelete = array_diff($currentSource, $this->source);
-        $sourceToAdd = array_diff($this->source, $currentSource);
+
+        $concat = $currentSource['group_concat(source_id)'];
+        $currentSourceId = explode(',', $concat);
+        // echo gettype($currentSourceId);
+
+
+        $sourceToDelete = array_diff($currentSourceId, $this->source);
+        $sourceToAdd = array_diff($this->source, $currentSourceId);
 
         echo "<pre>";
+        // echo gettype($currentSourceId);
         echo "current Source ";
-        print_r($currentSource);
+        print_r($currentSourceId);
         echo "del Source ";
         print_r($sourceToDelete);
         echo "add Source ";
@@ -179,11 +187,13 @@ class Post extends Common
     {
         $sql = "select group_concat(studio_id) from post_joins where post_id = '$this->id';";
         $currentStudio = $this->select($sql);
-        $studioToDelete = array_diff($currentStudio, $this->studio_id);
-        $studioToAdd = array_diff($this->studio_id, $currentStudio);
+        $concat = $currentStudio['group_concat(studio_id)'];
+        $currentStudioId = explode(',', $concat); 
+        $studioToDelete = array_diff($currentStudioId, $this->studio_id);
+        $studioToAdd = array_diff($this->studio_id, $currentStudioId);
         echo "<pre>";
         echo "cur studio";
-        print_r($currentStudio);
+        print_r($currentStudioId);
         echo "add";
 
         print_r($studioToAdd);
@@ -226,13 +236,19 @@ class Post extends Common
     {
         $sql = "select group_concat(genre_id) from post_joins where post_id = '$this->id';";
         $currentGenre = $this->select($sql);
-        $dbGenre = explode(',', $currentGenre);
-        $genreToDelete = array_diff($currentGenre, $this->genre_id);
-        $genreToAdd = array_diff($this->genre_id, $currentGenre);
+        // $dbGenre = explode(',', $currentGenre);
+        $concat = $currentGenre['group_concat(genre_id)'];
+        $currentGenreId = explode(',', $concat);
+        // echo gettype($currentGenreId);
+        print_r($currentGenreId);
+        $genreToDelete = array_diff($currentGenreId, $this->genre_id);
+        $genreToAdd = array_diff($this->genre_id, $currentGenreId);
 
         echo "<pre>";
+        echo "db current Genre";
+        // print_r($dbGenre);
         echo 'c genre';
-        print_r($currentGenre);
+        print_r($currentGenreId);
         echo "del";
 
         print_r($genreToDelete);
@@ -277,12 +293,14 @@ class Post extends Common
 
         $sql = "select group_concat(producer_id) from post_joins where post_id = '$this->id';";
         $currentProducer = $this->select($sql);
-        $producerToDelete = array_diff($currentProducer, $this->producers);
-        $producerToAdd = array_diff($this->producers, $currentProducer);
+        $concat = $currentProducer["group_concat(producer_id)"];
+        $currentProducerId = explode(',', $concat);
+        $producerToDelete = array_diff($currentProducerId, $this->producers);
+        $producerToAdd = array_diff($this->producers, $currentProducerId);
 
         echo "<pre>";
         echo "c producer";
-        print_r($currentProducer);
+        print_r($currentProducerId);
         echo "del";
         print_r($producerToDelete);
         echo "add";
