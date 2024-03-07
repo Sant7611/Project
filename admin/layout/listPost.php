@@ -10,6 +10,11 @@ $postObj = new Post();
 
 $dataList = $postObj->fetch();
 
+if (isset($_GET['msg'])) {
+    $msg = $_GET['msg'];
+}
+
+
 echo "<pre>";
 print_r($dataList);
 echo "</pre>";
@@ -31,6 +36,9 @@ echo "</pre>";
     <?php
     if (isset($successMessage)) {
         echo '<div class="alert alert-success">' . $successMessage . '</div>';
+    }
+    if (isset($msg)) {
+        echo '<div class="alert alert-success">' . $msg . '</div>';
     }
     ?>
     <div class="row">
@@ -56,11 +64,7 @@ echo "</pre>";
                             <td> <?php echo $key + 1; ?></td>
                             <td> <?php echo $post['title']; ?> </td>
                             <td> <?php echo $post['type']; ?> </td>
-                            <td><?php $post['genre'];
-                                // foreach ($genres as $genre) {
-                                //     echo $genre . "<br>";
-                                ?>
-                            </td>
+                            <td><?php echo $post['genre']; ?></td>
                             <td><?php echo $post['studio'];
                                 // print_r($studios);
                                 // foreach ($studios as $studio) {

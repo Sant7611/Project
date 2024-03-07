@@ -13,11 +13,10 @@ $post->set('id', $id);
 $data = $post->getById();
 echo "<pre>";
 print_r($data);
+print_r($_POST);
 echo "</pre>";
 
 $studioid = explode(',', $data->studio_id);
-echo gettype($studioid);
-echo gettype($data->studio_id);
 $genreid = explode(',', $data->genre_id);
 $producerid = explode(',', $data->producer_id);
 $sourceid = explode(',', $data->source_id);
@@ -91,8 +90,9 @@ if (isset($_POST['submit'])) {
     $result = $post->edit();
     // echo $result;
     if ($result == 'success') {
-        $ErrMs = "";
-        $msg = "Post successfully updated  ";
+        header('location:listPost.php?msg=Post successfully Updated');
+        // $ErrMs = "";
+        // $msg = "Post successfully updated  ";
     } else {
         $msg = "Post cannot be updated";
     }
@@ -128,9 +128,8 @@ if (isset($_POST['submit'])) {
                         ?>
                             <label>
                                 <input type="checkbox" name="studio_id[]" value="<?php echo $studios['id']; ?>" class="mark" <?php if (in_array($studios['id'], $studioid)) {
-
-                                                                                                                    echo 'checked ';
-                                                                                                                } ?>>
+                                                                                                                                    echo 'checked ';
+                                                                                                                                } ?>>
                                 <?php echo $studios['studio']; ?>
                                 </input>
                             </label>
@@ -143,8 +142,7 @@ if (isset($_POST['submit'])) {
 
                         ?>
                             <label>
-                                <input name="source_id[]" type="checkbox" value="<?php echo $source['id']; ?>" class="mark" <?php if (in_array($source['id'], $studioid)) {
-
+                                <input name="source_id[]" type="checkbox" value="<?php echo $source['id']; ?>" class="mark" <?php if (in_array($source['id'], $sourceid)) {
                                                                                                                                 echo 'checked ';
                                                                                                                             } ?>>
                                 <?php echo $source['source']; ?>
@@ -157,9 +155,8 @@ if (isset($_POST['submit'])) {
                     <label>Post Producer
                         <?php foreach ($producerList as $prod) { ?>
                             <label>
-                                <input type="checkbox" class="mark" name="producer_id[]" value="<?php echo $prod['id']; ?>" class="mark" <?php if (in_array($prod['id'], $producerid)) {
-                                                                                                                                echo 'checked';
-                                                                                                                            } ?>>
+                                <input type="checkbox" class="mark" name="producer_id[]" value="<?php echo $prod['id']; ?>" class="mark" <?php if (in_array($prod['id'], $producerid)) {                                                                                                                 echo 'checked';
+                                 } ?>>
                                 <?php echo $prod['producers']  ?>
                                 </input>
                             </label>
@@ -279,22 +276,7 @@ if (isset($_POST['submit'])) {
 include('header_footer/footer.php');
 ?>
 <script src="../js/ckeditor/ckeditor.js"></script>
-<script>
-    // script for selected.
-    // const clicks = document.getElementsByClassName('mark');
-    // clickArray = [...clicks];
-    // console.log(clickArray);
-    // clickArray.forEach(click => {
-    //     click.addEventListener('click', function() {
-    //         console.log(click);
-    //         if (this.hasAttribute('checked')) {
-    //             this.removeAttribute('checked');
-    //         } else {
-    //             this.setAttribute('checked', '')
-    //         }
-    //     });
-    // })
-</script>
+
 <!-- <script>
     $(document).ready(function() {
         $('#name').keyup(function() {

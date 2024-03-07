@@ -22,6 +22,28 @@ abstract class Common
     }
   }
 
+  public function customArrayDiff($array1, $array2, $strict = false)
+  {
+    $diff = array();
+
+    foreach ($array1 as $value1) {
+      $found = false;
+
+      foreach ($array2 as $value2) {
+        if ($strict ? $value1 === $value2 : $value1 == $value2) {
+          $found = true;
+          break;
+        }
+      }
+
+      if (!$found) {
+        $diff[] = $value1;
+      }
+    }
+
+    return $diff;
+  }
+
   public function validate($value)
   {
     $conn = mysqli_connect('localhost', 'root', '', 'anidb');
