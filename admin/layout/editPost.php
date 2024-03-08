@@ -11,10 +11,10 @@ $post = new Post();
 
 $post->set('id', $id);
 $data = $post->getById();
-echo "<pre>";
-print_r($data);
-print_r($_POST);
-echo "</pre>";
+// echo "<pre>";
+// print_r($data);
+// print_r($_POST);
+// echo "</pre>";
 
 $studioid = explode(',', $data->studio_id);
 $genreid = explode(',', $data->genre_id);
@@ -123,58 +123,75 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <label>Post Studio
-                        <?php foreach ($studioList as $studios) {
+                        <div class="insert-data">
+                            <?php foreach ($studioList as $studios) {
 
-                        ?>
-                            <label>
-                                <input type="checkbox" name="studio_id[]" value="<?php echo $studios['id']; ?>" class="mark" <?php if (in_array($studios['id'], $studioid)) {
-                                                                                                                                    echo 'checked ';
-                                                                                                                                } ?>>
-                                <?php echo $studios['studio']; ?>
-                                </input>
-                            </label>
-                        <?php  } ?>
+                            ?>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="studio_id[]" value="<?php echo $studios['id']; ?>" class="mark" <?php if (in_array($studios['id'], $studioid)) {
+                                                                                                                                            echo 'checked ';
+                                                                                                                                        } ?>>
+                                        <?php echo $studios['studio']; ?>
+                                        </input>
+                                    </label>
+                                </div>
+                            <?php  } ?>
+                        </div>
                     </label>
                 </div>
                 <div class="form-group">
                     <label>Post Source
-                        <?php foreach ($sourceList as $source) {
-
-                        ?>
-                            <label>
-                                <input name="source_id[]" type="checkbox" value="<?php echo $source['id']; ?>" class="mark" <?php if (in_array($source['id'], $sourceid)) {
-                                                                                                                                echo 'checked ';
-                                                                                                                            } ?>>
-                                <?php echo $source['source']; ?>
-                                </input>
-                            </label>
-                        <?php  } ?>
+                        <div class="insert-data">
+                            <?php foreach ($sourceList as $source) {    ?>
+                                <div>
+                                    <label>
+                                        <input name="source_id[]" type="checkbox" value="<?php echo $source['id']; ?>" class="mark" <?php if (in_array($source['id'], $sourceid)) {
+                                                                                                                                        echo 'checked ';
+                                                                                                                                    } ?>>
+                                        <?php echo $source['source']; ?>
+                                        </input>
+                                    </label>
+                                </div>
+                            <?php  } ?>
+                        </div>
                     </label>
                 </div>
                 <div class="form-group">
                     <label>Post Producer
-                        <?php foreach ($producerList as $prod) { ?>
-                            <label>
-                                <input type="checkbox" class="mark" name="producer_id[]" value="<?php echo $prod['id']; ?>" class="mark" <?php if (in_array($prod['id'], $producerid)) {                                                                                                                 echo 'checked';
-                                 } ?>>
-                                <?php echo $prod['producers']  ?>
-                                </input>
-                            </label>
-                        <?php   } ?>
+                        <div class="insert-data">
+
+                            <?php foreach ($producerList as $prod) { ?>
+                                <label>
+                                    <div>
+                                        <input type="checkbox" class="mark" name="producer_id[]" value="<?php echo $prod['id']; ?>" class="mark" <?php if (in_array($prod['id'], $producerid)) {
+                                                                                                                                                        echo 'checked';
+                                                                                                                                                    } ?>>
+                                        <?php echo $prod['producers']  ?>
+                                        </input>
+                                    </div>
+                                </label>
+                            <?php   } ?>
+                        </div>
                     </label>
                 </div>
                 <div class="form-group">
                     <label>Post Genre
-                        <?php foreach ($genreList as  $genre) { ?>
-                            <label>
-                                <input type="checkbox" name="genre_id[]" value="<?php echo $genre['id']; ?> " class="mark" <?php if (in_array($genre['id'], $genreid)) {
-                                                                                                                                echo 'checked';
-                                                                                                                            } ?>>
-                                <?php echo $genre['genre']; ?>
-                                </input>
-                            </label>
-                        <?php
-                        } ?>
+                        <div class="insert-data">
+
+                            <?php foreach ($genreList as  $genre) { ?>
+                                <label>
+                                    <div>
+                                        <input type="checkbox" name="genre_id[]" value="<?php echo $genre['id']; ?> " class="mark" <?php if (in_array($genre['id'], $genreid)) {
+                                                                                                                                        echo 'checked';
+                                                                                                                                    } ?>>
+                                        <?php echo $genre['genre']; ?>
+                                        </input>
+                                    </div>
+                                </label>
+                            <?php
+                            } ?>
+                        </div>
                     </label>
                 </div>
                 <div class="form-group">

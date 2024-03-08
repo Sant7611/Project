@@ -1,6 +1,6 @@
 <?php
 include('header_footer/header.php');
-include('sideBar.php');
+// include('sideBar.php');
 ?>
 
 <div id="page-wrapper">

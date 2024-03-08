@@ -245,17 +245,17 @@ class Post extends Common
         $genreToDelete = $this->customArrayDiff($currentGenreId, $this->genre_id);
         $genreToAdd = $this->customArrayDiff($this->genre_id, $currentGenreId);
 
-        echo " this genre <br>";
-        print_r($this->genre_id);
-        echo 'c genre ';
-        print_r($currentGenreId);
-        echo "del ";
+        // echo " this genre <br>";
+        // print_r($this->genre_id);
+        // echo 'c genre ';
+        // print_r($currentGenreId);
+        // echo "del ";
 
-        print_r($genreToDelete);
-        echo "add";
+        // print_r($genreToDelete);
+        // echo "add";
 
-        print_r($genreToAdd);
-        echo "<br>";
+        // print_r($genreToAdd);
+        // echo "<br>";
         if (!empty($genreToDelete)) {
             foreach ($genreToDelete as $deleteGenre) {
                 $sql = "delete from post_joins where post_id = '$this->id' and genre_id = '$deleteGenre';";

@@ -1,7 +1,7 @@
 <?php
 include('../class/studio.class.php');
 include('header_footer/header.php');
-include('sideBar.php');
+// include('sideBar.php');
 session_start();
 
 $studio = new Studio();

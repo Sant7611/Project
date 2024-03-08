@@ -1,7 +1,13 @@
 <?php
+@session_start();
 include('header_footer/header.php');
 include('../class/post.class.php');
-@session_start();
+// include('sideBar.php');
+
+if (isset($_GET['msg'])) {
+    $msg = $_GET['msg'];
+}
+
 if (isset($_SESSION['message']) && $_SESSION['message'] != "") {
     $successMessage = $_SESSION['message'];
     $_SESSION['message'] = "";
@@ -10,16 +16,11 @@ $postObj = new Post();
 
 $dataList = $postObj->fetch();
 
-if (isset($_GET['msg'])) {
-    $msg = $_GET['msg'];
-}
 
+// echo "<pre>";
+// print_r($dataList);
+// echo "</pre>";
 
-echo "<pre>";
-print_r($dataList);
-echo "</pre>";
-
-// include('sideBar.php');
 ?>
 <style>
     tr {
@@ -43,7 +44,7 @@ echo "</pre>";
     ?>
     <div class="row">
         <div class="panel-body">
-            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+            <table width="100%" class=" create-main " id="">
                 <thead>
                     <tr>
                         <th>S.NO</th>
@@ -65,16 +66,8 @@ echo "</pre>";
                             <td> <?php echo $post['title']; ?> </td>
                             <td> <?php echo $post['type']; ?> </td>
                             <td><?php echo $post['genre']; ?></td>
-                            <td><?php echo $post['studio'];
-                                // print_r($studios);
-                                // foreach ($studios as $studio) {
-                                //     echo $studio;
-                            } ?></td>
-                            <td><?php echo $post['producer'];
-                                // foreach ($producers as $producer) {
-                                //     echo $producer;
-                                ?></td>
-                            <td>
+                            <td><?php echo $post['studio'];} ?></td>
+                            <td><?php echo $post['producer']; ?></td>
                             <td>
                                 <img height='100' width='100' src="../images/<?php echo $post['image_url']; ?>" alt="" srcset="">
                             </td>

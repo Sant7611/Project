@@ -1,25 +1,62 @@
+* {
+  margin: 0px;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Ubuntu", sans-serif;
+}
+
 #page-wrapper {
   position: absolute;
-  top: 40px;
+  top: 90px;
   padding-bottom: 30px;
   margin-left: 210px;
 }
-/* * {
-  margin: 0px;
-  padding: 0;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.create-main th,
+.create-main td {
+  border: 2px solid black;
+  padding: 3px;
+}
+
+.insert-data {
+  width: 235px;
+  height: 150px;
+  overflow-y: scroll;
+  margin: 9px;
+  padding-left: 78px;
+}
+
+.form-group {
+  padding: 9px;
+}
+
+/*######################## Sidebar ################## */
+
+.dropdown-topic {
+  padding: 10px;
+  width: 100%;
+}
+/* 
+.dropdown-topic:active {
+  background-color: #8ea1cb;
 } */
+
 .sidebar {
   top: 40px;
   position: absolute;
   width: 200px;
 }
 .sidebar-inner {
-  height: 80vh;
+  margin-top: 50px;
+  height: 100vh;
   width: 100%;
-  background: grey;
+  background: rgb(229 218 218);
 }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
+ul > li {
+  list-style: none;
 }

@@ -1,8 +1,8 @@
 <?php
+session_start();
 include('../class/producer.class.php');
 include('header_footer/header.php');
-include('sideBar.php');
-session_start();
+// include('sideBar.php');
 
 $producer = new Producer();
 $datalist = $producer->fetch();

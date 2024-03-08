@@ -1,5 +1,5 @@
 <?php
-include('sidebar.php');
+// include('sidebar.php');
 include('header_footer/header.php');
 include('../class/source.class.php');
 

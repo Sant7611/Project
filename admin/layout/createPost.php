@@ -1,10 +1,12 @@
 <?php
+@session_start();
 include('header_footer/header.php');
 include('../class/post.class.php');
 include('../class/studio.class.php');
 include('../class/genre.class.php');
 include('../class/source.class.php');
 include('../class/producer.class.php');
+// include('sideBar.php');
 
 $post = new Post();
 $genre = new Genre();
@@ -19,7 +21,6 @@ $genreList = $genre->fetch();
 
 
 
-@session_start();
 if (isset($_POST['submit'])) {
     $post->set('title', $_POST['title']);
     $post->set('type', $_POST['type']);
@@ -37,9 +38,7 @@ if (isset($_POST['submit'])) {
     $post->set('studio_id', $_POST['studio_id']);
     $post->set('created_date', date('y-m-d H:i:s'));
     if ($_FILES['image']['error'] == 0) {
-        echo "<pre>";
-        print_r($_POST);
-        echo "</pre>";
+
         if (
             $_FILES['image']['type'] == "image/png" ||
             $_FILES['image']['type'] == "image/jpg" ||
@@ -71,7 +70,6 @@ if (isset($_POST['submit'])) {
         $msg = "";
     }
 }
-// include('sideBar.php');
 ?>
 
 
@@ -96,51 +94,68 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <label>Post Studio
-                        <?php foreach ($studioList as $studios) {
+                        <div class="insert-data">
+                            <?php foreach ($studioList as $studios) {
 
-                        ?>
-                            <label>
-                                <input type="checkbox" name="studio_id[]" value="<?php echo $studios['id']; ?>">
-                                <?php echo $studios['studio']; ?>
-                                </input>
-                            </label>
-                        <?php  } ?>
+                            ?>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="studio_id[]" value="<?php echo $studios['id']; ?>">
+                                        <?php echo $studios['studio']; ?>
+                                        </input>
+                                    </label>
+                                </div>
+                            <?php  } ?>
+                        </div>
                     </label>
                 </div>
                 <div class="form-group">
                     <label>Post Source
-                        <?php foreach ($sourceList as $source) {
+                        <div class="insert-data">
+                            <?php foreach ($sourceList as $source) {
 
-                        ?>
-                            <label>
-                                <input name="source_id[]" type="checkbox" value="<?php echo $source['id']; ?>" >
-                                <?php echo $source['source']; ?>
-                                </input>
-                            </label>
-                        <?php  } ?>
+                            ?>
+                                <div>
+                                    <label>
+                                        <input name="source_id[]" type="checkbox" value="<?php echo $source['id']; ?>">
+                                        <?php echo $source['source']; ?>
+                                        </input>
+                                    </label>
+                                </div>
+                            <?php  } ?>
+                        </div>
                     </label>
                 </div>
                 <div class="form-group">
                     <label>Post Producer
-                        <?php foreach ($producerList as $prod) { ?>
-                            <label>
-                                <input type="checkbox" class="mark" name="producer_id[]" value="<?php echo $prod['id']; ?>" >
-                                <?php echo $prod['producers']  ?>
-                                </input>
-                            </label>
-                        <?php   } ?>
+                        <div class="insert-data">
+
+                            <?php foreach ($producerList as $prod) { ?>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" class="mark" name="producer_id[]" value="<?php echo $prod['id']; ?>">
+                                        <?php echo $prod['producers']  ?>
+                                        </input>
+                                    </label>
+                                </div>
+                            <?php   } ?>
+                        </div>
                     </label>
                 </div>
                 <div class="form-group">
                     <label>Post Genre
+                        <div class="insert-data">
                             <?php foreach ($genreList as  $genre) { ?>
-                                <label>
-                                    <input type="checkbox" name="genre_id[]" value="<?php echo $genre['id']; ?> " >
-                                    <?php echo $genre['genre']; ?>
-                                    </input>
-                                </label>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" name="genre_id[]" value="<?php echo $genre['id']; ?> ">
+                                        <?php echo $genre['genre']; ?>
+                                        </input>
+                                    </label>
+                                </div>
                             <?php
                             } ?>
+                        </div>
                     </label>
                 </div>
                 <div class="form-group">

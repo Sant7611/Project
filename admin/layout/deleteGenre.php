@@ -1,10 +1,10 @@
 <?php
+@session_start();
 $id = $_GET['id'];
 include('../class/genre.class.php');
 $genreObj = new Genre();
 $genreObj->set('id', $id);
 $status = $genreObj->delete();
-@session_start();
 if ($status == 'success') {
   $_SESSION['message'] = 'Genre Deleted Successfully!';
   header('location:listGenre.php');
