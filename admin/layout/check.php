@@ -1,74 +1,50 @@
-<?php
-include('header.php');
-include('../class/category_class.php');
+<!DOCTYPE html>
+<html lang="en">
 
-session_start();
-$category = new Category();
-
-$error = [];
-
-if (isset($_POST['submit'])) {
-    if (isset($_POST['name']) && !empty($_POST['name'])) {
-        $existingCategory = $category->retrieve();
-
-        if (!$existingCategory) {
-            $category->set('name', $_POST['name']);
-            $category->set('status', $_POST['status']);
-            $category->set('created_date', date('Y-m-d H:i:s'));
-            $result = $category->save();
-
-            if($result) {
-                $msg = "Category inserted successfully with id" . $category->save();
-            } else {
-                $error['msg'] = "Failed to insert the data";
-            }
-        } else {
-            $error['msg'] = "Category already exists.";
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: rgb(234, 212, 65);
         }
-    } else {
-        $error['msg'] = "Please fill the name field.";
-    }
-}
-?>
 
-<div class="category">
-    <div class="row">
-        <div class="heading">
-            <p>Create Category</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="headings">
-        <?php if(isset($error['msg']) && !empty($error['msg'])){?>
-                <label class="error"><?php echo $error['msg']; ?></label>
-            <?php } ?>
-            <?php if(isset($msg) && !empty($msg)){?>
-                <label ><?php echo $msg; ?></label>
-            <?php } ?>
+        .select {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 150px;
+            height: 50px;
+            padding: 12px;
+        }
 
-            <form action="" method="post" novalidate>
-                <fieldset>
-                    <div class="form-grp">
-                        <label>Name</label><br>
-                        <input type="text" class="form_input" name="name" id="name" required>
-                        <br>
-                        <!-- <span id="categoryError" style="color:red"></span> -->
-                    </div>
-                    <div class="form-grp">
-                        <label>Status</label><br>
-                        <div class="select">
-                            <label for="option1">
-                                <input type="radio" name="status" id="option1" value="1" checked> Active
-                            </label>
-                            <label for="option2">
-                                <input type="radio" name="status" id="option2" value="0"> Inactive
-                            </label>
-                        </div>
-                    </div>
-                    <button type="submit" name="submit" value="submit" class="success">Submit Button</button>
-                    <button type="reset" class="danger">Reset Button</button>
-                </fieldset>
-            </form>
+        .caret {
+            border-right: 8px solid transparent;
+            border-left: 8px dashed transparent;
+            border-top: 6px solid black;
+        }
+
+        .caret:hover {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dropdown">
+
+        <div class="select">
+            <label>Dropdown Menu</label>
+            <div class="caret"></div>
         </div>
+        <ul class="menu">
+            <li>Menu 1</li>
+            <li>Menu 2</li>
+            <li>Menu 3</li>
+            <li>Menu 4</li>
+        </ul>
     </div>
-</div>
+</body>
+
+</html>

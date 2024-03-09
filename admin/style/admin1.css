@@ -9,7 +9,7 @@
   position: absolute;
   top: 90px;
   padding-bottom: 30px;
-  margin-left: 210px;
+  margin-left: 260px;
 }
 .navbar {
   display: flex;
@@ -48,7 +48,7 @@
 .sidebar {
   top: 40px;
   position: absolute;
-  width: 200px;
+  width: 250px;
 }
 .sidebar-inner {
   margin-top: 50px;
