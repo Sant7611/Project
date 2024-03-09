@@ -102,10 +102,9 @@ if (isset($_POST['submit'])) {
 
 
 <div id="page-wrapper">
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Edit Post</h1>
-        </div>
+
+    <div class="col-lg-12">
+        <h1 class="page-header">Edit Post</h1>
     </div>
     <div class="row">
         <div class="col-lg-6">
@@ -220,7 +219,7 @@ if (isset($_POST['submit'])) {
                     </label>
                 </div>
                 <div class="form-group" enctype="multipart/form-data">
-                    <label>Image<br>
+                    <label>Image<br><br>
                         <input type="hidden" value="<?php echo $data->image_url;  ?>" name="old_image">
                         <img src="../images/<?php echo $data->image_url;  ?>" height="100" width="200" alt="" srcset=""><br>
                         <br><input type="file" name="image">
@@ -283,8 +282,8 @@ if (isset($_POST['submit'])) {
                     </label>
                 </div>
 
-                <button type="submit" name="submit" value='submit' class="btn btn-success">Submit Button</button>
-                <button type="reset" class="btn btn-danger">Reset Button</button>
+                <button type="submit" name="submit" value='submit' class="btn btn-success">Update</button>
+                <button type="reset" class="btn btn-danger">Reset</button>
             </form>
         </div>
     </div>

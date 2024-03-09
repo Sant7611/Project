@@ -6,10 +6,12 @@ include('header_footer/header.php');
 <div id="page-wrapper">
     <div>
         <div>
-            <h1>Dashboard</h1>
+            <h1 class="page-header">Dashboard</h1>
         </div>
-        <div>
-            <a href="#"><i></i>&nbsp;Go to Site Home Page</a>
+        <div class="row">
+            <div>
+                <a href="http://localhost/project"><i></i>&nbsp;Go to Site Home Page</a>
+            </div>
         </div>
     </div>
 </div>

@@ -35,7 +35,7 @@ if (isset($_SESSION['message']) && $_SESSION['message'] != "") {
     ?>
 
     <div class="title">
-        <h1>List Genre</h1>
+        <h1 class="page-header">List Genre</h1>
     </div>
     <table>
         <tr>
@@ -48,8 +48,8 @@ if (isset($_SESSION['message']) && $_SESSION['message'] != "") {
                 <td><?php echo $key + 1; ?></td>
                 <td><?php echo $genres['genre']; ?></td>
                 <td width="20%">
-                    <a href="editGenre.php?id=<?php echo $genres['id'] ?>">Edit</a>
-                    <a href="deleteGenre.php?id=<?php echo $genres['id'] ?>">Delete</a>
+                    <button class="btn btn-success"> <a href="editGenre.php?id=<?php echo $genres['id'] ?>">Edit</a></button>
+                    <button class="btn-danger btn"><a href="deleteGenre.php?id=<?php echo $genres['id'] ?>">Delete</a></button>
                 </td>
             </tr>
         <?php } ?>

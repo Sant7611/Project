@@ -2,9 +2,9 @@
     <div class="sidebar-inner">
         <div class="sidebar-inner-i">
             <div class="dropdown-topic">
-                <ul class="dropdown">
-
-                    <li><a href="dashboard.php">
+                <ul>
+                    <li class="dropdown">
+                        <a href="dashboard.php">
                             <div class="icon-space">
                                 <span class="material-icons-outlined">space_dashboard</span>
                                 <span>Dashboard</span>
@@ -124,68 +124,6 @@
         });
     });
 </script>
-<style>
-    .toggle {
-        transform: rotate(180deg);
-    }
-
-    .dropdown {
-        position: relative;
-        display: block;
-        cursor: pointer;
-    }
-
-    .dropdown-content {
-        display: none;
-        /* position: absolute; */
-        /* padding-left: 4px; */
-        margin-left: 7px;
-        margin-top: 5px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        background-color: aliceblue;
-        z-index: 1;
-        font-weight: 200;
-    }
-
-    .dropdown>li>a {
-        text-decoration: none;
-        color: #000;
-
-    }
-
-    .dropdown-content>li>a {
-        display: block;
-        text-decoration: none;
-        padding: 4px 0 7px 9px;
-        width: 100%;
-        color: #000;
-        font-weight: 300;
-    }
-
-    .dropdown-content>li>a:hover {
-        background-color: #8ea1cb;
-        /* color: #fff; */
-        font-weight: 500;
-    }
-
-
-    .dropdown-topic:hover {
-        background-color: #6b77c7;
-        font-weight: 500;
-        color: aliceblue;
-    }
-
-    .icon-space {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .icon-space-dashboard {
-        display: flex;
-        align-items: center;
-    }
-</style>
 <?php
 include('header_footer/footer.php')
 ?>

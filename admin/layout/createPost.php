@@ -74,11 +74,11 @@ if (isset($_POST['submit'])) {
 
 
 <div id="page-wrapper">
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Create Post</h1>
-        </div>
+
+    <div class="col-lg-12">
+        <h1 class="page-header">Create Post</h1>
     </div>
+
     <div class="row">
         <div class="col-lg-6">
             <?php if (isset($msg)) { ?>
@@ -89,154 +89,162 @@ if (isset($_POST['submit'])) {
             <?php  } ?>
             <form role="form" id="submitForm" method="post" enctype="multipart/form-data" noValidate>
                 <div class="form-group">
-                    <label>Title</label>
+                    <label class="label" for="title">Title</label>
                     <input type="text" class="form-control" name="title" id="title" required>
                 </div>
                 <div class="form-group">
-                    <label>Post Studio
-                        <div class="insert-data">
-                            <?php foreach ($studioList as $studios) {
+                    <label for="studio_id" class="label">Post Studio</label>
+                    <div class="insert-data">
+                        <?php foreach ($studioList as $studios) { ?>
+                            <div>
+                                <label>
+                                    <input type="checkbox" name="studio_id[]" value="<?php echo $studios['id']; ?>">
+                                    <?php echo $studios['studio']; ?>
+                                    </input>
+                                </label>
+                            </div>
+                        <?php  } ?>
+                    </div>
 
-                            ?>
-                                <div>
-                                    <label>
-                                        <input type="checkbox" name="studio_id[]" value="<?php echo $studios['id']; ?>">
-                                        <?php echo $studios['studio']; ?>
-                                        </input>
-                                    </label>
-                                </div>
-                            <?php  } ?>
-                        </div>
-                    </label>
                 </div>
                 <div class="form-group">
-                    <label>Post Source
-                        <div class="insert-data">
-                            <?php foreach ($sourceList as $source) {
+                    <label class="label" for="source_id">Post Source </label>
+                    <div class="insert-data">
+                        <?php foreach ($sourceList as $source) {
 
-                            ?>
-                                <div>
-                                    <label>
-                                        <input name="source_id[]" type="checkbox" value="<?php echo $source['id']; ?>">
-                                        <?php echo $source['source']; ?>
-                                        </input>
-                                    </label>
-                                </div>
-                            <?php  } ?>
-                        </div>
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>Post Producer
-                        <div class="insert-data">
+                        ?>
+                            <div>
+                                <label>
+                                    <input name="source_id[]" type="checkbox" value="<?php echo $source['id']; ?>">
+                                    <?php echo $source['source']; ?>
+                                    </input>
+                                </label>
+                            </div>
+                        <?php  } ?>
+                    </div>
 
-                            <?php foreach ($producerList as $prod) { ?>
-                                <div>
-                                    <label>
-                                        <input type="checkbox" class="mark" name="producer_id[]" value="<?php echo $prod['id']; ?>">
-                                        <?php echo $prod['producers']  ?>
-                                        </input>
-                                    </label>
-                                </div>
-                            <?php   } ?>
-                        </div>
-                    </label>
                 </div>
                 <div class="form-group">
-                    <label>Post Genre
-                        <div class="insert-data">
-                            <?php foreach ($genreList as  $genre) { ?>
-                                <div>
-                                    <label>
-                                        <input type="checkbox" name="genre_id[]" value="<?php echo $genre['id']; ?> ">
-                                        <?php echo $genre['genre']; ?>
-                                        </input>
-                                    </label>
-                                </div>
-                            <?php
-                            } ?>
-                        </div>
-                    </label>
+                    <label class="label" for="producer_id">Post Producer</label>
+                    <div class="insert-data">
+
+                        <?php foreach ($producerList as $prod) { ?>
+                            <div>
+                                <label>
+                                    <input type="checkbox" class="mark" name="producer_id[]" value="<?php echo $prod['id']; ?>">
+                                    <?php echo $prod['producers']  ?>
+                                    </input>
+                                </label>
+                            </div>
+                        <?php   } ?>
+                    </div>
+
                 </div>
                 <div class="form-group">
-                    <label>Type</label>
-                    <input class="form-control" type="text" name="type" required></input>
+                    <label class="label" for="genre_id">Post Genre</label>
+                    <div class="insert-data">
+                        <?php foreach ($genreList as  $genre) { ?>
+                            <div>
+                                <label>
+                                    <input type="checkbox" name="genre_id[]" value="<?php echo $genre['id']; ?> ">
+                                    <?php echo $genre['genre']; ?>
+                                    </input>
+                                </label>
+                            </div>
+                        <?php
+                        } ?>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="type" class="label">Type</label>
+                    <input class="form-control" id="type" type="text" name="type" required></input>
                 </div>
         </div>
         <div class="form-group">
-            <label>Duration </label>
-            <input class="form-control" type="text" name="duration" required></input>
+            <label for="duration" class="label">Duration </label>
+            <input class="form-control" id="duration" type="text" name="duration" required></input>
         </div>
         <div class="form-group">
-            <label>Sypnosis</label>
-            <textarea class="form-control ckeditor" rows="3" name="sypnosis"></textarea>
+            <label for="sypnosis" class="label">Sypnosis</label>
+            <textarea class="form-control ckeditor" id="sypnosis" rows="3" name="sypnosis"></textarea>
         </div>
         <div class="form-group">
-            <label for="release_date"> Release date:
-                <input type="date" name="release_date" id="release_date" value="">
-            </label>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="aired"> Aired:
-            <input type="date" name="aired" id="aired" value="">
-        </label>
-    </div>
-    <div class="form-group">
-        <label for="episodes">Episodes: </label>
-        <input type="number" name="episodes" id="">
-    </div>
-    <div class="form-group" enctype="multipart/form-data">
-        <label>Image</label>
-        <!-- using multiple helps to upload multiple images -->
-        <input type="file" name="image" required>
-    </div>
+            <label for="release_dates" class="label"> Release date:</label>
+            <input type="date" id="release_dates" name="release_date" value="">
 
-
-    <div class="form-group">
-        <label>Status</label>
-        <div class="radio">
-            <label>
-                <input type="radio" name="status" id="statusOption1" value="1" checked>Active
-            </label>
         </div>
-        <div class="radio">
-            <label>
-                <input type="radio" name="status" id="statusOption1" value="0">Inactive
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label for="aired" class="label"> Aired:
+                <input type="date" id="aired" name="aired" value="">
             </label>
         </div>
     </div>
-    <div class="form-group">
-        <label>Featured</label>
-        <div class="radio">
-            <label>
-                <input type="radio" name="featured" id="featuredOption1" value="1" checked>Active
-            </label>
-        </div>
-        <div class="radio">
-            <label>
-                <input type="radio" name="featured" id="featuredOption2" value="0">Inactive
-            </label>
+    <div class="row">
+        <div class="form-group">
+            <label for="episode" class="label">Episodes: </label>
+            <input type="number" id="episode" class="form-control" name="episodes">
         </div>
     </div>
-    <div class="form-group">
-        <label>Slider Key</label>
-        <div class="radio">
-            <label>
-                <input type="radio" name="slider_key" id="sliderOption1" value="1" checked>Active
-            </label>
-        </div>
-        <div class="radio">
-            <label>
-                <input type="radio" name="slider_key" id="sliderOption2" value="0">Inactive
-            </label>
+    <div class="row">
+        <div class="form-group" enctype="multipart/form-data">
+            <label class="label" for="image">Image</label>
+            <!-- using multiple helps to upload multiple images -->
+            <input type="file" name="image" id="image" required>
         </div>
     </div>
-    <button type="submit" name="submit" value='submit' class="btn btn-success">Submit Button</button>
-    <button type="reset" class="btn btn-danger">Reset Button</button>
+    <div class="row">
+        <div class="form-group">
+            <label for="statusOption1" class="label">Status</label>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="status" id="statusOption1" value="1" checked>Active
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="status" id="statusOption1" value="0">Inactive
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label for="featuredOption1" class="label">Featured</label>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="featured" id="featuredOption1" value="1" checked>Active
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="featured" id="featuredOption2" value="0">Inactive
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <label for="sliderOption1" class="label">Slider Key</label>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="slider_key" id="sliderOption1" value="1" checked>Active
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="slider_key" id="sliderOption2" value="0">Inactive
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <button type="submit" name="submit" value='submit' class="btn btn-success">Create</button>
+        <button type="reset" class="btn btn-danger">Reset</button>
+    </div>
     </form>
-</div>
-</div>
 </div>
 <?php
 include('header_footer/footer.php');

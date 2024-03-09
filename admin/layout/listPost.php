@@ -90,8 +90,8 @@ $dataList = $postObj->fetch();
                             </td>
 
                             <td class="center" width="20%">
-                                <a href="editPost.php?id=<?php echo $post['id']; ?>" role="btn"><i class="fa fa-edit"></i>Edit</a>
-                                <a href="deletePost.php?id=<?php echo $post['id']; ?>" role="btn"><i class="fa fa-trash"></i>Delete</a>
+                              <button class="btn btn-success"><a href="editPost.php?id=<?php echo $post['id']; ?>" role="btn"><i class="fa fa-edit"></i>Edit</a></button>
+                                <button class="btn btn-danger"><a href="deletePost.php?id=<?php echo $post['id']; ?>" role="btn"><i class="fa fa-trash"></i>Delete</a></button>
                             </td>
                         </tr>
                         <?php   ?>

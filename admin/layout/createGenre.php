@@ -22,12 +22,12 @@ if (isset($_POST['submit'])) {
 }
 ?>
 <div id="page-wrapper">
-<div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Create Genre</h1>
-        </div>
+
+    <div class="col-lg-12">
+        <h1 class="page-header">Create Genre</h1>
     </div>
-    <div id="Genre-main">
+
+    <div class="row">
         <form action="" class="Genre" method="post">
             <?php if (isset($msg)) { ?>
                 <div><?php echo $msg; ?> </div>
@@ -37,8 +37,10 @@ if (isset($_POST['submit'])) {
             <?php } ?>
             <label class="label-block">Genre Name</label>
             <input type="text" name="genre" class="input-genre">
-            <input type="submit" value="submit" name="submit">
-            <input type="reset">
+            <div class="row">
+                <button type="submit" class="btn" value="submit" name="submit">Create</button>
+                <button type="reset" class="btn">Reset</button>
+            </div>
         </form>
     </div>
 </div>
