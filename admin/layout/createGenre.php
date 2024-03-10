@@ -11,30 +11,31 @@ if (isset($_POST['submit'])) {
         $genre->set('genre', $_POST['genre']);
         $res = $genre->save();
         if ($res) {
-            $msg = "Category successfully added with id " . $res;
-            $Err = "";
+            $msg = "Genre successfully added with id " . $res;
+            $Errmsg = "";
         } else {
-            $msg = "Category insertion unsuccessful";
+            $Errmsg = "Genre insertion unsuccessful";
         }
     } else {
-        $Err = 'Genre type already taken';
+        $Errmsg = 'Please enter Genre Name!!!';
     }
 }
 ?>
 <div id="page-wrapper">
 
     <div class="col-lg-12">
+        <?php if (isset($msg)) { ?>
+            <div class="alert alert-success"><?php echo $msg; ?> </div>
+        <?php } ?>
+        <?php if (isset($Errmsg)) { ?>
+            <div class="alert alert-danger"><?php echo $Errmsg; ?> </div>
+        <?php } ?>
         <h1 class="page-header">Create Genre</h1>
     </div>
 
     <div class="row">
         <form action="" class="Genre" method="post">
-            <?php if (isset($msg)) { ?>
-                <div><?php echo $msg; ?> </div>
-            <?php } ?>
-            <?php if (isset($Err)) { ?>
-                <div><?php echo $Err; ?> </div>
-            <?php } ?>
+
             <div class="form-group">
                 <label class="label" for="genrename">Genre Name</label>
                 <input type="text" name="genre" id="genrename" class="form-control">

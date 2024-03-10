@@ -17,23 +17,24 @@ if (isset($_POST['submit'])) {
             $msg = "Producer insertion unsuccessful";
         }
     } else {
-        $Err = 'Producer type already taken';
+        $Err = 'Please Enter Producer Name !!!!';
     }
 }
 ?>
 <div id="page-wrapper">
     <div class="col-lg-12">
+        <?php if (isset($msg)) { ?>
+            <div class="alert alert-success"><?php echo $msg; ?> </div>
+        <?php } ?>
+        <?php if (isset($Err)) { ?>
+            <div class="alert alert-danger"><?php echo $Err; ?> </div>
+        <?php } ?>
         <h1 class="page-header">Create Producer</h1>
     </div>
     <div class="row">
         <div id="Producer-main">
             <form action="" class="Producer" method="post">
-                <?php if (isset($msg)) { ?>
-                    <div><?php echo $msg; ?> </div>
-                <?php } ?>
-                <?php if (isset($Err)) { ?>
-                    <div><?php echo $Err; ?> </div>
-                <?php } ?>
+
                 <div class="form-group">
                     <label class="label" for="producername">Producer Name</label>
                     <input type="text" name="producer" class="form-control">

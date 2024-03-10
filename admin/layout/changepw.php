@@ -23,16 +23,16 @@ if (isset($_POST['submit'])) {
                 if ($res == "success") {
                     $msg = "Password successfully Updated.";
                 } else {
-                    $msg = "Password cannot be updated!!";
+                    $Errmsg = "Password cannot be updated!!";
                 }
             } else {
-                $msg = "The new password doesn't match";
+                $Errmsg = "The new password doesn't match";
             }
         } else {
-            $msg = "You entered incorrect password!!Try again";
+            $Errmsg = "You entered incorrect password!!Try again";
         }
     } else {
-        $msg = "Please enter all details";
+        $Errmsg = "Please enter all details";
     }
 }
 ?>
@@ -41,8 +41,13 @@ if (isset($_POST['submit'])) {
     <form action="" method="post" novalidate>
         <div>
             <?php if (isset($msg)) { ?>
-                <div class="msg">
+                <div class="alert alert-success">
                     <?php echo $msg;  ?>
+                </div>
+            <?php } ?>
+            <?php if (isset($Errmsg)) { ?>
+                <div class="alert alert-danger">
+                    <?php echo $Errmsg;  ?>
                 </div>
             <?php } ?>
             <div class="title">

@@ -9,8 +9,13 @@ include('header_footer/header.php');
             <h1 class="page-header">Dashboard</h1>
         </div>
         <div class="row">
-            <div>
-                <a href="http://localhost/project"><i></i>&nbsp;Go to Site Home Page</a>
+            <div class="dashboard-contents">
+                <div class="db-content" >Verified Users</div>
+                <div class="db-content">Total Posts</div>
+                <div class="db-content">Total Posts1</div>
+                <div class="db-content">Total Posts 2</div>
+                <div class="db-content">Total Posts3</div>
+                <div class="db-content">Total Posts 4</div>
             </div>
         </div>
     </div>

@@ -117,7 +117,8 @@ body {
 }
 
 .row {
-  padding-left: 50px;
+  padding-left: 40px;
+  padding-right: 10px;
 }
 
 .page-header {
@@ -259,4 +260,38 @@ table {
 
 th {
   padding: 10px;
+}
+
+/* Dashboard  */
+.dashboard-contents {
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr;
+  grid-gap: 32px;
+}
+.db-content {
+  background-color: #ddd;
+  padding: 20px;
+  height: 150px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.alert {
+  width: 75%;
+  height: 50px;
+  text-align: center;
+  /* align-items: center; */
+  font-size: 19px;
+  padding: 14px;
+  margin: 15px 0 0 55px;
+}
+
+.alert-success {
+  background: #91e391;
+  color: #016a00;
+}
+
+.alert-danger {
+  background: #f9b3b3;
+  color: #f70202;
 }
