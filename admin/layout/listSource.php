@@ -30,23 +30,25 @@ if (isset($_SESSION['message']) && $_SESSION['message'] != "") {
     <div class="title">
         <h1 class="page-header">List Source</h1>
     </div>
-    <table>
-        <tr>
-            <th>S.No</th>
-            <th>Source Name</th>
-            <th>Action</th>
-        </tr>
-        <?php foreach ($datalist as $key => $sources) { ?>
-            <tr class="center">
-                <td><?php echo $key + 1; ?></td>
-                <td><?php echo $sources['source']; ?></td>
-                <td width="20%">
-                    <button class="btn-success btn"><a href="editSource.php?id=<?php echo $sources['id']; ?>">Edit</a></button>
-                    <button class="btn-danger btn"><a href="deleteSource.php?id=<?php echo $sources['id']; ?>">Delete</a></button>
-                </td>
+    <div class="row">
+        <table>
+            <tr>
+                <th>S.No</th>
+                <th>Source Name</th>
+                <th>Action</th>
             </tr>
-        <?php } ?>
-    </table>
+            <?php foreach ($datalist as $key => $sources) { ?>
+                <tr class="center">
+                    <td><?php echo $key + 1; ?></td>
+                    <td><?php echo $sources['source']; ?></td>
+                    <td width="20%">
+                        <button class="btn-success btn"><a href="editSource.php?id=<?php echo $sources['id']; ?>">Edit</a></button>
+                        <button class="btn-danger btn"><a href="deleteSource.php?id=<?php echo $sources['id']; ?>">Delete</a></button>
+                    </td>
+                </tr>
+            <?php } ?>
+        </table>
+    </div>
 </div>
 <?php
 include('header_footer/footer.php');

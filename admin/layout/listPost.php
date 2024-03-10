@@ -22,12 +22,7 @@ $dataList = $postObj->fetch();
 // echo "</pre>";
 
 ?>
-<style>
-    tr {
-        text-align: center;
-        border: 2px solid black;
-    }
-</style>
+
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
@@ -44,7 +39,7 @@ $dataList = $postObj->fetch();
     ?>
     <div class="row">
         <div class="panel-body">
-            <table width="100%" class=" create-main " id="">
+            <table id="">
                 <thead>
                     <tr>
                         <th>S.NO</th>
@@ -66,7 +61,8 @@ $dataList = $postObj->fetch();
                             <td> <?php echo $post['title']; ?> </td>
                             <td> <?php echo $post['type']; ?> </td>
                             <td><?php echo $post['genre']; ?></td>
-                            <td><?php echo $post['studio'];} ?></td>
+                            <td><?php echo $post['studio'];
+                            } ?></td>
                             <td><?php echo $post['producer']; ?></td>
                             <td>
                                 <img height='100' width='100' src="../images/<?php echo $post['image_url']; ?>" alt="" srcset="">
@@ -90,8 +86,8 @@ $dataList = $postObj->fetch();
                             </td>
 
                             <td class="center" width="20%">
-                              <button class="btn btn-success"><a href="editPost.php?id=<?php echo $post['id']; ?>" role="btn"><i class="fa fa-edit"></i>Edit</a></button>
-                                <button class="btn btn-danger"><a href="deletePost.php?id=<?php echo $post['id']; ?>" role="btn"><i class="fa fa-trash"></i>Delete</a></button>
+                                <button class="btn btn-success"><a href="editPost.php?id=<?php echo $post['id']; ?>" role="btn"><i class="fa fa-edit"></i> Edit</a></button>
+                                <button class="btn btn-danger"><a href="deletePost.php?id=<?php echo $post['id']; ?>" role="btn"><i class="fa fa-trash"></i> Delete</a></button>
                             </td>
                         </tr>
                         <?php   ?>

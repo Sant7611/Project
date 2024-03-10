@@ -30,23 +30,25 @@ if (isset($_SESSION['message']) && $_SESSION['message'] != "") {
     <div class="title">
         <h1 class="page-header">List Producer</h1>
     </div>
-    <table>
-        <tr>
-            <th>S.No</th>
-            <th>Producer Name</th>
-            <th>Action</th>
-        </tr>
-        <?php foreach ($datalist as $key => $producers) { ?>
-            <tr class="center">
-                <td><?php echo $key + 1; ?></td>
-                <td><?php echo $producers['producers']; ?></td>
-                <td width="20%">
-                    <button class="btn-success  btn"><a href="editProducer.php?id=<?php echo $producers['id']; ?>">Edit</a></button>
-                    <button class="btn-danger btn"><a href="deleteProducer.php?id=<?php echo $producers['id']; ?>">Delete</a></button>
-                </td>
+    <div class="row">
+        <table>
+            <tr>
+                <th>S.No</th>
+                <th>Producer Name</th>
+                <th>Action</th>
             </tr>
-        <?php } ?>
-    </table>
+            <?php foreach ($datalist as $key => $producers) { ?>
+                <tr class="center">
+                    <td><?php echo $key + 1; ?></td>
+                    <td><?php echo $producers['producers']; ?></td>
+                    <td width="20%">
+                        <button class="btn-success  btn"><a href="editProducer.php?id=<?php echo $producers['id']; ?>">Edit</a></button>
+                        <button class="btn-danger btn"><a href="deleteProducer.php?id=<?php echo $producers['id']; ?>">Delete</a></button>
+                    </td>
+                </tr>
+            <?php } ?>
+        </table>
+    </div>
 </div>
 <?php
 include('header_footer/footer.php');

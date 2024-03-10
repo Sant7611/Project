@@ -29,7 +29,13 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin Panel-login</title>
+    <script src="js/admin1.js"></script>
+    <link rel="stylesheet" href="style/admin1.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+
+
 </head>
 
 <body>
@@ -48,12 +54,16 @@ if (isset($_POST['submit'])) {
                 <label class="error"><?php echo $error['msg']; ?></label>
             <?php } ?>
             <div class="form-group">
-                <input type="email" placeholder="Email:" name="email" id="email" required>
-
-                <input type="password" placeholder="Password:" name="password" id="pwd" required>
-                <!-- <input type="submit" name="submit"  class="btn"> -->
-                <button type="submit" name="submit">Submit</button>
+                <input type="email" placeholder="Email:" class="form-control" name="email" id="email" required>
             </div>
+            <div class="form-group">
+                <div class="toggle-password">
+                    <input type="password" class="form-control pw" placeholder="Password:" name="password" id="pwd" required>
+                    <span class="material-icons-outlined  eye">visibility</span>
+                </div>
+            </div>
+            <!-- <input type="submit" name="submit"  class="btn"> -->
+            <button type="submit" class="btn" name="submit">Submit</button>
             <div class="text">
                 <p>Forgot password? <a href="reset_pwd.php"> Click here</a></p>
                 <p>Don't have an account? <a href="signup.php"> Create one</a></p>
@@ -65,48 +75,15 @@ if (isset($_POST['submit'])) {
             color: red;
         }
 
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-        .btn {
-            width: 5rem;
-            background: #b3b2b2;
-        }
-
-        .btn:hover {
-            background-color: #fff;
-        }
-
         .text {
-            margin-bottom: 15px;
+            margin: 15px 0;
+
         }
 
         .form-group {
             margin: 8px 0px;
         }
 
-        input {
-            width: 14rem;
-            border-radius: 13px;
-            height: 2rem;
-            margin: 9px;
-            padding: 6px;
-        }
-
-        .head {
-            padding: 4px;
-        }
-
-        .error {
-            color: red;
-        }
-
-        label {
-            font-size: 1rem;
-        }
 
         .container {
             margin: auto;

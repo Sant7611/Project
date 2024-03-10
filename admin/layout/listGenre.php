@@ -37,23 +37,25 @@ if (isset($_SESSION['message']) && $_SESSION['message'] != "") {
     <div class="title">
         <h1 class="page-header">List Genre</h1>
     </div>
-    <table>
-        <tr>
-            <th>S.No</th>
-            <th>Genre Name</th>
-            <th>Action</th>
-        </tr>
-        <?php foreach ($datalist as $key => $genres) { ?>
-            <tr class="center">
-                <td><?php echo $key + 1; ?></td>
-                <td><?php echo $genres['genre']; ?></td>
-                <td width="20%">
-                    <button class="btn btn-success"> <a href="editGenre.php?id=<?php echo $genres['id'] ?>">Edit</a></button>
-                    <button class="btn-danger btn"><a href="deleteGenre.php?id=<?php echo $genres['id'] ?>">Delete</a></button>
-                </td>
+    <div class="row">
+        <table>
+            <tr>
+                <th>S.No</th>
+                <th>Genre Name</th>
+                <th>Action</th>
             </tr>
-        <?php } ?>
-    </table>
+            <?php foreach ($datalist as $key => $genres) { ?>
+                <tr class="center">
+                    <td><?php echo $key + 1; ?></td>
+                    <td><?php echo $genres['genre']; ?></td>
+                    <td width="20%">
+                        <button class="btn btn-success"> <a href="editGenre.php?id=<?php echo $genres['id'] ?>">Edit</a></button>
+                        <button class="btn-danger btn"><a href="deleteGenre.php?id=<?php echo $genres['id'] ?>">Delete</a></button>
+                    </td>
+                </tr>
+            <?php } ?>
+        </table>
+    </div>
 </div>
 <?php
 include('header_footer/footer.php');

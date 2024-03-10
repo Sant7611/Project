@@ -22,24 +22,27 @@ if (isset($_POST['submit'])) {
 }
 ?>
 <div id="page-wrapper">
-<div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Create Source</h1>
-        </div>
+    <div class="col-lg-12">
+        <h1 class="page-header">Create Source</h1>
     </div>
-    <div id="Source-main">
-        <form action="" class="Source" method="post">
-            <?php if (isset($msg)) { ?>
-                <div><?php echo $msg; ?> </div>
-            <?php } ?>
-            <?php if (isset($Err)) { ?>
-                <div><?php echo $Err; ?> </div>
-            <?php } ?>
-            <label class="label-block">Source Name</label>
-            <input type="text" name="source" class="input-source">
-            <input type="submit" value="submit" name="submit">
-            <input type="reset">
-        </form>
+    <div class="row">
+        <div id="Source-main">
+            <form action="" class="Source" method="post">
+                <?php if (isset($msg)) { ?>
+                    <div><?php echo $msg; ?> </div>
+                <?php } ?>
+                <?php if (isset($Err)) { ?>
+                    <div><?php echo $Err; ?> </div>
+                <?php } ?>
+                <div class="form-group">
+                    <label class="label">Source Name</label>
+                    <input type="text" name="source" class="form-control">
+                </div>
+                
+                <button type="submit" value="submit" class="btn-success btn" name="submit">Create</button>
+                <button type="reset" class="btn btn-danger">Reset</button>
+            </form>
+        </div>
     </div>
 </div>
 

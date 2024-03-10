@@ -2,7 +2,7 @@
 include('header_footer/header.php');
 include('../class/admin.class.php');
 session_start();
-include('sidebar.php');
+// include('sidebar.php');
 // echo $_SESSION['password'];
 $admin = new Admin();
 if (isset($_POST['submit'])) {
@@ -45,27 +45,43 @@ if (isset($_POST['submit'])) {
                     <?php echo $msg;  ?>
                 </div>
             <?php } ?>
-            <label for="">
-                Enter current password
-            </label>
-            <input type="password" name="current_pw" id="">
+            <div class="title">
+                <h1 class="page-header">Change Password</h1>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="current" class="label">
+                        Enter current password
+                    </label>
+                    <div class="toggle-password">
+                        <input type="password" class="form-control pw" name="current_pw" id="current_pw">
+                        <span class="material-icons-outlined  eye">visibility</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="new_pw" class="label">
+                        Enter New password
+                    </label>
+                    <div class="toggle-password">
+                        <input type="password" class="form-control pw" name="new_pw" id="new_pw">
+                        <span class="material-icons-outlined eye ">visibility</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm_pw" class="label">
+                        Confirm New password
+                    </label>
+                    <div class="toggle-password">
+                        <input type="password" name="confirm_pw" class="form-control pw" id="confirm_pw">
+                        <span class="material-icons-outlined eye">visibility</span>
+                    </div>
+                </div>
+                <input class="btn btn-success" type="submit" name="submit" value="submit">
+            </div>
         </div>
-        <div>
-            <label for="">
-                Enter New password
-            </label>
-            <input type="password" name="new_pw" id="">
-        </div>
-        <div>
-            <label for="">
-                Confirm New password
-            </label>
-            <input type="password" name="confirm_pw" id="">
-        </div>
-        <input type="submit" name="submit" value="submit">
     </form>
 </div>
-
 <?php
 include('header_footer/footer.php');
 ?>

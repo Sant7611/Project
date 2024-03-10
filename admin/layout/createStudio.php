@@ -21,24 +21,27 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
-<div id="page-wrapper"><div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Create Studio</h1>
-        </div>
+<div id="page-wrapper">
+    <div class="col-lg-12">
+        <h1 class="page-header">Create Studio</h1>
     </div>
-    <div id="create-main">
-        <form action="" class="studio" method="post">
-            <?php if (isset($msg)) { ?>
-                <div><?php echo $msg; ?> </div>
-            <?php } ?>
-            <?php if (isset($Err)) { ?>
-                <div><?php echo $Err; ?> </div>
-            <?php } ?>
-            <label class="label-block">Studio Name</label>
-            <input type="text" name="studio" class="input-studio">
-            <input type="submit" value="submit" name="submit">
-            <input type="reset">
-        </form>
+    <div class="row">
+        <div id="create-main">
+            <form action="" class="studio" method="post">
+                <?php if (isset($msg)) { ?>
+                    <div><?php echo $msg; ?> </div>
+                <?php } ?>
+                <?php if (isset($Err)) { ?>
+                    <div><?php echo $Err; ?> </div>
+                <?php } ?>
+                <div class="form-group">
+                    <label class="label" for="studioname">Studio Name</label>
+                    <input type="text" class="form-control" id="studioname" name="studio">
+                </div>
+                <button type="submit" value="submit" class="btn-success btn" name="submit">Create</button>
+                <button type="reset" class="btn btn-danger" >Reset</button>
+            </form>
+        </div>
     </div>
 </div>
 

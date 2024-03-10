@@ -22,24 +22,28 @@ if (isset($_POST['submit'])) {
 }
 ?>
 <div id="page-wrapper">
-<div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Create Producer</h1>
-        </div>
+    <div class="col-lg-12">
+        <h1 class="page-header">Create Producer</h1>
     </div>
-    <div id="Producer-main">
-        <form action="" class="Producer" method="post">
-            <?php if (isset($msg)) { ?>
-                <div><?php echo $msg; ?> </div>
-            <?php } ?>
-            <?php if (isset($Err)) { ?>
-                <div><?php echo $Err; ?> </div>
-            <?php } ?>
-            <label class="label-block">Producer Name</label>
-            <input type="text" name="producer" class="input-producer">
-            <input type="submit" value="submit" name="submit">
-            <input type="reset">
-        </form>
+    <div class="row">
+        <div id="Producer-main">
+            <form action="" class="Producer" method="post">
+                <?php if (isset($msg)) { ?>
+                    <div><?php echo $msg; ?> </div>
+                <?php } ?>
+                <?php if (isset($Err)) { ?>
+                    <div><?php echo $Err; ?> </div>
+                <?php } ?>
+                <div class="form-group">
+                    <label class="label" for="producername">Producer Name</label>
+                    <input type="text" name="producer" class="form-control">
+                </div>
+                <div class="row">
+                    <button class="btn-success btn" type="submit" name="submit">Create </button>
+                    <button type="reset" class="btn btn-danger"> Reset </button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

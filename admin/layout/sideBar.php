@@ -114,15 +114,7 @@
     </div>
 </div>
 <script>
-    const dropdowns = document.querySelectorAll('.dropdown');
-    dropdowns.forEach(function(dropdown) {
-        dropdown.addEventListener('click', () => {
-            const dropdownContent = dropdown.querySelector('.dropdown-content');
-            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
-            const icon = dropdown.querySelector('.toggle');
-            icon.style.transform = icon.style.transform === 'rotate(0deg)' ? 'rotate(180deg)' : 'rotate(0deg)';
-        });
-    });
+    
 </script>
 <?php
 include('header_footer/footer.php')

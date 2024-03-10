@@ -35,11 +35,13 @@ if (isset($_POST['submit'])) {
             <?php if (isset($Err)) { ?>
                 <div><?php echo $Err; ?> </div>
             <?php } ?>
-            <label class="label-block">Genre Name</label>
-            <input type="text" name="genre" class="input-genre">
+            <div class="form-group">
+                <label class="label" for="genrename">Genre Name</label>
+                <input type="text" name="genre" id="genrename" class="form-control">
+            </div>
             <div class="row">
-                <button type="submit" class="btn" value="submit" name="submit">Create</button>
-                <button type="reset" class="btn">Reset</button>
+                <button type="submit" class="btn btn-success" value="submit" name="submit">Create</button>
+                <button type="reset" class="btn btn-danger">Reset</button>
             </div>
         </form>
     </div>

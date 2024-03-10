@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <title>Admin Panel</title>
 
+    <!-- custom js  -->
+    <script src="../js/admin1.js"></script>
+
     <!-- font awesome icone  -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-3sV+0JmrvsEuFv4EnHW5oB4rbqL/UQX5bZtM+xLELPR2w23t4XTtOHcbObiOTwGP" crossorigin="anonymous"> -->
 
@@ -31,11 +34,18 @@
             <span class="title">Admin Panel</span>
             <div>
                 <div class="dropdown">
-                    <span class="material-icons-outlined toggle">expand_less</span>
+                    <div class="profile navbar">
+                        <span>Admin</span>
+                        <span class="material-icons-outlined" style="color: #000;">account_circle</span>
+                        <span class="material-icons-outlined toggle">expand_less</span>
+                    </div>
 
-                    <ul class="dropdown-content">
-                        <li><a href="logout.php">Logout</a></li>
-                        <li><a href="changepw.php">Change Password</a></li>
+                    <ul class="dropdown-content user">
+                        <li class="vcenter">
+                            <span class="material-icons-outlined">logout</span>
+                            <a href="logout.php"> Logout</a>
+                        </li>
+                        <li class="vcenter"><span class="material-icons-outlined">change_circle</span> <a href="changepw.php">Change Password</a> </li>
                     </ul>
                 </div>
             </div>

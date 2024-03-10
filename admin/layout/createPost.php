@@ -177,9 +177,8 @@ if (isset($_POST['submit'])) {
     </div>
     <div class="row">
         <div class="form-group">
-            <label for="aired" class="label"> Aired:
-                <input type="date" id="aired" name="aired" value="">
-            </label>
+            <label for="aired" class="label"> Aired: </label>
+            <input type="date" id="aired" name="aired" value="">
         </div>
     </div>
     <div class="row">
