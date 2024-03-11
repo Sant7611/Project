@@ -10,17 +10,13 @@ body {
   max-height: 100vh;
 }
 
-.button {
-  padding-top: 25px;
-  /* width: 10%; */
-  /* background: black; */
-}
-
 /* navbar  */
 
 .navbar {
+  font-family: "mukta", sans-serif;
   display: flex;
-  padding: 3px 55px;
+  padding: 0px 55px;
+  align-items: center;
   justify-content: space-between;
   background-image: linear-gradient(to bottom, #1e1e1e, #141414, #0f0f0f);
 }
@@ -33,40 +29,35 @@ body {
 .nav_list li {
   /* to remove dot */
   list-style: none;
-  padding: 23px 20px;
+  padding: 20px 20px;
 }
 .nav_list li a {
   text-decoration: none;
   font-size: 20px;
+  font-weight: 500;
   /* to remove underline */
-  color: #fff;
+  color: #c3c0c0;
 }
 .nav_list li a:hover {
-  color: rgb(183, 112, 20);
+  color: #fff;
 }
 .button a {
-  font-size: 20px;
-  font-family: sans-serif;
+  font-weight: 400;
+  text-decoration: none;
+  font-family: "mukta", sans-serif;
   color: #ffffff;
-  font-size: 16px;
-  background-color: rebeccapurple;
-  border: 2px solid black;
+  font-size: 19px;
+  background-color: #8330d5;
   border-radius: 20px;
   margin: 5px;
-  padding: 10px 20px;
+  padding: 5px 20px;
   cursor: pointer;
 }
-.button button:hover {
-  background-color: #74579e; /* Change background color on hover */
+.button a:hover {
+  background-color: #632bb7; /* Change background color on hover */
 }
 .box-main {
-  margin: 0;
-  padding: 0;
-  /* background-color: black; */
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  height: 717px;
+  padding: 0 15px;
 }
 .first {
   position: absolute;
@@ -104,4 +95,45 @@ body {
   border: 2px solid rgb(255, 255, 255);
   border-radius: 15px;
   font-size: 30px;
+}
+
+/* .container {
+  display: flex;
+}
+
+.left-container {
+  width: 100%;
+}
+
+.right-container {
+  width: 100%;
+} */
+
+.container {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  /* height: 300px; */
+  padding: 0 160px;
+}
+
+.left-container {
+  background: #ccc;
+  flex: 0 0 50%; /* Don't grow or shrink, and basis auto maintain original size */
+  margin-right: 20px; /* Adjust spacing between left and right containers */
+}
+
+.left-container img {
+  object-fit: cover;
+  object-position: 50% 0;
+  height: 100%;
+  max-width: 100%; /* Ensure image doesn't exceed container width */
+}
+
+.right-container {
+  flex: 1; /* Grow to fill available space */
+  background: #ddd;
+}
+
+.right-container h2 {
+  margin-top: 0; /* Remove default margin */
 }

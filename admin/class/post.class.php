@@ -10,7 +10,7 @@ class Post extends Common
     {
         $this->conn = mysqli_connect('localhost', 'root', '', 'anidb');
     }
-
+    
 
     public function save()
     {
