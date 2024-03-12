@@ -12,6 +12,10 @@ if (isset($_SESSION['uname'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <!-- google icons  -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+
     <!-- Google font  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,6 +28,9 @@ if (isset($_SESSION['uname'])) {
 
 <body>
     <nav class="navbar ">
+        <div class="logo">
+
+        </div>
         <ul class="nav_list">
             <li><a href="#home">Home</a></li>
             <li><a href="#new_release">New Release</a></li>
@@ -48,19 +55,104 @@ if (isset($_SESSION['uname'])) {
             </div>
             <div class="third">View Full Site > </div> 
             <div class="naruto"><img src="" alt=""></div>-->
-            <div class="container">
-                <div class="left-container">
-                    <img src="admin/images/65d704da399b1WIN_20200319_11_38_35_Pro.jpg" alt="Image">
+
+
+            <div class="slideshow-container">
+
+                <div class="mySlides fade">
+                    <div class="numbertext">1 / 3</div>
+                    <img src="admin/images/animeimg1.jpg" style="width:100%;">
+                    <div class="text">Caption Text</div>
                 </div>
-                <div class="right-container">
-                    <h2>Post Title</h2>
-                    <p>Post details go here...</p>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">2 / 3</div>
+                    <img src="img_snow_wide.jpg" style="width:100%">
+                    <div class="text">Caption Two</div>
                 </div>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">3 / 3</div>
+                    <img src="img_mountains_wide.jpg" style="width:100%">
+                    <div class="text">Caption Three</div>
+                </div>
+
+            </div>
+            <br>
+
+            <div class="dot-container">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
             </div>
 
         </div>
         <div id="new_release">
-
+            <div class="collection">
+                <div class="gallery">
+                    <img src="https://picsum.photos/id/239/400/300" alt="">
+                    <div class="desc">
+                        <h4>Title1</h4>
+                        <p>tags </p>
+                    </div>
+                </div>
+                <div class="gallery">
+                    <img src="https://picsum.photos/id/238/400/300" alt="">
+                    <div class="desc">
+                        <h4>Title</h4>
+                        <p>tags </p>
+                    </div>
+                </div>
+                <div class="gallery">
+                    <img src="https://picsum.photos/id/276/400/300" alt="">
+                    <div class="desc">
+                        <h4>Title</h4>
+                        <p>tags </p>
+                    </div>
+                </div>
+                <div class="gallery">
+                    <img src="https://picsum.photos/id/267/400/300" alt="">
+                    <div class="desc">
+                        <h4>Title</h4>
+                        <p>tags </p>
+                    </div>
+                </div>
+                <div class="gallery">
+                    <img src="https://picsum.photos/id/241/400/300" alt="">
+                    <div class="desc">
+                        <h4>Title</h4>
+                        <p>tags </p>
+                    </div>
+                </div>
+                <div class="gallery">
+                    <img src="https://picsum.photos/id/242/400/300" alt="">
+                    <div class="desc">
+                        <h4>Title</h4>
+                        <p>tags </p>
+                    </div>
+                </div>
+                <div class="gallery">
+                    <img src="https://picsum.photos/id/243/400/300" alt="">
+                    <div class="desc">
+                        <h4>Title</h4>
+                        <p>tags </p>
+                    </div>
+                </div>
+                <div class="gallery">
+                    <img src="https://picsum.photos/id/244/400/300" alt="">
+                    <div class="desc">
+                        <h4>Title</h4>
+                        <p>tags </p>
+                    </div>
+                </div>
+                <div class="gallery">
+                    <img src="https://picsum.photos/id/243/400/300" alt="">
+                    <div class="desc">
+                        <h4>Title</h4>
+                        <p>tags </p>
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="most_popular">
 
@@ -70,6 +162,29 @@ if (isset($_SESSION['uname'])) {
         </div>
     </div>
 
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            // setTimeout(showSlides, 2000); // Change image every 2 seconds
+        }
+    </script>
 
 </body>
 
