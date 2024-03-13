@@ -7,9 +7,10 @@
     $newsObject->set('id', $id);
     $status = $newsObject->delete();
     if($status == 'success'){
-        $_SESSION['message']='News Deleted Successfully!';
+        $_SESSION['message']='Post Deleted Successfully!';
         header('location:listPost.php');
     }else{
-        $_SESSION['message']="failed To Delete News!";
+        $_SESSION['msg']="failed To Delete Post!";
         header('location:listPost.php');
     }  
+ 

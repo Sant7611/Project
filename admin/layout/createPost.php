@@ -20,59 +20,57 @@ $studioList = $studio->fetch();
 $genreList = $genre->fetch();
 
 
-
 if (isset($_POST['submit'])) {
-    if (!empty($_POST['title']) && !empty($_POST['type']) && !empty($_POST['episodes']) && !empty($_POST['release_date']) && !empty($_POST['producers_id']) && !empty($_POST['duration']) && !empty($_POST['source_id']) && !empty($_POST['genre_id']) && !empty($_POST['studio_id']) && !empty($_POST['aired']) && !empty($_POST['sypnosis'])) {
-        $post->set('title', $_POST['title']);
-        $post->set('type', $_POST['type']);
-        $post->set('episodes', $_POST['episodes']);
-        $post->set('status', $_POST['status']);
-        $post->set('slider_key', $_POST['slider_key']);
-        $post->set('release_date', $_POST['release_date']);
-        $post->set('featured', $_POST['featured']);
-        $post->set('producers', $_POST['producers_id']);
-        $post->set('aired', $_POST['aired']);
-        $post->set('duration', $_POST['duration']);
-        $post->set('source', $_POST['source_id']);
-        $post->set('sypnosis', $_POST['sypnosis']);
-        $post->set('genre_id', $_POST['genre_id']);
-        $post->set('studio_id', $_POST['studio_id']);
-        $post->set('created_date', date('y-m-d H:i:s'));
-        if ($_FILES['image']['error'] == 0) {
+    // if (!empty($_POST['title']) && !empty($_POST['type']) && !empty($_POST['episodes']) && !empty($_POST['release_date']) && !empty($_POST['producers_id']) && !empty($_POST['duration']) && !empty($_POST['source_id']) && !empty($_POST['genre_id']) && !empty($_POST['studio_id']) && !empty($_POST['aired']) && !empty($_POST['sypnosis'])) {
+    $post->set('title', $_POST['title']);
+    $post->set('type', $_POST['type']);
+    $post->set('episodes', $_POST['episodes']);
+    $post->set('status', $_POST['status']);
+    $post->set('slider_key', $_POST['slider_key']);
+    $post->set('release_date', $_POST['release_date']);
+    $post->set('featured', $_POST['featured']);
+    $post->set('producers', $_POST['producers_id']);
+    $post->set('aired', $_POST['aired']);
+    $post->set('duration', $_POST['duration']);
+    $post->set('source', $_POST['source_id']);
+    $post->set('sypnosis', $_POST['sypnosis']);
+    $post->set('genre_id', $_POST['genre_id']);
+    $post->set('studio_id', $_POST['studio_id']);
+    $post->set('created_date', date('y-m-d H:i:s'));
+    if ($_FILES['image']['error'] == 0) {
 
-            if (
-                $_FILES['image']['type'] == "image/png" ||
-                $_FILES['image']['type'] == "image/jpg" ||
-                $_FILES['image']['type'] == "image/jpeg"
-            ) {
-                if ($_FILES['image']['size'] <= 1024 * 1024) {
-                    $imageName = uniqid() . $_FILES['image']['name'];
-                    move_uploaded_file(
-                        $_FILES['image']['tmp_name'],
-                        '../images/' . $imageName
-                    );
-                    $post->set('image_url', $imageName);
-                } else {
-                    $imageError = "Error, Exceeded 1mb!";
-                }
+        if (
+            $_FILES['image']['type'] == "image/png" ||
+            $_FILES['image']['type'] == "image/jpg" ||
+            $_FILES['image']['type'] == "image/jpeg"
+        ) {
+            if ($_FILES['image']['size'] <= 1024 * 1024) {
+                $imageName = uniqid() . $_FILES['image']['name'];
+                move_uploaded_file(
+                    $_FILES['image']['tmp_name'],
+                    '../images/' . $imageName
+                );
+                $post->set('image_url', $imageName);
+                $result = $post->save();
             } else {
-                $imageError = "Invalid Image!";
+                $imageError = "Error, Exceeded 1mb!";
             }
-        }
-        // echo "<pre>";
-        // print_r($_FILES['image']);
-        // echo "</pre>";
-        $result = $post->save();
-        echo $result;
-        if (is_integer($result)) {
-            $ErrMsg = "";
-            $msg = "Post inserted Successfully with id " . $result;
         } else {
-            $msg = "";
+            $imageError = "Invalid Image!";
         }
-    } else {
-        $ErrMsg = "Please enter all the fields!!";
     }
+    echo "<pre><div style = 'position: absolute; left: 0; z-index: 1;'";
+    print_r($_POST);
+    echo "</div></pre>";
+    echo $result;
+    if (is_integer($result)) {
+        $msg = "Post inserted Successfully with id " . $result;
+    } else {
+        $msg = "";
+    }
+    // } else {
+    //     $ErrMsg = "Please enter all the fields!!";
+    // }
 }
 ?>
 
@@ -80,18 +78,18 @@ if (isset($_POST['submit'])) {
 <div id="page-wrapper">
 
     <div class="col-lg-12">
-    <?php if (isset($msg)) { ?>
-                <div class="row alert alert-success"><?php echo $msg;  ?></div>
-            <?php  } ?>
-            <?php if (isset($ErrMsg)) { ?>
-                <div class="row alert alert-danger"><?php echo "<span>".$ErrMsg."</span>";  ?></div>
-            <?php  } ?>
+        <?php if (isset($msg)) { ?>
+            <div class="row alert alert-success"><?php echo $msg;  ?></div>
+        <?php  } ?>
+        <?php if (isset($ErrMsg)) { ?>
+            <div class="row alert alert-danger"><?php echo "<span>" . $ErrMsg . "</span>";  ?></div>
+        <?php  } ?>
         <h1 class="page-header">Create Post</h1>
     </div>
 
     <div class="row">
         <div class="col-lg-6">
-            
+
             <form role="form" id="submitForm" method="post" enctype="multipart/form-data" noValidate>
                 <div class="form-group">
                     <label class="label" for="title">Title</label>
@@ -197,6 +195,9 @@ if (isset($_POST['submit'])) {
             <label class="label" for="image">Image</label>
             <!-- using multiple helps to upload multiple images -->
             <input type="file" name="image" id="image" required>
+            <?php if (isset($imageError)) { ?>
+                <div class="alert alert-danger"><?php echo $imageError; ?></div>
+            <?php } ?>
         </div>
     </div>
     <div class="row">
@@ -251,6 +252,10 @@ if (isset($_POST['submit'])) {
     </form>
 </div>
 <?php
+
+echo "<pre><div style = 'position:absoulte; right : 0;'>";
+print_r($_POST);
+echo "<div><pre>";
 include('header_footer/footer.php');
 ?>
 <script src="../js/ckeditor/ckeditor.js"></script>

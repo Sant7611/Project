@@ -7,7 +7,24 @@
 
 body {
   background: #1a224b;
-  /* min-height: 100vh; */
+}
+
+.box-main {
+  padding: 0 40px;
+}
+
+/* section  */
+.section {
+  margin: 30px 0 15px 0;
+  background: #4e306c;
+  padding: 15px 0 25px 15px;
+}
+
+/* section1  */
+.section1 {
+  background: transparent;
+  height: 500px;
+  padding: 15px 0 25px 15px;
 }
 
 /* slider  */
@@ -22,7 +39,7 @@ img {
 /* Slideshow container */
 .slideshow-container {
   /* max-width: 1000px; */
-  width: 70%;
+  width: 73%;
   position: relative;
   margin: auto;
   margin-top: 15px;
@@ -32,7 +49,7 @@ img {
 .text {
   color: #f2f2f2;
   font-size: 15px;
-  padding:   8px 12px;
+  padding: 8px 12px;
   position: absolute;
   bottom: 8px;
   width: 100%;
@@ -106,7 +123,7 @@ img {
 }
 .nav_list li a {
   text-decoration: none;
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 600;
   /* to remove underline */
   color: #c3c0c0;
@@ -119,7 +136,7 @@ img {
   text-decoration: none;
   font-family: "mukta", sans-serif;
   color: #ffffff;
-  font-size: 15px;
+  font-size: 20px;
   background-color: #8330d5;
   border-radius: 20px;
   margin: 5px;
@@ -129,9 +146,6 @@ img {
 .button a:hover {
   background-color: #632bb7; /* Change background color on hover */
 }
-.box-main {
-  padding: 0 15px;
-}
 /* New Release  */
 body {
   background: #a591f1;
@@ -139,7 +153,7 @@ body {
 
 .collection {
   margin-top: 15px;
-  width: 80%;
+  /* width: 80%; */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -149,9 +163,10 @@ body {
 }
 
 div.gallery {
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   border-radius: 7px;
-  flex: 0 0 25%;
+  flex: 0 0 160px;
+  height: 315px;
 }
 
 div.gallery:hover {
@@ -165,6 +180,30 @@ div.gallery img {
 }
 
 div.desc {
-  padding: 15px;
+  padding: 6px 0 0;
   text-align: center;
+}
+
+.head-title {
+  color: #fff;
+  padding: 0px 5px;
+  margin-left: 38px;
+  font-family: "Mukta";
+  font-size: 23px;
+  display: inline-block;
+  border-bottom: 2px solid red;
+}
+
+.card-title {
+  padding: 0px 0 2px 0;
+  color: #fff;
+  font-family: "mukta";
+}
+
+.desc span {
+  color: #c3c7cd;
+  background: #3d1758;
+  padding: 3px 7px;
+  border-radius: 7px;
+  font-family: nunito;
 }

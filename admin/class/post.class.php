@@ -10,13 +10,13 @@ class Post extends Common
     {
         $this->conn = mysqli_connect('localhost', 'root', '', 'anidb');
     }
-    
+
 
     public function save()
     {
-        $sql = "insert into post (title, type, duration, aired, episodes, status, slider_key, featured, sypnosis, release_date, image_url) 
+        $sql = "insert into post (title, type, duration, aired, episodes, status, slider_key, featured, sypnosis, release_date, image_url,created_date) 
                 values ('$this->title', '$this->type', '$this->duration', '$this->aired', $this->episodes, '$this->status', '$this->slider_key', 
-                '$this->featured', '$this->sypnosis', '$this->release_date', '$this->image_url');";
+                '$this->featured', '$this->sypnosis', '$this->release_date', '$this->image_url', '$this->created_date');";
         $this->conn->query($sql);
 
         $saveId = $this->conn->insert_id;
@@ -352,9 +352,7 @@ class Post extends Common
         $sql = "select p.*, group_concat(s.source) as source, group_concat(s.id) as source_id, group_concat(pr.producers) as producer,group_concat(pr.id) as producer_id, group_concat(st.studio) as studio,group_concat(st.id) as studio_id, group_concat(g.genre) as genre, group_concat(g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
         $result = $this->conn->query($sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);
-        // echo "<pre>";
-        // print_r($data);
-        // echo "</pre>";
+
         if ($result->num_rows > 0) {
             return $data;
         } else {
