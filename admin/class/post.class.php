@@ -348,7 +348,33 @@ class Post extends Common
     {
         // $sql = "select * from post;";
         // $sql = "SELECT p.*, s.source, pr.producers, st.studio, g.genre FROM post p INNER JOIN post_joins pj ON p.id = pj.post_id LEFT JOIN source s ON pj.source_id = s.id LEFT JOIN producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
-        $sql = "select p.*, group_concat(s.source) as source, group_concat(s.id) as source_id, group_concat(pr.producers) as producer,group_concat(pr.id) as producer_id, group_concat(st.studio) as studio,group_concat(st.id) as studio_id, group_concat(g.genre) as genre, group_concat(g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
+        // $sql = "select p.*, group_concat(s.source) as source, group_concat(s.id) as source_id, group_concat(pr.producers) as producer,group_concat(pr.id) as producer_id, group_concat(st.studio) as studio,group_concat(st.id) as studio_id, group_concat(g.genre) as genre, group_concat(g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
+
+        $sql = "SELECT 
+        p.*, 
+        GROUP_CONCAT(DISTINCT s.source) AS source, 
+        GROUP_CONCAT(DISTINCT s.id) AS source_id, 
+        GROUP_CONCAT(DISTINCT pr.producers) AS producer, 
+        GROUP_CONCAT(DISTINCT pr.id) AS producer_id, 
+        GROUP_CONCAT(DISTINCT st.studio) AS studio, 
+        GROUP_CONCAT(DISTINCT st.id) AS studio_id, 
+        GROUP_CONCAT(DISTINCT g.genre) AS genre, 
+        GROUP_CONCAT(DISTINCT g.id) AS genre_id 
+    FROM 
+        post p 
+    LEFT JOIN 
+        post_joins pj ON p.id = pj.post_id 
+    LEFT JOIN 
+        source s ON pj.source_id = s.id 
+    LEFT JOIN 
+        producers pr ON pj.producer_id = pr.id 
+    LEFT JOIN 
+        studio st ON pj.studio_id = st.id 
+    LEFT JOIN 
+        genre g ON pj.genre_id = g.id 
+    GROUP BY 
+        p.id;
+    ";
         $result = $this->conn->query($sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);
 

@@ -1,4 +1,7 @@
-<?php include('header.php') ?>
+<?php 
+include('header.php');
+
+?>
 <div class="box-main">
     <div id="home">
 
@@ -15,13 +18,13 @@
 
             <div class="mySlides fade">
                 <div class="numbertext">1 / 3</div>
-                <img src="admin/images/animeimg1.jpg" style="width:100%;">
+                <img src="admin/images/naruto.jpg" style="width:100%;">
                 <div class="text">Caption Text</div>
             </div>
 
             <div class="mySlides fade">
                 <div class="numbertext">2 / 3</div>
-                <img src="admin/images/animeimg1.jpg" style="width:100%">
+                <img src="admin/images/attack on titans.jpg" style="width:100%">
                 <div class="text">Caption Two</div>
             </div>
 

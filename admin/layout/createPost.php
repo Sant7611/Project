@@ -51,7 +51,6 @@ if (isset($_POST['submit'])) {
                     '../images/' . $imageName
                 );
                 $post->set('image_url', $imageName);
-                $result = $post->save();
             } else {
                 $imageError = "Error, Exceeded 1mb!";
             }
@@ -62,6 +61,7 @@ if (isset($_POST['submit'])) {
     // echo "<pre><div style = 'position: absolute; left: 0; z-index: 1;'";
     // print_r($_POST);
     // echo "</div></pre>";
+    $result = $post->save();
     if(isset($result)){
         if (is_integer($result)) {
             $msg = "Post inserted Successfully with id " . $result;

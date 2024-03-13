@@ -16,7 +16,7 @@ $postObj = new Post();
 
 $dataList = $postObj->fetch();
 
-// echo "<pre><div style='background: #000; position:absolute; right: 0; color: #fff; z-index : 1;'";
+// echo "<pre><div style='background: #000; position:absolute; bottom: -800; color: #fff; z-index : 1;'>";
 // print_r($dataList);
 // echo "</div></pre>";
 
@@ -36,9 +36,16 @@ $dataList = $postObj->fetch();
         echo '<div class="alert alert-success">' . $msg . '</div>';
     }
     ?>
-    <div class="row">
+    <?php
+
+    // echo "<pre><div style='background: #000; position:absolute; bottom: -800; color: #fff; z-index : 1;'>";
+    // print_r($dataList[1]);
+    // print_r($dataList);
+    // echo "</div></pre>";
+    ?>
+    <!-- <div class="row"> -->
         <div class="panel-body">
-            <table id="">
+            <table id="custom-table">
                 <thead>
                     <tr>
                         <th>S.NO</th>
@@ -60,8 +67,7 @@ $dataList = $postObj->fetch();
                             <td> <?php echo $post['title']; ?> </td>
                             <td> <?php echo $post['type']; ?> </td>
                             <td><?php echo $post['genre']; ?></td>
-                            <td><?php echo $post['studio'];
-                            } ?></td>
+                            <td><?php echo $post['studio']; ?></td>
                             <td><?php echo $post['producer']; ?></td>
                             <td>
                                 <img height='100' width='100' src="../images/<?php echo $post['image_url']; ?>" alt="" srcset="">
@@ -89,11 +95,11 @@ $dataList = $postObj->fetch();
                                 <button class="btn btn-danger"><a href="deletePost.php?id=<?php echo $post['id']; ?>" role="btn"><i class="fa fa-trash"></i> Delete</a></button>
                             </td>
                         </tr>
-                        <?php   ?>
+                    <?php  } ?>
                 </tbody>
             </table>
         </div>
-    </div>
+    <!-- </div> -->
 </div>
 <?php
 include('header_footer/footer.php');
