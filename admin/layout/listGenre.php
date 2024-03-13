@@ -13,24 +13,26 @@ $datalist = $genre->fetch();
 // echo "</pre>";
 
 
-if (isset($_SESSION['message']) && $_SESSION['message'] != "") {
+if ((isset($_SESSION['message']) && $_SESSION['message'] != "") || (isset($_SESSION['msg']) && $_SESSION['msg'] != "") ) {
     $msg = $_SESSION['message'];
+    $Errmsg = $_SESSION['msg'];
     $_SESSION['message'] = "";
+    $_SESSION['msg'] = "";
 }
 
 ?>
 
-<style>
-    .center {
-        text-align: center;
-    }
-</style>
 
 <div id="page-wrapper">
 
     <?php
     if (isset($msg)) {
-        echo '<div class="msg">' . $msg . ' </div>';
+        echo '<div class="alert alert-success">' . $msg . ' </div>';
+    }
+    ?>
+    <?php
+    if (isset($Errmsg)) {
+        echo '<div class="alert alert-danger">' . $Errmsg . ' </div>';
     }
     ?>
 

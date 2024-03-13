@@ -43,6 +43,7 @@ $sourceList = $source->fetch();
 // print_r($_POST['studio_id']);
 // echo "</pre>";
 
+
 @session_start();
 if (isset($_POST['submit'])) {
     $post->set('title', $_POST['title']);
@@ -64,6 +65,7 @@ if (isset($_POST['submit'])) {
         $post->set('image_url', $_POST['old_image']);
     }
     if ($_FILES['image']['error'] == 0) {
+        echo "hello";
         if (
             $_FILES['image']['type'] == "image/png" ||
             $_FILES['image']['type'] == "image/jpg" ||
@@ -88,13 +90,18 @@ if (isset($_POST['submit'])) {
     // print_r($_FILES['image']);
     // echo "</pre>";
     $result = $post->edit();
-    // echo $result;
-    if ($result == 'success') {
-        header('location:listPost.php?msg=Post successfully Updated');
-        // $ErrMs = "";
-        // $msg = "Post successfully updated  ";
-    } else {
-        $msg = "Post cannot be updated";
+    echo $result;
+    echo "success";
+    echo "<script>window.location.href='listPost.php?msg= Post Successfully Updated'</script>";
+    // header('location:listPost.php?msg=Post successfully Updated');
+    if (isset($result)) {
+        if ($result == 'success') {
+            // $ErrMs = "";
+
+            $msg = "Post successfully updated  ";
+        } else {
+            $Errmsg = "Post cannot be updated";
+        }
     }
 }
 // include('sideBar.php');
@@ -108,178 +115,167 @@ if (isset($_POST['submit'])) {
     </div>
     <div class="row">
         <div class="col-lg-6">
-            <?php if (isset($msg)) { ?>
-                <div class="alert alert-success"><?php echo $msg;  ?></div>
+            <?php if (isset($imageError)) { ?>
+                <div class="alert alert-danger"><?php echo $imageError;  ?></div>
             <?php  } ?>
             <?php if (isset($ErrMsg)) { ?>
                 <div class="alert alert-danger"><?php echo $ErrMsg;  ?></div>
             <?php  } ?>
             <form role="form" id="submitForm" method="post" enctype="multipart/form-data" noValidate>
                 <div class="form-group">
-                    <label>Title
-                        <input type="text" class="form-control" name="title" value="<?php echo $data->title; ?>" id="title" required>
-                    </label>
+                    <label class="label" for="title">Title</label>
+                    <input type="text" class="form-control" name="title" value="<?php echo $data->title; ?>" id="title" required>
                 </div>
                 <div class="form-group">
-                    <label>Post Studio
-                        <div class="insert-data">
-                            <?php foreach ($studioList as $studios) {
+                    <label class="label" for="postid">Post Studio</label>
+                    <div class="insert-data">
+                        <?php foreach ($studioList as $studios) {
 
-                            ?>
-                                <div>
-                                    <label>
-                                        <input type="checkbox" name="studio_id[]" value="<?php echo $studios['id']; ?>" class="mark" <?php if (in_array($studios['id'], $studioid)) {
-                                                                                                                                            echo 'checked ';
-                                                                                                                                        } ?>>
-                                        <?php echo $studios['studio']; ?>
-                                        </input>
-                                    </label>
-                                </div>
-                            <?php  } ?>
-                        </div>
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>Post Source
-                        <div class="insert-data">
-                            <?php foreach ($sourceList as $source) {    ?>
-                                <div>
-                                    <label>
-                                        <input name="source_id[]" type="checkbox" value="<?php echo $source['id']; ?>" class="mark" <?php if (in_array($source['id'], $sourceid)) {
-                                                                                                                                        echo 'checked ';
-                                                                                                                                    } ?>>
-                                        <?php echo $source['source']; ?>
-                                        </input>
-                                    </label>
-                                </div>
-                            <?php  } ?>
-                        </div>
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>Post Producer
-                        <div class="insert-data">
-
-                            <?php foreach ($producerList as $prod) { ?>
+                        ?>
+                            <div>
                                 <label>
-                                    <div>
-                                        <input type="checkbox" class="mark" name="producer_id[]" value="<?php echo $prod['id']; ?>" class="mark" <?php if (in_array($prod['id'], $producerid)) {
-                                                                                                                                                        echo 'checked';
-                                                                                                                                                    } ?>>
-                                        <?php echo $prod['producers']  ?>
-                                        </input>
-                                    </div>
+                                    <input id="postid" type="checkbox" name="studio_id[]" value="<?php echo $studios['id']; ?>" class="mark" <?php if (in_array($studios['id'], $studioid)) {
+                                                                                                                                                    echo 'checked ';
+                                                                                                                                                } ?>>
+                                    <?php echo $studios['studio']; ?>
+                                    </input>
                                 </label>
-                            <?php   } ?>
-                        </div>
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>Post Genre
-                        <div class="insert-data">
+                            </div>
+                        <?php  } ?>
+                    </div>
 
-                            <?php foreach ($genreList as  $genre) { ?>
+                </div>
+                <div class="form-group">
+                    <label class="label" for="sourceid">Post Source </label>
+                    <div class="insert-data">
+                        <?php foreach ($sourceList as $source) {    ?>
+                            <div>
                                 <label>
-                                    <div>
-                                        <input type="checkbox" name="genre_id[]" value="<?php echo $genre['id']; ?> " class="mark" <?php if (in_array($genre['id'], $genreid)) {
-                                                                                                                                        echo 'checked';
-                                                                                                                                    } ?>>
-                                        <?php echo $genre['genre']; ?>
-                                        </input>
-                                    </div>
+                                    <input name="source_id[]" id="sourceid" type="checkbox" value="<?php echo $source['id']; ?>" class="mark" <?php if (in_array($source['id'], $sourceid)) {
+                                                                                                                                                    echo 'checked ';
+                                                                                                                                                } ?>>
+                                    <?php echo $source['source']; ?>
+                                    </input>
                                 </label>
-                            <?php
-                            } ?>
-                        </div>
+                            </div>
+                        <?php  } ?>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="label" for="producerid">Post Producer</label>
+                    <div class="insert-data">
+                        <?php foreach ($producerList as $prod) { ?>
+                            <label>
+                                <div>
+                                    <input type="checkbox" id="producerid" class="mark" name="producer_id[]" value="<?php echo $prod['id']; ?>" class="mark" <?php if (in_array($prod['id'], $producerid)) {
+                                                                                                                                                                    echo 'checked';
+                                                                                                                                                                } ?>>
+                                    <?php echo $prod['producers']  ?>
+                                    </input>
+                                </div>
+                            </label>
+                        <?php   } ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="label" for="genreid">Post Genre</label>
+                    <div class="insert-data">
+
+                        <?php foreach ($genreList as  $genre) { ?>
+                            <label>
+                                <div>
+                                    <input type="checkbox" id="genreid" name="genre_id[]" value="<?php echo $genre['id']; ?> " class="mark" <?php if (in_array($genre['id'], $genreid)) {
+                                                                                                                                                echo 'checked';
+                                                                                                                                            } ?>>
+                                    <?php echo $genre['genre']; ?>
+                                    </input>
+                                </div>
+                            </label>
+                        <?php
+                        } ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="label" for="type">Type</label>
+                    <input type="text" name="type" id="type" value="<?php echo $data->type ?>">
+                </div>
+                <div class="form-group">
+                    <label class="label" for="sypnosis">Sypnosis</label>
+                    <textarea class="form-control ckeditor" id="sypnosis" rows="3" name="sypnosis"> <?php echo $data->sypnosis; ?></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="label" for="release_date"> Release Date:</label>
+                    <input type="date" name="release_date" id="release_date" value="<?php echo $data->release_date; ?>">
+                </div>
+                <div class="form-group">
+                    <label class="label" for="aired"> Aired :</label>
+                    <input type="date" name="aired" id="aired" value="<?php echo $data->aired; ?>">
                     </label>
                 </div>
                 <div class="form-group">
-                    <label>Type
-                        <input type="text" name="type" id="type" value="<?php echo $data->type ?>">
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>Sypnosis
-                        <textarea class="form-control ckeditor" rows="3" name="sypnosis"> <?php echo $data->sypnosis; ?></textarea>
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label> Release Date:
-                        <input type="date" name="release_date" id="release_date" value="<?php echo $data->release_date; ?>">
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label> Aired :
-                        <input type="date" name="aired" id="aired" value="<?php echo $data->aired; ?>">
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>Episodes:
-                        <input type="number" name="episodes" value="<?php echo $data->episodes; ?>">
-                    </label>
+                    <label class="label" for="episodes">Episodes:</label>
+                    <input type="number" id="episodes" name="episodes" value="<?php echo $data->episodes; ?>">
                 </div>
                 <div class="form-group" enctype="multipart/form-data">
-                    <label>Image<br><br>
-                        <input type="hidden" value="<?php echo $data->image_url;  ?>" name="old_image">
-                        <img src="../images/<?php echo $data->image_url;  ?>" height="100" width="200" alt="" srcset=""><br>
-                        <br><input type="file" name="image">
-                    </label>
+                    <label class="label" for="image">Image<br><br></label>
+                    <input type="hidden" id="image" value="<?php echo $data->image_url;  ?>" name="old_image">
+                    <img src="../images/<?php echo $data->image_url;  ?>" height="100" width="200" alt="" srcset=""><br>
+                    <br><input type="file" name="image">
                 </div>
 
 
                 <div class="form-group">
-                    <label>Status
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="status" id="optionsRadios1" value="1" <?php if ($data->status == 1) {
+                    <label class="label" for="optionRadios1">Status</label>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="status" id="optionsRadios1" value="1" <?php if ($data->status == 1) {
+                                                                                                echo 'checked';
+                                                                                            } ?>>Active
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="status" id="optionsRadios2" value="0" <?php if ($data->status != 1) {
+                                                                                                echo 'checked';
+                                                                                            } ?>>Inactive
+                        </label>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label class="label" for="featuredOption1">Featured</label>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="featured" id="featuredOption1" value="1" <?php if ($data->featured == 1) {
                                                                                                     echo 'checked';
                                                                                                 } ?>>Active
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="status" id="optionsRadios2" value="0" <?php if ($data->status != 1) {
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="featured" id="featuredOption2" value="0" <?php if ($data->featured != 1) {
                                                                                                     echo 'checked';
                                                                                                 } ?>>Inactive
-                            </label>
-                        </div>
-                    </label>
+                        </label>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label>Featured
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="featured" id="featuredOption1" value="1" <?php if ($data->featured == 1) {
-                                                                                                        echo 'checked';
-                                                                                                    } ?>>Active
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="featured" id="featuredOption2" value="0" <?php if ($data->featured != 1) {
-                                                                                                        echo 'checked';
-                                                                                                    } ?>>Inactive
-                            </label>
-                        </div>
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>Slider Key
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="slider_key" id="sliderOption1" value="1" <?php if ($data->slider_key == 1) {
-                                                                                                        echo 'checked';
-                                                                                                    } ?>>Active
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="slider_key" id="sliderOption2" value="0" <?php if ($data->slider_key != 1) {
-                                                                                                        echo 'checked';
-                                                                                                    } ?>>Inactive
-                            </label>
-                        </div>
-                    </label>
+                    <label class="label" for="sliderOption1">Slider Key</label>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="slider_key" id="sliderOption1" value="1" <?php if ($data->slider_key == 1) {
+                                                                                                    echo 'checked';
+                                                                                                } ?>>Active
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="slider_key" id="sliderOption2" value="0" <?php if ($data->slider_key != 1) {
+                                                                                                    echo 'checked';
+                                                                                                } ?>>Inactive
+                        </label>
+                    </div>
                 </div>
 
                 <button type="submit" name="submit" value='submit' class="btn btn-success">Update</button>

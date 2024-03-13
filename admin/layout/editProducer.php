@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
         $res = $producer->edit();
         if ($res == "success") {
             $msg = "Producer successfully added with id " . $res;
-            $Err = "";
+            
         } else {
             $msg = "Producer insertion unsuccessful";
         }

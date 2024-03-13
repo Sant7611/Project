@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
         $res = $studio->edit();
         if ($res == "success") {
             $msg = "Studio successfully added with id " . $res;
-            $Err = "";
+          
         } else {
             $msg = "Studio insertion unsuccessful";
         }

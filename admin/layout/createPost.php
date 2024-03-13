@@ -59,14 +59,15 @@ if (isset($_POST['submit'])) {
             $imageError = "Invalid Image!";
         }
     }
-    echo "<pre><div style = 'position: absolute; left: 0; z-index: 1;'";
-    print_r($_POST);
-    echo "</div></pre>";
-    echo $result;
-    if (is_integer($result)) {
-        $msg = "Post inserted Successfully with id " . $result;
-    } else {
-        $msg = "";
+    // echo "<pre><div style = 'position: absolute; left: 0; z-index: 1;'";
+    // print_r($_POST);
+    // echo "</div></pre>";
+    if(isset($result)){
+        if (is_integer($result)) {
+            $msg = "Post inserted Successfully with id " . $result;
+        } else {
+            $msg = "";
+        }
     }
     // } else {
     //     $ErrMsg = "Please enter all the fields!!";
@@ -134,7 +135,7 @@ if (isset($_POST['submit'])) {
                         <?php foreach ($producerList as $prod) { ?>
                             <div>
                                 <label>
-                                    <input type="checkbox" class="mark" name="producer_id[]" value="<?php echo $prod['id']; ?>" required>
+                                    <input type="checkbox" class="mark" name="producers_id[]" value="<?php echo $prod['id']; ?>" required>
                                     <?php echo $prod['producers']  ?>
                                     </input>
                                 </label>

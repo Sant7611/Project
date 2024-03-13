@@ -9,6 +9,6 @@ if ($status == 'success') {
   $_SESSION['message'] = 'Genre Deleted Successfully!';
   header('location:listGenre.php');
 } else {
-  $_SESSION['message'] = "Failed To Delete Genre!";
+  $_SESSION['msg'] = "Failed To Delete Genre!";
   header('location:listGenre.php');
 }

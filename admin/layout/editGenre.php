@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
         $res = $genre->edit();
         if ($res == "success") {
             $msg = "Genre successfully added with id " . $res;
-            $Err = "";
+          
         } else {
             $msg = "Genre insertion unsuccessful";
         }

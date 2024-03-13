@@ -12,7 +12,7 @@ if (isset($_POST['submit'])) {
         $res = $source->edit();
         if ($res == "success") {
             $msg = "Source successfully added with id " . $res;
-            $Err = "";
+           
         } else {
             $msg = "Source insertion unsuccessful";
         }

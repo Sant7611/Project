@@ -20,9 +20,7 @@ class Post extends Common
         $this->conn->query($sql);
 
         $saveId = $this->conn->insert_id;
-        echo $saveId;
         if ($saveId > 0) {
-            echo "id valid";
             $this->addGenre($this->genre_id, $saveId);
             $this->addSource($this->source, $saveId);
             $this->addProducer($this->producers, $saveId);
@@ -82,6 +80,10 @@ class Post extends Common
     }
     public function edit()
     {
+        $this->updateGenre();
+        $this->updateSource();
+        $this->updateProducer();
+        $this->updateStudio();
         $sql = "update post set 
                     title = '$this->title',
                     type = '$this->type',      
@@ -97,10 +99,6 @@ class Post extends Common
                     where id = '$this->id';    ";
 
         $this->conn->query($sql);
-        $genre_res = $this->updateGenre();
-        $source_res = $this->updateSource();
-        $producer_res = $this->updateProducer();
-        $studio_res = $this->updateStudio();
         // if ($genre_res && $source_res && $producer_res && $studio_res) {
         //     echo "true";
         // }
@@ -116,8 +114,9 @@ class Post extends Common
         //     $sql = "update post_joins set source_id = '$source' where post_id = '$this->id';";
         //     $this->conn->query($sql);
         // }
-
         if ($this->conn->affected_rows > 0) {
+            echo "returned data";
+            123;
             return "success";
         } else {
             return false;
@@ -302,7 +301,7 @@ class Post extends Common
         $producerToDelete = array_diff($currentProducerId, $this->producers);
         $producerToAdd = array_diff($this->producers, $currentProducerId);
 
-        // echo "<pre>";
+        // echo "<pre> <div style = 'position:relative; background- #fff;'";
         // echo 'this producerid';
         // print_r($this->producers);
         // echo "c producer";
@@ -311,7 +310,7 @@ class Post extends Common
         // print_r($producerToDelete);
         // echo "add";
         // print_r($producerToAdd);
-        // echo "<pre>";
+        // echo "</div><pre>";
         if (!empty($producerToDelete)) {
             foreach ($producerToDelete as $deleteProducer) {
                 $sql = "delete from post_joins where post_id = '$this->id' and producer_id = '$deleteProducer';";

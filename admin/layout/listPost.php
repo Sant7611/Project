@@ -16,9 +16,9 @@ $postObj = new Post();
 
 $dataList = $postObj->fetch();
 
-echo "<pre><div style='background: #000; position:absolute; right: 0; color: #fff; z-index : 1;'";
-print_r($dataList);
-echo "</div></pre>";
+// echo "<pre><div style='background: #000; position:absolute; right: 0; color: #fff; z-index : 1;'";
+// print_r($dataList);
+// echo "</div></pre>";
 
 ?>
 

@@ -113,9 +113,6 @@
         </div>
     </div>
 </div>
-<script>
-    
-</script>
 <?php
 include('header_footer/footer.php')
 ?>

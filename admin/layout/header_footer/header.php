@@ -29,7 +29,7 @@
     <nav>
         <div class="navbar">
             <div class="logo">
-                <img src="../images/65d704da399b1WIN_20200319_11_38_35_Pro.jpg" style="height:50px; width:50px;" alt="">
+                <img src="../images/animeimg1.jpg" style="height:50px; width:50px;" alt="">
             </div>
             <span class="title">Admin Panel</span>
             <div>
