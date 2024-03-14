@@ -4,7 +4,7 @@ class Post extends Common
 {
     private $conn;
     public $id, $title, $type, $episodes, $status,
-        $source, $producers, $aired, $duration, $slider_key, $featured, $sypnosis, $genre_id, $studio_id, $release_date, $image_url, $created_date;
+        $source, $producers, $aired, $duration, $slider_key, $featured, $sypnosis, $genre_id, $studio_id, $release_date, $image_url,$slider_img, $created_date;
 
     public function __construct()
     {
@@ -14,9 +14,9 @@ class Post extends Common
 
     public function save()
     {
-        $sql = "insert into post (title, type, duration, aired, episodes, status, slider_key, featured, sypnosis, release_date, image_url,created_date) 
+        $sql = "insert into post (title, type, duration, aired, episodes, status, slider_key, featured, sypnosis, release_date,slider_img, image_url,created_date) 
                 values ('$this->title', '$this->type', '$this->duration', '$this->aired', $this->episodes, '$this->status', '$this->slider_key', 
-                '$this->featured', '$this->sypnosis', '$this->release_date', '$this->image_url', '$this->created_date');";
+                '$this->featured', '$this->sypnosis', '$this->release_date','$this->slider_img', '$this->image_url', '$this->created_date');";
         $this->conn->query($sql);
 
         $saveId = $this->conn->insert_id;
@@ -95,6 +95,7 @@ class Post extends Common
                     slider_key = '$this->slider_key',
                     featured = '$this->featured',
                     release_date = '$this->release_date',
+                    slider_img = '$this->slider_img',
                     image_url = '$this->image_url'
                     where id = '$this->id';    ";
 
@@ -115,8 +116,8 @@ class Post extends Common
         //     $this->conn->query($sql);
         // }
         if ($this->conn->affected_rows > 0) {
-            echo "returned data";
-            123;
+            // echo "returned data";
+            // 123;
             return "success";
         } else {
             return false;
@@ -258,8 +259,8 @@ class Post extends Common
         if (!empty($genreToDelete)) {
             foreach ($genreToDelete as $deleteGenre) {
                 $sql = "delete from post_joins where post_id = '$this->id' and genre_id = '$deleteGenre';";
-                echo " genreDel ";
-                echo $deleteGenre;
+                // echo " genreDel ";
+                // echo $deleteGenre;
                 $this->conn->query($sql);
             }
         }
@@ -281,8 +282,8 @@ class Post extends Common
         // $newId = $this->id;
         foreach ($genreToAdd as $addGenre) {
             $sql = "insert into post_joins(post_id, genre_id) values('$newId',  '$addGenre');";
-            echo 'addgenre';
-            echo $addGenre;
+            // echo 'addgenre';
+            // echo $addGenre;
             $this->conn->query($sql);
         }
         // if ($this->conn->affected_rows > 0) {
@@ -390,7 +391,7 @@ class Post extends Common
         // $sql = "select p.*, group_concat(s.source) as source, group_concat(pr.producers) as producer, group_concat(st.studio) as studio, group_concat(g.genre) as genre from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id
         // where p.id = '$this->id';";
 
-        $sql = "select p.*, group_concat(s.source) as source, group_concat(s.id) as source_id, group_concat(pr.producers) as producer,group_concat(pr.id) as producer_id, group_concat(st.studio) as studio,group_concat(st.id) as studio_id, group_concat(g.genre) as genre, group_concat(g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
+        $sql = "select p.*, group_concat(s.source) as source, group_concat(s.id) as source_id, group_concat(pr.producers) as producer,group_concat(pr.id) as producer_id, group_concat(st.studio) as studio,group_concat(st.id) as studio_id, group_concat(g.genre) as genre, group_concat(g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id where post_id = $this->id;";
         $var = $this->conn->query($sql);
         if ($this->conn->affected_rows == 1) {
             $result = $var->fetch_object();

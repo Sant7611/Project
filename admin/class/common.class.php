@@ -17,7 +17,7 @@ abstract class Common
     $conn = mysqli_connect('localhost', 'root', '', 'anidb');
     $var = $conn->query($sql);
     if ($var->num_rows > 0) {
-      $row = $var->fetch_assoc();
+      $row = $var->fetch_all(MYSQLI_ASSOC);
       return $row;
     }
   }

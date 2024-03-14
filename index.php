@@ -6,8 +6,10 @@ include_once('admin/class/post.class.php');
 $post = new Post();
 
 $datalist = $post->fetch();
-
-
+$sliderlist = $post->selectSliderPost();
+// echo "<pre>";
+// print_r($sliderlist);
+// echo "</pre>";
 ?>
 <div class="box-main">
     <div id="home">
@@ -22,22 +24,47 @@ $datalist = $post->fetch();
 
 
         <div class="slideshow-container">
-            <?php foreach ($datalist as $key => $post) {
-            } ?>
-            <div class="mySlides fade">
-                <div class="numbertext">1 / 3</div>
-                <img src="admin/images/animeimg1.jpg" style="width:100%">
+            <?php foreach ($sliderlist as $key => $post) { ?>
+                <div class="mySlides fade">
+                    <div class="numbertext">1 / 3</div>
+                    <!-- <img src="admin/images/animeimg1.jpg" style="width:100%"> -->
+                    <img src="<?php echo 'admin/images/' . $post['image_url']; ?>" style="width:100%">';
+                    <div class=" overlay text">
+                        <div class="disp">
+                            <div class="slide-title"><?php echo $post['title']; ?></div>
+                            <span class="epidsode">Ep <?php echo $post['episodes']; ?> +</span>
+                            <span class="aired"><?php $airedYear = substr($post['aired'], 0, 4);
+                                                echo $airedYear;; ?></span>
+                            <div class="sypnosis">
+                                <?php $sypnosis = substr($post['sypnosis'], 0, 250);
+                                echo $sypnosis; ?>....
+                            </div>
+                            <div class="add-btn read">
+                                <a href="post.php?id=<?php echo $post['id']; ?>">
+                                    <i class="material-icons-outlined">keyboard_double_arrow_right</i>Read More</a>
+                            </div>
+                            <div class="add-btn">
+                                <a href="post.php?id=<?php echo $post['id']; ?>"><i class="material-icons-outlined">add</i>Add to List</a>
+                            </div>
 
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+            <!-- <div class="mySlides fade">
+                <div class="numbertext">1 / 3</div>
+                <img src="admin/images/animeimg1.jpg" style="width:100%"> -->
+            <!-- 
                 <div class=" overlay text">
                     <div class="disp">
-                        <div class="slide-title">Solo Leveling</div>
-                        <span class="epidsode">10+</span>
+                        <div class="slide-title">SOLO LEVELING</div>
+                        <span class="epidsode">Ep 10 +</span>
                         <span class="aired">2020</span>
                         <div class="sypnosis">
                             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi quisquam, vero voluptate ducimus officiis, necessitatibus laudantium expedita velit deleniti atque unde magni saepe iure aliquam quasi magnam culpa at ad harum commodi nesciunt! Placeat libero repellat excepturi possimus! Aliquam ea maiores ratione totam. Ipsam ....
                         </div>
                         <div class="add-btn">
-                            <a href="">Add to List</a>
+                            <a href=""><i class="material-icons-outlined">add</i>Add to List</a>
                         </div>
                     </div>
                 </div>
@@ -48,7 +75,7 @@ $datalist = $post->fetch();
                 <img src="admin/images/naruto.jpg" style="width:100%;">
                 <div class="text">
                     <span class="slider-title">Naruto</span>
-                    span.
+
                 </div>
             </div>
 
@@ -57,7 +84,7 @@ $datalist = $post->fetch();
                 <img src="admin/images/attack on titans.jpg" style="width:100%">
                 <div class="text">Caption Two</div>
             </div>
-
+ -->
 
         </div>
         <br>
@@ -420,7 +447,7 @@ $datalist = $post->fetch();
         }
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].className += " active";
-        // setTimeout(showSlides, 2000); // Change image every 2 seconds
+        setTimeout(showSlides, 2000); // Change image every 2 seconds
     }
 </script>
 <?php include('footer.php') ?>

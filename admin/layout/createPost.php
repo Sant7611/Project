@@ -21,6 +21,10 @@ $genreList = $genre->fetch();
 
 
 if (isset($_POST['submit'])) {
+
+    // echo "<pre><div style = 'position: absolute; left: 0; z-index: 1;'";
+    // print_r($_FILES);
+    // echo "</div></pre>";
     // if (!empty($_POST['title']) && !empty($_POST['type']) && !empty($_POST['episodes']) && !empty($_POST['release_date']) && !empty($_POST['producers_id']) && !empty($_POST['duration']) && !empty($_POST['source_id']) && !empty($_POST['genre_id']) && !empty($_POST['studio_id']) && !empty($_POST['aired']) && !empty($_POST['sypnosis'])) {
     $post->set('title', $_POST['title']);
     $post->set('type', $_POST['type']);
@@ -38,7 +42,6 @@ if (isset($_POST['submit'])) {
     $post->set('studio_id', $_POST['studio_id']);
     $post->set('created_date', date('y-m-d H:i:s'));
     if ($_FILES['image']['error'] == 0) {
-
         if (
             $_FILES['image']['type'] == "image/png" ||
             $_FILES['image']['type'] == "image/jpg" ||
@@ -58,16 +61,38 @@ if (isset($_POST['submit'])) {
             $imageError = "Invalid Image!";
         }
     }
-    // echo "<pre><div style = 'position: absolute; left: 0; z-index: 1;'";
-    // print_r($_POST);
-    // echo "</div></pre>";
-    $result = $post->save();
-    if(isset($result)){
-        if (is_integer($result)) {
-            $msg = "Post inserted Successfully with id " . $result;
+
+    if ($_FILES['slider_img']['error'] == 0) {
+        if (
+            $_FILES['slider_img']['type'] == "image/png" ||
+            $_FILES['slider_img']['type'] == "image/jpg" ||
+            $_FILES['slider_img']['type'] == "image/jpeg"
+        ) {
+            if ($_FILES['slider_img']['size'] <= 1024 * 1024 * 5) {
+                $sliderimageName = uniqid() . $_FILES['slider_img']['name'];
+                move_uploaded_file(
+                    $_FILES['slider_img']['tmp_name'],
+                    '../images/sliderImage/' . $sliderimageName
+                );
+                $post->set('slider_img', $sliderimageName);
+            } else {
+                $s_imageError = "Error, Exceeded 5mb!";
+            }
         } else {
-            $msg = "";
+            $s_imageError = "Invalid Image!";
         }
+    }
+    try {
+
+        // $result = $post->save();
+    } catch (mysqli_sql_exception $e) {
+        // if (isset($result)) {
+        //     if (is_integer($result)) {
+        //         $msg = "Post inserted Successfully with id " . $result;
+        //     } else {
+        //         $ErrMsg = "Post cannot be inserted!!!";
+        //     }
+        // }
     }
     // } else {
     //     $ErrMsg = "Please enter all the fields!!";
@@ -79,6 +104,13 @@ if (isset($_POST['submit'])) {
 <div id="page-wrapper">
 
     <div class="col-lg-12">
+        <?php if (isset($imageError)) { ?>
+            <div class="alert alert-danger"><?php echo $imageError;  ?></div>
+        <?php  } ?>
+        <?php if (isset($s_imageError)) { ?>
+            <div class="alert alert-danger"><?php echo $s_imageError;  ?></div>
+        <?php  } ?>
+
         <?php if (isset($msg)) { ?>
             <div class="row alert alert-success"><?php echo $msg;  ?></div>
         <?php  } ?>
@@ -201,6 +233,18 @@ if (isset($_POST['submit'])) {
             <?php } ?>
         </div>
     </div>
+
+    <div class="row">
+        <div class="form-group" enctype="multipart/form-data">
+            <label class="label" for="slider_image">Slider Image</label>
+            <!-- using multiple helps to upload multiple images -->
+            <input type="file" name="slider_img" id="slider_image" required>
+            <?php if (isset($s_imageError)) { ?>
+                <div class="alert alert-danger"><?php echo $s_imageError; ?></div>
+            <?php } ?>
+        </div>
+    </div>
+
     <div class="row">
         <div class="form-group">
             <label for="statusOption1" class="label">Status</label>
@@ -254,9 +298,9 @@ if (isset($_POST['submit'])) {
 </div>
 <?php
 
-echo "<pre><div style = 'position:absoulte; right : 0;'>";
-print_r($_POST);
-echo "<div><pre>";
+// echo "<pre><div style = 'position:absoulte; right : 0;'>";
+// print_r($_POST);
+// echo "<div><pre>";
 include('header_footer/footer.php');
 ?>
 <script src="../js/ckeditor/ckeditor.js"></script>

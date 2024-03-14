@@ -84,14 +84,32 @@ img {
 
 .add-btn {
   margin-top: 15px;
+  display: inline-block;
 }
 
 .add-btn a {
+  /* width: 150px; */
   font-size: 21px;
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  background: #eee;
-  color: black;
+  background: #8330d5;
+  color: #fff;
   padding: 6px 13px;
+}
+
+.add-btn a:hover {
+  background: #721da7;
+}
+
+.read a {
+  background: #eee;
+  color: #1e1e1e;
+}
+
+.read a:hover {
+  background: #837c87;
+  color: #fff;
 }
 
 /* Slideshow container */

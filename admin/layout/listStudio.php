@@ -12,18 +12,20 @@ if (isset($_SESSION['message']) && $_SESSION['message'] != "") {
     $_SESSION['message'] = "";
 }
 
-?>
-<style>
-    .center {
-        text-align: center;
-    }
-</style>
+if (isset($_GET['msg'])) {
+    $Errmsg = $_GET['msg'];
+}
 
+?>
 <div id="page-wrapper">
 
     <?php
+
     if (isset($msg)) {
-        echo '<div class="msg">' . $msg . ' </div>';
+        echo '<div class="alert alert-success">' . $msg . ' </div>';
+    }
+    if (isset($Errmsg)) {
+        echo '<div class="alert alert-danger">' . $Errmsg . ' </div>';
     }
     ?>
 

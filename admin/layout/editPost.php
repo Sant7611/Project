@@ -11,10 +11,13 @@ $post = new Post();
 
 $post->set('id', $id);
 $data = $post->getById();
-// echo "<pre>";
+echo "<pre>";
 // print_r($data);
-// print_r($_POST);
-// echo "</pre>";
+print_r($_POST);
+print_r($_POST['image']);
+print_r($_POST['slider_img']);
+print_r($_FILES);
+echo "</pre>";
 
 $studioid = explode(',', $data->studio_id);
 $genreid = explode(',', $data->genre_id);
@@ -65,7 +68,6 @@ if (isset($_POST['submit'])) {
         $post->set('image_url', $_POST['old_image']);
     }
     if ($_FILES['image']['error'] == 0) {
-        echo "hello";
         if (
             $_FILES['image']['type'] == "image/png" ||
             $_FILES['image']['type'] == "image/jpg" ||
@@ -86,23 +88,49 @@ if (isset($_POST['submit'])) {
         }
     }
 
+    if (empty($_FILES['slider_img']['name'])) {
+        $post->set('slider_img', $_POST['old_slider_image']);
+    }
+
+    if ($_FILES['slider_img']['error'] == 0) {
+        if (
+            $_FILES['slider_img']['type'] == "image/png" ||
+            $_FILES['slider_img']['type'] == "image/jpg" ||
+            $_FILES['slider_img']['type'] == "image/jpeg"
+        ) {
+            if ($_FILES['slider_img']['size'] <= 1024 * 1024 * 5) {
+                $sliderimageName = uniqid() . $_FILES['slider_img']['name'];
+                move_uploaded_file(
+                    $_FILES['slider_img']['tmp_name'],
+                    '../images/sliderImage/' . $sliderimageName
+                );
+                $post->set('slider_img', $sliderimageName);
+            } else {
+                $imageError = "Error, Exceeded 1mb!";
+            }
+        } else {
+            $imageError = "Invalid image format!";
+        }
+    }
+
     // echo "<pre>";
     // print_r($_FILES['image']);
     // echo "</pre>";
-    $result = $post->edit();
-    echo $result;
-    echo "success";
-    echo "<script>window.location.href='listPost.php?msg= Post Successfully Updated'</script>";
-    // header('location:listPost.php?msg=Post successfully Updated');
-    if (isset($result)) {
-        if ($result == 'success') {
-            // $ErrMs = "";
+        $result = $post->edit();
+        // echo $result;
+        // echo "success";
+        echo "<script>window.location.href='listPost.php?msg= Post Successfully Updated'</script>";
+        // header('location:listPost.php?msg=Post successfully Updated');
+        if (isset($result)) {
+            if ($result == 'success') {
+                // $ErrMs = "";
 
-            $msg = "Post successfully updated  ";
-        } else {
-            $Errmsg = "Post cannot be updated";
-        }
-    }
+                $msg = "Post successfully updated  ";
+            } else {
+                $Errmsg = "Post cannot be updated";
+            }
+        } 
+
 }
 // include('sideBar.php');
 ?>
@@ -111,7 +139,7 @@ if (isset($_POST['submit'])) {
 <div id="page-wrapper">
 
     <div class="col-lg-12">
-        <h1 class="page-header">Edit Post</h1>
+        <h1 class="page-header">Edit Post <?php echo $id; ?></h1>
     </div>
     <div class="row">
         <div class="col-lg-6">
@@ -221,7 +249,14 @@ if (isset($_POST['submit'])) {
                     <label class="label" for="image">Image<br><br></label>
                     <input type="hidden" id="image" value="<?php echo $data->image_url;  ?>" name="old_image">
                     <img src="../images/<?php echo $data->image_url;  ?>" height="100" width="200" alt="" srcset=""><br>
-                    <br><input type="file" name="image">
+                    <br>
+                    <input type="file" name="image">
+                    <br><br>
+                    <label class="label" for="slider_image">Slider Image<br><br></label>
+                    <input type="hidden" id="slider_image" value="<?php echo $data->slider_img;  ?>" name="old_slider_image">
+                    <img src="../images/sliderImage/<?php echo $data->slider_img;  ?>" height="100" width="200" alt="" srcset=""><br>
+                    <br>
+                    <input type="file" name="slider_img">
                 </div>
 
 
