@@ -1,5 +1,12 @@
-<?php 
+<?php
 include('header.php');
+include_once('admin/class/post.class.php');
+include_once('admin/class/post.class.php');
+
+$post = new Post();
+
+$datalist = $post->fetch();
+
 
 ?>
 <div class="box-main">
@@ -15,24 +22,42 @@ include('header.php');
 
 
         <div class="slideshow-container">
-
+            <?php foreach ($datalist as $key => $post) {
+            } ?>
             <div class="mySlides fade">
                 <div class="numbertext">1 / 3</div>
-                <img src="admin/images/naruto.jpg" style="width:100%;">
-                <div class="text">Caption Text</div>
+                <img src="admin/images/animeimg1.jpg" style="width:100%">
+
+                <div class=" overlay text">
+                    <div class="disp">
+                        <div class="slide-title">Solo Leveling</div>
+                        <span class="epidsode">10+</span>
+                        <span class="aired">2020</span>
+                        <div class="sypnosis">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi quisquam, vero voluptate ducimus officiis, necessitatibus laudantium expedita velit deleniti atque unde magni saepe iure aliquam quasi magnam culpa at ad harum commodi nesciunt! Placeat libero repellat excepturi possimus! Aliquam ea maiores ratione totam. Ipsam ....
+                        </div>
+                        <div class="add-btn">
+                            <a href="">Add to List</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="mySlides fade">
                 <div class="numbertext">2 / 3</div>
-                <img src="admin/images/attack on titans.jpg" style="width:100%">
-                <div class="text">Caption Two</div>
+                <img src="admin/images/naruto.jpg" style="width:100%;">
+                <div class="text">
+                    <span class="slider-title">Naruto</span>
+                    span.
+                </div>
             </div>
 
             <div class="mySlides fade">
                 <div class="numbertext">3 / 3</div>
-                <img src="admin/images/animeimg1.jpg" style="width:100%">
-                <div class="text">Caption Three</div>
+                <img src="admin/images/attack on titans.jpg" style="width:100%">
+                <div class="text">Caption Two</div>
             </div>
+
 
         </div>
         <br>
@@ -395,7 +420,7 @@ include('header.php');
         }
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].className += " active";
-        setTimeout(showSlides, 2000); // Change image every 2 seconds
+        // setTimeout(showSlides, 2000); // Change image every 2 seconds
     }
 </script>
 <?php include('footer.php') ?>

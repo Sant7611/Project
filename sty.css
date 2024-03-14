@@ -36,10 +36,68 @@ img {
   vertical-align: middle;
 }
 
+.overlay {
+  height: 100%;
+  /* box-shadow: inset 71px -20px 154px 103px #1e1e1e; */
+  box-shadow: inset 490px 0px 94px rgba(0, 0, 0, 0.9),
+    inset -45px 0px 128px rgba(0, 0, 0, 0.5),
+    inset 0px 60px 106px rgba(0, 0, 0, 0.5),
+    inset 10px -52px 168px rgba(0, 0, 0, 0.5);
+}
+
+.disp {
+  /* width: 35%;
+  position: absolute;
+  bottom: 9px;
+  text-align: left;
+  left: 53px; */
+  width: 42%;
+  height: 100%;
+  vertical-align: middle;
+  position: absolute;
+  bottom: 0;
+  text-align: left;
+  left: 0;
+  padding: 80px 21px 40px 50px;
+}
+
+.slide-title {
+  font-size: 93px;
+  font-family: "Nunito";
+  line-height: 85px;
+  font-weight: bold;
+  padding: 15px 0;
+}
+
+.disp span {
+  display: inline-block;
+  font-size: 20px;
+  width: 125px;
+  text-align: right;
+  color: #ddd;
+  margin-bottom: 10px;
+}
+
+.sypnosis {
+  line-height: 20px;
+}
+
+.add-btn {
+  margin-top: 15px;
+}
+
+.add-btn a {
+  font-size: 21px;
+  text-decoration: none;
+  background: #eee;
+  color: black;
+  padding: 6px 13px;
+}
+
 /* Slideshow container */
 .slideshow-container {
   /* max-width: 1000px; */
-  width: 1100px;
+  width: 1275px;
   height: 550px;
   position: relative;
   margin: auto;
@@ -51,9 +109,9 @@ img {
 .text {
   color: #f2f2f2;
   font-size: 15px;
-  padding: 8px 12px;
+  /* padding: 8px 12px; */
   position: absolute;
-  bottom: 8px;
+  bottom: 0px;
   width: 100%;
   text-align: center;
 }
@@ -65,6 +123,7 @@ img {
   padding: 8px 12px;
   position: absolute;
   top: 0;
+  z-index: 1;
 }
 
 /* The dots/bullets/indicators */
