@@ -84,13 +84,11 @@ if (isset($_POST['submit'])) {
         }
         try {
             $result = $post->save();
-            echo $result;
-            echo 'successfully echoed';
-        } catch (mysqli_sql_exception $e) {
-
             if ($result == 'success') {
                 $msg = "Post inserted Successfully with id " . $result;
-            } else {
+            }
+        } catch (mysqli_sql_exception $e) {
+            if(isset($e)) {
                 $ErrMsg = "Post cannot be inserted!!!" . substr($e, 21, 16);
             }
         }
@@ -220,7 +218,7 @@ if (isset($_POST['submit'])) {
     <div class="row">
         <div class="form-group">
             <label for="episode" class="label">Episodes: </label>
-            <input type="number" id="episode" class="form-control" name="episodes" required>
+            <input type="text" id="episode" class="form-control" name="episodes" required>
         </div>
     </div>
     <div class="row">

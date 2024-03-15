@@ -63,7 +63,7 @@ if (isset($_POST['submit'])) {
     $post->set('release_date', $_POST['release_date']);
     $post->set('status', $_POST['status']);
     $post->set('aired', $_POST['aired']);
-    $post->set('created_date', date('y-m-d H:i:s'));
+    $post->set('modified_date', date('y-m-d H:i:s'));
     if (empty($_FILES['image']['name'])) {
         $post->set('image_url', $_POST['old_image']);
     }
@@ -119,17 +119,18 @@ if (isset($_POST['submit'])) {
         $result = $post->edit();
         // echo $result;
         // echo "success";
-        echo "<script>window.location.href='listPost.php?msg= Post Successfully Updated'</script>";
         // header('location:listPost.php?msg=Post successfully Updated');
-        if (isset($result)) {
+        
             if ($result == 'success') {
                 // $ErrMs = "";
-
-                $msg = "Post successfully updated  ";
+                
+                // $_SESSION['msg'] = 'Post successfully updated  '; 
+                echo "<script>window.location.href='listPost.php?msg=Post successfully updated'</script>";
+                // $msg = "Post successfully updated  ";
             } else {
                 $Errmsg = "Post cannot be updated";
             }
-        } 
+         
 
 }
 // include('sideBar.php');
@@ -243,7 +244,7 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <label class="label" for="episodes">Episodes:</label>
-                    <input type="number" id="episodes" name="episodes" value="<?php echo $data->episodes; ?>">
+                    <input type="text" id="episodes" name="episodes" value="<?php echo $data->episodes; ?>">
                 </div>
                 <div class="form-group" enctype="multipart/form-data">
                     <label class="label" for="image">Image<br><br></label>

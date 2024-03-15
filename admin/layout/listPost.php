@@ -19,7 +19,7 @@ if (isset($_SESSION['message']) && $_SESSION['message'] != "") {
 // }
 $postObj = new Post();
 
-$dataList = $postObj->fetch();
+$dataList = $postObj->sortCreatedDate();
 
 // echo "<pre><div style='background: #000; position:absolute; bottom: -800; color: #fff; z-index : 1;'>";
 // print_r($dataList);
@@ -28,11 +28,6 @@ $dataList = $postObj->fetch();
 ?>
 
 <div id="page-wrapper">
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">List Post</h1>
-        </div>
-    </div>
     <?php
     if (isset($successMessage)) {
         echo '<div class="alert alert-danger">' . $successMessage . '</div>';
@@ -41,29 +36,15 @@ $dataList = $postObj->fetch();
         echo '<div class="alert alert-success">' . $msg . '</div>';
     }
     ?>
-    <?php
-
-    // echo "<pre><div style='background: #000; position:absolute; bottom: -800; color: #fff; z-index : 1;'>";
-    // print_r($dataList[1]);
-    // print_r($dataList);
-    // echo "</div></pre>";
-    ?>
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">List Post</h1>
+        </div>
+    </div>
     <!-- <div class="row"> -->
     <div class="panel-body">
         <table id="custom-table">
             <thead>
-                <colgroup>
-                    <col style="width:20%">
-                    <col style="width:30%">
-                    <col style="width:50%">
-                    <col style="width:20%">
-                    <col style="width:30%">
-                    <col style="width:50%">
-                    <col style="width:20%">
-                    <col style="width:30%">
-                    <col style="width:50%">
-                    <col style="width:50%">
-                </colgroup>
                 <tr>
                     <th>S.NO</th>
                     <th>Title</th>

@@ -35,7 +35,7 @@ $sliderlist = $post->selectSliderPost();
                     <div class=" overlay text">
                         <div class="disp">
                             <div class="slide-title"><?php echo $post['title']; ?></div>
-                            <span class="epidsode">Ep <?php echo $post['episodes']; ?> +</span>
+                            <span class="epidsode">Ep <?php echo $post['episodes']; ?> </span>
                             <span class="aired"><i class="material-icons-outlined">cast</i>
                                 <?php $airedYear = substr($post['aired'], 0, 4);
                                 echo $airedYear;; ?>
@@ -120,100 +120,6 @@ $sliderlist = $post->selectSliderPost();
                     </div>
                 </div>
             <?php } ?>
-            <div class="gallery">
-                <img src="admin/images/solo-leveling-1-190x273.jpg" alt="">
-                <div class="desc">
-                    <h4 class="card-title">Solo Leveling</h4>
-                    <span>tags</span>
-                </div>
-            </div>
-            <div class="gallery">
-                <img src="https://picsum.photos/id/238/400/300" alt="">
-                <div class="desc">
-                    <h4 class="card-title">Title</h4>
-                    <span>tags</span>
-                </div>
-            </div>
-            <div class="gallery">
-                <img src="https://picsum.photos/id/238/400/300" alt="">
-                <div class="desc">
-                    <h4 class="card-title">Title</h4>
-                    <span>tags</span>
-                </div>
-            </div>
-            <div class="gallery">
-                <img src="https://picsum.photos/id/276/400/300" alt="">
-                <div class="desc">
-                    <h4 class="card-title">Title</h4>
-                    <span>tags</span>
-                </div>
-            </div>
-            <div class="gallery">
-                <img src="https://picsum.photos/id/276/400/300" alt="">
-                <div class="desc">
-                    <h4 class="card-title">Title</h4>
-                    <span>tags</span>
-                </div>
-            </div>
-            <div class="gallery">
-                <img src="https://picsum.photos/id/267/400/300" alt="">
-                <div class="desc">
-                    <h4 class="card-title">Title</h4>
-                    <span>tags</span>
-                </div>
-            </div>
-            <div class="gallery">
-                <img src="https://picsum.photos/id/267/400/300" alt="">
-                <div class="desc">
-                    <h4 class="card-title">Title</h4>
-                    <span>tags</span>
-                </div>
-            </div>
-            <div class="gallery">
-                <img src="https://picsum.photos/id/241/400/300" alt="">
-                <div class="desc">
-                    <h4 class="card-title">Title</h4>
-                    <span>tags</span>
-                </div>
-            </div>
-            <div class="gallery">
-                <img src="https://picsum.photos/id/241/400/300" alt="">
-                <div class="desc">
-                    <h4 class="card-title">Title</h4>
-                    <span>tags</span>
-                </div>
-            </div>
-            <div class="gallery">
-                <img src="https://picsum.photos/id/242/400/300" alt="">
-                <div class="desc">
-                    <h4 class="card-title">Title</h4>
-                    <span>tags</span>
-                </div>
-            </div>
-            <div class="gallery">
-                <img src="https://picsum.photos/id/242/400/300" alt="">
-                <div class="desc">
-                    <h4 class="card-title">Title</h4>
-                    <span>tags</span>
-                </div>
-            </div>
-            <div class="gallery">
-                <img src="https://picsum.photos/id/243/400/300" alt="">
-                <div class="desc">
-                    <h4 class="card-title">Title</h4>
-                    <span>tags</span>
-                </div>
-            </div>
-            <div class="gallery">
-                <img src="https://picsum.photos/id/243/400/300" alt="">
-                <div class="desc">
-                    <h4 class="card-title">Title</h4>
-                    <span>Action</span>
-                    <span>Suspense</span>
-                </div>
-            </div>
-
-
         </div>
     </div>
     <div class="section1"></div>

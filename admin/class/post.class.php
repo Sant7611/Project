@@ -4,7 +4,7 @@ class Post extends Common
 {
     private $conn;
     public $id, $title, $type, $episodes, $status,
-        $source, $producers, $aired, $duration, $slider_key, $featured, $sypnosis, $genre_id, $studio_id, $release_date, $image_url, $slider_img, $created_date;
+        $source, $producers, $aired, $duration, $slider_key, $featured, $sypnosis,$modified_date, $genre_id,  $studio_id, $release_date, $image_url, $slider_img, $created_date;
 
     public function __construct()
     {
@@ -15,7 +15,7 @@ class Post extends Common
     public function save()
     {
         $sql = "insert into post (title, type, duration, aired, episodes, status, slider_key, featured, sypnosis, release_date,slider_img, image_url,created_date) 
-                values ('$this->title', '$this->type', '$this->duration', '$this->aired', $this->episodes, '$this->status', '$this->slider_key', 
+                values ('$this->title', '$this->type', '$this->duration', '$this->aired', '$this->episodes', '$this->status', '$this->slider_key', 
                 '$this->featured', '$this->sypnosis', '$this->release_date','$this->slider_img', '$this->image_url', '$this->created_date');";
         $this->conn->query($sql);
 
@@ -24,10 +24,12 @@ class Post extends Common
         $this->addSource($this->source, $saveId);
         $this->addProducer($this->producers, $saveId);
         $this->addStudio($this->studio_id, $saveId);
-
+        // echo "<pre>";
+        // print_r($this->conn);
+        // echo "</pre>";
         if ($this->conn->affected_rows >= 1) {
             return 'success';
-        }else{
+        } else {
             return 'failed';
         }
     }
@@ -95,7 +97,8 @@ class Post extends Common
                     featured = '$this->featured',
                     release_date = '$this->release_date',
                     slider_img = '$this->slider_img',
-                    image_url = '$this->image_url'
+                    image_url = '$this->image_url',
+                    modified_date = '$this->modified_date'
                     where id = '$this->id';    ";
 
         $this->conn->query($sql);
@@ -376,6 +379,50 @@ class Post extends Common
         p.id
     ORDER BY 
         p.release_date desc;
+    
+    ";
+        $result = $this->conn->query($sql);
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+
+        if ($result->num_rows > 0) {
+            return $data;
+        } else {
+            return false;
+        }
+    }
+
+    public function sortCreatedDate()
+    {
+        // $sql = "select * from post;";
+        // $sql = "SELECT p.*, s.source, pr.producers, st.studio, g.genre FROM post p INNER JOIN post_joins pj ON p.id = pj.post_id LEFT JOIN source s ON pj.source_id = s.id LEFT JOIN producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
+        // $sql = "select p.*, group_concat(s.source) as source, group_concat(s.id) as source_id, group_concat(pr.producers) as producer,group_concat(pr.id) as producer_id, group_concat(st.studio) as studio,group_concat(st.id) as studio_id, group_concat(g.genre) as genre, group_concat(g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
+
+        $sql = "SELECT 
+        p.*, 
+        GROUP_CONCAT(DISTINCT s.source) AS source, 
+        GROUP_CONCAT(DISTINCT s.id) AS source_id, 
+        GROUP_CONCAT(DISTINCT pr.producers) AS producer, 
+        GROUP_CONCAT(DISTINCT pr.id) AS producer_id, 
+        GROUP_CONCAT(DISTINCT st.studio) AS studio, 
+        GROUP_CONCAT(DISTINCT st.id) AS studio_id, 
+        GROUP_CONCAT(DISTINCT g.genre) AS genre, 
+        GROUP_CONCAT(DISTINCT g.id) AS genre_id 
+    FROM 
+        post p 
+    LEFT JOIN 
+        post_joins pj ON p.id = pj.post_id 
+    LEFT JOIN 
+        source s ON pj.source_id = s.id 
+    LEFT JOIN 
+        producers pr ON pj.producer_id = pr.id 
+    LEFT JOIN 
+        studio st ON pj.studio_id = st.id 
+    LEFT JOIN 
+        genre g ON pj.genre_id = g.id 
+    GROUP BY 
+        p.id
+    ORDER BY 
+        p.created_date desc;
     
     ";
         $result = $this->conn->query($sql);
