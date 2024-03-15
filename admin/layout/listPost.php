@@ -13,10 +13,10 @@ if (isset($_SESSION['message']) && $_SESSION['message'] != "") {
     $_SESSION['message'] = "";
 }
 
-if (isset($_SESSION['msg']) && $_SESSION['msg'] != "") {
-    $successMessage = $_SESSION['msg'];
-    $_SESSION['msg'] = "";
-}
+// if (isset($_SESSION['msg']) && $_SESSION['msg'] != "") {
+//     $successMessage = $_SESSION['msg'];
+//     $_SESSION['msg'] = "";
+// }
 $postObj = new Post();
 
 $dataList = $postObj->fetch();
@@ -35,7 +35,7 @@ $dataList = $postObj->fetch();
     </div>
     <?php
     if (isset($successMessage)) {
-        echo '<div class="alert alert-success">' . $successMessage . '</div>';
+        echo '<div class="alert alert-danger">' . $successMessage . '</div>';
     }
     if (isset($msg)) {
         echo '<div class="alert alert-success">' . $msg . '</div>';
@@ -52,6 +52,18 @@ $dataList = $postObj->fetch();
     <div class="panel-body">
         <table id="custom-table">
             <thead>
+                <colgroup>
+                    <col style="width:20%">
+                    <col style="width:30%">
+                    <col style="width:50%">
+                    <col style="width:20%">
+                    <col style="width:30%">
+                    <col style="width:50%">
+                    <col style="width:20%">
+                    <col style="width:30%">
+                    <col style="width:50%">
+                    <col style="width:50%">
+                </colgroup>
                 <tr>
                     <th>S.NO</th>
                     <th>Title</th>

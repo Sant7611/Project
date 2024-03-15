@@ -4,7 +4,7 @@ class Post extends Common
 {
     private $conn;
     public $id, $title, $type, $episodes, $status,
-        $source, $producers, $aired, $duration, $slider_key, $featured, $sypnosis, $genre_id, $studio_id, $release_date, $image_url,$slider_img, $created_date;
+        $source, $producers, $aired, $duration, $slider_key, $featured, $sypnosis, $genre_id, $studio_id, $release_date, $image_url, $slider_img, $created_date;
 
     public function __construct()
     {
@@ -20,16 +20,15 @@ class Post extends Common
         $this->conn->query($sql);
 
         $saveId = $this->conn->insert_id;
-        if ($saveId > 0) {
-            $this->addGenre($this->genre_id, $saveId);
-            $this->addSource($this->source, $saveId);
-            $this->addProducer($this->producers, $saveId);
-            $this->addStudio($this->studio_id, $saveId);
-        } else {
-            echo "id invalid";
-        }
-        if ($this->conn->affected_rows == 1 && $this->conn->insert_id > 0) {
-            return $saveId;
+        $this->addGenre($this->genre_id, $saveId);
+        $this->addSource($this->source, $saveId);
+        $this->addProducer($this->producers, $saveId);
+        $this->addStudio($this->studio_id, $saveId);
+
+        if ($this->conn->affected_rows >= 1) {
+            return 'success';
+        }else{
+            return 'failed';
         }
     }
 
@@ -74,7 +73,7 @@ class Post extends Common
 
         // $this->conn->query($sql);
         if ($this->conn->affected_rows == 1) {
-            $msg = "Success";
+            $msg = "success";
             return $msg;
         }
     }
@@ -374,7 +373,10 @@ class Post extends Common
     LEFT JOIN 
         genre g ON pj.genre_id = g.id 
     GROUP BY 
-        p.id;
+        p.id
+    ORDER BY 
+        p.release_date desc;
+    
     ";
         $result = $this->conn->query($sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);
@@ -426,7 +428,7 @@ class Post extends Common
 
     public function selectSliderPost()
     {
-        $sql = "select * from post where status = 1 and slider_key = 1 order by created_date desc limit 3;";
+        $sql = "select * from post where status = 1 and slider_key = 1 order by release_date desc limit 3;";
         return $this->select($sql);
     }
 

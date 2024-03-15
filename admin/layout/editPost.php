@@ -139,7 +139,7 @@ if (isset($_POST['submit'])) {
 <div id="page-wrapper">
 
     <div class="col-lg-12">
-        <h1 class="page-header">Edit Post <?php echo $id; ?></h1>
+        <h1 class="page-header">Edit Post</h1>
     </div>
     <div class="row">
         <div class="col-lg-6">

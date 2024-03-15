@@ -25,78 +25,78 @@ if (isset($_POST['submit'])) {
     // echo "<pre><div style = 'position: absolute; left: 0; z-index: 1;'";
     // print_r($_FILES);
     // echo "</div></pre>";
-    // if (!empty($_POST['title']) && !empty($_POST['type']) && !empty($_POST['episodes']) && !empty($_POST['release_date']) && !empty($_POST['producers_id']) && !empty($_POST['duration']) && !empty($_POST['source_id']) && !empty($_POST['genre_id']) && !empty($_POST['studio_id']) && !empty($_POST['aired']) && !empty($_POST['sypnosis'])) {
-    $post->set('title', $_POST['title']);
-    $post->set('type', $_POST['type']);
-    $post->set('episodes', $_POST['episodes']);
-    $post->set('status', $_POST['status']);
-    $post->set('slider_key', $_POST['slider_key']);
-    $post->set('release_date', $_POST['release_date']);
-    $post->set('featured', $_POST['featured']);
-    $post->set('producers', $_POST['producers_id']);
-    $post->set('aired', $_POST['aired']);
-    $post->set('duration', $_POST['duration']);
-    $post->set('source', $_POST['source_id']);
-    $post->set('sypnosis', $_POST['sypnosis']);
-    $post->set('genre_id', $_POST['genre_id']);
-    $post->set('studio_id', $_POST['studio_id']);
-    $post->set('created_date', date('y-m-d H:i:s'));
-    if ($_FILES['image']['error'] == 0) {
-        if (
-            $_FILES['image']['type'] == "image/png" ||
-            $_FILES['image']['type'] == "image/jpg" ||
-            $_FILES['image']['type'] == "image/jpeg"
-        ) {
-            if ($_FILES['image']['size'] <= 1024 * 1024) {
-                $imageName = uniqid() . $_FILES['image']['name'];
-                move_uploaded_file(
-                    $_FILES['image']['tmp_name'],
-                    '../images/' . $imageName
-                );
-                $post->set('image_url', $imageName);
+    if (!empty($_POST['title']) && !empty($_POST['type']) && !empty($_POST['episodes']) && !empty($_POST['release_date']) && !empty($_POST['producers_id']) && !empty($_POST['duration']) && !empty($_POST['source_id']) && !empty($_POST['genre_id']) && !empty($_POST['studio_id']) && !empty($_POST['aired']) && !empty($_POST['sypnosis'])) {
+        $post->set('title', $_POST['title']);
+        $post->set('type', $_POST['type']);
+        $post->set('episodes', $_POST['episodes']);
+        $post->set('status', $_POST['status']);
+        $post->set('slider_key', $_POST['slider_key']);
+        $post->set('release_date', $_POST['release_date']);
+        $post->set('featured', $_POST['featured']);
+        $post->set('producers', $_POST['producers_id']);
+        $post->set('aired', $_POST['aired']);
+        $post->set('duration', $_POST['duration']);
+        $post->set('source', $_POST['source_id']);
+        $post->set('sypnosis', $_POST['sypnosis']);
+        $post->set('genre_id', $_POST['genre_id']);
+        $post->set('studio_id', $_POST['studio_id']);
+        $post->set('created_date', date('y-m-d H:i:s'));
+        if ($_FILES['image']['error'] == 0) {
+            if (
+                $_FILES['image']['type'] == "image/png" ||
+                $_FILES['image']['type'] == "image/jpg" ||
+                $_FILES['image']['type'] == "image/jpeg"
+            ) {
+                if ($_FILES['image']['size'] <= 1024 * 1024 * 5) {
+                    $imageName = uniqid() . $_FILES['image']['name'];
+                    move_uploaded_file(
+                        $_FILES['image']['tmp_name'],
+                        '../images/' . $imageName
+                    );
+                    $post->set('image_url', $imageName);
+                } else {
+                    $imageError = "Error, Exceeded 5mb!";
+                }
             } else {
-                $imageError = "Error, Exceeded 1mb!";
+                $imageError = "Invalid Image!";
             }
-        } else {
-            $imageError = "Invalid Image!";
         }
-    }
 
-    if ($_FILES['slider_img']['error'] == 0) {
-        if (
-            $_FILES['slider_img']['type'] == "image/png" ||
-            $_FILES['slider_img']['type'] == "image/jpg" ||
-            $_FILES['slider_img']['type'] == "image/jpeg"
-        ) {
-            if ($_FILES['slider_img']['size'] <= 1024 * 1024 * 5) {
-                $sliderimageName = uniqid() . $_FILES['slider_img']['name'];
-                move_uploaded_file(
-                    $_FILES['slider_img']['tmp_name'],
-                    '../images/sliderImage/' . $sliderimageName
-                );
-                $post->set('slider_img', $sliderimageName);
+        if ($_FILES['slider_img']['error'] == 0) {
+            if (
+                $_FILES['slider_img']['type'] == "image/png" ||
+                $_FILES['slider_img']['type'] == "image/jpg" ||
+                $_FILES['slider_img']['type'] == "image/jpeg"
+            ) {
+                if ($_FILES['slider_img']['size'] <= 1024 * 1024 * 5) {
+                    $sliderimageName = uniqid() . $_FILES['slider_img']['name'];
+                    move_uploaded_file(
+                        $_FILES['slider_img']['tmp_name'],
+                        '../images/sliderImage/' . $sliderimageName
+                    );
+                    $post->set('slider_img', $sliderimageName);
+                } else {
+                    $s_imageError = "Error, Exceeded 5mb!";
+                }
             } else {
-                $s_imageError = "Error, Exceeded 5mb!";
+                $s_imageError = "Invalid Image!";
             }
-        } else {
-            $s_imageError = "Invalid Image!";
         }
-    }
-    try {
+        try {
+            $result = $post->save();
+            echo $result;
+            echo 'successfully echoed';
+        } catch (mysqli_sql_exception $e) {
 
-        // $result = $post->save();
-    } catch (mysqli_sql_exception $e) {
-        // if (isset($result)) {
-        //     if (is_integer($result)) {
-        //         $msg = "Post inserted Successfully with id " . $result;
-        //     } else {
-        //         $ErrMsg = "Post cannot be inserted!!!";
-        //     }
-        // }
+            if ($result == 'success') {
+                $msg = "Post inserted Successfully with id " . $result;
+            } else {
+                $ErrMsg = "Post cannot be inserted!!!" . substr($e, 21, 16);
+            }
+        }
+    } else {
+        $ErrMsg = "Please enter all the fields!!";
     }
-    // } else {
-    //     $ErrMsg = "Please enter all the fields!!";
-    // }
 }
 ?>
 

@@ -4,7 +4,9 @@
   /* font-family: sans-serif; */
   box-sizing: border-box;
 }
-
+html {
+  scroll-behavior: smooth;
+}
 body {
   background: #1a224b;
 }
@@ -17,7 +19,7 @@ body {
 .section {
   margin: 30px 0 15px 0;
   background: #4e306c;
-  padding: 15px 0 25px 15px;
+  padding: 15px 10px 25px 15px;
 }
 
 /* section1  */
@@ -58,7 +60,7 @@ img {
   bottom: 0;
   text-align: left;
   left: 0;
-  padding: 80px 21px 40px 50px;
+  padding: 50px 21px 40px 20px;
 }
 
 .slide-title {
@@ -76,6 +78,15 @@ img {
   text-align: right;
   color: #ddd;
   margin-bottom: 10px;
+}
+
+.aired i {
+  vertical-align: bottom;
+}
+
+.aired {
+  display: flex;
+  align-items: center;
 }
 
 .sypnosis {
@@ -244,18 +255,19 @@ body {
 div.gallery {
   /* border: 1px solid #ccc; */
   border-radius: 7px;
-  flex: 0 0 160px;
-  height: 315px;
+  flex: 0 0 168px;
+  height: 370px;
 }
 
 div.gallery:hover {
-  border: 1px solid #777;
+  position: relative;
+  top: -3px;
 }
 
 div.gallery img {
   border-radius: 7px;
-  width: 100%;
-  height: auto;
+  width: 168px;
+  height: 255px;
 }
 
 div.desc {
@@ -266,7 +278,7 @@ div.desc {
 .head-title {
   color: #fff;
   padding: 0px 5px;
-  margin-left: 38px;
+  margin-left: 10px;
   font-family: "Mukta";
   font-size: 23px;
   display: inline-block;
@@ -282,7 +294,9 @@ div.desc {
 .desc span {
   color: #c3c7cd;
   background: #3d1758;
+  display: inline-block;
   padding: 3px 7px;
+  margin: 3px;
   border-radius: 7px;
   font-family: nunito;
 }

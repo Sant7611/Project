@@ -7,9 +7,7 @@ $post = new Post();
 
 $datalist = $post->fetch();
 $sliderlist = $post->selectSliderPost();
-// echo "<pre>";
-// print_r($sliderlist);
-// echo "</pre>";
+
 ?>
 <div class="box-main">
     <div id="home">
@@ -23,18 +21,25 @@ $sliderlist = $post->selectSliderPost();
             <div class="naruto"><img src="" alt=""></div>-->
 
 
+        <?php
+        // echo "<pre>";
+        // print_r($datalist);
+        // echo "</pre>";
+        ?>
         <div class="slideshow-container">
             <?php foreach ($sliderlist as $key => $post) { ?>
                 <div class="mySlides fade">
-                    <div class="numbertext">1 / 3</div>
+                    <div class="numbertext"><?php echo $key + 1 ?> / 3</div>
                     <!-- <img src="admin/images/animeimg1.jpg" style="width:100%"> -->
-                    <img src="<?php echo 'admin/images/' . $post['image_url']; ?>" style="width:100%">';
+                    <img src="<?php echo 'admin/images/sliderImage/' . $post['slider_img']; ?>" style="width:100%">';
                     <div class=" overlay text">
                         <div class="disp">
                             <div class="slide-title"><?php echo $post['title']; ?></div>
                             <span class="epidsode">Ep <?php echo $post['episodes']; ?> +</span>
-                            <span class="aired"><?php $airedYear = substr($post['aired'], 0, 4);
-                                                echo $airedYear;; ?></span>
+                            <span class="aired"><i class="material-icons-outlined">cast</i>
+                                <?php $airedYear = substr($post['aired'], 0, 4);
+                                echo $airedYear;; ?>
+                            </span>
                             <div class="sypnosis">
                                 <?php $sypnosis = substr($post['sypnosis'], 0, 250);
                                 echo $sypnosis; ?>....
@@ -101,14 +106,20 @@ $sliderlist = $post->selectSliderPost();
             <h3>New Release</h3>
         </div>
         <div class="collection">
-            <div class="gallery">
-                <img src="admin/images/solo-leveling-1-190x273.jpg" alt="">
-                <div class="desc">
-                    <h4 class="card-title">Solo Leveling</h4>
-                    <span>Action</span>
-                    <span>Adventure</span>
+            <?php foreach ($datalist as $key => $post) { ?>
+                <div class="gallery">
+                    <img src="admin/images/<?php echo $post['image_url'] ?>" alt="">
+                    <div class="desc">
+                        <h4 class="card-title"><?php echo strtoupper($post['title']); ?></h4>
+                        <?php
+                        $genres = explode(',', $post['genre']);
+                        echo '<span>' . $genres[0] . '</span>';
+                        echo '<span>' . $genres[1] . '</span>';
+
+                        ?>
+                    </div>
                 </div>
-            </div>
+            <?php } ?>
             <div class="gallery">
                 <img src="admin/images/solo-leveling-1-190x273.jpg" alt="">
                 <div class="desc">
@@ -447,7 +458,7 @@ $sliderlist = $post->selectSliderPost();
         }
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].className += " active";
-        setTimeout(showSlides, 2000); // Change image every 2 seconds
+        // setTimeout(showSlides, 3000); // Change image every 2 seconds
     }
 </script>
 <?php include('footer.php') ?>
