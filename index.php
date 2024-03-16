@@ -5,8 +5,15 @@ include_once('admin/class/post.class.php');
 
 $post = new Post();
 
+//for New Releases 
 $datalist = $post->fetch();
+
+//for Slider Post -> new released
 $sliderlist = $post->selectSliderPost();
+
+//for just added
+
+$justlist = $post->sortCreatedDate(12);
 
 ?>
 <div class="box-main">
@@ -149,7 +156,7 @@ $sliderlist = $post->selectSliderPost();
             <h3>Just Added</h3>
         </div>
         <div class="collection">
-            <?php foreach ($datalist as $key => $post) { ?>
+            <?php foreach ($justlist as $key => $post) { ?>
                 <div class="gallery">
                     <a href="post.php?id=<?php echo $post['id']; ?>">
                         <div class="img">

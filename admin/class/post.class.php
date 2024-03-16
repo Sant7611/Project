@@ -4,7 +4,7 @@ class Post extends Common
 {
     private $conn;
     public $id, $title, $type, $episodes, $status,
-        $source, $producers, $aired, $duration, $slider_key, $featured, $sypnosis, $modified_date, $genre_id,  $studio_id, $release_date, $image_url, $slider_img, $created_date;
+        $source, $producers, $aired, $duration, $slider_key, $featured, $sypnosis, $modified_date, $genre_id,  $studio_id, $release_date, $image_url, $slider_img, $created_date, $limit;
 
     public function __construct()
     {
@@ -17,6 +17,10 @@ class Post extends Common
         $sql = "insert into post (title, type, duration, aired, episodes, status, slider_key, featured, sypnosis, release_date,slider_img, image_url,created_date) 
                 values ('$this->title', '$this->type', '$this->duration', '$this->aired', '$this->episodes', '$this->status', '$this->slider_key', 
                 '$this->featured', '$this->sypnosis', '$this->release_date','$this->slider_img', '$this->image_url', '$this->created_date');";
+        if (!empty($this->limit)) {
+            $sql .= 'limit $this->limit';
+        }
+
         $this->conn->query($sql);
 
         $saveId = $this->conn->insert_id;
@@ -392,7 +396,7 @@ class Post extends Common
         }
     }
 
-    public function sortCreatedDate()
+    public function sortCreatedDate($limit)
     {
         // $sql = "select * from post;";
         // $sql = "SELECT p.*, s.source, pr.producers, st.studio, g.genre FROM post p INNER JOIN post_joins pj ON p.id = pj.post_id LEFT JOIN source s ON pj.source_id = s.id LEFT JOIN producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
@@ -423,9 +427,16 @@ class Post extends Common
     GROUP BY 
         p.id
     ORDER BY 
-        p.created_date desc;
+        p.created_date desc
     
     ";
+
+        if ($limit != 0) {
+            $sql .= ' Limit ' . $limit . ';';
+        }else{
+            $sql .= ';';
+        }
+
         $result = $this->conn->query($sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);
 
