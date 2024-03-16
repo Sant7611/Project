@@ -58,4 +58,6 @@ abstract class Common
       return $conn->real_escape_string($value);
     }
   }
+
+
 }

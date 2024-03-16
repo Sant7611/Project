@@ -1,50 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            background: rgb(234, 212, 65);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Overlay on Hover</title>
+<style>
+.img-container {
+  position: relative;
+  display: inline-block;
+}
 
-        .select {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 150px;
-            height: 50px;
-            padding: 12px;
-        }
+.img-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  opacity: 0; /* Initially invisible */
+  transition: opacity 0.3s ease; /* Smooth transition effect */
+}
 
-        .caret {
-            border-right: 8px solid transparent;
-            border-left: 8px dashed transparent;
-            border-top: 6px solid black;
-        }
+.img-container:hover .img-overlay {
+  opacity: 1; /* Show overlay on hover */
+}
 
-        .caret:hover {
-            transform: rotate(180deg);
-        }
-    </style>
+.img-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+</style>
 </head>
-
 <body>
-    <div class="dropdown">
 
-        <div class="select">
-            <label>Dropdown Menu</label>
-            <div class="caret"></div>
-        </div>
-        <ul class="menu">
-            <li>Menu 1</li>
-            <li>Menu 2</li>
-            <li>Menu 3</li>
-            <li>Menu 4</li>
-        </ul>
-    </div>
+<div class="img-container">
+  <img src="https://via.placeholder.com/300x200" alt="Sample Image">
+  <div class="img-overlay"></div>
+</div>
+
 </body>
-
 </html>

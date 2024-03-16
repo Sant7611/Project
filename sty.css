@@ -64,9 +64,9 @@ img {
 }
 
 .slide-title {
-  font-size: 93px;
+  font-size: 70px;
   font-family: "Nunito";
-  line-height: 85px;
+  line-height: 65px;
   font-weight: bold;
   padding: 15px 0;
 }
@@ -80,14 +80,14 @@ img {
   margin-bottom: 10px;
 }
 
-.aired i {
-  vertical-align: bottom;
+.center i {
+  vertical-align: middle;
 }
 
-.aired {
+/* .aired {
   display: flex;
   align-items: center;
-}
+} */
 
 .sypnosis {
   line-height: 20px;
@@ -126,8 +126,8 @@ img {
 /* Slideshow container */
 .slideshow-container {
   /* max-width: 1000px; */
-  width: 1275px;
-  height: 550px;
+  /* width: 1160px; */
+  height: 485px;
   position: relative;
   margin: auto;
   margin-top: 15px;
@@ -249,25 +249,92 @@ body {
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
-div.gallery {
+.gallery {
   /* border: 1px solid #ccc; */
   border-radius: 7px;
-  flex: 0 0 168px;
-  height: 370px;
+  flex: 0 0 160px;
+  height: 338px;
+  position: relative;
 }
 
-div.gallery:hover {
-  position: relative;
-  top: -3px;
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 7px;
+  height: 247px;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  opacity: 0; /* Initially invisible */
+  transition: opacity 0.3s ease; /* Smooth transition effect */
+}
+
+.gallery:hover a > .img > .gallery-overlay {
+  opacity: 1;
+  /* position: relative; */
+
+  /* top: -3px; */
+}
+
+.gallery:hover > .gallery-detail {
+  right: -410px;
+  display: block;
+  top: 20px;
+}
+.gallery-detail {
+  position: absolute;
+  /* display: none; */
+  font-size: 14px;
+  font-family: "Mukta";
+  padding: 11px;
+  text-align: justify;
+  z-index: 1;
+  display: none;
+  width: 400px;
+  color: #fff;
+  background: #685fab;
+}
+
+.line {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  font-weight: bold;
+  padding: 5px 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tv {
+  font-size: 14px;
+}
+
+.abstract {
+  line-height: 14px;
+  padding: 4px 0;
+}
+
+.tags {
+  background: #4b3a72;
+  border-radius: 7px;
+  padding: 1px 9px;
+  margin: 3px;
+  display: inline-block;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 15px;
+  font-family: "Nunito";
 }
 
 div.gallery img {
   border-radius: 7px;
-  width: 168px;
-  height: 255px;
+  width: 160px;
+  height: 247px;
 }
 
 div.desc {
@@ -299,4 +366,5 @@ div.desc {
   margin: 3px;
   border-radius: 7px;
   font-family: nunito;
+  font-size: 12px;
 }

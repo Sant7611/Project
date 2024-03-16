@@ -4,7 +4,7 @@ class Post extends Common
 {
     private $conn;
     public $id, $title, $type, $episodes, $status,
-        $source, $producers, $aired, $duration, $slider_key, $featured, $sypnosis,$modified_date, $genre_id,  $studio_id, $release_date, $image_url, $slider_img, $created_date;
+        $source, $producers, $aired, $duration, $slider_key, $featured, $sypnosis, $modified_date, $genre_id,  $studio_id, $release_date, $image_url, $slider_img, $created_date;
 
     public function __construct()
     {
@@ -378,7 +378,8 @@ class Post extends Common
     GROUP BY 
         p.id
     ORDER BY 
-        p.release_date desc;
+        p.release_date desc
+    LIMIT 12;
     
     ";
         $result = $this->conn->query($sql);
@@ -483,5 +484,9 @@ class Post extends Common
     {
         $sql = "select * from post where genre_id = '$this->genre_id' order by created_date desc limit 3;";
         return $this->select($sql);
+    }
+
+    public function page($pg)
+    {
     }
 }

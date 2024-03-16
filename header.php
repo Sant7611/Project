@@ -34,11 +34,10 @@ if (isset($_SESSION['uname'])) {
         <ul class="nav_list">
             <li><a href="#home">Home</a></li>
             <li><a href="#new_release">New Release</a></li>
+            <li><a href="#tv_series">Just Added</a></li>
             <li> <a href="#most_popular">Most Popular</a></li>
-            <li><a href="#tv_series">TV Series</a></li>
         </ul>
-        <?php
-        if (empty($uname)) { ?>
+        <?php if (empty($uname)) { ?>
             <div class="button">
                 <a href="signup.php">Sign in</a>
             </div>
