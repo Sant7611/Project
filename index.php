@@ -12,7 +12,6 @@ $datalist = $post->fetch();
 $sliderlist = $post->selectSliderPost();
 
 //for just added
-
 $justlist = $post->sortCreatedDate(12);
 
 ?>
@@ -28,11 +27,7 @@ $justlist = $post->sortCreatedDate(12);
             <div class="naruto"><img src="" alt=""></div>-->
 
 
-        <?php
-        // echo "<pre>";
-        // print_r($datalist);
-        // echo "</pre>";
-        ?>
+        
         <div class="slideshow-container">
             <?php foreach ($sliderlist as $key => $post) { ?>
                 <div class="mySlides fade">
@@ -325,7 +320,7 @@ $justlist = $post->sortCreatedDate(12);
         }
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].className += " active";
-        setTimeout(showSlides, 3000); // Change image every 2 seconds
+        // setTimeout(showSlides, 3000); // Change image every 2 seconds
     }
 </script>
 <?php include('footer.php') ?>

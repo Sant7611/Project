@@ -3,23 +3,38 @@
 include('header_footer/header.php');
 include('../class/post.class.php');
 // include('sideBar.php');
+$postObj = new Post();
 
 if (isset($_GET['msg'])) {
     $msg = $_GET['msg'];
 }
+
+
+if (isset($_GET['page'])) {
+    $postObj->set('page', $_GET['page']);
+    $page = $_GET['page'];
+} else {
+    $page = 1;
+}
+
+$dataList = $postObj->sortCreatedDate(0);
 
 if (isset($_SESSION['message']) && $_SESSION['message'] != "") {
     $successMessage = $_SESSION['message'];
     $_SESSION['message'] = "";
 }
 
+$totalPost = $postObj->allPost();
+$totalPages = ceil($totalPost / 5);
+
+// echo "<pre>";
+// print_r($totalPost);
+// echo "</pre>";
 // if (isset($_SESSION['msg']) && $_SESSION['msg'] != "") {
 //     $successMessage = $_SESSION['msg'];
 //     $_SESSION['msg'] = "";
 // }
-$postObj = new Post();
 
-$dataList = $postObj->sortCreatedDate();
 
 // echo "<pre><div style='background: #000; position:absolute; bottom: -800; color: #fff; z-index : 1;'>";
 // print_r($dataList);
@@ -97,8 +112,43 @@ $dataList = $postObj->sortCreatedDate();
             </tbody>
         </table>
     </div>
-    <!-- </div> -->
+    <div class="row">
+        <div class="pagination">
+            <span class="pagination-title">Page: </span>
+            <ul class="pageList">
+                <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
+                    <li><a class="pageNumbers <?php echo $i == $page ? 'active' : ''; ?>" href="listPost.php?page=<?php echo $i ?>" data-page="<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                <?php } ?>
+
+            </ul>
+        </div>
+    </div>
 </div>
+<script>
+    // pageNumber = document.querySelectorAll('.pageNumbers .pageList');
+    // pageNumber.forEach(page => {
+    //     page.addEventListener('click', (event) => {
+    //         page.forEach(item => item.classList.remove('active'))
+
+    //         this.classList.add('active')
+    //     })
+    // });
+    // Get all pagination links
+    const links = Array.from(document.querySelectorAll('.pageList .pageNumbers'));
+
+    // Add click event listener to each link
+    links.forEach(link => {
+        link.addEventListener('click', function(event) {
+            // event.preventDefault(); // Prevent default link behavior
+
+            // Remove 'active' class from all links
+            links.forEach(item => item.classList.remove('active'));
+
+            // Add 'active' class to the clicked link
+            this.classList.add('active');
+        });
+    });
+</script>
 <?php
 include('header_footer/footer.php');
 ?>

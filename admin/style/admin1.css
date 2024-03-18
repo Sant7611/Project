@@ -80,7 +80,7 @@ body {
   position: absolute;
   top: 70px;
   min-height: 100vh;
-  width: 80.7%;
+  width: -webkit-fill-available;
   padding-bottom: 30px;
   margin-left: 260px;
   background: #e7e7e7;
@@ -250,9 +250,45 @@ table tr:nth-child(even) {
 }
 
 .panel-body {
-  width: 97%;
+  width: 936px;
   overflow-x: scroll;
   margin-left: 20px;
+  position: relative;
+}
+
+.pagination {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.pagination > ul > li > a {
+  padding: 10px;
+  border: 1px solid #ccc;
+  color: #000;
+  text-decoration: none;
+}
+
+.pagination-title {
+  font-weight: bold;
+  flex-basis: 60px;
+}
+
+.pageList {
+  display: flex;
+}
+
+.pageList li {
+  margin: 3px;
+}
+
+.pageNumbers:hover {
+  background: #c1c1c1;
+}
+
+.active {
+  background: #c1c1c1;
 }
 
 tr > td {

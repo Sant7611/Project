@@ -4,7 +4,7 @@ class Post extends Common
 {
     private $conn;
     public $id, $title, $type, $episodes, $status,
-        $source, $producers, $aired, $duration, $slider_key, $featured, $sypnosis, $modified_date, $genre_id,  $studio_id, $release_date, $image_url, $slider_img, $created_date, $limit;
+        $source, $producers, $aired, $duration, $slider_key, $featured, $sypnosis, $modified_date, $genre_id,  $studio_id, $release_date, $image_url, $slider_img, $created_date, $limit, $page;
 
     public function __construct()
     {
@@ -402,6 +402,8 @@ class Post extends Common
         // $sql = "SELECT p.*, s.source, pr.producers, st.studio, g.genre FROM post p INNER JOIN post_joins pj ON p.id = pj.post_id LEFT JOIN source s ON pj.source_id = s.id LEFT JOIN producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
         // $sql = "select p.*, group_concat(s.source) as source, group_concat(s.id) as source_id, group_concat(pr.producers) as producer,group_concat(pr.id) as producer_id, group_concat(st.studio) as studio,group_concat(st.id) as studio_id, group_concat(g.genre) as genre, group_concat(g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
 
+
+
         $sql = "SELECT 
         p.*, 
         GROUP_CONCAT(DISTINCT s.source) AS source, 
@@ -431,14 +433,27 @@ class Post extends Common
     
     ";
 
+        $post_per_page = 5;
+
         if ($limit != 0) {
             $sql .= ' Limit ' . $limit . ';';
-        }else{
-            $sql .= ';';
+        } else {
+            if (isset($this->page)) {
+
+                $pg = intval($this->page);
+            } else {
+                $pg = 1;
+            }
+            // echo $pg;
+            $start_from = ($pg - 1) * $post_per_page;
+
+            $sql .= ' limit ' . $start_from . ' , ' . $post_per_page . ' ;';
         }
 
         $result = $this->conn->query($sql);
         $data = $result->fetch_all(MYSQLI_ASSOC);
+
+
 
         if ($result->num_rows > 0) {
             return $data;
@@ -462,17 +477,17 @@ class Post extends Common
         }
     }
 
-    public function selectPostById()
-    {
-        $sql = "select * from post where id = '$this->id';";
-        $result = $this->conn->query($sql);
-        if ($result->num_rows == 1) {
-            $var = $result->fetch_all(MYSQLI_ASSOC);
-            return $var;
-        } else {
-            return [];
-        }
-    }
+    // public function selectPostById()
+    // {
+    //     $sql = "select * from post where id = '$this->id';";
+    //     $result = $this->conn->query($sql);
+    //     if ($result->num_rows == 1) {
+    //         $var = $result->fetch_all(MYSQLI_ASSOC);
+    //         return $var;
+    //     } else {
+    //         return [];
+    //     }
+    // }
     public function selectFeaturedPost()
     {
         $sql = "select * from post where featured = 1 order by created_date desc limit 3;";
@@ -493,11 +508,16 @@ class Post extends Common
 
     public function selectPostByGenre()
     {
-        $sql = "select * from post where genre_id = '$this->genre_id' order by created_date desc limit 3;";
+        $sql = "select p.*, group_concat(distinct s.source) as source, group_concat(distinct g.genre) as genre , group_concat(distinct pr.producer) as producer, group_concat(distinct s.studio) as studio from post p left join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join genre g on pj.id = genre.id left join producer pr on pj.producer_id = producer.id left join studio s on pj.studio_id = studio.id where genre_id = $this->genre_id;";
         return $this->select($sql);
     }
-
-    public function page($pg)
+    public function allPost()
     {
+      $conn = mysqli_connect('localhost', 'root', '', 'anidb');
+      $sql = 'SELECT * FROM post';
+  
+      $res = $conn->query($sql);
+      return $res->num_rows;
     }
+    
 }
