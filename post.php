@@ -1,28 +1,45 @@
 <?php
 include_once("admin/class/post.class.php");
-include_once("admin/class/genre.class.php");
-include_once("admin/class/studio.class.php");
-include_once("admin/class/user.class.php");
+
+include('header.php');
+
 
 $post = new Post();
-$genre = new Genre();
-$studio = new Studio();
-$user = new User();
 
-$activePost = $post->selectActivePost();
-$sliderPost = $post->selectSliderPost();
-$featuredPost = $post->selectFeaturedPost();
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $post->set('id', $_GET['id']);
+}
+
+$selectedPost = $post->getById();
+
+// echo "<pre>";
+// print_r($selectedPost);
+// echo "</pre>";
+
+
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="admin/style/style.css">
-    <title>Otaku Oasis</title>
-</head>
-<body>
-    
-</body>
-</html>
+<div class="overview">
+    <div class="background-img overlay">
+        <img src="admin/images/sliderImage/<?php echo $selectedPost->slider_img; ?>" width="100%" alt="" srcset="">
+        <div class="img-title">
+            <h1><?php echo $selectedPost->title; ?></h1>
+            <h6 class="alt-title">Kimetsu na moto</h6>
+        </div>
+    </div>
+    <div class="box-main">
+        <div class="post-img">
+            <img src="admin/images/<?php echo $selectedPost->image_url; ?>" width="100px" alt="" srcset="">
+        </div>
+        <div class="post-desc">
+            <h2></h2>
+        </div>
+
+    </div>
+</div>
+
+
+<?php
+include('footer.php');
+?>

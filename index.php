@@ -165,7 +165,7 @@ $justlist = $post->sortCreatedDate(12);
                     <div class="gallery-detail">
                         <h2><?php echo $post['title']; ?></h2>
                         <div class="line">
-                            <span class="center"><i class="material-icons-outlined tv">tv</i> TV(<?php echo $post['episodes']; ?>eps)</span>
+                            <span class="center"><i class="material-icons-outlined tv">tv</i> (<?php echo $post['type']. '(' ;echo $post['episodes']; ?>eps)</span>
                             <span><?php $producer = explode(',', $post['producer']);
                                     echo $producer[0]; ?></span>
                             <span><?php echo $post['release_date']; ?></span>
@@ -301,6 +301,8 @@ $justlist = $post->sortCreatedDate(12);
 </div>
 
 <script>
+
+    //################## for slideshow ......
     let slideIndex = 0;
     showSlides();
 

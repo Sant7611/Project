@@ -125,25 +125,20 @@ $totalPages = ceil($totalPost / 5);
     </div>
 </div>
 <script>
-    // pageNumber = document.querySelectorAll('.pageNumbers .pageList');
-    // pageNumber.forEach(page => {
-    //     page.addEventListener('click', (event) => {
-    //         page.forEach(item => item.classList.remove('active'))
-
-    //         this.classList.add('active')
-    //     })
-    // });
+    //##################for ################## Pagination.....
     // Get all pagination links
     const links = Array.from(document.querySelectorAll('.pageList .pageNumbers'));
-
+    // console.log(links);
     // Add click event listener to each link
     links.forEach(link => {
         link.addEventListener('click', function(event) {
             // event.preventDefault(); // Prevent default link behavior
-
+            // console.log(links);
+            // console.log(link);
             // Remove 'active' class from all links
             links.forEach(item => item.classList.remove('active'));
 
+            // alert(link);
             // Add 'active' class to the clicked link
             this.classList.add('active');
         });

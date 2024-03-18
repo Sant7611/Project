@@ -4,9 +4,11 @@
   /* font-family: sans-serif; */
   box-sizing: border-box;
 }
+
 html {
   scroll-behavior: smooth;
 }
+
 body {
   background: #1a224b;
 }
@@ -367,4 +369,39 @@ div.desc {
   border-radius: 7px;
   font-family: nunito;
   font-size: 12px;
+}
+
+/* ########################## post.php file style############################ */
+
+.overview {
+  position: relative;
+}
+
+.background-img {
+  height: 145px;
+  overflow: hidden;
+  position: relative;
+}
+
+.background-img > img {
+  opacity: 0.4;
+}
+
+.background-img .img-title {
+  position: absolute;
+  top: 27px;
+  left: 355px;
+  color: #fff;
+  font-family: "Mukta";
+  font-size: 25px;
+}
+
+.post-img {
+  position: absolute;
+  top: 105px;
+  left: 105px;
+}
+
+.post-img > img {
+  width: 170px;
 }
