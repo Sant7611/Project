@@ -11,13 +11,13 @@ $post = new Post();
 
 $post->set('id', $id);
 $data = $post->getById();
-echo "<pre>";
-// print_r($data);
-print_r($_POST);
-print_r($_POST['image']);
-print_r($_POST['slider_img']);
-print_r($_FILES);
-echo "</pre>";
+// echo "<pre>";
+// // print_r($data);
+// print_r($_POST);
+// print_r($_POST['image']);
+// print_r($_POST['slider_img']);
+// print_r($_FILES);
+// echo "</pre>";
 
 $studioid = explode(',', $data->studio_id);
 $genreid = explode(',', $data->genre_id);

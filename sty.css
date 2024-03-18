@@ -83,6 +83,10 @@ img {
 }
 
 .center i {
+  vertical-align: bottom;
+}
+
+.middle i {
   vertical-align: middle;
 }
 
@@ -390,10 +394,21 @@ div.desc {
 .background-img .img-title {
   position: absolute;
   top: 27px;
-  left: 355px;
+  left: 290px;
+  line-height: 55px;
   color: #fff;
   font-family: "Mukta";
-  font-size: 25px;
+  font-size: 20px;
+}
+
+.alt-title {
+  display: inline;
+  color: #b9b9b9;
+}
+
+.img-title > i {
+  font-size: 15px;
+  margin-right: 3px;
 }
 
 .post-img {
@@ -404,4 +419,40 @@ div.desc {
 
 .post-img > img {
   width: 170px;
+}
+
+.post-desc {
+  background: #17191f;
+  color: #eee;
+  padding-left: 300px;
+}
+
+/* Double body just try for post.php */
+body {
+  background: #0e121f;
+}
+
+.post-head {
+  display: flex;
+  justify-content: space-between;
+  width: 800px;
+  padding: 12px 0;
+}
+.post-head > span:last-child {
+  border: none;
+}
+
+.post-head span {
+  border-right: 1px solid #eee;
+  padding: 0px 40px 0 0;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "Nunito";
+}
+
+.post-syp {
+  width: 500px;
+  text-align: left;
+  font-family: "Mukta";
+  margin-top: 25px;
 }
