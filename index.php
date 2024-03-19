@@ -27,7 +27,7 @@ $justlist = $post->sortCreatedDate(12);
             <div class="naruto"><img src="" alt=""></div>-->
 
 
-        
+
         <div class="slideshow-container">
             <?php foreach ($sliderlist as $key => $post) { ?>
                 <div class="mySlides fade">
@@ -132,7 +132,7 @@ $justlist = $post->sortCreatedDate(12);
                             <?php $sypnosis = substr($post['sypnosis'], 0, 450);
                             echo $sypnosis; ?>....
                         </div>
-                        <div>
+                        <div class="tags-container">
                             <span class="title">Tags: </span>
                             <?php $genres = explode(',', $post['genre']);
                             foreach ($genres as $key => $genre) { ?>
@@ -165,7 +165,8 @@ $justlist = $post->sortCreatedDate(12);
                     <div class="gallery-detail">
                         <h2><?php echo $post['title']; ?></h2>
                         <div class="line">
-                            <span class="middle"><i class="material-icons-outlined tv">tv</i> (<?php echo $post['type']. '(' ;echo $post['episodes']; ?>eps)</span>
+                            <span class="middle"><i class="material-icons-outlined tv">tv</i> (<?php echo $post['type'] . '(';
+                                                                                                echo $post['episodes']; ?>eps)</span>
                             <span><?php $producer = explode(',', $post['producer']);
                                     echo $producer[0]; ?></span>
                             <span><?php echo $post['release_date']; ?></span>
@@ -301,7 +302,6 @@ $justlist = $post->sortCreatedDate(12);
 </div>
 
 <script>
-
     //################## for slideshow ......
     let slideIndex = 0;
     showSlides();

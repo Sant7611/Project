@@ -13,10 +13,10 @@ if (isset($_GET['id'])) {
 
 $selectedPost = $post->getById();
 
-// echo "<pre>";
-// print_r($selectedPost);
-// echo "</pre>";
 $studioList = explode(',', $selectedPost->studio);
+// echo "<pre>";
+// print_r($studioList);
+// echo "</pre>";
 
 ?>
 
@@ -45,7 +45,21 @@ $studioList = explode(',', $selectedPost->studio);
                 <span><?php echo 'Rating'; ?></span>
             </div>
             <div class="post-syp">
-                <p><?php echo $selectedPost->sypnosis; ?></p>
+                <?php echo substr($selectedPost->sypnosis, 0, 2000); ?>
+                <div class="tags-container">
+                    <span class="title">Tags: </span>
+                    <?php $genres = explode(',', $selectedPost->genre);
+                    for ($i = 0; $i < count($genres); $i++) { ?>
+                        <span class="tags"><?php echo $genres[$i]; ?></span>
+
+                    <?php } ?>
+                </div>
+            </div>
+            <div class="recommend">
+                <h2>You might also like</h2>
+                <div class="recommendList">
+                    
+                </div>
             </div>
         </div>
 

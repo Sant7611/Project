@@ -329,6 +329,11 @@ body {
   padding: 1px 9px;
   margin: 3px;
   display: inline-block;
+  font-family: "Mukta";
+}
+
+.tags-container {
+  margin-top: 4px;
 }
 
 .title {
@@ -424,7 +429,7 @@ div.desc {
 .post-desc {
   background: #17191f;
   color: #eee;
-  padding-left: 300px;
+  /* padding-left: 300px; */
 }
 
 /* Double body just try for post.php */
@@ -434,9 +439,9 @@ body {
 
 .post-head {
   display: flex;
-  justify-content: space-between;
-  width: 800px;
-  padding: 12px 0;
+  justify-content: space-evenly;
+  width: 100%;
+  padding: 25px 0 0 300px;
 }
 .post-head > span:last-child {
   border: none;
@@ -451,8 +456,15 @@ body {
 }
 
 .post-syp {
-  width: 500px;
+  width: 800px;
+  padding-left: 300px;
   text-align: left;
   font-family: "Mukta";
   margin-top: 25px;
+}
+
+.recommend {
+  height: 200px;
+  padding: 25px 0 0 100px;
+  font-family: 'mukta';
 }
