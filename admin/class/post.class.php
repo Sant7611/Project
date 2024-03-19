@@ -477,6 +477,14 @@ class Post extends Common
         }
     }
 
+    public function recommendation()
+    {
+        $sql = "select p.*, group_concat(distinct s.source) as source, group_concat(distinct s.id) as source_id, group_concat(distinct pr.producers) as producer,group_concat(distinct pr.id) as producer_id, group_concat(distinct st.studio) as studio,group_concat(distinct st.id) as studio_id, group_concat(distinct g.genre) as genre, group_concat(distinct g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id where post_id != $this->id and genre_id in (select genre_id from post_joins where post_id = $this->id ;";
+
+        $res = 
+
+    }
+
     // public function selectPostById()
     // {
     //     $sql = "select * from post where id = '$this->id';";
@@ -513,11 +521,10 @@ class Post extends Common
     }
     public function allPost()
     {
-      $conn = mysqli_connect('localhost', 'root', '', 'anidb');
-      $sql = 'SELECT * FROM post';
-  
-      $res = $conn->query($sql);
-      return $res->num_rows;
+        $conn = mysqli_connect('localhost', 'root', '', 'anidb');
+        $sql = 'SELECT * FROM post';
+
+        $res = $conn->query($sql);
+        return $res->num_rows;
     }
-    
 }

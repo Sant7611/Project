@@ -12,10 +12,19 @@ if (isset($_GET['id'])) {
 }
 
 $selectedPost = $post->getById();
+$datalist = $post->sortCreatedDate(6);
+
+
 
 $studioList = explode(',', $selectedPost->studio);
 // echo "<pre>";
-// print_r($studioList);
+
+for ($i = 0; $i < count($datalist); $i++)
+    if ($selectedPost->id == $datalist[$i]['id']) {
+        $datalist = $post->sortCreatedDate(7);
+    }
+// echo $selectedPost->id;
+// print_r($datalist);
 // echo "</pre>";
 
 ?>
@@ -55,14 +64,54 @@ $studioList = explode(',', $selectedPost->studio);
                     <?php } ?>
                 </div>
             </div>
-            <div class="recommend">
-                <h2>You might also like</h2>
-                <div class="recommendList">
-                    
-                </div>
-            </div>
         </div>
 
+    </div>
+</div>
+<div id="recommend " class="section">
+    <div class="head-title">
+        <h3>You might also like</h3>
+    </div>
+    <div class="collection">
+        <?php foreach ($datalist as $key => $post) {
+            if ($post['id'] == $selectedPost->id) {
+
+                continue;
+            }
+        ?>
+            <div class="gallery">
+                <a href="post.php?id=<?php echo $post['id']; ?>">
+                    <div class="img">
+                        <img src="admin/images/<?php echo $post['image_url'] ?>" alt="">
+                        <div class="gallery-overlay"></div>
+                        <div class="desc">
+                        </div>
+                        <h4 class="card-title"><?php echo $post['title']; ?></h4>
+                    </div>
+                </a>
+                <div class="gallery-detail">
+                    <h2><?php echo $post['title']; ?></h2>
+                    <div class="line">
+                        <span class="middle"><i class="material-icons-outlined tv">tv</i> TV(<?php echo $post['episodes']; ?>eps)</span>
+                        <span><?php $studio = explode(',', $post['studio']);
+                                echo $studio[0]; ?></span>
+                        <span><?php echo $post['release_date']; ?></span>
+                        <span>Rating</span>
+                    </div>
+                    <div class="abstract">
+                        <?php $sypnosis = substr($post['sypnosis'], 0, 450);
+                        echo $sypnosis; ?>....
+                    </div>
+                    <div class="tags-container">
+                        <span class="title">Tags: </span>
+                        <?php $genres = explode(',', $post['genre']);
+                        foreach ($genres as $key => $genre) { ?>
+                            <span class="tags"><?php echo $genre; ?></span>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
     </div>
 </div>
 

@@ -114,8 +114,8 @@ $justlist = $post->sortCreatedDate(12);
                         <div class="img">
                             <img src="admin/images/<?php echo $post['image_url'] ?>" alt="">
                             <div class="gallery-overlay"></div>
-                        </div>
-                        <div class="desc">
+                       <div class="desc">
+                         </div>
                             <h4 class="card-title"><?php echo $post['title']; ?></h4>
                         </div>
                     </a>
@@ -137,7 +137,6 @@ $justlist = $post->sortCreatedDate(12);
                             <?php $genres = explode(',', $post['genre']);
                             foreach ($genres as $key => $genre) { ?>
                                 <span class="tags"><?php echo $genre; ?></span>
-
                             <?php } ?>
                         </div>
                     </div>

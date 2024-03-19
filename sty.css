@@ -15,6 +15,7 @@ body {
 
 .box-main {
   padding: 0 40px;
+  height: 100%;
 }
 
 /* section  */
@@ -262,6 +263,7 @@ body {
   /* border: 1px solid #ccc; */
   border-radius: 7px;
   flex: 0 0 160px;
+  text-align: center;
   height: 338px;
   position: relative;
 }
@@ -383,6 +385,7 @@ div.desc {
 /* ########################## post.php file style############################ */
 
 .overview {
+  min-height: 640px;
   position: relative;
 }
 
@@ -418,16 +421,17 @@ div.desc {
 
 .post-img {
   position: absolute;
-  top: 105px;
-  left: 105px;
+  top: 170px;
+  left: 65px;
 }
 
 .post-img > img {
-  width: 170px;
+  width: 330px;
+  height: 472px;
 }
 
 .post-desc {
-  background: #17191f;
+  /* background: #17191f; */
   color: #eee;
   /* padding-left: 300px; */
 }
@@ -439,9 +443,9 @@ body {
 
 .post-head {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   width: 100%;
-  padding: 25px 0 0 300px;
+  padding: 25px 0 0 390px;
 }
 .post-head > span:last-child {
   border: none;
@@ -450,14 +454,15 @@ body {
 .post-head span {
   border-right: 1px solid #eee;
   padding: 0px 40px 0 0;
+  width: 15%;
   font-size: 16px;
   font-weight: 600;
   font-family: "Nunito";
 }
 
 .post-syp {
-  width: 800px;
-  padding-left: 300px;
+  width: 95%;
+  padding-left: 390px;
   text-align: left;
   font-family: "Mukta";
   margin-top: 25px;
@@ -466,5 +471,5 @@ body {
 .recommend {
   height: 200px;
   padding: 25px 0 0 100px;
-  font-family: 'mukta';
+  font-family: "mukta";
 }
