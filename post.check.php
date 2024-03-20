@@ -17,14 +17,51 @@ $datalist = $post->recommendation(6);
 
 
 // echo "<pre>";
-// print_r($postResults);
+// print_r($selectedPost);
 // echo "</pre>";
 
 
 
-$studioList = explode(',', $selectedPost->studio);
+// $studioList = explode(',', $selectedPost->studio);
 
 ?>
+<style>
+    .post-head {
+        /* display: flex; */
+        /* justify-content: space-between; */
+        width: 100%;
+        padding: 25px 0 10px 0px;
+    }
+
+    .post-head span {
+        /* border-right: 1px solid #eee; */
+        padding: 0px 40px 5px 0;
+        font-size: 14px;
+        font-weight: 500;
+        display: inline-block;
+        font-family: "Nunito";
+    }
+
+    .post-syp {
+        width: 95%;
+        padding-left: 390px;
+        text-align: left;
+        /* margin-top: 5px; */
+        font-family: "Mukta";
+        font-weight: 300;
+        margin-top: 10px;
+    }
+
+    .post-syp h3 {
+        padding-top: 5px;
+        border-top: 1px solid #eee;
+    }
+
+    .tags-container {
+        margin-top: 4px;
+        padding-bottom: 15px;
+    }
+</style>
 
 <div class="overview">
     <div class="background-img overlay">
@@ -40,17 +77,32 @@ $studioList = explode(',', $selectedPost->studio);
             <img src="admin/images/<?php echo $selectedPost->image_url; ?>" width="100px" alt="" srcset="">
         </div>
         <div class="post-desc">
-            <div class="post-head">
-                <span><?php echo $selectedPost->episodes . 'eps'; ?></span>
-                <span class="center"><?php if ($selectedPost->type == 'TV Series') {
-                                            echo '<i class=" material-icons-outlined ">tv</i> ';
-                                        }
-                                        echo $selectedPost->type; ?></span>
-                <span class="center"><i class="material-icons-outlined ">calendar_month</i> <?php echo substr($selectedPost->aired, 0, 4) ?></span>
-                <span><?php echo $studioList[0]; ?></span>
-                <span><?php echo 'Rating'; ?></span>
-            </div>
             <div class="post-syp">
+                <div class="post-head">
+
+                    <div>
+                        <span>Episodes: </span> <span><?php echo $selectedPost->episodes; ?></span>
+                    </div>
+                    <div>
+                        <span>Type: </span> <span class="center"><?php if ($selectedPost->type == 'TV Series') {
+                                                                        // echo '<i class=" material-icons-outlined ">tv</i> ';
+                                                                    }
+                                                                    echo $selectedPost->type; ?></span>
+                    </div>
+                    <div>
+                        <span>Duration :</span>
+                        <span><?php echo $selectedPost->duration; ?></span>
+                    </div>
+                    <div>
+                        <span>Released:</span>
+                        <span class="center"><?php echo substr($selectedPost->aired, 0, 4) ?></span>
+                    </div>
+                    <div>
+
+                        <span>Rating:</span><span><?php echo 'Rating'; ?></span>
+                    </div>
+                </div>
+                <h3>Description</h3>
                 <?php echo substr($selectedPost->sypnosis, 0, 2000); ?>
                 <div class="tags-container">
                     <span class="title">Tags: </span>
@@ -59,6 +111,25 @@ $studioList = explode(',', $selectedPost->studio);
                         <span class="tags"><?php echo $genres[$i]; ?></span>
 
                     <?php } ?>
+                </div>
+
+                <div class="post-head">
+                    <h3>More Details</h3>
+                    <div>
+                        <span>Origination: </span><span><?php echo $selectedPost->source ?></span>
+                    </div>
+                    <div>
+                        <span>Studio :</span><span><?php echo $selectedPost->studio; ?></span>
+                    </div>
+                    <div>
+                        <span>Producer :</span>
+                        <span><?php echo $selectedPost->producer; ?></span>
+                    </div>
+                    <div>
+                        <span>Aired :</span>
+                        <span><?php echo substr($selectedPost->aired, 0, 4); ?></span>
+                    </div>
+
                 </div>
             </div>
         </div>

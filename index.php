@@ -1,6 +1,5 @@
 <?php
-include('header.php');
-include_once('admin/class/post.class.php');
+include('user/header-footer/header.php');
 include_once('admin/class/post.class.php');
 
 $post = new Post();
@@ -114,8 +113,8 @@ $justlist = $post->sortCreatedDate(12);
                         <div class="img">
                             <img src="admin/images/<?php echo $post['image_url'] ?>" alt="">
                             <div class="gallery-overlay"></div>
-                       <div class="desc">
-                         </div>
+                            <div class="desc">
+                            </div>
                             <h4 class="card-title"><?php echo $post['title']; ?></h4>
                         </div>
                     </a>
@@ -321,7 +320,7 @@ $justlist = $post->sortCreatedDate(12);
         }
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].className += " active";
-        // setTimeout(showSlides, 3000); // Change image every 2 seconds
+        setTimeout(showSlides, 3000); // Change image every 2 seconds
     }
 </script>
 <?php include('footer.php') ?>

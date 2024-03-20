@@ -22,8 +22,7 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Mukta:wght@200;300;400;500;600;700;800&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
 
     <!-- custom css  -->
-
-    <link rel="stylesheet" href="sty.css">
+    <link rel="stylesheet" type="text/css" href="user/style/sty.css">
 </head>
 
 <body>
@@ -44,7 +43,9 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
         <?php  } else { ?>
             <div class="userLogo">
                 <img src="admin/images/65f186cc25edeattackontitans.jpg" alt="">
+
             </div>
+
         <?php } ?>
 
     </nav>

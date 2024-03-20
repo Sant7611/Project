@@ -58,6 +58,7 @@ if (isset($_POST['submit'])) {
     $post->set('featured', $_POST['featured']);
     $post->set('studio_id', $_POST['studio_id']);
     $post->set('genre_id', $_POST['genre_id']);
+    $post->set('duration', $_POST['duration']);
     $post->set('producers', $_POST['producer_id']);
     $post->set('source', $_POST['source_id']);
     $post->set('release_date', $_POST['release_date']);
@@ -228,6 +229,10 @@ if (isset($_POST['submit'])) {
                 <div class="form-group">
                     <label class="label" for="type">Type</label>
                     <input type="text" name="type" id="type" value="<?php echo $data->type ?>">
+                </div>
+                <div class="form-group">
+                    <label class="label" for="duration">Duration</label>
+                    <input type="text" name="duration" id="duration" value="<?php echo $data->duration ?>">
                 </div>
                 <div class="form-group">
                     <label class="label" for="sypnosis">Sypnosis</label>

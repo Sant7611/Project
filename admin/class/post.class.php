@@ -529,12 +529,13 @@ class Post extends Common
         $post_ids = [];
         for ($i = 0; $i < count($postList); $i++) {
             if ($postList[$i]['post_id'] == $this->id) {
+                $limit += 1;
                 continue;
             }
             if ($limit != 0) {
-                if ($i == ($limit + 1)) {
+                if ($i == ($limit)) {
                     break;
-                }else{
+                } else {
                     $post_ids[] = $postList[$i]['post_id'];
                 }
             } else {

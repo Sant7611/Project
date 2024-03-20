@@ -440,7 +440,7 @@ div.desc {
 body {
   background: #0e121f;
 }
-
+/* 
 .post-head {
   display: flex;
   justify-content: space-between;
@@ -458,7 +458,7 @@ body {
   font-size: 16px;
   font-weight: 600;
   font-family: "Nunito";
-}
+} */
 
 .post-syp {
   width: 95%;
@@ -474,8 +474,15 @@ body {
   font-family: "mukta";
 }
 
-
 /* ####################################user Sign in ############################ */
-.userLogo{
-  
+.userLogo {
+  height: 45px;
+  overflow: hidden;
+  border-radius: 100%;
+  width: 45px;
+}
+
+.userLogo img {
+  height: 100%;
+  width: 100%;
 }
