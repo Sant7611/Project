@@ -462,10 +462,10 @@ class Post extends Common
 
     public function getById()
     {
-        // $sql = "select p.*, group_concat(s.source) as source, group_concat(pr.producers) as producer, group_concat(st.studio) as studio, group_concat(g.genre) as genre from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id
-        // where p.id = '$this->id';";
+        // $sql = "select p.*, group_concat(s.source) as source, group_concat(pr.producers) as producer, group_concat(st.studio) as studio, group_concat(g.genre) as genre from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id where p.id = '$this->id';";
 
-        $sql = "select p.*, group_concat(distinct s.source) as source, group_concat(distinct s.id) as source_id, group_concat(distinct pr.producers) as producer,group_concat(distinct pr.id) as producer_id, group_concat(distinct st.studio) as studio,group_concat(distinct st.id) as studio_id, group_concat(distinct g.genre) as genre, group_concat(distinct g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id where post_id = $this->id;";
+        $sql = "select p.*, group_concat(distinct s.source) as source, group_concat(distinct s.id) as source_id, group_concat(distinct pr.producers) as producer,group_concat(distinct pr.id) as producer_id, group_concat(distinct st.studio) as studio,group_concat(distinct st.id) as studio_id, group_concat(distinct g.genre) as genre, group_concat(distinct g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id where post_id = '$this->id';";
+
         $var = $this->conn->query($sql);
         if ($this->conn->affected_rows == 1) {
             $result = $var->fetch_object();
@@ -475,27 +475,110 @@ class Post extends Common
         }
     }
 
+    // public function recommendation($limit)
+    // {
+
+    //     // select genre of this id
+    //     $sql = "select group_concat(genre_id) as genres from post_joins where post_id = '$this->id';";
+    //     $genres = $this->conn->query($sql);
+    //     $genreList = explode(',', $genres);
+
+    //     // select post based on the available genres
+    //     foreach ($genreList as $genre) {
+    //         $sql = "select p.*, group_concat(distinct s.source) as source, group_concat(distinct s.id) as source_id, group_concat(distinct pr.producers) as producer,group_concat(distinct pr.id) as producer_id, group_concat(distinct st.studio) as studio,group_concat(distinct st.id) as studio_id, group_concat(distinct g.genre) as genre, group_concat(distinct g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id where post_id != $this->id and genre_id  = '$genre') ";
+    //         $res = $this->conn->query($sql);
+    //         $res->fetch_all(MYSQLI_ASSOC);
+    //     }
+    //     if ($limit != 0) {
+    //         $sql .= " limit $limit;";
+    //     } else {
+    //         $sql .= ';';
+    //     }
+
+
+    //     $res = $this->conn->query($sql);
+    //     if ($res->num_rows > 0) {
+    //         return $res->fetch_assoc();
+    //     } else {
+    //         return [];
+    //     }
+    // }
+
+
     public function recommendation($limit)
     {
 
-        // "select * from posts where genre_id in (". implode(',', $genre_ids).") and post_id != $currentPostid order by rand();";
+        $conn = mysqli_connect('localhost', 'root', '', 'anidb');
+        $sql = "SELECT GROUP_CONCAT(genre_id) AS genres FROM post_joins WHERE post_id = '{$this->id}'";
+        $genresResult = $conn->query($sql);
+        $genresRow = $genresResult->fetch_assoc();
+        $genreList = explode(',', $genresRow['genres']);
 
-        $sql = "select p.*, group_concat(distinct s.source) as source, group_concat(distinct s.id) as source_id, group_concat(distinct pr.producers) as producer,group_concat(distinct pr.id) as producer_id, group_concat(distinct st.studio) as studio,group_concat(distinct st.id) as studio_id, group_concat(distinct g.genre) as genre, group_concat(distinct g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id where post_id != $this->id and genre_id in (select genre_id from post_joins where post_id = $this->id) ";
+        $sql = "(";
+        foreach ($genreList as $index => $genreId) {
+            $sql .= "SELECT post_id FROM post_joins WHERE genre_id = '$genreId'";
+            if ($index < count($genreList) - 1) {
+                $sql .= " UNION ";
+            }
+        }
+        $sql .= ");";
 
-        if ($limit != 0) {
-            $sql .= " limit $limit;";
-        } else {
-            $sql .= ';';
+        $res = $conn->query($sql);
+        $postList = $res->fetch_all(MYSQLI_ASSOC);
+
+        $post_ids = [];
+        for ($i = 0; $i < count($postList); $i++) {
+            if ($postList[$i]['post_id'] == $this->id) {
+                continue;
+            }
+            if ($limit != 0) {
+                if ($i == ($limit + 1)) {
+                    break;
+                }else{
+                    $post_ids[] = $postList[$i]['post_id'];
+                }
+            } else {
+                $post_ids[] = $postList[$i]['post_id'];
+            }
         }
 
+        foreach ($post_ids as $key => $postId) {
+            // echo $postId;
+            // Prepare the SQL query for each post ID
+            $sql = "SELECT p.*, 
+                   GROUP_CONCAT(DISTINCT s.source) AS source, 
+                   GROUP_CONCAT(DISTINCT s.id) AS source_id, 
+                   GROUP_CONCAT(DISTINCT pr.producers) AS producer, 
+                   GROUP_CONCAT(DISTINCT pr.id) AS producer_id, 
+                   GROUP_CONCAT(DISTINCT st.studio) AS studio, 
+                   GROUP_CONCAT(DISTINCT st.id) AS studio_id, 
+                   GROUP_CONCAT(DISTINCT g.genre) AS genre, 
+                   GROUP_CONCAT(DISTINCT g.id) AS genre_id 
+            FROM post p 
+            INNER JOIN post_joins pj ON p.id = pj.post_id 
+            LEFT JOIN source s ON pj.source_id = s.id 
+            LEFT JOIN producers pr ON pj.producer_id = pr.id 
+            LEFT JOIN studio st ON pj.studio_id = st.id 
+            LEFT JOIN genre g ON pj.genre_id = g.id 
+            WHERE post_id = '$postId'";
 
-        $res = $this->conn->query($sql);
-        if ($res->num_rows > 0) {
-            return $res->fetch_assoc();
-        } else {
-            return [];
+            // Execute the query
+            $result = $conn->query($sql);
+
+            // Check if query executed successfully
+            if ($result === FALSE) {
+                echo "Error: ";
+            } else {
+                // Fetch the results for the current post ID
+                $postResults[$postId] = array();
+                while ($row = $result->fetch_assoc()) {
+                    $postResults[$postId] = $row;
+                }
+            }
         }
+        return $postResults;
     }
+
 
     // public function selectPostById()
     // {

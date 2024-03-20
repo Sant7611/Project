@@ -26,8 +26,8 @@ class User
             $data = $res->fetch_object();
             session_start();
             $_SESSION['id'] = $data->id;
-            $_SESSION['username'] = $data->username;
-            setcookie('username', $data->username, time() + 24 * 60 * 60, '/');
+            $_SESSION['uname'] = $data->username;
+            setcookie('uname', $data->username, time() + 24 * 60 * 60, '/');
             header('location:index.php');
             // return $data;
         } else {

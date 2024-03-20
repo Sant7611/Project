@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['uname'])) {
+if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
     $uname = $_SESSION['uname'];
 }
 ?>
@@ -41,6 +41,10 @@ if (isset($_SESSION['uname'])) {
             <div class="button">
                 <a href="signup.php">Sign in</a>
             </div>
-        <?php  } ?>
+        <?php  } else { ?>
+            <div class="userLogo">
+                <img src="admin/images/65f186cc25edeattackontitans.jpg" alt="">
+            </div>
+        <?php } ?>
 
     </nav>
