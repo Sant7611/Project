@@ -133,17 +133,21 @@ class Post extends Common
 
     public function updateSource()
     {
-        $sql = "select group_concat(source_id) from post_joins where post_id = '$this->id';";
-        $currentSource = $this->select($sql);
+        $sql = "select group_concat(distinct source_id) as source from post_joins where post_id = '$this->id';";
+        $res = $this->conn->query($sql);
+        $currentSource = $res->fetch_all(MYSQLI_ASSOC);
 
-        $concat = $currentSource['group_concat(source_id)'];
+
+        // print_r($currentSource);
+
+        $concat = $currentSource[0]['source'];
         $currentSourceId = explode(',', $concat);
 
         $sourceToDelete = array_diff($currentSourceId, $this->source);
         $sourceToAdd = array_diff($this->source, $currentSourceId);
 
         // echo "<pre>";
-        // echo gettype($currentSourceId);
+        // echo gettype($currentSource);
         // echo "this source";
         // print_r($this->source);
         // echo "current Source ";
@@ -152,7 +156,7 @@ class Post extends Common
         // print_r($sourceToDelete);
         // echo "add Source ";
         // print_r($sourceToAdd);
-        // echo "<pre>";
+        // echo "</pre>";
 
         if (!empty($sourceToDelete)) {
             foreach ($sourceToDelete as $deleteSource) {
@@ -191,10 +195,10 @@ class Post extends Common
     }
     public function updateStudio()
     {
-        $sql = "select group_concat(studio_id) from post_joins where post_id = '$this->id';";
+        $sql = "select group_concat(studio_id) as studio from post_joins where post_id = '$this->id';";
         $currentStudio = $this->select($sql);
 
-        $concat = $currentStudio['group_concat(studio_id)'];
+        $concat = $currentStudio[0]['studio'];
         $currentStudioId = explode(',', $concat);
         $studioToDelete = array_diff($currentStudioId, $this->studio_id);
         $studioToAdd = array_diff($this->studio_id, $currentStudioId);
@@ -243,67 +247,61 @@ class Post extends Common
     }
     public function updateGenre()
     {
-        $sql = "select group_concat(genre_id) from post_joins where post_id = '$this->id';";
-        $currentGenre = $this->select($sql);
-        // $dbGenre = explode(',', $currentGenre);
-        $concat = $currentGenre['group_concat(genre_id)'];
-        $currentGenreId = explode(',', $concat);
-        $genreToDelete = $this->customArrayDiff($currentGenreId, $this->genre_id);
-        $genreToAdd = $this->customArrayDiff($this->genre_id, $currentGenreId);
+        // Retrieve current genres associated with the post
+        $sql = "SELECT GROUP_CONCAT(genre_id) AS genres FROM post_joins WHERE post_id = '$this->id';";
+        $currentGenres = $this->select($sql);
 
-        // echo " this genre <br>";
-        // print_r($this->genre_id);
-        // echo 'c genre ';
-        // print_r($currentGenreId);
-        // echo "del ";
+        // Extract current genre IDs
+        $currentGenreIds = explode(',', $currentGenres[0]['genres']);
 
-        // print_r($genreToDelete);
-        // echo "add";
+        // Find genres to delete and add
+        $genresToDelete = $this->customArrayDiff($currentGenreIds, $this->genre_id);
+        $genresToAdd = $this->customArrayDiff($this->genre_id, $currentGenreIds);
 
-        // print_r($genreToAdd);
-        // echo "<br>";
-        if (!empty($genreToDelete)) {
-            foreach ($genreToDelete as $deleteGenre) {
-                $sql = "delete from post_joins where post_id = '$this->id' and genre_id = '$deleteGenre';";
-                // echo " genreDel ";
-                // echo $deleteGenre;
+        // Output for debugging
+        echo "<pre>";
+        print_r($currentGenres);
+        echo "Current genres<br>";
+        print_r($this->genre_id);
+        echo "New genres<br>";
+        print_r($currentGenreIds);
+        echo "Existing genre IDs<br>";
+        print_r($genresToDelete);
+        echo "Genres to delete<br>";
+        print_r($genresToAdd);
+        echo "Genres to add<br>";
+        echo "</pre>";
+
+        // Delete duplicate genres
+        if (!empty($genresToDelete)) {
+            foreach ($genresToDelete as $deleteGenre) {
+                $sql = "DELETE FROM post_joins WHERE post_id = '$this->id' AND genre_id = '$deleteGenre';";
                 $this->conn->query($sql);
             }
         }
-        if (!empty($genreToDelete)) {
-            $this->addGenre($genreToAdd, $this->id);
+
+        // Add new genres
+        if (!empty($genresToAdd)) {
+            $this->addGenre($genresToAdd, $this->id);
         }
-        if ($this->conn->affected_rows > 0) {
-            return true;
-        } else {
-            return false;
+
+        return true; // Indicate success
+    }
+
+    public function addGenre($genresToAdd, $newId)
+    {
+        foreach ($genresToAdd as $addGenre) {
+            $sql = "INSERT INTO post_joins (post_id, genre_id) VALUES ('$newId', '$addGenre');";
+            $this->conn->query($sql);
         }
     }
 
-    public function addGenre($genreToAdd, $newId)
-    {
-        // if(empty($this->id)){
-        //     $newId = $this->conn->insert_id;
-        // }
-        // $newId = $this->id;
-        foreach ($genreToAdd as $addGenre) {
-            $sql = "insert into post_joins(post_id, genre_id) values('$newId',  '$addGenre');";
-            // echo 'addgenre';
-            // echo $addGenre;
-            $this->conn->query($sql);
-        }
-        // if ($this->conn->affected_rows > 0) {
-        //     return true;
-        // } else {
-        //     return false;
-        // }
-    }
     public function updateProducer()
     {
 
-        $sql = "select group_concat(producer_id) from post_joins where post_id = '$this->id';";
+        $sql = "select group_concat(producer_id) as producer from post_joins where post_id = '$this->id';";
         $currentProducer = $this->select($sql);
-        $concat = $currentProducer["group_concat(producer_id)"];
+        $concat = $currentProducer[0]["producer"];
         $currentProducerId = explode(',', $concat);
         $producerToDelete = array_diff($currentProducerId, $this->producers);
         $producerToAdd = array_diff($this->producers, $currentProducerId);
@@ -477,12 +475,26 @@ class Post extends Common
         }
     }
 
-    public function recommendation()
+    public function recommendation($limit)
     {
-        $sql = "select p.*, group_concat(distinct s.source) as source, group_concat(distinct s.id) as source_id, group_concat(distinct pr.producers) as producer,group_concat(distinct pr.id) as producer_id, group_concat(distinct st.studio) as studio,group_concat(distinct st.id) as studio_id, group_concat(distinct g.genre) as genre, group_concat(distinct g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id where post_id != $this->id and genre_id in (select genre_id from post_joins where post_id = $this->id ;";
 
-        $res = 
+        // "select * from posts where genre_id in (". implode(',', $genre_ids).") and post_id != $currentPostid order by rand();";
 
+        $sql = "select p.*, group_concat(distinct s.source) as source, group_concat(distinct s.id) as source_id, group_concat(distinct pr.producers) as producer,group_concat(distinct pr.id) as producer_id, group_concat(distinct st.studio) as studio,group_concat(distinct st.id) as studio_id, group_concat(distinct g.genre) as genre, group_concat(distinct g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id where post_id != $this->id and genre_id in (select genre_id from post_joins where post_id = $this->id) ";
+
+        if ($limit != 0) {
+            $sql .= " limit $limit;";
+        } else {
+            $sql .= ';';
+        }
+
+
+        $res = $this->conn->query($sql);
+        if ($res->num_rows > 0) {
+            return $res->fetch_assoc();
+        } else {
+            return [];
+        }
     }
 
     // public function selectPostById()

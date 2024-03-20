@@ -12,22 +12,24 @@ if (isset($_GET['id'])) {
 }
 
 $selectedPost = $post->getById();
-$datalist = $post->sortCreatedDate(6);
+// $datalist = $post->sortCreatedDate(6);
+$datalist = $post->sortCreatedDate(0);
 
 
 
 $studioList = explode(',', $selectedPost->studio);
-// echo "<pre>";
 
-for ($i = 0; $i < count($datalist); $i++)
-    if ($selectedPost->id == $datalist[$i]['id']) {
-        $datalist = $post->sortCreatedDate(7);
-    }
+echo "<pre>";
 // echo $selectedPost->id;
-// print_r($datalist);
-// echo "</pre>";
 
-?>
+print_r($datalist);
+echo "</pre>";
+for ($i = 0; $i < count($datalist); $i++)
+    // if ($selectedPost->id == $datalist[$i]['id']) {
+    //     $datalist = $post->sortCreatedDate(7);
+    // }
+    
+    ?>
 
 <div class="overview">
     <div class="background-img overlay">
@@ -74,10 +76,10 @@ for ($i = 0; $i < count($datalist); $i++)
     </div>
     <div class="collection">
         <?php foreach ($datalist as $key => $post) {
-            if ($post['id'] == $selectedPost->id) {
+           // if ($post['id'] == $selectedPost->id) {
 
-                continue;
-            }
+            //     continue;
+            // }
         ?>
             <div class="gallery">
                 <a href="post.php?id=<?php echo $post['id']; ?>">
