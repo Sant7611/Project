@@ -104,40 +104,58 @@ $datalist = $post->recommendation(6);
     /* comment Section  */
 
     .comment-section {
-        height: 400px;
-
+        /* height: 400px; */
+        color: #b9b9b9;
+        font-family: 'Nunito';
+        font-weight: 400;
     }
 
-    .comment-gallery {
-        background: #5b5172;
-        border: 1px solid;
+    .comments-gallery {
+        overflow: scroll;
+        scrollbar-width: none;
+        /* margin-bottom: 41px; */
+        color: #b3b3b3;
+        padding: 0 30px;
     }
 
     .comments {
         position: relative;
-        background: #eee;
-        border: 1px solid yellow;
+        /* background: #eee; */
+        margin-bottom: 70px;
     }
 
     .write-comment {
-        position: fixed;
-        background: #fff;
-        bottom: 0px;
-        border: 1px solid black;
+        /* position: fixed; */
+        background: #0e121f;
+        padding: 8px;
+        /* border: 1px solid black; */
         width: 100%;
     }
 
     textarea {
         resize: vertical;
+        background: #141723;
         width: 100%;
+        height: 50px;
+        outline: 1px solid #9b9b9b;
+        color: #acaeaf;
+        padding: 15px 12px;
+        /* border-inline: none; */
+        scrollbar-width: none;
+        border-radius: 6px;
+    }
+
+    textarea:focus-visible {
+        outline: 1px solid #eee;
     }
 
     .user {
-        background: #ccc;
-        border: 1px solid pink;
+        /* background: #ccc; */
+        /* border: 1px solid pink; */
         display: flex;
         justify-content: flex-start;
         align-items: center;
+        padding: 10px 5px;
     }
 
     .user img {
@@ -147,7 +165,39 @@ $datalist = $post->recommendation(6);
     }
 
     .user-area {
-        padding: 10px;
+        padding: 10px 0;
+        border-top: 1px solid #232323;
+    }
+
+    .user-detail {
+        padding: 0px 16px;
+    }
+
+    .user-name {
+        font-size: 15px;
+        font-weight: 600;
+        font-family: 'Nunito';
+    }
+
+    .cmt-time {
+        font-size: 12px;
+        color: #898585;
+    }
+
+    .cmt-response {
+        padding-left: 58px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .cmt-response span {
+        flex-basis: 5%;
+        cursor: pointer;
+    }
+
+    .thumb:hover {
+        color: #fff;
     }
 </style>
 
@@ -276,19 +326,27 @@ $datalist = $post->recommendation(6);
 <div class="comment-section">
     <div class="comments-gallery">
         <div class="comments">
+            <div class="write-comment">
+                <textarea placeholder="Leave a comment....." name="comment" id="write-comment" cols="30" rows="10"></textarea>
+            </div>
             <div class="comment">
                 <div class="user-area">
                     <div class="user">
                         <img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">
                         <div class="user-detail">
                             <div class="user-name">
-                                <span>name</span>
-                                <span>comment time</span>
+                                <span>Santosh Bohara</span>
+                                <span class="cmt-time">6 hrs ago</span>
                             </div>
                             <div class="user-comment">
                                 <p>This is great !!!!!!</p>
                             </div>
                         </div>
+                    </div>
+                    <div class="cmt-response">
+                        <span class="material-icons-outlined">thumb_up</span>
+                        <span class="material-icons-outlined">thumb_down</span>
+                        <span>Reply</span>
                     </div>
                 </div>
                 <div class="user-area">
@@ -296,13 +354,18 @@ $datalist = $post->recommendation(6);
                         <img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">
                         <div class="user-detail">
                             <div class="user-name">
-                                <span>name</span>
-                                <span>comment time</span>
+                                <span>Santosh Bohara</span>
+                                <span class="cmt-time">6 hrs ago</span>
                             </div>
                             <div class="user-comment">
                                 <p>This is great !!!!!!</p>
                             </div>
                         </div>
+                    </div>
+                    <div class="cmt-response">
+                        <span class="thumb material-icons-outlined">thumb_up</span>
+                        <span class="thumb material-icons-outlined">thumb_down</span>
+                        <span>Reply</span>
                     </div>
                 </div>
                 <div class="user-area">
@@ -310,13 +373,18 @@ $datalist = $post->recommendation(6);
                         <img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">
                         <div class="user-detail">
                             <div class="user-name">
-                                <span>name</span>
-                                <span>comment time</span>
+                                <span>Santosh Bohara</span>
+                                <span class="cmt-time">6 hrs ago</span>
                             </div>
                             <div class="user-comment">
                                 <p>This is great !!!!!!</p>
                             </div>
                         </div>
+                    </div>
+                    <div class="cmt-response">
+                        <span class="material-icons-outlined">thumb_up</span>
+                        <span class="material-icons-outlined">thumb_down</span>
+                        <span>Reply</span>
                     </div>
                 </div>
                 <div class="user-area">
@@ -324,19 +392,38 @@ $datalist = $post->recommendation(6);
                         <img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">
                         <div class="user-detail">
                             <div class="user-name">
-                                <span>name</span>
-                                <span>comment time</span>
+                                <span>Santosh Bohara</span>
+                                <span class="cmt-time">6 hrs ago</span>
                             </div>
                             <div class="user-comment">
                                 <p>This is great !!!!!!</p>
                             </div>
                         </div>
                     </div>
+                    <div class="cmt-response">
+                        <span class="material-icons-outlined">thumb_up</span>
+                        <span class="material-icons-outlined">thumb_down</span>
+                        <span>Reply</span>
+                    </div>
                 </div>
-                <div class="write-comment">
-                    <textarea placeholder="Write comment" name="comment" id="write-comment" cols="30" rows="10">
-
-                </textarea>
+                <div class="user-area">
+                    <div class="user">
+                        <img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">
+                        <div class="user-detail">
+                            <div class="user-name">
+                                <span>Santosh Bohara</span>
+                                <span class="cmt-time">6 hrs ago</span>
+                            </div>
+                            <div class="user-comment">
+                                <p>This is great !!!!!!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cmt-response">
+                        <span class="material-icons-outlined">thumb_up</span>
+                        <span class="material-icons-outlined">thumb_down</span>
+                        <span>Reply</span>
+                    </div>
                 </div>
             </div>
         </div>
