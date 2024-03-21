@@ -52,6 +52,7 @@ if (isset($_POST['submit'])) {
     $post->set('title', $_POST['title']);
     $post->set('type', $_POST['type']);
     $post->set('episodes', $_POST['episodes']);
+    $post->set('alt_title', $_POST['alt_title']);
     $post->set('sypnosis', $_POST['sypnosis']);
     $post->set('genre_id', $_POST['genre_id']);
     $post->set('slider_key', $_POST['slider_key']);
@@ -155,6 +156,11 @@ if (isset($_POST['submit'])) {
                 <div class="form-group">
                     <label class="label" for="title">Title</label>
                     <input type="text" class="form-control" name="title" value="<?php echo $data->title; ?>" id="title" required>
+                </div>
+                <div class="form-group">
+                    <label class="label" for="alt_title">Alternate Title </label>
+                    <input type="text" class="form-control" name="alt_title" value="<?php echo $data->alt_title; ?>" id="alt_title" required>
+                    <span class="suggest">Use comma if more than one title is added</span>
                 </div>
                 <div class="form-group">
                     <label class="label" for="postid">Post Studio</label>

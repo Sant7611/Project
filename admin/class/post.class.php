@@ -4,7 +4,7 @@ class Post extends Common
 {
     private $conn;
     public $id, $title, $type, $episodes, $status,
-        $source, $producers, $aired, $duration, $slider_key, $featured, $sypnosis, $modified_date, $genre_id,  $studio_id, $release_date, $image_url, $slider_img, $created_date, $limit, $page;
+        $source, $producers, $aired, $duration, $alt_title, $slider_key, $featured, $sypnosis, $modified_date, $genre_id,  $studio_id, $release_date, $image_url, $slider_img, $created_date, $limit, $page;
 
     public function __construct()
     {
@@ -14,8 +14,8 @@ class Post extends Common
 
     public function save()
     {
-        $sql = "insert into post (title, type, duration, aired, episodes, status, slider_key, featured, sypnosis, release_date,slider_img, image_url,created_date) 
-                values ('$this->title', '$this->type', '$this->duration', '$this->aired', '$this->episodes', '$this->status', '$this->slider_key', 
+        $sql = "insert into post (title,alt_title, type, duration, aired, episodes, status, slider_key, featured, sypnosis, release_date,slider_img, image_url,created_date) 
+                values ('$this->title','$this->alt_title', '$this->type', '$this->duration', '$this->aired', '$this->episodes', '$this->status', '$this->slider_key', 
                 '$this->featured', '$this->sypnosis', '$this->release_date','$this->slider_img', '$this->image_url', '$this->created_date');";
         if (!empty($this->limit)) {
             $sql .= 'limit $this->limit';
@@ -91,6 +91,7 @@ class Post extends Common
         $this->updateStudio();
         $sql = "update post set 
                     title = '$this->title',
+                    alt_title = '$this->alt_title',
                     type = '$this->type',      
                     duration = '$this->duration',
                     aired = '$this->aired',

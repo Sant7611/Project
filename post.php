@@ -32,7 +32,7 @@ $studioList = explode(',', $selectedPost->studio);
         <div class="img-title">
             <h1><?php echo $selectedPost->title; ?></h1>
             <i>Alt title: </i>
-            <h6 class="alt-title">Kimetsu na moto</h6>
+            <h6 class="alt-title"><?php echo $selectedPost->alt_title ?></h6>
         </div>
     </div>
     <div class="box-main">

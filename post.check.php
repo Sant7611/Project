@@ -30,7 +30,7 @@ $datalist = $post->recommendation(6);
         /* display: flex; */
         /* justify-content: space-between; */
         width: 100%;
-        padding: 25px 0 10px 0px;
+        padding: 25px 0 25px 0px;
     }
 
     .post-head span {
@@ -61,6 +61,94 @@ $datalist = $post->recommendation(6);
         margin-top: 4px;
         padding-bottom: 15px;
     }
+
+    .alt-title {
+        /* display: inline; */
+        color: #b9b9b9;
+        font-size: 14px;
+        display: inline-block;
+        width: 800px;
+        line-height: 20px;
+    }
+
+    .background-img .img-title {
+        position: absolute;
+        top: 27px;
+        left: 290px;
+        /* line-height: 55px; */
+        color: #fff;
+        font-family: "Mukta";
+        font-size: 20px;
+    }
+
+    .line button {
+        border: none;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    button a {
+        display: inline-block;
+        padding: 7px 77px;
+        color: #eee;
+        background: #5b5172;
+        font-weight: 400;
+        font-family: 'Nunito';
+        text-decoration: none;
+        font-size: 18px;
+        /* border-color: blue; */
+        display: flex
+    }
+
+
+    /* comment Section  */
+
+    .comment-section {
+        height: 400px;
+
+    }
+
+    .comment-gallery {
+        background: #5b5172;
+        border: 1px solid;
+    }
+
+    .comments {
+        position: relative;
+        background: #eee;
+        border: 1px solid yellow;
+    }
+
+    .write-comment {
+        position: fixed;
+        background: #fff;
+        bottom: 0px;
+        border: 1px solid black;
+        width: 100%;
+    }
+
+    textarea {
+        resize: vertical;
+        width: 100%;
+    }
+
+    .user {
+        background: #ccc;
+        border: 1px solid pink;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .user img {
+        height: 35px;
+        width: 35px;
+        border-radius: 70%;
+    }
+
+    .user-area {
+        padding: 10px;
+    }
 </style>
 
 <div class="overview">
@@ -68,8 +156,10 @@ $datalist = $post->recommendation(6);
         <img src="admin/images/sliderImage/<?php echo $selectedPost->slider_img; ?>" width="100%" alt="" srcset="">
         <div class="img-title">
             <h1><?php echo $selectedPost->title; ?></h1>
-            <i>Alt title: </i>
-            <h6 class="alt-title">Kimetsu na moto</h6>
+            <div class="alt-title">
+                <i>Alt title: </i>
+                <span><?php echo $selectedPost->alt_title ?></span>
+            </div>
         </div>
     </div>
     <div class="box-main">
@@ -102,8 +192,14 @@ $datalist = $post->recommendation(6);
                         <span>Rating:</span><span><?php echo 'Rating'; ?></span>
                     </div>
                 </div>
-                <h3>Description</h3>
-                <?php echo substr($selectedPost->sypnosis, 0, 2000); ?>
+                <div class="line">
+                    <button><a href="" class="btn"><span class="material-icons-outlined">assignment</span>Wishlist</a></button>
+                    <button></button>
+                </div>
+                <div class="description">
+                    <h3>Description</h3>
+                    <?php echo substr($selectedPost->sypnosis, 0, 2000); ?>
+                </div>
                 <div class="tags-container">
                     <span class="title">Tags: </span>
                     <?php $genres = explode(',', $selectedPost->genre);
@@ -141,12 +237,7 @@ $datalist = $post->recommendation(6);
         <h3>You might also like</h3>
     </div>
     <div class="collection">
-        <?php foreach ($datalist as $key => $post) {
-            // if ($post['id'] == $selectedPost->id) {
-
-            //     continue;
-            // }
-        ?>
+        <?php foreach ($datalist as $key => $post) { ?>
             <div class="gallery">
                 <a href="post.php?id=<?php echo $post['id']; ?>">
                     <div class="img">
@@ -180,6 +271,75 @@ $datalist = $post->recommendation(6);
                 </div>
             </div>
         <?php } ?>
+    </div>
+</div>
+<div class="comment-section">
+    <div class="comments-gallery">
+        <div class="comments">
+            <div class="comment">
+                <div class="user-area">
+                    <div class="user">
+                        <img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">
+                        <div class="user-detail">
+                            <div class="user-name">
+                                <span>name</span>
+                                <span>comment time</span>
+                            </div>
+                            <div class="user-comment">
+                                <p>This is great !!!!!!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-area">
+                    <div class="user">
+                        <img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">
+                        <div class="user-detail">
+                            <div class="user-name">
+                                <span>name</span>
+                                <span>comment time</span>
+                            </div>
+                            <div class="user-comment">
+                                <p>This is great !!!!!!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-area">
+                    <div class="user">
+                        <img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">
+                        <div class="user-detail">
+                            <div class="user-name">
+                                <span>name</span>
+                                <span>comment time</span>
+                            </div>
+                            <div class="user-comment">
+                                <p>This is great !!!!!!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="user-area">
+                    <div class="user">
+                        <img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">
+                        <div class="user-detail">
+                            <div class="user-name">
+                                <span>name</span>
+                                <span>comment time</span>
+                            </div>
+                            <div class="user-comment">
+                                <p>This is great !!!!!!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="write-comment">
+                    <textarea placeholder="Write comment" name="comment" id="write-comment" cols="30" rows="10">
+
+                </textarea>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
