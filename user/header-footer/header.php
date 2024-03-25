@@ -23,6 +23,9 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
 
     <!-- custom css  -->
     <link rel="stylesheet" type="text/css" href="user/style/sty.css">
+
+    <!-- jquery  -->
+    <script src="../../admin/js/jquery/jquery.min.js"></script>
 </head>
 
 <style>

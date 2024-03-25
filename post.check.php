@@ -2,7 +2,7 @@
 include_once('admin/class/post.class.php');
 
 include('user/header-footer/header.php');
-
+include('comment.php');
 
 $post = new Post();
 
@@ -91,13 +91,17 @@ $datalist = $post->recommendation(6);
         display: inline-block;
         padding: 7px 77px;
         color: #eee;
-        background: #5b5172;
+        background: #6c4f8b;
         font-weight: 400;
         font-family: 'Nunito';
         text-decoration: none;
         font-size: 18px;
         /* border-color: blue; */
         display: flex
+    }
+
+    .btn:hover {
+        background: #755e9f;
     }
 
 
@@ -198,6 +202,26 @@ $datalist = $post->recommendation(6);
 
     .thumb:hover {
         color: #fff;
+    }
+
+    .submit-area {
+        display: none;
+        justify-content: flex-end;
+        align-items: center;
+        padding-right: 2px;
+    }
+
+    .submit-comment-btn {
+        padding: 7px 17px;
+        background: #2c2b2b;
+        color: #eee;
+        cursor: pointer;
+        border: none;
+        border-radius: 6px;
+    }
+
+    .submit-comment-btn:hover {
+        background: #373738;
     }
 </style>
 
@@ -327,22 +351,35 @@ $datalist = $post->recommendation(6);
     <div class="comments-gallery">
         <div class="comments">
             <div class="write-comment">
-                <textarea placeholder="Leave a comment....." name="comment" id="write-comment" cols="30" rows="10"></textarea>
+                <form action="">
+                    <textarea placeholder="Leave a comment....." name="comment" onclick="show()" id="write-comment" cols="30" rows="10"></textarea>
+                    <div class="submit-area">
+                        <input type="hidden" name="comment_id" id="comment_id" value="0">
+                        <input type="hidden" name="post_id" id="post_id" value="<?php echo $id; ?>">
+                        <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['id'];  ?>">
+                        <button type="submit" id="submit_comment_btn" class="submit-comment-btn">Comment</button>
+                    </div>
+                </form>
             </div>
             <div class="comment">
+                <div class="cmt-count">
+                    5 comments
+                </div>
+
                 <div class="user-area">
                     <div class="user">
                         <img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">
                         <div class="user-detail">
                             <div class="user-name">
-                                <span>Santosh Bohara</span>
-                                <span class="cmt-time">6 hrs ago</span>
+                                <span><?php echo $sl['uname']; ?></span>
+                                <span class="cmt-time"><?php echo $sl['created']; ?></span>
                             </div>
                             <div class="user-comment">
-                                <p>This is great !!!!!!</p>
+                                <p><?php echo $sl['comment']; ?></p>
                             </div>
                         </div>
                     </div>
+
                     <div class="cmt-response">
                         <span class="material-icons-outlined">thumb_up</span>
                         <span class="material-icons-outlined">thumb_down</span>
@@ -429,7 +466,38 @@ $datalist = $post->recommendation(6);
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function() {
+        function show() {
+            $('.submit-area').css('display', 'flex');
+        }
 
+        $('#submit_comment_btn').click(function() {
+
+            var ucomment = $('#write-comment').val();
+
+            var form_data = $(this).serialize();
+            $.ajax({
+                url: 'admin/class/comment.class.php',
+                method: 'POST',
+                data: form_data ,
+                dataType:"JSON",
+                success: function(response) {
+                    alert('comment successful');
+                },
+                error: function(xhr, status, error) {
+                    alert('Error:', error);
+                }
+
+            });
+        });
+
+        function getComment(){
+            
+        }
+
+    });
+</script>
 
 <?php
 include('user/header-footer/footer.php');

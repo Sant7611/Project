@@ -8,7 +8,7 @@
     <title>Admin Panel</title>
 
     <!-- custom js  -->
-    <script src="../js/admin1.js"></script>
+    <script src="../js/jquery/admin1.js"></script>
 
     <!-- font awesome icone  -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-3sV+0JmrvsEuFv4EnHW5oB4rbqL/UQX5bZtM+xLELPR2w23t4XTtOHcbObiOTwGP" crossorigin="anonymous"> -->
