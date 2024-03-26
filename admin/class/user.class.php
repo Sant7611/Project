@@ -7,11 +7,12 @@ class User
 
     public function __construct()
     {
-        $this->conn = mysqli_connect('localhost', 'root', '','anidb'); 
+        $this->conn = mysqli_connect('localhost', 'root', '', 'anidb');
     }
 
     public function signup()
-    {$conn = mysqli_connect('localhost', 'root', '', 'anidb');
+    {
+        $conn = mysqli_connect('localhost', 'root', '', 'anidb');
         $sql = "insert into users(username, email, password) values ('$this->username', '$this->email', '$this->password');";
         mysqli_query($this->conn, $sql);
         if ($conn->affected_rows > 0) {
@@ -23,21 +24,21 @@ class User
 
 
     public function login()
-    { $conn = mysqli_connect("localhost", "root", "", 'anidb');
+    {
+        $conn = mysqli_connect("localhost", "root", "", 'anidb');
         $sql = "select * from users where email = '$this->email' and password = '$this->password';";
-        $res = mysqli_query($$this->conn, $sql);
+        $res = mysqli_query($this->conn, $sql);
+        print_r($res);
         if ($res->num_rows > 0) {
             $data = $res->fetch_object();
             session_start();
             $_SESSION['id'] = $data->id;
             $_SESSION['uname'] = $data->username;
             setcookie('uname', $data->username, time() + 24 * 60 * 60, '/');
-            header('location:index.php');
+            header('location:../index.php');
             // return $data;
         } else {
             return false;
         }
     }
-
-    
 }

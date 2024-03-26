@@ -25,7 +25,8 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
     <link rel="stylesheet" type="text/css" href="user/style/sty.css">
 
     <!-- jquery  -->
-    <script src="../../admin/js/jquery/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 
 <style>
@@ -78,7 +79,7 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
         </ul>
         <?php if (empty($uname)) { ?>
             <div class="button">
-                <a href="signup.php">Sign in</a>
+                <a href="user/signup.php">Sign in</a>
             </div>
         <?php  } else { ?>
             <div class="dropdown">
@@ -86,7 +87,7 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
                     <img src="admin/images/65f186cc25edeattackontitans.jpg" alt="">
                 </div>
 
-                <div class="dropdown-content user">
+                <div class="dropdown-content user-profile">
                     <ul>
                         <li class="dropdown-menu">
                             <a href="user/logout.php">

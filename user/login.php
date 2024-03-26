@@ -1,5 +1,5 @@
 <?php
-include('admin/class/user.class.php');
+include('../admin/class/user.class.php');
 if (isset($_GET['message'])) {
     $message = $_GET['message'];
 }

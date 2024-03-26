@@ -578,7 +578,11 @@ class Post extends Common
                 }
             }
         }
-        return $postResults;
+        if($postResults){
+            return $postResults;
+        }else{
+            return false;
+        }
     }
 
 

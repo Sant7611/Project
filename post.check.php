@@ -1,8 +1,9 @@
 <?php
+// session_start();
 include_once('admin/class/post.class.php');
 
 include('user/header-footer/header.php');
-include('comment.php');
+// include('user/comment/getComment.php');
 
 $post = new Post();
 
@@ -352,39 +353,20 @@ $datalist = $post->recommendation(6);
         <div class="comments">
             <div class="write-comment">
                 <form action="">
-                    <textarea placeholder="Leave a comment....." name="comment" onclick="show()" id="write-comment" cols="30" rows="10"></textarea>
+                    <textarea placeholder="Leave a comment....." name="comment" id="comment_Text" cols="30" rows="10"></textarea>
                     <div class="submit-area">
-                        <input type="hidden" name="comment_id" id="comment_id" value="0">
-                        <input type="hidden" name="post_id" id="post_id" value="<?php echo $id; ?>">
+                        <input type="hidden" name="id" id="post_id" value="<?php echo $id; ?>">
+                        <input type="hidden" name="parent_id" id="parent_id" value="0">
+                        <?php if(isset($_SESSION['id'])){ ?>
                         <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['id'];  ?>">
+                        <?php } ?>
                         <button type="submit" id="submit_comment_btn" class="submit-comment-btn">Comment</button>
                     </div>
                 </form>
             </div>
             <div class="comment">
-                <div class="cmt-count">
+                <!-- <div class="cmt-count">
                     5 comments
-                </div>
-
-                <div class="user-area">
-                    <div class="user">
-                        <img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">
-                        <div class="user-detail">
-                            <div class="user-name">
-                                <span><?php echo $sl['uname']; ?></span>
-                                <span class="cmt-time"><?php echo $sl['created']; ?></span>
-                            </div>
-                            <div class="user-comment">
-                                <p><?php echo $sl['comment']; ?></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="cmt-response">
-                        <span class="material-icons-outlined">thumb_up</span>
-                        <span class="material-icons-outlined">thumb_down</span>
-                        <span>Reply</span>
-                    </div>
                 </div>
                 <div class="user-area">
                     <div class="user">
@@ -402,7 +384,7 @@ $datalist = $post->recommendation(6);
                     <div class="cmt-response">
                         <span class="thumb material-icons-outlined">thumb_up</span>
                         <span class="thumb material-icons-outlined">thumb_down</span>
-                        <span>Reply</span>
+                        <span class="reply">Reply</span>
                     </div>
                 </div>
                 <div class="user-area">
@@ -442,58 +424,128 @@ $datalist = $post->recommendation(6);
                         <span class="material-icons-outlined">thumb_down</span>
                         <span>Reply</span>
                     </div>
-                </div>
-                <div class="user-area">
-                    <div class="user">
-                        <img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">
-                        <div class="user-detail">
-                            <div class="user-name">
-                                <span>Santosh Bohara</span>
-                                <span class="cmt-time">6 hrs ago</span>
-                            </div>
-                            <div class="user-comment">
-                                <p>This is great !!!!!!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cmt-response">
-                        <span class="material-icons-outlined">thumb_up</span>
-                        <span class="material-icons-outlined">thumb_down</span>
-                        <span>Reply</span>
-                    </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
 </div>
 <script>
     $(document).ready(function() {
-        function show() {
+
+        
+
+
+        $('.write-comment').click(function() {
             $('.submit-area').css('display', 'flex');
-        }
+        })
 
-        $('#submit_comment_btn').click(function() {
+        $(document).on('click', '.reply', function() {
+            var comment_id = $(this).attr("id");
+            $('#parent_id').val(parent_id);
+            $('#write-comment').focus();
+        });
 
-            var ucomment = $('#write-comment').val();
+        $('#submit_comment_btn').click(function(e) {
+            e.preventDefault();
+            var ucomment = $('#comment_Text').val();
+            var post_ids = $('#post_id').val();
+            var parent_ids = $('#parent_id').val();
+            var user_ids = $('#user_id').val();
+            var post_id = $('#post_id').val();
 
             var form_data = $(this).serialize();
             $.ajax({
-                url: 'admin/class/comment.class.php',
-                method: 'POST',
-                data: form_data ,
-                dataType:"JSON",
-                success: function(response) {
-                    alert('comment successful');
+                url: "user/comment/submitComment.php",
+                method: "POST",
+                data: {
+                    parent_id: parent_ids,
+                    post_id: post_ids,
+                    user_id: user_ids,
+                    commentText: ucomment
                 },
+                // data: form_data,
+                dataType: "JSON",
+                success: function(response) {
+                    // if(response.status == 'success')
+                    getComment(post_id);
+                    alert(response.successMsg);
+                },
+                // error: function(xhr, status, error) {
+                //     alert('Error:', error);
+                // }
                 error: function(xhr, status, error) {
-                    alert('Error:', error);
+                    var errorMessage = JSON.parse(xhr.responseText).message;
+                    alert('Error: ' + errorMessage);
                 }
-
             });
         });
 
-        function getComment(){
-            
+
+        function getComment(post_id) {
+            $.ajax({
+                url: "user/comment/getComment.php",
+                method: 'GET',
+                data: {
+                    id: post_id
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    displayComment(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching comments:', error);
+                }
+            });
+        }
+        getComment(47);
+
+        function displayComment(comments) {
+            var commentArea = $('.comment');
+            commentArea.empty(); // Clear the comment area before adding new comments
+            comments.forEach(comment => {
+                var commentHtml = '<div class="user-area">';
+                commentHtml += '<div class="user">';
+                commentHtml += '<div class="user-detail">';
+                commentHtml += '<img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">';
+                commentHtml += '<div class="user-name">' + comment.username + '</div>';
+                commentHtml += '<div class="cmt-time">' + comment.created + '</div>';
+                commentHtml += '</div>'; // user-detail
+                commentHtml += '<div class="user-comment">';
+                commentHtml += '<p>' + comment.comment + '</p>';
+                commentHtml += '</div>'; // user-comment
+                commentHtml += '</div>'; // user
+                commentHtml += '<div class="cmt-response">';
+                commentHtml += '<span class="material-icons-outlined">thumb_up</span>';
+                commentHtml += '<span class="material-icons-outlined">thumb_down</span>';
+                commentHtml += '<span class = "reply">Reply</span>';
+                commentHtml += '</div>'; // cmt-response
+                commentHtml += '</div>'; // user-area
+                commentArea.append(commentHtml);
+
+                // Check if the comment has replies
+                if (comment.replies && comment.replies.length > 0) {
+                    comment.replies.forEach(reply => {
+                        var replyHtml = '<div class="user-area reply-area">';
+                        replyHtml += '<div class="user">';
+                        replyHtml += '<div class="user-detail">';
+                        replyHtml += '<img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">';
+                        replyHtml += '<div class="user-name">' + reply.username + '</div>';
+                        replyHtml += '<div class="cmt-time">' + reply.created + '</div>';
+                        replyHtml += '</div>'; // user-detail
+                        replyHtml += '<div class="user-comment">';
+                        replyHtml += '<p>' + reply.comment + '</p>';
+                        replyHtml += '</div>'; // user-comment
+                        replyHtml += '</div>'; // user
+                        replyHtml += '<div class="cmt-response">';
+                        replyHtml += '<span class="material-icons-outlined">thumb_up</span>';
+                        replyHtml += '<span class="material-icons-outlined">thumb_down</span>';
+                        replyHtml += '<span class = "reply">Reply</span>';
+                        replyHtml += '</div>'; // cmt-response
+                        replyHtml += '</div>'; // user-area
+                        commentArea.append(replyHtml);
+                    });
+                }
+            });
         }
 
     });

@@ -1,5 +1,5 @@
 <?php
-include('admin/class/user.class.php');
+include('../admin/class/user.class.php');
 
 if (isset($_POST["submit"])) {
     $uname = $_POST['uname'];
