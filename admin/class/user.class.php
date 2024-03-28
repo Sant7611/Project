@@ -3,7 +3,7 @@
 class User
 {
     private $conn;
-    public $id, $username, $email, $password, $created_date;
+    public $id, $username, $email, $password, $created_date, $remember;
 
     public function __construct()
     {
@@ -13,8 +13,9 @@ class User
     public function signup()
     {
         $conn = mysqli_connect('localhost', 'root', '', 'anidb');
-        $sql = "insert into users(username, email, password) values ('$this->username', '$this->email', '$this->password');";
+        $sql = "insert into users(username, email, password, created_at) values ('$this->username', '$this->email', '$this->password', NOW());";
         mysqli_query($this->conn, $sql);
+        echo 'hello';
         if ($conn->affected_rows > 0) {
             header('location:login.php?message=Signup Successful. Please Login ');
         } else {

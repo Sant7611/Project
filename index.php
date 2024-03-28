@@ -323,4 +323,4 @@ $justlist = $post->sortCreatedDate(12);
         setTimeout(showSlides, 3000); // Change image every 2 seconds
     }
 </script>
-<?php include('footer.php') ?>
+<?php include('user/header-footer/footer.php') ?>
