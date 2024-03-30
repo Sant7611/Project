@@ -15,7 +15,6 @@ class User
         $conn = mysqli_connect('localhost', 'root', '', 'anidb');
         $sql = "insert into users(username, email, password, created_at) values ('$this->username', '$this->email', '$this->password', NOW());";
         mysqli_query($this->conn, $sql);
-        echo 'hello';
         if ($conn->affected_rows > 0) {
             header('location:login.php?message=Signup Successful. Please Login ');
         } else {
@@ -35,7 +34,11 @@ class User
             session_start();
             $_SESSION['id'] = $data->id;
             $_SESSION['uname'] = $data->username;
-            setcookie('uname', $data->username, time() + 24 * 60 * 60, '/');
+            if($this->remember){
+                setcookie('uname', $data->username, time() + 28* 24 * 60 * 60, '/');
+            }else{
+                setcookie('uname', $data->username, time() + 24 * 60 * 60, '/');
+            }
             header('location:../index.php');
             // return $data;
         } else {

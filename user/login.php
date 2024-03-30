@@ -7,29 +7,19 @@ $userObj = new User();
 
 if (isset($_POST['submit'])) {
   $email = $_POST['email'];
-  $remember = $_POST['remember'];
+  $remember = isset($_POST['remember']) ? $_POST['remember'] : null;
   $password = $_POST['password'];
-
   $err = [];
   if (isset($password) && !empty($password)) {
     $userObj->password = $password;
-  } else {
-    $err['msg'] = 1;
-  }
-  if (isset($email) && !empty($email)) {
-    $userObj->remember = $remember;
-    $userObj->email = $email;
-  } else {
-    $err['msg'] = 1;
-  }
-  if (count($err) == 0) {
-    $res = $userObj->login();
-    if ($res) {
+    if (isset($email) && !empty($email)) {
+      $userObj->remember = $remember;
+      $userObj->email = $email;
+
+      $res = $userObj->login();
     } else {
-      $err['msg'] = "Invalaid Credentials!!!";
+      $err['msg'] = "Please try again!";
     }
-  } else {
-    $err['msg'] = "Enter correct details!!!!";
   }
 }
 
@@ -52,7 +42,7 @@ if (isset($_POST['submit'])) {
 
 <body>
   <div class="center">
-    <form action="login.php" method="post">
+    <form action="" id="loginForm" method="post" novalidate>
       <?php if (isset($message)) { ?>
         <p class="success"> <?php echo $message; ?> </p>
       <?php } ?>
@@ -62,24 +52,24 @@ if (isset($_POST['submit'])) {
       <div class="title">Login</div>
       <span class="inputs">
         <span class="inputf">
-          <input type="text" name="email" class="input" placeholder="Email" />
+          <input type="text" name="email" id="email" class="input" placeholder="Email" required />
           <span class="label">Email</span>
           <span class="material-icons icon">account_circle</span>
         </span>
         <span class="inputf">
-          <input type="password" name="password" class="input" placeholder="Password" />
+          <input type="password" name="password" id="pwd" class="input" placeholder="Password" required />
           <span class="label">Password</span>
           <span class="material-icons icon">lock</span>
         </span>
       </span>
       <div class="links">
         <a href="#">Forgot Password</a>
-        <label for="remember">
+        <label>
           <input type="checkbox" name="remember" value="1" id="remember" />
           Remember Me
         </label>
       </div>
-      <button type="submit" class="btn">
+      <button type="submit" name="submit" id="submit" value="submit" class="btn">
         <span>Login</span>
       </button>
       <div class="text">
@@ -87,11 +77,57 @@ if (isset($_POST['submit'])) {
       </div>
     </form>
   </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#submit').click(function(e) {
+        e.preventDefault();
+
+        var email = $('#email');
+        var pwd = $('#pwd');
+        $('.msg').remove();
+        var errors = [];
+
+        email.css('border-color', '');
+        pwd.css('border-color', '');
+
+
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email.val())) {
+          $(email).css("border-color", 'red');
+          errors.push({
+            'key': 'email',
+            'msg': '<span class="msg">Please enter a valid email address</span>'
+          });
+          // return;
+        }
+
+        if (pwd.val().trim() === '' || pwd.val().trim().length <= 7) {
+          $(pwd).css("border-color", 'red');
+          errors.push({
+            'key': 'pwd',
+            'msg': '<span class="msg">Minimum 8 chatacters required</span>'
+          });
+          // return;
+        }
+
+        console.log(errors);
+        if (errors.length > 0) {
+          $.each(errors, (key, value) => {
+            $(value.msg).insertAfter('#' + value.key)
+          });
+          return;
+        }
+
+
+        $('#loginForm').submit();
+      });
+
+
+    });
+  </script>
+
 </body>
 
-<script>
-$(document).ready(function(){
-  $uname = $('')
-});
-</script>
 </html>

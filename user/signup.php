@@ -3,7 +3,7 @@ include('../admin/class/user.class.php');
 
 if (isset($_POST["submit"])) {
   $uname = $_POST['username'];
-  $pass1 = $_POST['pwd1'];
+  $pass1 = $_POST['pwd'];
   $pass2 = $_POST['pwd2'];
   $email = $_POST['email'];
   $err = [];
@@ -75,7 +75,7 @@ if (isset($_POST["submit"])) {
           <span class="material-icons icon">email</span>
         </span>
         <span class="inputf">
-          <input type="password" name="pwd1" class="input" id="pwd1" placeholder="Password" required />
+          <input type="password" name="pwd" class="input" id="pwd" placeholder="Password" required />
           <span class="label">Password</span>
           <span class="material-icons icon">lock</span>
         </span>
@@ -100,13 +100,13 @@ if (isset($_POST["submit"])) {
 
         var uname = $('#username');
         var email = $('#email');
-        var pwd1 = $('#pwd1');
+        var pwd = $('#pwd');
         var pwd2 = $('#pwd2');
 
         // Reset border colors and remove any existing error messages
         uname.css("border-color", '');
         email.css("border-color", '');
-        pwd1.css("border-color", '');
+        pwd.css("border-color", '');
         pwd2.css("border-color", '');
         $('.msg').remove(); // Remove any existing error messages
         var errors = [];
@@ -124,7 +124,7 @@ if (isset($_POST["submit"])) {
         // Validation for email
         var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailPattern.test(email.val())) {
-          email.css("border-color", 'red');
+          $(email).css("border-color", 'red');
           errors.push({
             'key': 'email',
             'msg': '<span class="msg">Please enter a valid email address</span>'
@@ -133,10 +133,10 @@ if (isset($_POST["submit"])) {
         }
 
         // Validation for passwords
-        if (pwd1.val().trim() === '' || pwd1.val().trim().length <= 7) {
-          pwd1.css("border-color", 'red');
+        if (pwd.val().trim() === '' || pwd.val().trim().length <= 7) {
+          $(pwd).css("border-color", 'red');
           errors.push({
-            'key': 'pwd1',
+            'key': 'pwd',
             'msg': '<span class="msg">Minimum 8 chatacters required</span>'
           });
           // return;
@@ -150,8 +150,8 @@ if (isset($_POST["submit"])) {
 
         } else {
 
-          if (pwd1.val() !== pwd2.val()) {
-            pwd1.css("border-color", 'red');
+          if (pwd.val() !== pwd2.val()) {
+            pwd.css("border-color", 'red');
             pwd2.css("border-color", 'red');
             errors.push({
               'key': 'pwd2',
@@ -160,7 +160,6 @@ if (isset($_POST["submit"])) {
             // return;
           }
         }
-        console.log(errors);
         if (errors.length > 0) {
           $.each(errors, (key, value) => {
             $(value.msg).insertAfter('#' + value.key);
@@ -169,7 +168,7 @@ if (isset($_POST["submit"])) {
         }
 
         // Submit the form if all validations pass
-        $('#loginForm').submit();
+        this.submit();
       });
     });
   </script>
