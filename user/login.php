@@ -89,4 +89,9 @@ if (isset($_POST['submit'])) {
   </div>
 </body>
 
+<script>
+$(document).ready(function(){
+  $uname = $('')
+});
+</script>
 </html>

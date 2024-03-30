@@ -148,5 +148,7 @@ form {
   color: rgb(196, 80, 231);
 }
 .msg {
+  font-family: monospace;
   color: #ff2500;
+  font-size: 10px;
 }
