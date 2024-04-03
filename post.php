@@ -26,7 +26,7 @@ $datalist = $post->recommendation(6);
 // $studioList = explode(',', $selectedPost->studio);
 
 ?>
-<style>
+<!-- <style>
     .post-head {
         /* display: flex; */
         /* justify-content: space-between; */
@@ -232,7 +232,7 @@ $datalist = $post->recommendation(6);
     .reply-area {
         padding-left: 50px;
     }
-</style>
+</style> -->
 
 <div class="overview">
     <div class="background-img overlay">
@@ -360,7 +360,7 @@ $datalist = $post->recommendation(6);
     <div class="comments-gallery">
         <div class="comments">
             <div class="write-comment">
-                <form action="" id="comment-form" >
+                <form action="" id="comment-form">
                     <textarea placeholder="Leave a comment....." name="comment" id="comment_Text" cols="30" rows="10"></textarea>
                     <div class="submit-area">
                         <input type="hidden" name="id" id="post_id" value="<?php echo $id; ?>">
@@ -373,6 +373,7 @@ $datalist = $post->recommendation(6);
                 </form>
             </div>
             <div class="comment">
+                <p class="default">Be the first to comment</p>
                 <!-- <div class="cmt-count">
                     5 comments
                 </div>
@@ -514,54 +515,54 @@ $datalist = $post->recommendation(6);
         getComment();
 
         function displayComment(comments) {
+            console.log(comments);
             var commentArea = $('.comment');
             commentArea.empty(); // Clear the comment area before adding new comments
-            comments.forEach(comment => {
-                var commentHtml = '<div class="user-area">';
-                commentHtml += '<div class="user">';
-                commentHtml += '<img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">';
-                commentHtml += '<div class="user-detail">';
-                commentHtml += '<div class="user-name">' + '<span>' + comment.username + '</span> ';
-                commentHtml += ' <span class="cmt-time">' + comment.created + '</span>';
-                commentHtml += '</div>'; // user-name
-                commentHtml += '<div class="user-comment">';
-                commentHtml += '<p>' + comment.comment + '</p>';
-                commentHtml += '</div>'; // user-comment
-                commentHtml += '</div>'; // user-detail
-                commentHtml += '</div>'; // user
-                commentHtml += '<div class="cmt-response">';
-                commentHtml += '<span class="thumb material-icons-outlined">thumb_up</span>';
-                commentHtml += '<span class="thumb material-icons-outlined">thumb_down</span>';
-                commentHtml += '<span id = "' + comment.id + '" class = "reply">Reply</span>';
-                commentHtml += '</div>'; // cmt-response
-                commentHtml += '</div>'; // user-area
-                commentArea.append(commentHtml);
 
-                // Check if the comment has replies
-                if (comment.replies && comment.replies.length > 0) {
-                    comment.replies.forEach(reply => {
-                        var replyHtml = '<div class="user-area reply-area">';
-                        replyHtml += '<div class="user">';
-                        replyHtml += '<img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">';
-                        replyHtml += '<div class="user-detail">';
-                        replyHtml += '<div class="user-name">' + '<span>' + reply.username + ' replied to '+ comment.username +'</span> ';
-                        replyHtml += ' <span class="cmt-time">' + reply.created + '</span>';
-                        replyHtml += '</div>'; // user-name
-                        replyHtml += '<div class="user-comment">';
-                        replyHtml += '<p>' + reply.comment + '</p>';
-                        replyHtml += '</div>'; // user-comment
-                        replyHtml += '</div>'; // user-detail
-                        replyHtml += '</div>'; // user
-                        replyHtml += '<div class="cmt-response">';
-                        replyHtml += '<span class="thumb material-icons-outlined">thumb_up</span>';
-                        replyHtml += '<span class="thumb material-icons-outlined">thumb_down</span>';
-                        replyHtml += '<span id = "' + comment.id + '" class = "reply">Reply</span>';
-                        replyHtml += '</div>'; // cmt-response
-                        replyHtml += '</div>'; // user-area
-                        commentArea.append(replyHtml);
-                    });
-                }
+            comments.forEach(comment => {
+                var commentHtml = generateComment(comment);
+                commentArea.append(commentHtml);
+                
+                displayReplies(comment.replies);
             });
+        }
+        
+        function displayReplies(replies) {
+            if (replies && replies.length > 0) {
+                replies.forEach(reply => {
+                    console.log(reply);
+                    var replyHtml = generateComment(reply);
+                    $('.comment').append(replyHtml);
+
+                    displayReplies(reply.replies);
+                });
+            }
+        }
+
+        function generateComment(comment) {
+            var commentHtml = '<div class="user-area ';
+            if (comment.parent_id != 0) {
+                commentHtml += ' reply-area';
+            }
+            commentHtml += '">';
+            commentHtml += '<div class="user">';
+            commentHtml += '<img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">';
+            commentHtml += '<div class="user-detail">';
+            commentHtml += '<div class="user-name">' + '<span>' + comment.username + '</span> ';
+            commentHtml += ' <span class="cmt-time">' + comment.created + '</span>';
+            commentHtml += '</div>'; // user-name
+            commentHtml += '<div class="user-comment">';
+            commentHtml += '<p>' + comment.comment + '</p>';
+            commentHtml += '</div>'; // user-comment
+            commentHtml += '</div>'; // user-detail
+            commentHtml += '</div>'; // user
+            commentHtml += '<div class="cmt-response">';
+            commentHtml += '<span class="thumb material-icons-outlined">thumb_up</span>';
+            commentHtml += '<span class="thumb material-icons-outlined">thumb_down</span>';
+            commentHtml += '<span id = "' + comment.id + '" class = "reply">Reply</span>';
+            commentHtml += '</div>'; // cmt-response
+            commentHtml += '</div>'; // user-area
+            return commentHtml;
         }
 
     });

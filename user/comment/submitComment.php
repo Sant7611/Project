@@ -90,10 +90,16 @@
         $parent_id = filter_input(INPUT_POST, "parent_id", FILTER_SANITIZE_NUMBER_INT);
         $commentText = filter_input(INPUT_POST, "commentText");
 
-        if (!$user_id || !$post_id || !$commentText) {
+        if (!$user_id ) {
             header("HTTP/1.0 400 Bad Request");
-            echo json_encode(["status" => "error", "message" => "Invalid input data $user_id, $post_id, $commentText, $parent_id"]);
+            echo json_encode(["status" => "error", "message" => "Log in to comment $user_id, $post_id, $commentText, $parent_id"]);
             exit;
+        }else{
+            if(!$commentText){
+                header("HTTP/1.0 400 Bad Request");
+                echo json_encode(["status" => "error", "message" => "Empty comment!!"]);
+                exit;
+            }
         }
 
         $data = [

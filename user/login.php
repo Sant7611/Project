@@ -82,7 +82,6 @@ if (isset($_POST['submit'])) {
   <script>
     $(document).ready(function() {
       $('#submit').click(function(e) {
-        e.preventDefault();
 
         var email = $('#email');
         var pwd = $('#pwd');
@@ -117,7 +116,8 @@ if (isset($_POST['submit'])) {
           $.each(errors, (key, value) => {
             $(value.msg).insertAfter('#' + value.key)
           });
-          return;
+          // return;
+          e.preventDefault();
         }
 
 

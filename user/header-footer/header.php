@@ -81,7 +81,7 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
         </ul>
         <?php if (empty($uname)) { ?>
             <div class="button">
-                <a href="user/signup.php">Sign in</a>
+                <a href="user/login.php">Log in</a>
             </div>
         <?php  } else { ?>
             <div class="dropdown">
