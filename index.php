@@ -102,7 +102,7 @@ $justlist = $post->sortCreatedDate(12);
         </div>
 
     </div>
-    <div id="new_release " class="section">
+    <div id="new_release" class="section">
         <div class="head-title">
             <h3>New Release</h3>
         </div>
@@ -143,8 +143,7 @@ $justlist = $post->sortCreatedDate(12);
             <?php } ?>
         </div>
     </div>
-    <div class="section1"></div>
-    <div id="just_added " class="section">
+    <div id="just_added" class="section">
         <div class="head-title">
             <h3>Just Added</h3>
         </div>
@@ -187,7 +186,6 @@ $justlist = $post->sortCreatedDate(12);
             <?php } ?>
         </div>
     </div>
-    <div class="section1"></div>
     <div id="tv_series" class="section">
         <div class="head-title">
             <h3>TV Series</h3>
@@ -320,7 +318,7 @@ $justlist = $post->sortCreatedDate(12);
         }
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].className += " active";
-        setTimeout(showSlides, 3000); // Change image every 2 seconds
+        // setTimeout(showSlides, 3000); // Change image every 2 seconds
     }
 </script>
 <?php include('user/header-footer/footer.php') ?>

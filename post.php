@@ -233,6 +233,8 @@ $datalist = $post->recommendation(6);
         padding-left: 50px;
     }
 </style> -->
+<!-- Add this line inside the <head> tag of your HTML file -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <div class="overview">
     <div class="background-img overlay">
@@ -282,14 +284,14 @@ $datalist = $post->recommendation(6);
                 <div class="description">
                     <h3>Description</h3>
                     <?php echo substr($selectedPost->sypnosis, 0, 2000); ?>
-                </div>
-                <div class="tags-container">
-                    <span class="title">Tags: </span>
-                    <?php $genres = explode(',', $selectedPost->genre);
-                    for ($i = 0; $i < count($genres); $i++) { ?>
-                        <span class="tags"><?php echo $genres[$i]; ?></span>
+                    <div class="tags-container">
+                        <span class="title">Tags: </span>
+                        <?php $genres = explode(',', $selectedPost->genre);
+                        for ($i = 0; $i < count($genres); $i++) { ?>
+                            <span class="tags"><?php echo $genres[$i]; ?></span>
 
-                    <?php } ?>
+                        <?php } ?>
+                    </div>
                 </div>
 
                 <div class="post-head">
@@ -443,9 +445,13 @@ $datalist = $post->recommendation(6);
 
 
 
-        $('.write-comment').click(function() {
+        $(document).on('focus', '.write-comment', function() {
             $('.submit-area').css('display', 'flex');
         })
+
+        // $('.write-comment').click(function() {
+        //     $('.submit-area').css('display', 'flex');
+        // })
 
         $(document).on('click', '.reply', function() {
             var comment_id = $(this).attr("id");
@@ -515,23 +521,25 @@ $datalist = $post->recommendation(6);
         getComment();
 
         function displayComment(comments) {
-            console.log(comments);
+            // console.log(comments);
             var commentArea = $('.comment');
-            commentArea.empty(); // Clear the comment area before adding new comments
+            if (comments != null)
+                commentArea.empty(); // Clear the comment area before adding new comments
 
             comments.forEach(comment => {
-                var commentHtml = generateComment(comment);
+                var commentHtml = generateComment(comment, blank = 0);
                 commentArea.append(commentHtml);
-                
-                displayReplies(comment.replies);
+
+                displayReplies(comment.replies, comment.username);
             });
         }
-        
-        function displayReplies(replies) {
+
+        function displayReplies(replies, p_username) {
             if (replies && replies.length > 0) {
                 replies.forEach(reply => {
-                    console.log(reply);
-                    var replyHtml = generateComment(reply);
+                    // console.log(reply);
+                    var replyHtml = generateComment(reply, p_username);
+                    //this only works for reply to primary comment. not reply to reply
                     $('.comment').append(replyHtml);
 
                     displayReplies(reply.replies);
@@ -539,7 +547,8 @@ $datalist = $post->recommendation(6);
             }
         }
 
-        function generateComment(comment) {
+        function generateComment(comment, p_username) {
+            var parent_username = comment.username;
             var commentHtml = '<div class="user-area ';
             if (comment.parent_id != 0) {
                 commentHtml += ' reply-area';
@@ -548,7 +557,11 @@ $datalist = $post->recommendation(6);
             commentHtml += '<div class="user">';
             commentHtml += '<img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">';
             commentHtml += '<div class="user-detail">';
-            commentHtml += '<div class="user-name">' + '<span>' + comment.username + '</span> ';
+            if (comment.parent_id) {
+                commentHtml += '<div class = "user-name"> <span>' + comment.username + ' replied to ' + p_username + '</span>';
+            } else {
+                commentHtml += '<div class="user-name">' + '<span>' + comment.username + '</span> ';
+            }
             commentHtml += ' <span class="cmt-time">' + comment.created + '</span>';
             commentHtml += '</div>'; // user-name
             commentHtml += '<div class="user-comment">';
@@ -557,9 +570,15 @@ $datalist = $post->recommendation(6);
             commentHtml += '</div>'; // user-detail
             commentHtml += '</div>'; // user
             commentHtml += '<div class="cmt-response">';
+            commentHtml += '<div>';
             commentHtml += '<span class="thumb material-icons-outlined">thumb_up</span>';
+            commentHtml += '</div>';
+            commentHtml += '<div>';
             commentHtml += '<span class="thumb material-icons-outlined">thumb_down</span>';
+            commentHtml += '</div>';
+            commentHtml += '<div>';
             commentHtml += '<span id = "' + comment.id + '" class = "reply">Reply</span>';
+            commentHtml += '</div>';
             commentHtml += '</div>'; // cmt-response
             commentHtml += '</div>'; // user-area
             return commentHtml;

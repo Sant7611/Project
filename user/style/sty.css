@@ -61,6 +61,7 @@ img {
   vertical-align: middle;
   position: absolute;
   bottom: 0;
+  font-family: "Nunito", sans-serif;
   text-align: left;
   left: 0;
   padding: 50px 21px 40px 20px;
@@ -68,7 +69,7 @@ img {
 
 .slide-title {
   font-size: 70px;
-  font-family: "Nunito";
+  /* font-family: "Nunito"; */
   line-height: 65px;
   font-weight: bold;
   padding: 15px 0;
@@ -98,6 +99,7 @@ img {
 
 .sypnosis {
   line-height: 20px;
+  font-family: "Nunito", "mukta", Verdana, sans-serif;
 }
 
 .add-btn {
@@ -355,6 +357,12 @@ div.desc {
   text-align: center;
 }
 
+.description {
+  margin-top: 15px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
 .head-title {
   color: #fff;
   padding: 0px 5px;
@@ -483,7 +491,7 @@ body {
   /* display: flex; */
   /* justify-content: space-between; */
   width: 100%;
-  padding: 25px 0 25px 0px;
+  padding: 10px 0 0 0px;
 }
 
 .post-head span {
@@ -507,7 +515,6 @@ body {
 
 .post-syp h3 {
   padding-top: 5px;
-  border-top: 1px solid #eee;
 }
 
 .tags-container {
@@ -647,9 +654,11 @@ textarea:focus-visible {
   align-items: center;
 }
 
-.cmt-response span {
+.cmt-response > div {
   flex-basis: 5%;
+  display: flex;
   cursor: pointer;
+  align-items: center;
 }
 
 .thumb:hover {

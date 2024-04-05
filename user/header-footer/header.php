@@ -26,6 +26,7 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
 
     <!-- jquery  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="../../admin/js/jquery/jquery-3.7.1.min.js"></script> -->
     <!-- jquery cookie function  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
@@ -74,10 +75,10 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
 
         </div>
         <ul class="nav_list">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#new_release">New Release</a></li>
-            <li><a href="#tv_series">Just Added</a></li>
-            <li> <a href="#most_popular">Most Popular</a></li>
+            <li><a href="index.php?#home">Home</a></li>
+            <li><a href="index.php?#new_release">New Release</a></li>
+            <li><a href="index.php?#tv_series">Just Added</a></li>
+            <li> <a href="index.php?#most_popular">Most Popular</a></li>
         </ul>
         <?php if (empty($uname)) { ?>
             <div class="button">
