@@ -4,6 +4,10 @@ include('header_footer/header.php');
 include('../class/source.class.php');
 
 $source = new Source();
+if(isset($_GET['id'])){
+    $source->set('id', $_GET['id']);
+    $sources = $source->getById();
+}
 
 if (isset($_POST['submit'])) {
     // echo $_POST['source'];
@@ -37,7 +41,9 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <label class="label" for="source">Source Name</label>
-                    <input type="text" name="source" id="source" class="form-control">
+                    <?php foreach($sources as $sourceName){ ?>
+                    <input type="text" value="<?php echo $sourceName['source'] ?>" name="source" id="source" class="form-control">
+                    <?php } ?>
                 </div>
                 <input type="submit" value="submit" class="btn btn-success" name="submit">
                 <input type="reset" class="btn btn-danger">

@@ -5,6 +5,10 @@ include('../class/studio.class.php');
 
 $studio = new Studio();
 
+if(isset($_GET['id'])){
+    $studio->set('id', $_GET['id']);
+    $studios = $studio->getById();
+}
 if (isset($_POST['submit'])) {
     // echo $_POST['studio'];
     if (isset($_POST['studio']) && !empty($_POST['studio'])) {
@@ -22,7 +26,6 @@ if (isset($_POST['submit'])) {
 }
 ?>
 <div id="page-wrapper">
-
     <div id="create-main">
         <form action="" class="studio" method="post">
             <?php if (isset($msg)) { ?>
@@ -39,7 +42,9 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <label class="label" for="studio" >Studio Name</label>
-                    <input type="text" name="studio" id="studio" class="form-control">
+                    <?php foreach($studios as $studioName){ ?>
+                    <input type="text" name="studio" value="<?php echo $studioName['studio']; ?>" id="studio" class="form-control">
+                    <?php } ?>
                 </div>
                 <input type="submit" value="submit" class="btn btn-success" name="submit">
                 <input type="reset" class="btn btn-danger" >

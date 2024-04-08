@@ -4,6 +4,10 @@ include('header_footer/header.php');
 include('../class/genre.class.php');
 
 $genre = new Genre();
+if(isset($_GET['id'])){
+    $genre->set('id', $_GET['id']);
+    $genres = $genre->getById();
+}
 
 if (isset($_POST['submit'])) {
     // echo $_POST['genre'];
@@ -21,6 +25,7 @@ if (isset($_POST['submit'])) {
 }
 ?>
 <div id="page-wrapper">
+
     <div id="create-main">
         <form action="" class="genre" method="post">
             <?php if (isset($msg)) { ?>
@@ -37,7 +42,9 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <label class="label" for="genre" >Genre Name</label>
-                    <input type="text" name="genre" class="form-control">
+                    <?php foreach($genres as $genreName){ ?>
+                    <input type="text" value="<?php echo $genreName['genre']; ?>" id="genre" name="genre" class="form-control">
+                    <?php } ?>
                 </div>
                 <input type="submit" value="submit" class="btn btn-success" name="submit">
                 <input type="reset" class="btn btn-danger" >

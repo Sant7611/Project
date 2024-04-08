@@ -4,6 +4,10 @@ include('header_footer/header.php');
 include('../class/producer.class.php');
 
 $producer = new Producer();
+if(isset($_GET['id'])){
+    $producer->set('id', $_GET['id']);
+    $producers = $producer->getById();
+}
 
 if (isset($_POST['submit'])) {
     // echo $_POST['producer'];
@@ -37,7 +41,9 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <label class="label" for="producer">Producer Name</label>
-                    <input type="text" name="producer" id="producer" class="form-control">
+                    <?php foreach($producers as $producerName){ ?>
+                    <input type="text" value="<?php echo $producerName['producers'] ?>" name="producer" id="producer" class="form-control">
+                    <?php } ?>
                 </div>
                 <input type="submit" value="submit" class="btn btn-success" name="submit">
                 <input type="reset" class="btn btn-danger">

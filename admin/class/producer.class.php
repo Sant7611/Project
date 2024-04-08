@@ -52,7 +52,7 @@ class Producer extends Common{
     }
     public function getById()
     {
-        $sql = "select * from producer where id = $this->id;";
+        $sql = "select * from producers where id = $this->id;";
         return $this->select($sql);
     }
 }
