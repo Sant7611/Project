@@ -30,11 +30,20 @@ if (isset($_POST['submit'])) {
             <?php } ?>
             <?php if (isset($Err)) { ?>
                 <div><?php echo $Err; ?> </div>
-            <?php } ?>
-            <label class="label-block">Studio Name</label>
-            <input type="text" name="studio" class="input-studio">
-            <input type="submit" value="submit" name="submit">
-            <input type="reset">
+            <?php } ?> 
+            <div class="row">
+                <div class="row-nav">
+                    <div>
+                        <h1 class="page-header">Edit Studio</h1>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="label" for="studio" >Studio Name</label>
+                    <input type="text" name="studio" id="studio" class="form-control">
+                </div>
+                <input type="submit" value="submit" class="btn btn-success" name="submit">
+                <input type="reset" class="btn btn-danger" >
+            </div>
         </form>
     </div>
 </div>

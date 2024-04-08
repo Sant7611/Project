@@ -48,4 +48,9 @@ class Source extends Common{
             return false;
         }
     }
+    public function getById()
+    {
+        $sql = "select * from source where id = $this->id;";
+        return $this->select($sql);
+    }
 }

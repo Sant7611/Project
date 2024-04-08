@@ -54,4 +54,9 @@ class Genre extends Common
             return false;
         }
     }
+    public function getById()
+    {
+        $sql = "select * from genre where id = $this->id;";
+        return $this->select($sql);
+    }
 }

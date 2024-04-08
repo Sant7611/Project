@@ -12,7 +12,6 @@ if (isset($_POST['submit'])) {
         $res = $source->edit();
         if ($res == "success") {
             $msg = "Source successfully added with id " . $res;
-           
         } else {
             $msg = "Source insertion unsuccessful";
         }
@@ -30,10 +29,19 @@ if (isset($_POST['submit'])) {
             <?php if (isset($Err)) { ?>
                 <div><?php echo $Err; ?> </div>
             <?php } ?>
-            <label class="label-block">source Name</label>
-            <input type="text" name="source" class="input-source">
-            <input type="submit" value="submit" name="submit">
-            <input type="reset">
+            <div class="row">
+                <div class="row-nav">
+                    <div>
+                        <h1 class="page-header">Edit Source</h1>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="label" for="source">Source Name</label>
+                    <input type="text" name="source" id="source" class="form-control">
+                </div>
+                <input type="submit" value="submit" class="btn btn-success" name="submit">
+                <input type="reset" class="btn btn-danger">
+            </div>
         </form>
     </div>
 </div>

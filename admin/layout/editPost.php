@@ -141,10 +141,12 @@ if (isset($_POST['submit'])) {
 
 <div id="page-wrapper">
 
-    <div class="col-lg-12">
-        <h1 class="page-header">Edit Post</h1>
-    </div>
-    <div class="row">
+<div class="row">
+        <div class="row-nav">
+            <div>
+                <h1 class="page-header">Edit Post</h1>
+            </div>
+        </div>
         <div class="col-lg-6">
             <?php if (isset($imageError)) { ?>
                 <div class="alert alert-danger"><?php echo $imageError;  ?></div>

@@ -50,4 +50,9 @@ class Producer extends Common{
         }
         
     }
+    public function getById()
+    {
+        $sql = "select * from producer where id = $this->id;";
+        return $this->select($sql);
+    }
 }

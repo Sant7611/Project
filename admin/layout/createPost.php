@@ -116,7 +116,13 @@ if (isset($_POST['submit'])) {
         <?php if (isset($ErrMsg)) { ?>
             <div class="row alert alert-danger"><?php echo "<span>" . $ErrMsg . "</span>";  ?></div>
         <?php  } ?>
-        <h1 class="page-header">Create Post</h1>
+    </div>
+    <div class="row">
+        <div class="row-nav">
+            <div>
+                <h1 class="page-header">Create Post</h1>
+            </div>
+        </div>
     </div>
 
     <div class="row">

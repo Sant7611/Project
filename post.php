@@ -571,10 +571,10 @@ $datalist = $post->recommendation(6);
             commentHtml += '</div>'; // user
             commentHtml += '<div class="cmt-response">';
             commentHtml += '<div>';
-            commentHtml += '<span class="thumb material-icons-outlined">thumb_up</span>';
+            commentHtml += '<span id="like" class="thumb material-icons-outlined">thumb_up</span>';
             commentHtml += '</div>';
             commentHtml += '<div>';
-            commentHtml += '<span class="thumb material-icons-outlined">thumb_down</span>';
+            commentHtml += '<span id="dislike" class="thumb material-icons-outlined">thumb_down</span>';
             commentHtml += '</div>';
             commentHtml += '<div>';
             commentHtml += '<span id = "' + comment.id + '" class = "reply">Reply</span>';
@@ -585,6 +585,35 @@ $datalist = $post->recommendation(6);
         }
 
     });
+
+
+    // event hadnler for like
+    $(document).on('click', '#like', function(e) {
+        updateCount('like');
+    });
+
+    //event handler ofr dislike
+    $(document).on('click', '#dislike', function(e) {
+        updateCount('dislike');
+    });
+
+    //ajax for updateCount
+    function updateCount(value) {
+        $.ajax({
+            url: 'user/comment/updateCount.php',
+            method: 'POST',
+            data: {
+                action: value
+            },
+            success: function(response) {
+
+            },
+
+            error: function(xhr, status, error) {
+                console.log('error:', error);
+            }
+        });
+    }
 </script>
 
 <?php

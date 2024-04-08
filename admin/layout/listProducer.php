@@ -28,10 +28,15 @@ if (isset($_GET['msg'])) {
     <?php } ?>
 
 
-    <div class="title">
-        <h1 class="page-header">List Producer</h1>
-    </div>
     <div class="row">
+        <div class="row-nav">
+            <div>
+                <h1 class="page-header">List Producer</h1>
+            </div>
+            <div class="searchbar">
+                <input type="text" placeholder="Search" autocomplete="off" name="search" id="search">
+            </div>
+        </div>
         <table>
             <tr>
                 <th>S.No</th>

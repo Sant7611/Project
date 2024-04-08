@@ -12,7 +12,6 @@ if (isset($_POST['submit'])) {
         $res = $genre->edit();
         if ($res == "success") {
             $msg = "Genre successfully added with id " . $res;
-          
         } else {
             $msg = "Genre insertion unsuccessful";
         }
@@ -30,10 +29,19 @@ if (isset($_POST['submit'])) {
             <?php if (isset($Err)) { ?>
                 <div><?php echo $Err; ?> </div>
             <?php } ?>
-            <label class="label-block">genre Name</label>
-            <input type="text" name="genre" class="input-genre">
-            <input type="submit" value="submit" name="submit">
-            <input type="reset">
+            <div class="row">
+                <div class="row-nav">
+                    <div>
+                        <h1 class="page-header">Edit Genre</h1>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="label" for="genre" >Genre Name</label>
+                    <input type="text" name="genre" class="form-control">
+                </div>
+                <input type="submit" value="submit" class="btn btn-success" name="submit">
+                <input type="reset" class="btn btn-danger" >
+            </div>
         </form>
     </div>
 </div>

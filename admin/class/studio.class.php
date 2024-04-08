@@ -50,4 +50,9 @@ class Studio extends Common{
         }
         
     }
+    public function getById()
+    {
+        $sql = "select * from studio where id = $this->id;";
+        return $this->select($sql);
+    }
 }

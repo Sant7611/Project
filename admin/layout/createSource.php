@@ -12,7 +12,6 @@ if (isset($_POST['submit'])) {
         $res = $source->save();
         if ($res) {
             $msg = "Source successfully added with id " . $res;
-            
         } else {
             $msg = "Source insertion unsuccessful";
         }
@@ -29,9 +28,13 @@ if (isset($_POST['submit'])) {
         <?php if (isset($Err)) { ?>
             <div class="alert alert-danger"><?php echo $Err; ?> </div>
         <?php } ?>
-        <h1 class="page-header">Create Source</h1>
     </div>
     <div class="row">
+        <div class="row-nav">
+            <div>
+                <h1 class="page-header">Create Source</h1>
+            </div>
+        </div>
         <div id="Source-main">
             <form action="" class="Source" method="post">
 

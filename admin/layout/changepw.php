@@ -50,11 +50,12 @@ if (isset($_POST['submit'])) {
                     <?php echo $Errmsg;  ?>
                 </div>
             <?php } ?>
-            <div class="title">
-                <h1 class="page-header">Change Password</h1>
-            </div>
-
             <div class="row">
+                <div class="row-nav">
+                    <div class="title">
+                        <h1 class="page-header">Change Password</h1>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="current" class="label">
                         Enter current password

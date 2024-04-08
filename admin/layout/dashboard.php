@@ -5,12 +5,17 @@ include('header_footer/header.php');
 
 <div id="page-wrapper">
     <div>
-        <div>
-            <h1 class="page-header">Dashboard</h1>
-        </div>
         <div class="row">
+            <div class="row-nav">
+                <div>
+                    <h1 class="page-header">Dashboard</h1>
+                </div>
+                <div class="searchbar">
+                    <input type="text" placeholder="Search" autocomplete="off" name="search" id="search">
+                </div>
+            </div>
             <div class="dashboard-contents">
-                <div class="db-content" >Verified Users</div>
+                <div class="db-content">Verified Users</div>
                 <div class="db-content">Total Posts</div>
                 <div class="db-content">Total Posts1</div>
                 <div class="db-content">Total Posts 2</div>

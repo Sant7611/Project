@@ -13,7 +13,7 @@ $datalist = $genre->fetch();
 // echo "</pre>";
 
 
-if ((isset($_SESSION['message']) && $_SESSION['message'] != "") || (isset($_SESSION['msg']) && $_SESSION['msg'] != "") ) {
+if ((isset($_SESSION['message']) && $_SESSION['message'] != "") || (isset($_SESSION['msg']) && $_SESSION['msg'] != "")) {
     $msg = $_SESSION['message'];
     $Errmsg = $_SESSION['msg'];
     $_SESSION['message'] = "";
@@ -21,8 +21,6 @@ if ((isset($_SESSION['message']) && $_SESSION['message'] != "") || (isset($_SESS
 }
 
 ?>
-
-
 <div id="page-wrapper">
 
     <?php
@@ -36,10 +34,15 @@ if ((isset($_SESSION['message']) && $_SESSION['message'] != "") || (isset($_SESS
     }
     ?>
 
-    <div class="title">
-        <h1 class="page-header">List Genre</h1>
-    </div>
     <div class="row">
+        <div class="row-nav">
+            <div>
+                <h1 class="page-header">List Genre</h1>
+            </div>
+            <div class="searchbar">
+                <input type="text" placeholder="Search" autocomplete="off" name="search" id="search">
+            </div>
+        </div>
         <table>
             <tr>
                 <th>S.No</th>

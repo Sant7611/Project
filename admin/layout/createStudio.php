@@ -12,7 +12,6 @@ if (isset($_POST['submit'])) {
         $res = $studio->save();
         if ($res) {
             $msg = "Studio successfully added with id " . $res;
-            
         } else {
             $msg = "Studio insertion unsuccessful";
         }
@@ -29,9 +28,13 @@ if (isset($_POST['submit'])) {
         <?php if (isset($Err)) { ?>
             <div class="alert alert-danger"><?php echo $Err; ?> </div>
         <?php } ?>
-        <h1 class="page-header">Create Studio</h1>
     </div>
     <div class="row">
+        <div class="row-nav">
+            <div>
+                <h1 class="page-header">Create Studio</h1>
+            </div>
+        </div>
         <div id="create-main">
             <form action="" class="studio" method="post">
 

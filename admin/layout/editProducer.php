@@ -12,7 +12,6 @@ if (isset($_POST['submit'])) {
         $res = $producer->edit();
         if ($res == "success") {
             $msg = "Producer successfully added with id " . $res;
-            
         } else {
             $msg = "Producer insertion unsuccessful";
         }
@@ -30,10 +29,19 @@ if (isset($_POST['submit'])) {
             <?php if (isset($Err)) { ?>
                 <div><?php echo $Err; ?> </div>
             <?php } ?>
-            <label class="label-block">producer Name</label>
-            <input type="text" name="producer" class="input-producer">
-            <input type="submit" value="submit" name="submit">
-            <input type="reset">
+            <div class="row">
+                <div class="row-nav">
+                    <div>
+                        <h1 class="page-header">Edit Producer</h1>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="label" for="producer">Producer Name</label>
+                    <input type="text" name="producer" id="producer" class="form-control">
+                </div>
+                <input type="submit" value="submit" class="btn btn-success" name="submit">
+                <input type="reset" class="btn btn-danger">
+            </div>
         </form>
     </div>
 </div>

@@ -52,8 +52,13 @@ $totalPages = ceil($totalPost / 5);
     }
     ?>
     <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">List Post</h1>
+        <div class="row-nav">
+            <div>
+                <h1 class="page-header">List Post</h1>
+            </div>
+            <div class="searchbar">
+                <input type="text" placeholder="Search" autocomplete="off" name="search" id="search">
+            </div>
         </div>
     </div>
     <!-- <div class="row"> -->
@@ -143,6 +148,8 @@ $totalPages = ceil($totalPost / 5);
             this.classList.add('active');
         });
     });
+
+    
 </script>
 <?php
 include('header_footer/footer.php');

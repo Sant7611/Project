@@ -12,7 +12,6 @@ if (isset($_POST['submit'])) {
         $res = $genre->save();
         if ($res) {
             $msg = "Genre successfully added with id " . $res;
-            
         } else {
             $Errmsg = "Genre insertion unsuccessful";
         }
@@ -30,7 +29,13 @@ if (isset($_POST['submit'])) {
         <?php if (isset($Errmsg)) { ?>
             <div class="alert alert-danger"><?php echo $Errmsg; ?> </div>
         <?php } ?>
-        <h1 class="page-header">Create Genre</h1>
+    </div>
+    <div class="row">
+        <div class="row-nav">
+            <div>
+                <h1 class="page-header">Create Genre</h1>
+            </div>
+        </div>
     </div>
 
     <div class="row">
