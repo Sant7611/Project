@@ -28,7 +28,7 @@ class User
         $conn = mysqli_connect("localhost", "root", "", 'anidb');
         $sql = "select * from users where email = '$this->email' and password = '$this->password';";
         $res = mysqli_query($this->conn, $sql);
-        print_r($res);
+        // print_r($res);
         if ($res->num_rows > 0) {
             $data = $res->fetch_object();
             session_start();

@@ -375,7 +375,7 @@ $datalist = $post->recommendation(6);
                 </form>
             </div>
             <div class="comment">
-                <p class="default">Be the first to comment</p>
+                
                 <!-- <div class="cmt-count">
                     5 comments
                 </div>
@@ -511,7 +511,11 @@ $datalist = $post->recommendation(6);
                 },
                 dataType: "JSON",
                 success: function(response) {
-                    displayComment(response);
+                    if (response.length > 0)
+                        displayComment(response);
+                    else {
+                        $('.comment').append('<p class="default">Be the first to comment</p>');
+                    }
                 },
                 error: function(xhr, status, error) {
                     console.error('Error fetching comments:', error);

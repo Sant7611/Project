@@ -17,9 +17,9 @@ if (isset($_POST['submit'])) {
       $userObj->email = $email;
 
       $res = $userObj->login();
-    } else {
+      if(!$res)
       $err['msg'] = "Please try again!";
-    }
+    } 
   }
 }
 
@@ -119,8 +119,7 @@ if (isset($_POST['submit'])) {
           // return;
           e.preventDefault();
         }
-
-
+        
         $('#loginForm').submit();
       });
 

@@ -204,10 +204,30 @@ img {
 .navbar {
   font-family: "mukta", sans-serif;
   display: flex;
-  padding: 5px 55px;
+  padding: 10px 55px;
   align-items: center;
   justify-content: space-between;
   background: #225;
+}
+
+.vcenter {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-basis: 39%;
+}
+
+.searchbar{
+  width: 75%;
+}
+
+.searchbar input {
+  height: 35px;
+  width: 100%;
+  padding: 2px 5px;
+  outline: none;
+  border: 1px solid #b9afaf;
+  border-radius: 5px;
 }
 
 .nav_list {
@@ -236,10 +256,11 @@ img {
   font-family: "mukta", sans-serif;
   color: #ffffff;
   font-size: 20px;
+  height: 35px;
   background-color: #8330d5;
-  border-radius: 20px;
+  border-radius: 5px;
   margin: 5px;
-  padding: 3px 16px;
+  padding: 0px 16px;
   cursor: pointer;
 }
 .button a:hover {

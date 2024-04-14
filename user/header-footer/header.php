@@ -71,17 +71,21 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
 
 <body>
     <nav class="navbar ">
-        <div class="logo">
+        <!-- <div class="logo">
 
-        </div>
+        </div> -->
         <ul class="nav_list">
             <li><a href="index.php?#home">Home</a></li>
             <li><a href="index.php?#new_release">New Release</a></li>
-            <li><a href="index.php?#tv_series">Just Added</a></li>
+            <li><a href="index.php?#just_added">Just Added</a></li>
             <li> <a href="index.php?#most_popular">Most Popular</a></li>
         </ul>
+
         <?php if (empty($uname)) { ?>
-            <div class="button">
+            <div class="button vcenter">
+                <div class="searchbar">
+                    <input type="text" placeholder="Search" autocomplete="off" name="search" id="search">
+                </div>
                 <a href="user/login.php">Log in</a>
             </div>
         <?php  } else { ?>
@@ -133,5 +137,9 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
                     dropcontent.style.display = 'none';
                 }
             });
+
+
+            //searchbar 
+            
         });
     </script>
