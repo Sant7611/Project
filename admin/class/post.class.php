@@ -4,7 +4,7 @@ class Post extends Common
 {
     private $conn;
     public $id, $title, $type, $episodes, $status,
-        $source, $producers, $aired, $duration, $alt_title, $slider_key, $featured, $sypnosis, $modified_date, $genre_id,  $studio_id, $release_date, $image_url, $slider_img, $created_date, $limit, $page;
+        $source, $producers, $aired, $duration, $alt_title, $slider_key, $featured, $sypnosis, $modified_date, $genre_id,  $studio_id, $release_date, $image_url, $slider_img, $created_date, $limit, $page, $searchData;
 
     public function __construct()
     {
@@ -578,9 +578,9 @@ class Post extends Common
                 }
             }
         }
-        if($postResults){
+        if ($postResults) {
             return $postResults;
-        }else{
+        } else {
             return false;
         }
     }
@@ -627,5 +627,15 @@ class Post extends Common
 
         $res = $conn->query($sql);
         return $res->num_rows;
+    }
+
+    public function search()
+    {
+        $sql = "select * from post where title like $this->searchData.'%'";
+        if ($this->select($sql))
+            return $this->select($sql);
+        else {
+            return false;
+        }
     }
 }

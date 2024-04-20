@@ -92,7 +92,7 @@
 
         if (!$user_id ) {
             header("HTTP/1.0 400 Bad Request");
-            echo json_encode(["status" => "error", "message" => "Log in to comment $user_id, $post_id, $commentText, $parent_id"]);
+            echo json_encode(["status" => "error", "message" => "Log in to comment"]);
             exit;
         }else{
             if(!$commentText){

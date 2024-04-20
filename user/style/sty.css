@@ -214,11 +214,13 @@ img {
   display: flex;
   width: 100%;
   align-items: center;
+  justify-content: space-between;
   flex-basis: 39%;
 }
 
 .searchbar{
   width: 75%;
+  /* width: 30%; */
 }
 
 .searchbar input {

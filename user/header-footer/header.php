@@ -80,12 +80,13 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
             <li><a href="index.php?#just_added">Just Added</a></li>
             <li> <a href="index.php?#most_popular">Most Popular</a></li>
         </ul>
+        <div class="vcenter">
 
+            <div class="searchbar">
+                <input type="text" placeholder="Search" autocomplete="off" name="search" id="search">
+            </div>
         <?php if (empty($uname)) { ?>
-            <div class="button vcenter">
-                <div class="searchbar">
-                    <input type="text" placeholder="Search" autocomplete="off" name="search" id="search">
-                </div>
+            <div class="button ">
                 <a href="user/login.php">Log in</a>
             </div>
         <?php  } else { ?>
@@ -99,15 +100,16 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
                         <li class="dropdown-menu">
                             <a href="user/logout.php">
                                 <span class="material-icons-outlined">logout</span> Logout</a>
-                        </li>
-                        <li class="dropdown-menu">
-                            <a href="user/changepw.php">
-                                <span class="material-icons-outlined">change_circle</span> Change Password</a>
-                        </li>
-                    </ul>
+                            </li>
+                            <li class="dropdown-menu">
+                                <a href="user/changepw.php">
+                                    <span class="material-icons-outlined">change_circle</span> Change Password</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <?php } ?>
                 </div>
-            </div>
-        <?php } ?>
     </nav>
 
     <script>
@@ -140,6 +142,26 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
 
 
             //searchbar 
-            
+            $('#search').keyup(function(event) {
+                var val = $('#search').val();
+                $.ajax({
+                    url : '../search.php',
+                    method : 'post',
+                    dataType : 'JSON',
+                    data : {searchData : val},
+                    success:function(response){
+                        if(response){
+                            console.log('hello');
+                            console.log(response);
+                        }else{
+                            console.log('error');
+                            // console.log(response.error);
+                        }
+                    },
+                    error: function(xhr, status, error){
+                        
+                    }
+                })
+            })
         });
     </script>
