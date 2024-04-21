@@ -9,9 +9,6 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  background: #1a224b;
-}
 
 .box-main {
   padding: 0 40px;
@@ -207,7 +204,8 @@ img {
   padding: 10px 55px;
   align-items: center;
   justify-content: space-between;
-  background: #225;
+  /* background: #225; */
+  background: #4d4d68;
 }
 
 .vcenter {
@@ -270,7 +268,8 @@ img {
 }
 /* New Release  */
 body {
-  background: #a591f1;
+  /* background: #a591f1; */
+  background: #c0c0c3;
 }
 
 .collection {

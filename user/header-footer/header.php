@@ -140,7 +140,6 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
                 }
             });
 
-
             //searchbar 
             $('#search').keyup(function(event) {
                 var val = $('#search').val();
