@@ -89,6 +89,13 @@ img {
   vertical-align: middle;
 }
 
+.center-align{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 /* .aired {
   display: flex;
   align-items: center;
