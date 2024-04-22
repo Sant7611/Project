@@ -1,10 +1,11 @@
 <?php
 // session_start();
 include_once('admin/class/post.class.php');
+include_once('admin/class/wishlist.class.php');
 
 include('user/header-footer/header.php');
 // include('user/comment/getComment.php');
-
+$wishlist = new Wishlist();
 $post = new Post();
 
 if (isset($_GET['id'])) {
@@ -15,6 +16,14 @@ if (isset($_GET['id'])) {
 $selectedPost = $post->getById();
 // $datalist = $post->sortCreatedDate(6);
 $datalist = $post->recommendation(6);
+
+$wishlist->post_id = $_GET['id'];
+$wishlist->user_id = 19;
+$check = $wishlist->checkWishlist();
+echo '<pre>';
+// echo $check;
+print_r($check);
+echo '</pre>';
 
 
 // echo "<pre>";

@@ -32,7 +32,7 @@ class Wishlist {
         $sql = "select * from post left join wishlist on post.id = wishlist.post_id  where user_id = $this->user_id;";
         $res = mysqli_query($this->conn, $sql);
         if ($res->num_rows > 0) {
-            $data = $res->fetch_object();
+            $data = $res->fetch_all(MYSQLI_ASSOC);
             return $data;
         } else {
             return false;
@@ -40,7 +40,18 @@ class Wishlist {
     }
 
     public function checkWishlist(){
-        $check = $this->fetchById();
-        
+        $checks = $this->fetchById();
+        // return $checks;
+        foreach($checks as $key => $value){
+            echo $value['id'];
+            echo "<pre>";
+            print_r($value);
+            echo "</pre>";
+            // if($value['id'] == $this->post_id){
+            //     return $value;
+            // }else{
+            //     return 'hello not available';
+            // }
+        }
     }
 }
