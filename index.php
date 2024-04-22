@@ -186,7 +186,7 @@ $justlist = $post->sortCreatedDate(12);
             <?php } ?>
         </div>
     </div>
-    <div id="tv_series" class="section">
+    <!-- <div id="tv_series" class="section">
         <div class="head-title">
             <h3>TV Series</h3>
         </div>
@@ -294,7 +294,7 @@ $justlist = $post->sortCreatedDate(12);
 
 
         </div>
-    </div>
+    </div> -->
 </div>
 
 <script>

@@ -25,7 +25,6 @@ class User
 
     public function login()
     {
-        $conn = mysqli_connect("localhost", "root", "", 'anidb');
         $sql = "select * from users where email = '$this->email' and password = '$this->password';";
         $res = mysqli_query($this->conn, $sql);
         // print_r($res);
@@ -34,9 +33,9 @@ class User
             session_start();
             $_SESSION['id'] = $data->id;
             $_SESSION['uname'] = $data->username;
-            if($this->remember){
-                setcookie('uname', $data->username, time() + 28* 24 * 60 * 60, '/');
-            }else{
+            if ($this->remember) {
+                setcookie('uname', $data->username, time() + 28 * 24 * 60 * 60, '/');
+            } else {
                 setcookie('uname', $data->username, time() + 24 * 60 * 60, '/');
             }
             header('location:../index.php');
@@ -45,4 +44,6 @@ class User
             return false;
         }
     }
+
+ 
 }

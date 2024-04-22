@@ -278,8 +278,7 @@ $datalist = $post->recommendation(6);
                     </div>
                 </div>
                 <div class="line">
-                    <button><a href="" class="btn"><span class="material-icons-outlined">assignment</span>Wishlist</a></button>
-                    <button></button>
+                    <button><a href="" class="btn"><span id="bookmark" class="material-icons-outlined">bookmark_border</span>Wishlist</a></button>
                 </div>
                 <div class="description">
                     <h3>Description</h3>
@@ -375,7 +374,7 @@ $datalist = $post->recommendation(6);
                 </form>
             </div>
             <div class="comment">
-                
+
                 <!-- <div class="cmt-count">
                     5 comments
                 </div>
@@ -443,8 +442,7 @@ $datalist = $post->recommendation(6);
 <script>
     $(document).ready(function() {
 
-
-
+        //comment button
         $(document).on('focus', '.write-comment', function() {
             $('.submit-area').css('display', 'flex');
         })
@@ -453,12 +451,14 @@ $datalist = $post->recommendation(6);
         //     $('.submit-area').css('display', 'flex');
         // })
 
+        //comment reply
         $(document).on('click', '.reply', function() {
             var comment_id = $(this).attr("id");
             $('#parent_id').val(comment_id);
             $('#comment_Text').focus();
         });
-
+        
+        var user_ids = $('#user_id').val();
         var cookie = $.cookie('uname');
         var post_id = $('#post_id').val();
         $('#submit_comment_btn').click(function(e) {
@@ -588,36 +588,70 @@ $datalist = $post->recommendation(6);
             return commentHtml;
         }
 
-    });
 
 
-    // event hadnler for like
-    $(document).on('click', '#like', function(e) {
-        updateCount('like');
-    });
-
-    //event handler ofr dislike
-    $(document).on('click', '#dislike', function(e) {
-        updateCount('dislike');
-    });
-
-    //ajax for updateCount
-    function updateCount(value) {
-        $.ajax({
-            url: 'user/comment/updateCount.php',
-            method: 'POST',
-            data: {
-                action: value
-            },
-            success: function(response) {
-
-            },
-
-            error: function(xhr, status, error) {
-                console.log('error:', error);
-            }
+        // event hadnler for like
+        $(document).on('click', '#like', function(e) {
+            updateCount('like');
         });
-    }
+
+        //event handler ofr dislike
+        $(document).on('click', '#dislike', function(e) {
+            updateCount('dislike');
+        });
+
+        //ajax for updateCount
+        function updateCount(value) {
+            $.ajax({
+                url: 'user/comment/updateCount.php',
+                method: 'POST',
+                data: {
+                    action: value
+                },
+                success: function(response) {
+
+                },
+
+                error: function(xhr, status, error) {
+                    console.log('error:', error);
+                }
+            });
+        }
+
+        //Bookmark functionality
+        $('.line').click(function(e) {
+            e.preventDefault();
+            if (!cookie) {
+                alert('Please log in to comment');
+                return;
+            }
+            if ($('#bookmark').text() === 'bookmark') {
+                var status = 'delete';
+                // console.log(status);
+                $('#bookmark').html('bookmark_border');
+            } else {
+                var status = 'insert';
+                // console.log(status);
+                $('#bookmark').html('bookmark');
+            }
+            $.ajax({
+                url: 'user/wishlist.php',
+                method: 'POST',
+                data: {
+                    status: status,
+                    post_id: post_id,
+                    user_id: user_ids
+                },
+                dataType: 'JSON',
+                success: function(response) {
+                    console.log(response.result);
+                },
+                error: function(xhr, status, error) {
+                    console.log('error');
+                }
+            })
+        });
+    });
 </script>
 
 <?php
