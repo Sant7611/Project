@@ -2,6 +2,7 @@
 session_start();
 if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
     $uname = $_SESSION['uname'];
+    $id = $_SESSION['id'];
 }
 ?>
 
@@ -60,7 +61,7 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
     }
 
     .dropdown-menu {
-        border-bottom: 1px solid #eee;
+        /* border-bottom: 1px solid #eee; */
         list-style: none;
     }
 
@@ -85,31 +86,35 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
             <div class="searchbar">
                 <input type="text" placeholder="Search" autocomplete="off" name="search" id="search">
             </div>
-        <?php if (empty($uname)) { ?>
-            <div class="button ">
-                <a href="user/login.php">Log in</a>
-            </div>
-        <?php  } else { ?>
-            <div class="dropdown">
-                <div class="userLogo">
-                    <img src="admin/images/65f186cc25edeattackontitans.jpg" alt="">
+            <?php if (empty($uname)) { ?>
+                <div class="button ">
+                    <a href="user/login.php">Log in</a>
                 </div>
+            <?php  } else { ?>
+                <div class="dropdown">
+                    <div class="userLogo">
+                        <img src="admin/images/65f186cc25edeattackontitans.jpg" alt="">
+                    </div>
 
-                <div class="dropdown-content user-profile">
-                    <ul>
-                        <li class="dropdown-menu">
-                            <a href="user/logout.php">
-                                <span class="material-icons-outlined">logout</span> Logout</a>
-                            </li>
+                    <div class="dropdown-content user-profile">
+                        <ul>
+                            <li class="dropdown-menu"><a href="wishlist.php?id=<?php echo $id;?>">
+                <span class="material-icons-outlined">favorite_border</span>My Wishlist
+                            </a>
+                        </li>
                             <li class="dropdown-menu">
                                 <a href="user/changepw.php">
                                     <span class="material-icons-outlined">change_circle</span> Change Password</a>
-                                </li>
-                            </ul>
-                        </div>
+                            </li>
+                            <li class="dropdown-menu">
+                                <a href="user/logout.php">
+                                    <span class="material-icons-outlined">logout</span> Logout</a>
+                            </li>
+                        </ul>
                     </div>
-                    <?php } ?>
                 </div>
+            <?php } ?>
+        </div>
     </nav>
 
     <script>
@@ -144,21 +149,23 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
             $('#search').keyup(function(event) {
                 var val = $('#search').val();
                 $.ajax({
-                    url : '../search.php',
-                    method : 'post',
-                    dataType : 'JSON',
-                    data : {searchData : val},
-                    success:function(response){
-                        if(response){
+                    url: '../search.php',
+                    method: 'post',
+                    dataType: 'JSON',
+                    data: {
+                        searchData: val
+                    },
+                    success: function(response) {
+                        if (response) {
                             console.log('hello');
                             console.log(response);
-                        }else{
+                        } else {
                             console.log('error');
                             // console.log(response.error);
                         }
                     },
-                    error: function(xhr, status, error){
-                        
+                    error: function(xhr, status, error) {
+
                     }
                 })
             })

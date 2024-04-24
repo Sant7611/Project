@@ -9,10 +9,17 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Align the main container to center  */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .box-main {
   padding: 0 40px;
   height: 100%;
+  width: 1350px;
 }
 
 /* section  */
@@ -89,7 +96,7 @@ img {
   vertical-align: middle;
 }
 
-.center-align{
+.center-align {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -140,7 +147,7 @@ img {
 .slideshow-container {
   /* max-width: 1000px; */
   /* width: 1160px; */
-  height: 485px;
+  height: 570px;
   position: relative;
   margin: auto;
   margin-top: 15px;
@@ -208,7 +215,7 @@ img {
 .navbar {
   font-family: "mukta", sans-serif;
   display: flex;
-  padding: 10px 55px;
+  padding: 10px 40px;
   align-items: center;
   justify-content: space-between;
   /* background: #225; */
@@ -223,7 +230,7 @@ img {
   flex-basis: 39%;
 }
 
-.searchbar{
+.searchbar {
   width: 75%;
   /* width: 30%; */
 }
@@ -283,6 +290,7 @@ body {
   margin-top: 15px;
   /* width: 80%; */
   display: flex;
+  padding: 0 3rem;
   flex-direction: row;
   align-items: center;
   gap: 10px;

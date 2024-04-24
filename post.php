@@ -19,11 +19,10 @@ $datalist = $post->recommendation(6);
 
 $wishlist->post_id = $_GET['id'];
 $wishlist->user_id = 19;
-$check = $wishlist->checkWishlist();
-echo '<pre>';
-// echo $check;
-print_r($check);
-echo '</pre>';
+// echo '<pre>';
+// // echo $check;
+// print_r($check);
+// echo '</pre>';
 
 
 // echo "<pre>";
@@ -287,7 +286,7 @@ echo '</pre>';
                     </div>
                 </div>
                 <div class="line">
-                    <button><a href="" class="btn"><span id="bookmark" class="material-icons-outlined">bookmark_border</span>Wishlist</a></button>
+                    <button><a href="" class="btn"><span id="favorite" class="material-icons-outlined">favorite_border</span>Wishlist</a></button>
                 </div>
                 <div class="description">
                     <h3>Description</h3>
@@ -456,10 +455,6 @@ echo '</pre>';
             $('.submit-area').css('display', 'flex');
         })
 
-        // $('.write-comment').click(function() {
-        //     $('.submit-area').css('display', 'flex');
-        // })
-
         //comment reply
         $(document).on('click', '.reply', function() {
             var comment_id = $(this).attr("id");
@@ -510,7 +505,7 @@ echo '</pre>';
             });
         });
 
-
+        //get comment
         function getComment() {
             $.ajax({
                 url: "user/comment/getComment.php",
@@ -533,6 +528,7 @@ echo '</pre>';
         }
         getComment();
 
+        //display comment
         function displayComment(comments) {
             // console.log(comments);
             var commentArea = $('.comment');
@@ -547,6 +543,7 @@ echo '</pre>';
             });
         }
 
+        // display reply
         function displayReplies(replies, p_username) {
             if (replies && replies.length > 0) {
                 replies.forEach(reply => {
@@ -618,7 +615,7 @@ echo '</pre>';
                     action: value
                 },
                 success: function(response) {
-
+                    console.log('success');
                 },
 
                 error: function(xhr, status, error) {
@@ -627,21 +624,21 @@ echo '</pre>';
             });
         }
 
-        //Bookmark functionality
+        //Wishlist functionality
         $('.line').click(function(e) {
             e.preventDefault();
             if (!cookie) {
-                alert('Please log in to comment');
+                alert('Please log in to add to wishlist');
                 return;
             }
-            if ($('#bookmark').text() === 'bookmark') {
+            if ($('#favorite').text() === 'favorite') {
                 var status = 'delete';
                 // console.log(status);
-                $('#bookmark').html('bookmark_border');
+                $('#favorite').html('favorite_border');
             } else {
                 var status = 'insert';
                 // console.log(status);
-                $('#bookmark').html('bookmark');
+                $('#favorite').html('favorite');
             }
             $.ajax({
                 url: 'user/wishlist.php',
@@ -653,10 +650,11 @@ echo '</pre>';
                 },
                 dataType: 'JSON',
                 success: function(response) {
-                    console.log(response.result);
+                    // console.log(response.result);
+                    console.log(response.msg)
                 },
                 error: function(xhr, status, error) {
-                    console.log('error');
+                    console.log('error: ' , error);
                 }
             })
         });

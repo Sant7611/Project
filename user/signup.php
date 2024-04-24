@@ -20,7 +20,7 @@ if (isset($_POST["submit"])) {
             $userObj->password = $pass1;
             try {
               $res = $userObj->signup();
-              header('location: login.php/message=Signup Successful. Please Login to continue');
+              header('location: login.php?message=Signup Successful. Please Login to continue');
             } catch (mysqli_sql_exception $e) {
               $err['msg'] = "Not available username or email!! Try another";
             }
@@ -96,7 +96,7 @@ if (isset($_POST["submit"])) {
   <script>
     $(document).ready(function() {
       $('#submit').click(function(e) {
-        e.preventDefault();
+        // e.preventDefault();
 
         var uname = $('#username');
         var email = $('#email');

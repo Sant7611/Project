@@ -3,12 +3,12 @@
         <div class="row">
 
             <ul>
-                <li><a href=""> Contact Us</a></li>
+                <li><a href="">Contact Us</a></li>
                 <li><a href="">Privacy Policy</a> </li>
                 <li><a href="">Terms of Services</a> </li>
             </ul>
             <div class="copyright">
-            2022 Nitro Manga. All rights reserved
+            &#169; 2024 Otaku Oasis. All rights reserved
             </div>
         </div>
     </div>
