@@ -1,10 +1,11 @@
 <?php
 
-include_once('../admin/class/post.class.php');
-$post = new $Post;
+// include_once('../admin/class/post.class.php');
+// $post = new $Post;
 
-echo $_POST['searchData'];
-if(isset($_POST['searchData'])){
+$data = ['data' => $_POST['searchData']];
+echo json_encode($data);
+// if(isset($_POST['searchData'])){
     // echo 'santosh';
     // $post->set('searchData', $_POST['search_data']);
 
@@ -15,4 +16,4 @@ if(isset($_POST['searchData'])){
     //     $data = ['status' => 'error', 'msg' => 'No search result found'];
     //     echo json_encode($data);
     // }
-}
+// }

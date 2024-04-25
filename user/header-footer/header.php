@@ -85,6 +85,12 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
 
             <div class="searchbar">
                 <input type="text" placeholder="Search" autocomplete="off" name="search" id="search">
+                <div class="search-result">
+                    <div class="search-data">
+                        <div class="search-data-image"></div>
+                        <div class="search-data-title"></div>
+                    </div>
+                </div>
             </div>
             <?php if (empty($uname)) { ?>
                 <div class="button ">
@@ -149,7 +155,7 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
             $('#search').keyup(function(event) {
                 var val = $('#search').val();
                 $.ajax({
-                    url: '../search.php',
+                    url: 'user/search.php',
                     method: 'post',
                     dataType: 'JSON',
                     data: {
@@ -157,15 +163,15 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
                     },
                     success: function(response) {
                         if (response) {
-                            console.log('hello');
-                            console.log(response);
+                            // console.log('hello');
+                            console.log(response.data);
                         } else {
                             console.log('error');
                             // console.log(response.error);
                         }
                     },
                     error: function(xhr, status, error) {
-
+                        console.log('error', error);
                     }
                 })
             })

@@ -46,6 +46,7 @@ class Wishlist
     {
         $checks = $this->fetchById();
         // return $checks;
+        // $checks = ['name' => 'ram', 'age' => 234];
         foreach ($checks as $key => $value) {
             if ($value['post_id'] == $this->post_id) {
              $status = 1;

@@ -9,7 +9,7 @@ $wishlist->user_id = filter_input(INPUT_POST, "user_id", FILTER_SANITIZE_NUMBER_
 // $status = $_GET['status'];
 // $status = $_POST['status'];
 
-$wishlist->checkWishlist();
+// $data = $wishlist->checkWishlist();
 $data = ['result' => 'delete'];
 echo json_encode($data);
 // echo 'hello';
