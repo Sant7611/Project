@@ -27,7 +27,7 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
 
     <!-- jquery  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- <script src="../../admin/js/jquery/jquery-3.7.1.min.js"></script> -->
+    <!-- <script src="../../jquery-3.7.1.min.js"></script> -->
     <!-- jquery cookie function  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 

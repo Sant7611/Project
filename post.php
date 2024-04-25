@@ -655,6 +655,7 @@ $wishlist->user_id = 19;
                 },
                 error: function(xhr, status, error) {
                     console.log('error: ' , error);
+                    console.log(xhr.responseText)
                 }
             })
         });

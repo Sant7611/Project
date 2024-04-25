@@ -2,6 +2,7 @@
 include('user/header-footer/header.php');
 include('admin/class/wishlist.class.php');
 
+// $id = $_GET['id'];
 $id = $_GET['id'];
 $wishlist = new Wishlist();
 // $datalist = $wishlist->fetchById();
@@ -17,15 +18,14 @@ $wishlist = new Wishlist();
 </div>
 <script>
     $(document).ready(function(e) {
-        
         function fetchWishlist() {
             var user_id = $('#user_id').val();
             $.ajax({
-                url: 'user/wishlist.php',
+                url: 'user/checkWishlist.php',
                 method: 'POST',
                 data: {
-                    user_id: user_id,
-                    status: 'fetchById'
+                    user_id: user_id
+                    // status: 'fetchById'
                 },
                 dataType: 'JSON',
                 success: function(response) {
