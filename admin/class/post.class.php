@@ -631,7 +631,7 @@ class Post extends Common
 
     public function search()
     {
-        $sql = "select * from post where title like $this->searchData.'%'";
+        $sql = "select * from post where title like '{$this->searchData}%';";
         if ($this->select($sql))
             return $this->select($sql);
         else {

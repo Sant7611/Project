@@ -29,8 +29,8 @@ $wishlist = new Wishlist();
                 },
                 dataType: 'JSON',
                 success: function(response) {
-                    console.log(response.result);
-                    console.log(response);
+                    // console.log(response.result);
+                    // console.log(response);
                 },
                 error: function(xhr, status, error) {
                     console.log('error:', error);

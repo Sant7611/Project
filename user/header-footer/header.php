@@ -68,6 +68,48 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
     .dropdown-menu a:hover {
         background: #ae7eeb;
     }
+
+    /* search bar */
+    .search-result {
+        display: none;
+        overflow: auto;
+        padding: 5px;
+        max-height: 300px;
+        position: absolute;
+        z-index: 2;
+        background: #eee;
+        width: 465px;
+        top: 50px;
+        scrollbar-width: thin;
+        right: 70px;
+        border-radius: 5px;
+    }
+
+    .search-data {
+
+        display: flex;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    .search-data:hover {
+        background: #c9c5c5;
+    }
+
+    .search-data-image>.search-img {
+        vertical-align: middle;
+        height: 4rem;
+        object-fit: cover;
+        width: 2.6rem;
+    }
+
+    .search-data-title {
+        padding: 0px 0 0 10px;
+    }
+
+    .sub-text {
+        color: #8d8d8d;
+    }
 </style>
 
 <body>
@@ -86,10 +128,7 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
             <div class="searchbar">
                 <input type="text" placeholder="Search" autocomplete="off" name="search" id="search">
                 <div class="search-result">
-                    <div class="search-data">
-                        <div class="search-data-image"></div>
-                        <div class="search-data-title"></div>
-                    </div>
+
                 </div>
             </div>
             <?php if (empty($uname)) { ?>
@@ -104,10 +143,10 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
 
                     <div class="dropdown-content user-profile">
                         <ul>
-                            <li class="dropdown-menu"><a href="wishlist.php?id=<?php echo $id;?>">
-                <span class="material-icons-outlined">favorite_border</span>My Wishlist
-                            </a>
-                        </li>
+                            <li class="dropdown-menu"><a href="wishlist.php?id=<?php echo $id; ?>">
+                                    <span class="material-icons-outlined">favorite_border</span>My Wishlist
+                                </a>
+                            </li>
                             <li class="dropdown-menu">
                                 <a href="user/changepw.php">
                                     <span class="material-icons-outlined">change_circle</span> Change Password</a>
@@ -124,20 +163,46 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
     </nav>
 
     <script>
-        // document.addEventListener("DOMContentLoaded", function() {
-        //     var dropdown = document.querySelector('.dropdown');
-        //     var dropcontent = dropdown.querySelector('.dropdown-content');
-        //     dropdown.addEventListener("click", (event) => {
-        //         dropcontent.style.display = dropcontent.style.display === 'block' ? 'none' : 'block';
-        //     });
-        //     document.addEventListener('click', (event) => {
-        //         if (!dropcontent.contains(event.target)) {
-        //             dropcontent.style.display = 'none';
-        //         }
-        //     });
-        // });
-
+        //searchbar 
         document.addEventListener("DOMContentLoaded", function() {
+            $('#search').keyup(function(event) {
+                var val = $('#search').val().trim();
+                $.ajax({
+                    url: 'user/search.php',
+                    // url: 'user/search.php',
+                    method: 'post',
+                    data: {
+                        searchData: val
+                    },
+                    // dataType: 'JSON',
+                    success: function(response) {
+                        // displaySearch(response);
+                        $('.search-result').empty();
+                        if (response.length > 0) {
+                            $('.search-result').append(response);
+                        }
+                        // else {
+                        //     $('.search-result').append('<span>No search result found </span>');
+                        // }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('error:', error);
+                    }
+                });
+
+                // $('#search').on('click', function(event) {
+                //     var searchData = $('.search-result');
+                //     if (!searchData.contains(event)) {
+                //         searchData.css(display, 'none');
+                //     }
+                // });
+                var search = document.querySelector('.searchbar');
+                var searchData = document.querySelector('.search-result');
+                toggleDisplay(search, searchData);
+                $('.search-result').css({'display' : 'block'});
+
+            });
+
             var dropdown = document.querySelector('.dropdown');
             var dropcontent = dropdown.querySelector('.dropdown-content');
 
@@ -145,35 +210,24 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
                 dropcontent.style.display = dropcontent.style.display === 'block' ? 'none' : 'block';
             });
 
-            document.addEventListener('click', (event) => {
-                if (!dropdown.contains(event.target)) {
-                    dropcontent.style.display = 'none';
-                }
-            });
-
-            //searchbar 
-            $('#search').keyup(function(event) {
-                var val = $('#search').val();
-                $.ajax({
-                    url: 'user/search.php',
-                    method: 'post',
-                    dataType: 'JSON',
-                    data: {
-                        searchData: val
-                    },
-                    success: function(response) {
-                        if (response) {
-                            // console.log('hello');
-                            console.log(response.data);
-                        } else {
-                            console.log('error');
-                            // console.log(response.error);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.log('error', error);
+            function toggleDisplay(className, subClassName) {
+                document.addEventListener('click', (event) => {
+                    if (!className.contains(event.target)) {
+                        subClassName.style.display = 'none';
+                        document.getElementById('search').value = "";
                     }
-                })
-            })
+
+                });
+            }
+
+            toggleDisplay(dropdown, dropcontent);
+
+            // document.addEventListener('click', (event) => {
+            //     if (!dropdown.contains(event.target)) {
+            //         dropcontent.style.display = 'none';
+            //     }
+            // });
+
+
         });
     </script>
