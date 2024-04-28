@@ -1,6 +1,5 @@
 <?php
 session_start();
-session_destroy();
 setcookie('uname', '', time() - 60 *60);
-
+session_destroy();
 header('location:../index.php');

@@ -1,10 +1,9 @@
 <?php
 // session_start();
-include_once('admin/class/post.class.php');
-include_once('admin/class/wishlist.class.php');
+include('admin/class/post.class.php');
+include('admin/class/wishlist.class.php');
 
 include('user/header-footer/header.php');
-// include('user/comment/getComment.php');
 $wishlist = new Wishlist();
 $post = new Post();
 
@@ -17,232 +16,14 @@ $selectedPost = $post->getById();
 // $datalist = $post->sortCreatedDate(6);
 $datalist = $post->recommendation(6);
 
-$wishlist->post_id = $_GET['id'];
-$wishlist->user_id = 19;
-// echo '<pre>';
-// // echo $check;
-// print_r($check);
-// echo '</pre>';
-
-
-// echo "<pre>";
-// print_r($selectedPost);
-// echo "</pre>";
-
-
-
-// $studioList = explode(',', $selectedPost->studio);
-
+$check = 0;
+if (isset($_SESSION['id'])) {
+    $wishlist->post_id = $_GET['id'];
+    $wishlist->user_id = $_SESSION['id'];
+    $check = $wishlist->checkWishlist();
+}
 ?>
-<!-- <style>
-    .post-head {
-        /* display: flex; */
-        /* justify-content: space-between; */
-        width: 100%;
-        padding: 25px 0 25px 0px;
-    }
-
-    .post-head span {
-        /* border-right: 1px solid #eee; */
-        padding: 0px 40px 5px 0;
-        font-size: 14px;
-        font-weight: 500;
-        display: inline-block;
-        font-family: "Nunito";
-    }
-
-    .post-syp {
-        width: 95%;
-        padding-left: 390px;
-        text-align: left;
-        /* margin-top: 5px; */
-        font-family: "Mukta";
-        font-weight: 300;
-        margin-top: 10px;
-    }
-
-    .post-syp h3 {
-        padding-top: 5px;
-        border-top: 1px solid #eee;
-    }
-
-    .tags-container {
-        margin-top: 4px;
-        padding-bottom: 15px;
-    }
-
-    .alt-title {
-        /* display: inline; */
-        color: #b9b9b9;
-        font-size: 14px;
-        display: inline-block;
-        width: 800px;
-        line-height: 20px;
-    }
-
-    .background-img .img-title {
-        position: absolute;
-        top: 27px;
-        left: 290px;
-        /* line-height: 55px; */
-        color: #fff;
-        font-family: "Mukta";
-        font-size: 20px;
-    }
-
-    .line button {
-        border: none;
-        border-radius: 5px;
-        overflow: hidden;
-    }
-
-    button a {
-        display: inline-block;
-        padding: 7px 77px;
-        color: #eee;
-        background: #6c4f8b;
-        font-weight: 400;
-        font-family: 'Nunito';
-        text-decoration: none;
-        font-size: 18px;
-        /* border-color: blue; */
-        display: flex
-    }
-
-    .btn:hover {
-        background: #755e9f;
-    }
-
-
-    /* comment Section  */
-
-    .comment-section {
-        /* height: 400px; */
-        color: #b9b9b9;
-        font-family: 'Nunito';
-        font-weight: 400;
-    }
-
-    .comments-gallery {
-        overflow: scroll;
-        scrollbar-width: none;
-        /* margin-bottom: 41px; */
-        color: #b3b3b3;
-        padding: 0 30px;
-    }
-
-    .comments {
-        position: relative;
-        /* background: #eee; */
-        margin-bottom: 70px;
-    }
-
-    .write-comment {
-        /* position: fixed; */
-        background: #0e121f;
-        padding: 8px;
-        /* border: 1px solid black; */
-        width: 100%;
-    }
-
-    textarea {
-        resize: vertical;
-        background: #141723;
-        width: 100%;
-        height: 50px;
-        outline: 1px solid #9b9b9b;
-        color: #acaeaf;
-        padding: 15px 12px;
-        /* border-inline: none; */
-        scrollbar-width: none;
-        border-radius: 6px;
-    }
-
-    textarea:focus-visible {
-        outline: 1px solid #eee;
-    }
-
-    .user {
-        /* background: #ccc; */
-        /* border: 1px solid pink; */
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 10px 5px;
-    }
-
-    .user img {
-        height: 35px;
-        width: 35px;
-        border-radius: 70%;
-    }
-
-    .user-area {
-        padding: 10px 0;
-        border-top: 1px solid #232323;
-    }
-
-    .user-detail {
-        padding: 0px 16px;
-    }
-
-    .user-name {
-        font-size: 15px;
-        font-weight: 600;
-        font-family: 'Nunito';
-    }
-
-    .cmt-time {
-        font-size: 12px;
-        color: #898585;
-    }
-
-    .cmt-response {
-        padding-left: 58px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-    }
-
-    .cmt-response span {
-        flex-basis: 5%;
-        cursor: pointer;
-    }
-
-    .thumb:hover {
-        color: #fff;
-    }
-
-    .submit-area {
-        display: none;
-        justify-content: flex-end;
-        align-items: center;
-        padding-right: 2px;
-    }
-
-    .submit-comment-btn {
-        padding: 7px 17px;
-        background: #2c2b2b;
-        color: #eee;
-        cursor: pointer;
-        border: none;
-        border-radius: 6px;
-    }
-
-    .reply:hover {
-        color: #fff;
-    }
-
-    .submit-comment-btn:hover {
-        background: #373738;
-    }
-
-    .reply-area {
-        padding-left: 50px;
-    }
-</style> -->
-<!-- Add this line inside the <head> tag of your HTML file -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
 
 <div class="overview">
     <div class="background-img overlay">
@@ -285,8 +66,12 @@ $wishlist->user_id = 19;
                         <span>Rating:</span><span><?php echo 'Rating'; ?></span>
                     </div>
                 </div>
-                <div class="line">
-                    <button><a href="" class="btn"><span id="favorite" class="material-icons-outlined">favorite_border</span>Wishlist</a></button>
+                <div id="wishlist" class="line ">
+                    <?php if ($check == 1) { ?>
+                        <button><a href="javascript:void(0)" class="btn"><span id="favorite" class="material-icons-outlined">favorite</span>Wishlist</a></button>
+                    <?php } else { ?>
+                        <button><a href="javascript:void(0)" class="btn"><span id="favorite" class="material-icons-outlined">favorite_border</span>Wishlist</a></button>
+                    <?php } ?>
                 </div>
                 <div class="description">
                     <h3>Description</h3>
@@ -383,66 +168,6 @@ $wishlist->user_id = 19;
             </div>
             <div class="comment">
 
-                <!-- <div class="cmt-count">
-                    5 comments
-                </div>
-                <div class="user-area">
-                    <div class="user">
-                        <img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">
-                        <div class="user-detail">
-                            <div class="user-name">
-                                <span>Santosh Bohara</span>
-                                <span class="cmt-time">6 hrs ago</span>
-                            </div>
-                            <div class="user-comment">
-                                <p>This is great !!!!!!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cmt-response">
-                        <span class="thumb material-icons-outlined">thumb_up</span>
-                        <span class="thumb material-icons-outlined">thumb_down</span>
-                        <span class="reply">Reply</span>
-                    </div>
-                </div>
-                <div class="user-area">
-                    <div class="user">
-                        <img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">
-                        <div class="user-detail">
-                            <div class="user-name">
-                                <span>Santosh Bohara</span>
-                                <span class="cmt-time">6 hrs ago</span>
-                            </div>
-                            <div class="user-comment">
-                                <p>This is great !!!!!!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cmt-response">
-                        <span class="material-icons-outlined">thumb_up</span>
-                        <span class="material-icons-outlined">thumb_down</span>
-                        <span>Reply</span>
-                    </div>
-                </div>
-                <div class="user-area">
-                    <div class="user">
-                        <img src="admin/images/65f32703c2ce6onepiece.jpg" alt="">
-                        <div class="user-detail">
-                            <div class="user-name">
-                                <span>Santosh Bohara</span>
-                                <span class="cmt-time">6 hrs ago</span>
-                            </div>
-                            <div class="user-comment">
-                                <p>This is great !!!!!!</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="cmt-response">
-                        <span class="material-icons-outlined">thumb_up</span>
-                        <span class="material-icons-outlined">thumb_down</span>
-                        <span>Reply</span>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
@@ -461,16 +186,18 @@ $wishlist->user_id = 19;
             $('#parent_id').val(comment_id);
             $('#comment_Text').focus();
         });
-        
+
         var user_ids = $('#user_id').val();
         var cookie = $.cookie('uname');
+        console.log(cookie);
+
         var post_id = $('#post_id').val();
         $('#submit_comment_btn').click(function(e) {
             e.preventDefault();
-            if (!cookie) {
-                alert('Please log in to comment');
-                return;
-            }
+            // if (!cookie) {
+            //     alert('Please log in to comment');
+            //     return;
+            // }
             var ucomment = $('#comment_Text').val();
             var post_ids = $('#post_id').val();
             var parent_ids = $('#parent_id').val();
@@ -625,39 +352,42 @@ $wishlist->user_id = 19;
         }
 
         //Wishlist functionality
-        $('.line').click(function(e) {
+        $('#wishlist').click(function(e) {
             e.preventDefault();
-            if (!cookie) {
+            if (!user_ids) {
                 alert('Please log in to add to wishlist');
                 return;
-            }
-            if ($('#favorite').text() === 'favorite') {
-                var status = 'delete';
-                // console.log(status);
-                $('#favorite').html('favorite_border');
             } else {
-                var status = 'insert';
-                // console.log(status);
-                $('#favorite').html('favorite');
-            }
-            $.ajax({
-                url: 'user/wishlist.php',
-                method: 'POST',
-                data: {
-                    status: status,
-                    post_id: post_id,
-                    user_id: user_ids
-                },
-                dataType: 'JSON',
-                success: function(response) {
-                    // console.log(response.result);
-                    console.log(response.msg)
-                },
-                error: function(xhr, status, error) {
-                    console.log('error: ' , error);
-                    console.log(xhr.responseText)
+                if ($('#favorite').text() === 'favorite') {
+                    var status = 'delete';
+                    $('#favorite').html('favorite_border');
+                } else {
+                    var status = 'insert';
+                    // console.log(status);
+                    $('#favorite').html('favorite');
                 }
-            })
+                // console.log(status, user_ids, post_id);
+                $.ajax({
+                    url: 'user/checkWishlist.php',
+                    method: 'POST',
+                    data: {
+                        status: status,
+                        post_id: post_id,
+                        user_id: user_ids
+                    },
+                    // dataType: 'JSON',
+                    success: function(response) {
+                        // console.log(response.result);
+                        var result = JSON.parse(response);
+                        console.log(result.message)
+                        alert(result.message);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('error: ', error);
+                        // console.log(xhr.responseText)
+                    }
+                })
+            }
         });
     });
 </script>

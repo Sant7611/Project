@@ -1,8 +1,14 @@
 <div class="sidebar">
     <div class="sidebar-inner">
         <div class="sidebar-inner-i">
+            <div class="searchbar center-align">
+                <input type="text" placeholder="Search" autocomplete="off" name="search" id="search">
+            </div>
+        </div>
+        <div class="sidebar-inner-i">
             <div class="dropdown-topic">
                 <ul>
+
                     <li class="dropdown">
                         <a href="dashboard.php">
                             <div class="icon-space">
@@ -113,6 +119,26 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(event) {
+        $('#search').keyup(function(e) {
+            var search = $('#search').val();
+            $.ajax({
+                url: 'searchbar.php',
+                method: 'post',
+                data: {
+                    searchValue: search
+                },
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.log('error:', error);
+                }
+            })
+        })
+    });
+</script>
 <?php
 include('header_footer/footer.php')
 ?>

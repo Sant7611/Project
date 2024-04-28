@@ -10,8 +10,8 @@ $wishlist = new Wishlist();
 ?>
 <div class="container">
     <div class="box-main">
+        <input type="hidden" name="user_id" id="user_id" value="<?php echo $id; ?>">
         <div class="collection">
-            <input type="hidden" name="user_id" id="user_id" value="<?php echo $id; ?>">
 
         </div>
     </div>
@@ -25,12 +25,12 @@ $wishlist = new Wishlist();
                 method: 'POST',
                 data: {
                     user_id: user_id
-                    // status: 'fetchById'
                 },
-                dataType: 'JSON',
+                // dataType: 'JSON',
                 success: function(response) {
                     // console.log(response.result);
-                    // console.log(response);
+                    $('.collection').append(response);
+                    console.log(response);
                 },
                 error: function(xhr, status, error) {
                     console.log('error:', error);

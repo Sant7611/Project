@@ -19,7 +19,8 @@ html {
 .box-main {
   padding: 0 40px;
   height: 100%;
-  width: 1350px;
+  /* width: 1350px; */
+  width: 100%;
 }
 
 /* section  */
@@ -147,7 +148,7 @@ html {
 .slideshow-container {
   /* max-width: 1000px; */
   /* width: 1160px; */
-  height: 570px;
+  max-height: 520px;
   position: relative;
   margin: auto;
   margin-top: 15px;
@@ -303,8 +304,12 @@ body {
   border-radius: 7px;
   flex: 0 0 160px;
   text-align: center;
-  height: 338px;
+  min-height: 310px;
   position: relative;
+}
+
+.gallery>a{
+  text-decoration: none;
 }
 
 .gallery-overlay {

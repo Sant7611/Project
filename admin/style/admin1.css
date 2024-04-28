@@ -24,6 +24,15 @@
   align-items: center;
 }
 
+/* search-bar center  */
+.center-align {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #aaa;
+}
+
 /* User  */
 .user {
   position: absolute;
@@ -48,7 +57,7 @@ body {
   border-radius: 6px;
 }
 
-.btn-submit{
+.btn-submit {
   margin: 0;
   margin-left: 2px;
   border-radius: 5px;
@@ -58,7 +67,6 @@ body {
   padding: 3px 3px;
   width: inherit;
 }
-
 
 .btn-success {
   color: #fff;
@@ -242,7 +250,7 @@ body {
 .sidebar-inner {
   /* margin-top: 50px; */
   /* height: 100vh; */
-  padding-top: 42px;
+  padding-top: 10px;
   width: 100%;
   background-color: rgb(208 205 245);
   /* background: rgb(182 177 253); */
@@ -284,9 +292,8 @@ table tr:nth-child(even) {
 }
 
 .panel-body {
-  width: 936px;
   overflow-x: scroll;
-  margin-left: 20px;
+  margin: 0 20px;
   position: relative;
 }
 

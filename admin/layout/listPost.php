@@ -27,19 +27,6 @@ if (isset($_SESSION['message']) && $_SESSION['message'] != "") {
 $totalPost = $postObj->allPost();
 $totalPages = ceil($totalPost / 5);
 
-// echo "<pre>";
-// print_r($totalPost);
-// echo "</pre>";
-// if (isset($_SESSION['msg']) && $_SESSION['msg'] != "") {
-//     $successMessage = $_SESSION['msg'];
-//     $_SESSION['msg'] = "";
-// }
-
-
-// echo "<pre><div style='background: #000; position:absolute; bottom: -800; color: #fff; z-index : 1;'>";
-// print_r($dataList);
-// echo "</div></pre>";
-
 ?>
 
 <div id="page-wrapper">

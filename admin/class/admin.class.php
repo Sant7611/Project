@@ -45,5 +45,9 @@ class Admin
         }
     }
 
+    public function Search(){
+        $sql = "select "        
+    }
+
     
 }
