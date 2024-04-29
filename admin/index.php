@@ -35,11 +35,9 @@ if (isset($_POST['submit'])) {
 
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
 
-
 </head>
 
 <body>
-
     <div class="container">
         <div class="head">
             <h2> Admin Login Panel</h2>
@@ -64,10 +62,7 @@ if (isset($_POST['submit'])) {
             </div>
             <!-- <input type="submit" name="submit"  class="btn"> -->
             <button type="submit" class="btn" name="submit">Submit</button>
-            <div class="text">
-                <p>Forgot password? <a href="reset_pwd.php"> Click here</a></p>
-                <p>Don't have an account? <a href="signup.php"> Create one</a></p>
-            </div>
+            
         </form>
     </div>
     <style>
@@ -98,7 +93,7 @@ if (isset($_POST['submit'])) {
             text-align: center;
         }
     </style>
-    <script src="js/jqueryt/jquery.validate.min.js"></script>
+    <script src="js/jquery/jquery.validate.min.js"></script>
     <script src="js/jquery/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
