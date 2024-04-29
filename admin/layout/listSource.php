@@ -33,9 +33,6 @@ if (isset($_SESSION['message']) && $_SESSION['message'] != "") {
             <div>
                 <h1 class="page-header">List Source</h1>
             </div>
-            <div class="searchbar">
-                <input type="text" placeholder="Search" autocomplete="off" name="search" id="search">
-            </div>
         </div>
         <table>
             <tr>

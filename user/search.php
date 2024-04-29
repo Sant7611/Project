@@ -18,14 +18,16 @@ $res = $post->search();
 if (gettype($res) == 'array') {
     foreach ($res as $key => $value) {
 ?>
-        <div class="search-data ">
-            <div class="search-data-image">
-                <img src="admin/images/<?php echo $value['image_url'] ?>" class="search-img"  alt="" srcset="">
-            </div>
-            <div class="search-data-title">
-                <h3><?php echo $value['title']; ?></h3>
-                <h5 class="sub-text"><?php echo $value['type'] ?></h5>
-            </div>
+        <div class=>
+            <a href="post.php?id=<?php echo $value['id'] ?>" class="search-data">
+                <div class="search-data-image">
+                    <img src="admin/images/<?php echo $value['image_url'] ?>" class="search-img" alt="" srcset="">
+                </div>
+                <div class="search-data-title">
+                    <h3><?php echo $value['title']; ?></h3>
+                    <h5 class="sub-text"><?php echo $value['type'] ?></h5>
+                </div>
+            </a>
         </div>
 
     <?php }

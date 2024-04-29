@@ -122,14 +122,18 @@
 <script>
     $(document).ready(function(event) {
         $('#search').keyup(function(e) {
+
             var search = $('#search').val();
             $.ajax({
-                url: 'searchbar.php',
+                url: 'search.php',
                 method: 'post',
                 data: {
-                    searchValue: search
+                    searchText: search
                 },
+                // dataType:'JSON',
                 success: function(response) {
+                    $('#page-wrapper').empty();
+                    $('#page-wrapper').append(response);
                     console.log(response);
                 },
                 error: function(xhr, status, error) {

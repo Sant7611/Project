@@ -34,9 +34,6 @@ if (isset($_GET['msg'])) {
             <div>
                 <h1 class="page-header">List Studio</h1>
             </div>
-            <div class="searchbar">
-                <input type="text" placeholder="Search" autocomplete="off" name="search" id="search">
-            </div>
         </div>
         <table>
             <tr>

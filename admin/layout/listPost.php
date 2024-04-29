@@ -43,9 +43,7 @@ $totalPages = ceil($totalPost / 5);
             <div>
                 <h1 class="page-header">List Post</h1>
             </div>
-            <div class="searchbar">
-                <input type="text" placeholder="Search" autocomplete="off" name="search" id="search">
-            </div>
+            
         </div>
     </div>
     <!-- <div class="row"> -->
@@ -103,16 +101,15 @@ $totalPages = ceil($totalPost / 5);
                 <?php  } ?>
             </tbody>
         </table>
-    </div>
-    <div class="row">
-        <div class="pagination">
-            <span class="pagination-title">Page: </span>
-            <ul class="pageList">
-                <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
-                    <li><a class="pageNumbers <?php echo $i == $page ? 'active' : ''; ?>" href="listPost.php?page=<?php echo $i ?>" data-page="<?php echo $i; ?>"><?php echo $i; ?></a></li>
-                <?php } ?>
-
-            </ul>
+        <div class="row">
+            <div class="pagination">
+                <span class="pagination-title">Page: </span>
+                <ul class="pageList">
+                    <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
+                        <li><a class="pageNumbers <?php echo $i == $page ? 'active' : ''; ?>" href="listPost.php?page=<?php echo $i ?>" data-page="<?php echo $i; ?>"><?php echo $i; ?></a></li>
+                    <?php } ?>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
@@ -135,8 +132,6 @@ $totalPages = ceil($totalPost / 5);
             this.classList.add('active');
         });
     });
-
-    
 </script>
 <?php
 include('header_footer/footer.php');
