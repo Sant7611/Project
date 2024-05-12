@@ -453,6 +453,7 @@ body {
   border-radius: 7px;
   padding: 1px 9px;
   margin: 3px;
+  text-align: center;
   display: inline-block;
   font-family: "Mukta";
 }
@@ -611,7 +612,7 @@ body {
 .post-head {
   /* display: flex; */
   /* justify-content: space-between; */
-  width: 100%;
+  width: 50%;
   padding: 10px 0 0 0px;
 }
 
@@ -624,7 +625,15 @@ body {
   font-family: "Nunito";
 }
 
+.rating{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+
 .post-syp {
+  /* display: flex; */
   width: 95%;
   padding-left: 390px;
   text-align: left;
@@ -636,6 +645,10 @@ body {
 
 .post-syp h3 {
   padding-top: 5px;
+}
+
+.post-details{
+  display: flex;
 }
 
 .tags-container {

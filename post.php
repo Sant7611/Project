@@ -42,28 +42,41 @@ if (isset($_SESSION['id'])) {
         </div>
         <div class="post-desc">
             <div class="post-syp">
-                <div class="post-head">
+                <div class="post-details">
+                    <div class="post-head">
 
-                    <div>
-                        <span>Episodes: </span> <span><?php echo $selectedPost->episodes; ?></span>
-                    </div>
-                    <div>
-                        <span>Type: </span> <span class="center"><?php if ($selectedPost->type == 'TV Series') {
-                                                                        // echo '<i class=" material-icons-outlined ">tv</i> ';
-                                                                    }
-                                                                    echo $selectedPost->type; ?></span>
-                    </div>
-                    <div>
-                        <span>Duration :</span>
-                        <span><?php echo $selectedPost->duration; ?></span>
-                    </div>
-                    <div>
-                        <span>Released:</span>
-                        <span class="center"><?php echo substr($selectedPost->aired, 0, 4) ?></span>
-                    </div>
-                    <div>
+                        <div>
+                            <span>Episodes: </span> <span><?php echo $selectedPost->episodes; ?></span>
+                        </div>
+                        <div>
+                            <span>Type: </span> <span class="center"><?php if ($selectedPost->type == 'TV Series') {
+                                                                            // echo '<i class=" material-icons-outlined ">tv</i> ';
+                                                                        }
+                                                                        echo $selectedPost->type; ?></span>
+                        </div>
+                        <div>
+                            <span>Duration :</span>
+                            <span><?php echo $selectedPost->duration; ?></span>
+                        </div>
+                        <div>
+                            <span>Released:</span>
+                            <span class="center"><?php echo substr($selectedPost->aired, 0, 4) ?></span>
+                        </div>
+                        <div>
 
-                        <span>Rating:</span><span><?php echo 'Rating'; ?></span>
+                            <span>Rating:</span><span><?php echo 'Rating'; ?></span>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <div class="stars">
+                            <!-- <i class="fa fa-star fa-2x" style = "background: #000;"></i> -->
+                            <span class="material-icons-outlined star" data-index="0">star</span>
+                            <span class="material-icons-outlined star" data-index="1">star</span>
+                            <span class="material-icons-outlined star" data-index="2">star</span>
+                            <span class="material-icons-outlined star" data-index="3">star</span>
+                            <span class="material-icons-outlined star" data-index="4">star</span>
+                        </div>
+                        <span class="tags">Rate</span>
                     </div>
                 </div>
                 <div id="wishlist" class="line ">
@@ -321,34 +334,33 @@ if (isset($_SESSION['id'])) {
             return commentHtml;
         }
 
+        //Rating functionality
+        var ratedIndex = -1;
 
-
-        // event hadnler for like
-        $(document).on('click', '#like', function(e) {
-            updateCount('like');
+        $('.star').on('click', function() {
+            ratedIndex = $(this).data('index');
         });
 
-        //event handler ofr dislike
-        $(document).on('click', '#dislike', function(e) {
-            updateCount('dislike');
+        $('.star').mouseover(function() {
+            resetStarColor();
+            var starIndex = parseInt($(this).data('index'));
+            for (var i = 0; i <= starIndex; i++)
+                $('.star:eq(' + i + ')').css('color', 'yellow');
         });
 
-        //ajax for updateCount
-        function updateCount(value) {
-            $.ajax({
-                url: 'user/comment/updateCount.php',
-                method: 'POST',
-                data: {
-                    action: value
-                },
-                success: function(response) {
-                    console.log('success');
-                },
 
-                error: function(xhr, status, error) {
-                    console.log('error:', error);
-                }
-            });
+        $('.star').mouseleave(function() {
+            resetStarColor();
+
+            if (ratedIndex != -1) {
+                for (var i = 0; i <= ratedIndex; i++)
+                    $('.star:eq(' + i + ')').css('color', 'yellow');
+            }
+        });
+
+
+        function resetStarColor() {
+                $('.star').css('color', 'white');
         }
 
         //Wishlist functionality
