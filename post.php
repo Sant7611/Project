@@ -339,6 +339,17 @@ if (isset($_SESSION['id'])) {
 
         $('.star').on('click', function() {
             ratedIndex = $(this).data('index');
+            $.ajax({
+                url: '',
+                method:'POST',
+                data:{'userid' : user_ids, 'rate' : ratedIndex},
+                success: function(response){
+                    console.log(response);
+                },
+                error: function(xhr, status, error){
+                    console.log('error: ', error);
+                }
+            });
         });
 
         $('.star').mouseover(function() {
