@@ -2,7 +2,6 @@
 include('user/header-footer/header.php');
 include('admin/class/wishlist.class.php');
 
-// $id = $_GET['id'];
 $id = $_GET['id'];
 $wishlist = new Wishlist();
 // $datalist = $wishlist->fetchById();
