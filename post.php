@@ -64,7 +64,7 @@ if (isset($_SESSION['id'])) {
                         </div>
                         <div>
 
-                            <span>Rating:</span><span><?php echo 'Rating'; ?></span>
+                            <span>Rating:</span><span class="avgRating">No rating for this post</span>
                         </div>
                     </div>
                     <div class="rating">
@@ -335,28 +335,12 @@ if (isset($_SESSION['id'])) {
         }
 
         //Rating functionality
-        var ratedIndex = -1;
-
-        $('.star').on('click', function() {
-            ratedIndex = $(this).data('index');
-            $.ajax({
-                url: '',
-                method:'POST',
-                data:{'userid' : user_ids, 'rate' : ratedIndex},
-                success: function(response){
-                    console.log(response);
-                },
-                error: function(xhr, status, error){
-                    console.log('error: ', error);
-                }
-            });
-        });
-
         $('.star').mouseover(function() {
             resetStarColor();
             var starIndex = parseInt($(this).data('index'));
-            for (var i = 0; i <= starIndex; i++)
-                $('.star:eq(' + i + ')').css('color', 'yellow');
+            // for (var i = 0; i <= starIndex; i++)
+            //     $('.star:eq(' + i + ')').css('color', 'yellow');
+            setStarColor(starIndex);
         });
 
 
@@ -364,11 +348,46 @@ if (isset($_SESSION['id'])) {
             resetStarColor();
 
             if (ratedIndex != -1) {
-                for (var i = 0; i <= ratedIndex; i++)
-                    $('.star:eq(' + i + ')').css('color', 'yellow');
+                // for (var i = 0; i <= ratedIndex; i++)
+                //     $('.star:eq(' + i + ')').css('color', 'yellow');
+                setStarColor(ratedIndex);
             }
         });
 
+        function setStarColor(index){
+            for (var i = 0; i <= index; i++)
+                    $('.star:eq(' + i + ')').css('color', 'yellow');
+            
+        }
+        
+        var ratedIndex = -1;
+        $('.star').on('click', function() {
+            ratedIndex = parseInt($(this).data('index'));
+            rating();
+        });
+
+        
+        function rating(){
+            $.ajax({
+                url: 'user/rate.php',
+                method:'POST',
+                dataType : 'JSON',
+                data:{'userid' : user_ids, 'rate' : ratedIndex, 'postid' : post_id},
+                success: function(response){
+                    console.log(response);
+                    avgRating = response.rating;
+                    rateIndex = response.curRating;
+
+                    setStarColor(rateIndex);
+                    $('.avgRating').html(avgRating);
+                },
+                error: function(xhr, status, error){
+                    console.log('error: ', error);
+                }
+            });
+        }
+        
+        rating();
 
         function resetStarColor() {
                 $('.star').css('color', 'white');
