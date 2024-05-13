@@ -28,6 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     $output = $conn->query("select round(avg(rate), 2) as rating from rating where post_id = $postid;");
     $message = $output->fetch_assoc();
-    $result = ['status' => 'success', 'message' => 'Thank you for rating', 'rating' => $message['rating']];
+    if(isset($curRating['rate'])){
+        $result = ['status' => 'success', 'rating' => $message['rating'], 'curRating' => --$curRating['rate']];
+    }else{
+        $result = ['status' => 'success', 'rating' => $message['rating']];
+    }
     echo json_encode($result);
 }

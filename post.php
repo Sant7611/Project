@@ -76,7 +76,7 @@ if (isset($_SESSION['id'])) {
                             <span class="material-icons-outlined star" data-index="3">star</span>
                             <span class="material-icons-outlined star" data-index="4">star</span>
                         </div>
-                        <span class="tags">Your Rating</span>
+                        <span class="tags userRating">Rate the Content</span>
                     </div>
                 </div>
                 <div id="wishlist" class="line ">
@@ -338,8 +338,6 @@ if (isset($_SESSION['id'])) {
         $('.star').mouseover(function() {
             resetStarColor();
             var starIndex = parseInt($(this).data('index'));
-            // for (var i = 0; i <= starIndex; i++)
-            //     $('.star:eq(' + i + ')').css('color', 'yellow');
             setStarColor(starIndex);
         });
 
@@ -348,8 +346,6 @@ if (isset($_SESSION['id'])) {
             resetStarColor();
 
             if (ratedIndex != -1) {
-                // for (var i = 0; i <= ratedIndex; i++)
-                //     $('.star:eq(' + i + ')').css('color', 'yellow');
                 setStarColor(ratedIndex);
             }
         });
@@ -377,6 +373,9 @@ if (isset($_SESSION['id'])) {
                     console.log(response);
                     avgRating = response.rating;
                     rateIndex = response.curRating;
+                    if(rateIndex != -1){
+                        $('.userRating').html('Your Rating');
+                    }
                     
                     setStarColor(rateIndex);
                     $('.avgRating').html(avgRating);
