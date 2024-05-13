@@ -76,7 +76,7 @@ if (isset($_SESSION['id'])) {
                             <span class="material-icons-outlined star" data-index="3">star</span>
                             <span class="material-icons-outlined star" data-index="4">star</span>
                         </div>
-                        <span class="tags">Rate</span>
+                        <span class="tags">Your Rating</span>
                     </div>
                 </div>
                 <div id="wishlist" class="line ">
@@ -377,7 +377,7 @@ if (isset($_SESSION['id'])) {
                     console.log(response);
                     avgRating = response.rating;
                     rateIndex = response.curRating;
-
+                    
                     setStarColor(rateIndex);
                     $('.avgRating').html(avgRating);
                 },
