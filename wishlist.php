@@ -10,7 +10,8 @@ $wishlist = new Wishlist();
 <div class="container">
     <div class="box-main">
         <input type="hidden" name="user_id" id="user_id" value="<?php echo $id; ?>">
-        <div class="collection">
+        <h2 class="vcenter">Wishlist</h2>
+        <div class="wishlist-collection">
 
         </div>
     </div>
@@ -27,8 +28,7 @@ $wishlist = new Wishlist();
                 },
                 // dataType: 'JSON',
                 success: function(response) {
-                    // console.log(response.result);
-                    $('.collection').append(response);
+                    $('.wishlist-collection').append(response);
                     console.log(response);
                 },
                 error: function(xhr, status, error) {

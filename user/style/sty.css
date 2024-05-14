@@ -73,7 +73,7 @@ html {
   background: #c9c5c5;
 }
 
-.search-data-image>.search-img {
+.search-data-image > .search-img {
   vertical-align: middle;
   height: 4rem;
   object-fit: cover;
@@ -330,7 +330,6 @@ html {
   align-items: center;
 }
 .nav_list li {
-  /* to remove dot */
   list-style: none;
   padding: 4px 20px;
 }
@@ -338,7 +337,6 @@ html {
   text-decoration: none;
   font-size: 18px;
   font-weight: 600;
-  /* to remove underline */
   color: #c3c0c0;
 }
 .nav_list li a:hover {
@@ -366,6 +364,17 @@ body {
   background: #c0c0c3;
 }
 
+.wishlist-collection {
+  margin-top: 15px;
+  display: flex;
+  padding: 0 3rem;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+
 .collection {
   margin-top: 15px;
   /* width: 80%; */
@@ -387,7 +396,7 @@ body {
   position: relative;
 }
 
-.gallery>a{
+.gallery > a {
   text-decoration: none;
 }
 
@@ -625,7 +634,7 @@ body {
   font-family: "Nunito";
 }
 
-.rating{
+.rating {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -647,7 +656,7 @@ body {
   padding-top: 5px;
 }
 
-.post-details{
+.post-details {
   display: flex;
 }
 
