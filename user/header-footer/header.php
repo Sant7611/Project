@@ -90,7 +90,6 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
                 var val = $('#search').val().trim();
                 $.ajax({
                     url: 'user/search.php',
-                    // url: 'user/search.php',
                     method: 'post',
                     data: {
                         searchData: val
@@ -110,13 +109,7 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
                         console.log('error:', error);
                     }
                 });
-
-                // $('#search').on('click', function(event) {
-                //     var searchData = $('.search-result');
-                //     if (!searchData.contains(event)) {
-                //         searchData.css(display, 'none');
-                //     }
-                // });
+                
                 var search = document.querySelector('.searchbar');
                 var searchData = document.querySelector('.search-result');
                 toggleDisplay(search, searchData);
