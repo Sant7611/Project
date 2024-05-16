@@ -10,9 +10,17 @@ $wishlist = new Wishlist();
 <div class="container">
     <div class="box-main">
         <input type="hidden" name="user_id" id="user_id" value="<?php echo $id; ?>">
-        <h2 class="vcenter">Wishlist</h2>
+        <!-- <h2 class="vcenter">Wishlist</h2>
         <div class="wishlist-collection">
 
+        </div> -->
+        <div id="new_release" class="section">
+            <div class="head-title">
+                <h3>My Wishlist</h3>
+            </div>
+            <div class="wishlist-collection">
+                
+            </div>
         </div>
     </div>
 </div>
