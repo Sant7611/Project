@@ -5,7 +5,7 @@ include('../admin/class/post.class.php');
 $wishlist = new Wishlist();
 $post = new Post();
 
-$datalist = $post->selectFeaturedPost();
+$datalist = $post->fetch();
 
 
 if (isset($_POST['user_id'])) {
