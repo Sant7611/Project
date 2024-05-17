@@ -64,7 +64,7 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
 
                     <div class="dropdown-content user-profile">
                         <ul>
-                            <li class="dropdown-menu"><a href="wishlist.php?id=<?php echo $id; ?>">
+                            <li class="dropdown-menu"><a href="wishlist.php">
                                     <span class="material-icons-outlined">favorite_border</span>My Wishlist
                                 </a>
                             </li>

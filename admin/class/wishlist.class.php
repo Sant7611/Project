@@ -40,8 +40,12 @@ class Wishlist
         while ($row = mysqli_fetch_assoc($res)) {
             $output[] = $row['post_id'];
         }
-        $data =  implode(',', $output);
-        return $data;
+        if (is_array($output)) {
+            $data =  implode(',', $output);
+            return $data;
+        } else {
+            return 0;
+        }
     }
 
     public function fetchById()
@@ -78,19 +82,23 @@ class Wishlist
     public function checkWishlist()
     {
         $checks = $this->getPostId();
-        $check = explode(',',$checks);
-        $status = 0;
-        foreach ($check as  $value) {
-            // echo $value;
-            // echo $this->post_id;
-            if ($value == $this->post_id) {
-                $status = 1;
+        if ($checks) {
+            $check = explode(',', $checks);
+            $status = 0;
+            foreach ($check as  $value) {
+                // echo $value;
+                // echo $this->post_id;
+                if ($value == $this->post_id) {
+                    $status = 1;
+                }
             }
-        }
-        if ($status) {
-            return true;
-        } else {
-            return  0;
+            if ($status) {
+                return true;
+            } else {
+                return  0;
+            }
+        }else{
+            return 0;
         }
         // return 1;
     }

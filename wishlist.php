@@ -2,14 +2,14 @@
 include('user/header-footer/header.php');
 include('admin/class/wishlist.class.php');
 
-$id = $_GET['id'];
+// $id = $_GET['id'];
 $wishlist = new Wishlist();
 // $datalist = $wishlist->fetchById();
 
 ?>
 <div class="container">
     <div class="box-main">
-        <input type="hidden" name="user_id" id="user_id" value="<?php echo $id; ?>">
+        <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['id']; ?>">
         <!-- <h2 class="vcenter">Wishlist</h2>
         <div class="wishlist-collection">
 
@@ -28,6 +28,7 @@ $wishlist = new Wishlist();
     $(document).ready(function(e) {
         function fetchWishlist() {
             var user_id = $('#user_id').val();
+            console.log(user_id);
             $.ajax({
                 url: 'user/checkWishlist.php',
                 method: 'POST',
@@ -41,7 +42,7 @@ $wishlist = new Wishlist();
                 },
                 error: function(xhr, status, error) {
                     console.log('error:', error);
-                    console.log(status);
+                    // console.log(status);
                 }
             });
         }
