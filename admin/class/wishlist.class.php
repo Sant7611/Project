@@ -40,7 +40,7 @@ class Wishlist
         while ($row = mysqli_fetch_assoc($res)) {
             $output[] = $row['post_id'];
         }
-        if (is_array($output)) {
+        if (count($output) > 0) {
             $data =  implode(',', $output);
             return $data;
         } else {
@@ -51,6 +51,7 @@ class Wishlist
     public function fetchById()
     {
         $ids = $this->getPostId();
+
         $sql = "SELECT p.*, 
         GROUP_CONCAT(DISTINCT s.source) AS source, 
         GROUP_CONCAT(DISTINCT s.id) AS source_id, 
@@ -97,9 +98,8 @@ class Wishlist
             } else {
                 return  0;
             }
-        }else{
+        } else {
             return 0;
         }
-        // return 1;
     }
 }

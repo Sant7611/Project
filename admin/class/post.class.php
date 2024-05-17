@@ -599,7 +599,7 @@ class Post extends Common
     // }
     public function selectFeaturedPost()
     {
-        $sql = "select * from post where featured = 1 order by created_date desc limit 3;";
+        $sql = "select * from post where featured = 1 order by created_date desc limit 6;";
         return $this->select($sql);
     }
 

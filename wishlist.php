@@ -14,14 +14,10 @@ $wishlist = new Wishlist();
         <div class="wishlist-collection">
 
         </div> -->
-        <div id="new_release" class="section">
-            <div class="head-title">
-                <h3>My Wishlist</h3>
-            </div>
-            <div class="wishlist-collection">
-                
-            </div>
+        <div class="show">
+
         </div>
+        
     </div>
 </div>
 <script>
@@ -37,7 +33,7 @@ $wishlist = new Wishlist();
                 },
                 // dataType: 'JSON',
                 success: function(response) {
-                    $('.wishlist-collection').append(response);
+                    $('.show').append(response);
                     console.log(response);
                 },
                 error: function(xhr, status, error) {
