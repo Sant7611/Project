@@ -79,11 +79,11 @@ if (isset($_SESSION['id'])) {
                         <span class="tags userRating">Rate the Content</span>
                     </div>
                 </div>
-                <div id="wishlist" class="line ">
+                <div  class="line ">
                     <?php if ($check == 1) { ?>
-                        <button><a href="javascript:void(0)" class="btn"><span id="favorite" class="material-icons-outlined">favorite</span>Wishlist</a></button>
+                        <button id="wishlist"><a href="javascript:void(0)" class="btn"><span id="favorite" class="material-icons-outlined">favorite</span>Wishlist</a></button>
                     <?php } else { ?>
-                        <button><a href="javascript:void(0)" class="btn"><span id="favorite" class="material-icons-outlined">favorite_border</span>Wishlist</a></button>
+                        <button id="wishlist"><a href="javascript:void(0)" class="btn"><span id="favorite" class="material-icons-outlined">favorite_border</span>Wishlist</a></button>
                     <?php } ?>
                 </div>
                 <div class="description">
@@ -119,7 +119,6 @@ if (isset($_SESSION['id'])) {
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 <div id="recommend " class="section">
@@ -358,6 +357,10 @@ if (isset($_SESSION['id'])) {
         
         var ratedIndex = -1;
         $('.star').on('click', function() {
+        if(!user_ids){
+            alert('Please Login to Rate !!');
+            return;
+        }
             ratedIndex = parseInt($(this).data('index'));
             rating();
         });
@@ -378,6 +381,7 @@ if (isset($_SESSION['id'])) {
                     }
                     
                     setStarColor(rateIndex);
+                    if(avgRating != 0)
                     $('.avgRating').html(avgRating);
                 },
                 error: function(xhr, status, error){
@@ -395,6 +399,7 @@ if (isset($_SESSION['id'])) {
         //Wishlist functionality
         $('#wishlist').click(function(e) {
             e.preventDefault();
+            console.log('user Id: ',user_ids);
             if (!user_ids) {
                 alert('Please log in to add to wishlist');
                 return;

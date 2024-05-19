@@ -25,7 +25,6 @@ if (array_key_exists('username', $_SESSION) && array_key_exists('username', $_CO
     <!-- jquery  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
     <!-- google font  -->
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 

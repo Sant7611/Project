@@ -382,7 +382,7 @@ class Post extends Common
         p.id
     ORDER BY 
         p.release_date desc
-    LIMIT 12;
+    LIMIT 6;
     
     ";
         $result = $this->conn->query($sql);
