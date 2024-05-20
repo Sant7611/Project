@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 class User
 {
     private $conn;
@@ -12,13 +12,23 @@ class User
 
     public function signup()
     {
-        $conn = mysqli_connect('localhost', 'root', '', 'anidb');
-        $sql = "insert into users(username, email, password, created_at) values ('$this->username', '$this->email', '$this->password', NOW());";
-        mysqli_query($this->conn, $sql);
-        if ($conn->affected_rows > 0) {
-            header('location:login.php?message=Signup Successful. Please Login ');
+        $checkSql = "select * from users where email = '$this->email' limit 1;";
+        $check_user_query_run = mysqli_query($this->conn, $checkSql);
+
+        if (mysqli_num_rows($check_user_query_run) > 0) {
+            $_SESSION['status'] = "User Already Exists";
+            return false;
         } else {
-            return "invalid credentials";
+            $token = md5(rand());
+            $sql = "insert into users(username, email, password, created_at, token) values ('$this->username', '$this->email', '$this->password', NOW(), '$token');";
+            mysqli_query($this->conn, $sql);
+            if ($this->conn->affected_rows > 0) 
+            {
+                $_SESSION['status'] = "User Registration successful. Please verify your email address!!";
+                return false;
+            } else {
+                return "invalid credentials";
+            }
         }
     }
 
@@ -44,6 +54,4 @@ class User
             return false;
         }
     }
-
- 
 }

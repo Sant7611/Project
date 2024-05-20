@@ -1,44 +1,31 @@
 <?php
 include('../admin/class/user.class.php');
 
-if (isset($_POST["submit"])) {
-  $uname = $_POST['username'];
-  $pass1 = $_POST['pwd'];
-  $pass2 = $_POST['pwd2'];
-  $email = $_POST['email'];
-  $err = [];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST["submit"])) {
+    $uname = $_POST['username'];
+    $pass1 = $_POST['pwd'];
+    $pass2 = $_POST['pwd2'];
+    $email = $_POST['email'];
+    $err = [];
 
-  $userObj = new User();
+    $userObj = new User();
 
-  if (isset($uname) && !empty($uname)) {
-    $userObj->username =  $uname;
-    if (isset($email) && !empty($email)) {
-      $userObj->email = $email;
-      if ((isset($pass1) && !empty($pass1))) {
-        if (isset($pass2) && !empty($pass2)) {
-          if ($pass1 == $pass2) {
-            $userObj->password = $pass1;
-            try {
-              $res = $userObj->signup();
-              header('location: login.php?message=Signup Successful. Please Login to continue');
-            } catch (mysqli_sql_exception $e) {
-              $err['msg'] = "Not available username or email!! Try another";
+    if (!empty($uname) && !empty($email) && !empty($pass1) && !empty($pass2) && $pass1 === $pass2) {
+        $userObj->username = $uname;
+        $userObj->email = $email;
+        $userObj->password = $pass1;
+        try {
+            $signupSuccess = $userObj->signup();
+            if ($signupSuccess === true) {
+                $err['msg'] = 'submitted';
+                exit();
             }
-          } else {
-            // $err['msg'] = "Password doesn't match!";
-          }
-        } else {
-          // $err['msg'] = "Please confirm your password  !";
+        } catch (mysqli_sql_exception $e) {
+            $err['msg'] = "Database error: " . $e->getMessage();
         }
-      } else {
-        // $err['msg'] = "Please enter your password  !";
-      }
     } else {
-      // $err['msg'] = "Please enter your email  !";
+        $err['msg'] = 'Please fill in all fields correctly.';
     }
-  } else {
-    // $err['msg'] = 'Please Enter Your Full Name!';
-  }
 }
 ?>
 
@@ -58,14 +45,19 @@ if (isset($_POST["submit"])) {
 
 <body>
   <div class="center">
-    <form id="loginForm" action="" method="post" novalidate>
+    <form id="signupForm" action="" method="post" novalidate>
       <div class="title">Signup</div>
       <?php if (isset($err['msg'])) { ?>
         <p class="msg"> <?php echo $err['msg']; ?> </p>
       <?php } ?>
+
+      <?php if (isset($_SESSION['status'])) { ?>
+        <p class="msg"> <?php echo $_SESSION['status'];
+                        unset($_SESSION['status']); ?> </p>
+      <?php } ?>
       <span class="inputs">
         <span class="inputf">
-          <input type="text" class="input" id="username" name="username" placeholder="Full Name" required />
+          <input type="text" class="input" id="username" name="username" placeholder="User Name" required />
           <span class="label">Full Name</span>
           <span class="material-icons icon">account_circle</span>
         </span>
@@ -96,6 +88,7 @@ if (isset($_POST["submit"])) {
   <script>
     $(document).ready(function() {
       $('#submit').click(function(e) {
+
         // e.preventDefault();
 
         var uname = $('#username');
@@ -103,25 +96,24 @@ if (isset($_POST["submit"])) {
         var pwd = $('#pwd');
         var pwd2 = $('#pwd2');
 
-        // Reset border colors and remove any existing error messages
         uname.css("border-color", '');
         email.css("border-color", '');
         pwd.css("border-color", '');
         pwd2.css("border-color", '');
-        $('.msg').remove(); // Remove any existing error messages
+        $('.msg').remove();
         var errors = [];
 
-        // Validation for username
+
         if (uname.val().trim() === '') {
           uname.css("border-color", 'red');
           errors.push({
             'key': 'username',
             'msg': '<span class="msg">Please enter your username</span>'
           });
-          // return;
+
         }
 
-        // Validation for email
+
         var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailPattern.test(email.val())) {
           $(email).css("border-color", 'red');
@@ -129,18 +121,18 @@ if (isset($_POST["submit"])) {
             'key': 'email',
             'msg': '<span class="msg">Please enter a valid email address</span>'
           });
-          // return;
+
         }
 
-        // Validation for passwords
+
         if (pwd.val().trim() === '' || pwd.val().trim().length <= 7) {
           $(pwd).css("border-color", 'red');
           errors.push({
             'key': 'pwd',
             'msg': '<span class="msg">Minimum 8 chatacters required</span>'
           });
-          // return;
         }
+
         if (pwd2.val().trim() === '' || pwd2.val().trim().length <= 7) {
           pwd2.css("border-color", 'red');
           errors.push({
@@ -157,19 +149,19 @@ if (isset($_POST["submit"])) {
               'key': 'pwd2',
               'msg': '<span class="msg">Passwords don\'t match</span>'
             });
-            // return;
           }
         }
         if (errors.length > 0) {
           $.each(errors, (key, value) => {
             $(value.msg).insertAfter('#' + value.key);
           });
-          return;
+          return false;
+        } else {
+          $('#signupForm').submit();
         }
-
-        // Submit the form if all validations pass
-        this.submit();
       });
+
+
     });
   </script>
 </body>
