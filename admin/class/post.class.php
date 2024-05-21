@@ -273,7 +273,7 @@ class Post extends Common
         echo "Genres to add<br>";
         echo "</pre>";
 
-        // Delete duplicate genres
+    // Delete duplicate genres
         if (!empty($genresToDelete)) {
             foreach ($genresToDelete as $deleteGenre) {
                 $sql = "DELETE FROM post_joins WHERE post_id = '$this->id' AND genre_id = '$deleteGenre';";
@@ -401,8 +401,6 @@ class Post extends Common
         // $sql = "SELECT p.*, s.source, pr.producers, st.studio, g.genre FROM post p INNER JOIN post_joins pj ON p.id = pj.post_id LEFT JOIN source s ON pj.source_id = s.id LEFT JOIN producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
         // $sql = "select p.*, group_concat(s.source) as source, group_concat(s.id) as source_id, group_concat(pr.producers) as producer,group_concat(pr.id) as producer_id, group_concat(st.studio) as studio,group_concat(st.id) as studio_id, group_concat(g.genre) as genre, group_concat(g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
 
-
-
         $sql = "SELECT 
         p.*, 
         GROUP_CONCAT(DISTINCT s.source) AS source, 
@@ -438,7 +436,6 @@ class Post extends Common
             $sql .= ' Limit ' . $limit . ';';
         } else {
             if (isset($this->page)) {
-
                 $pg = intval($this->page);
             } else {
                 $pg = 1;

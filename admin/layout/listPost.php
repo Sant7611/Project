@@ -81,8 +81,7 @@ $totalPages = ceil($totalPost / 5);
                                             } else {
                                                 echo "<label class='label-danger'>No</label>";
                                             }
-                                            ?>
-                        </td>
+                                            ?>  </td>
 
                         <td class="center"><?php
                                             if ($post['status'] == 1) {
