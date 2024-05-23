@@ -62,12 +62,13 @@ class User
         $check_user_query_run = $stmt->get_result();
 
         if ($check_user_query_run->num_rows > 0) {
-            $_SESSION['status'] = "User Already Exists";
+            $_SESSION['status'] = "<p class = 'msg'>User Already Exists</p>";
             return false;
         } else {
             $token = md5(rand());
-            $stmt = $this->conn->prepare("INSERT INTO users (username, email, password, created_at, token) VALUES (?, ?, ?, NOW(), ?)");
-            $stmt->bind_param('ssss', $this->username, $this->email, $this->password, $token);
+            $status = 'pending';
+            $stmt = $this->conn->prepare("INSERT INTO users (username, email, status, password, created_at, token) VALUES (?, ?,?, ?, NOW(), ?)");
+            $stmt->bind_param('sssss', $this->username, $this->email, $status, $this->password, $token);
             $stmt->execute();
 
             if ($stmt->affected_rows > 0) {
@@ -75,7 +76,7 @@ class User
                 $this->sendVerifyEmail($this->username, $this->email, $token);
                 return true;
             } else {
-                $_SESSION['status'] = "Registration failed. Please try again.";
+                $_SESSION['status'] = "<p class = 'msg'>Registration failed. Please try again.</p>";
                 return false;
             }
         }
@@ -92,15 +93,21 @@ class User
             $data = $res->fetch_object();
             $_SESSION['id'] = $data->id;
             $_SESSION['uname'] = $data->username;
-            if ($this->remember) {
-                setcookie('uname', $data->username, time() + 28 * 24 * 60 * 60, '/');
-            } else {
-                setcookie('uname', $data->username, time() + 24 * 60 * 60, '/');
+            if($data->status != 'verified'){
+                $_SESSION['status']  = '<p class = "msg">Please verify your email address to continue</p>';
+                header('location:login.php');
+                exit();
+            }else{
+                if ($this->remember) {
+                    setcookie('uname', $data->username, time() + 28 * 24 * 60 * 60, '/');
+                } else {
+                    setcookie('uname', $data->username, time() + 24 * 60 * 60, '/');
+                }
+                header('location:../index.php');
+                exit();
             }
-            header('location:../index.php');
-            exit();
         } else {
-            $_SESSION['status'] = "Invalid login credentials";
+            $_SESSION['status'] = "<p class = 'msg' >Invalid login credentials</p>";
             return false;
         }
     }

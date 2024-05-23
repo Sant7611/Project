@@ -1,8 +1,6 @@
 <?php
 include('../admin/class/user.class.php');
-if (isset($_GET['message'])) {
-  $message = $_GET['message'];
-}
+
 $userObj = new User();
 
 if (isset($_POST['submit'])) {
@@ -16,9 +14,8 @@ if (isset($_POST['submit'])) {
       $userObj->remember = $remember;
       $userObj->email = $email;
 
-      $res = $userObj->login();
-      if(!$res)
-      $err['msg'] = "Please try again!";
+      $userObj->login();
+      
     } 
   }
 }
@@ -43,11 +40,8 @@ if (isset($_POST['submit'])) {
 <body>
   <div class="center">
     <form action="" id="loginForm" method="post" novalidate>
-      <?php if (isset($message)) { ?>
-        <p class="success"> <?php echo $message; ?> </p>
-      <?php } ?>
-      <?php if (isset($err['msg'])) { ?>
-        <p class="msg"> <?php echo $err['msg']; ?> </p>
+      <?php if (isset($_SESSION['status'])) { ?>
+        <p class="success"> <?php echo $_SESSION['status']; unset($_SESSION['status']) ?> </p>
       <?php } ?>
       <div class="title">Login</div>
       <span class="inputs">
@@ -102,13 +96,12 @@ if (isset($_POST['submit'])) {
           // return;
         }
 
-        if (pwd.val().trim() === '' || pwd.val().trim().length <= 7) {
+        if (pwd.val().trim() === '') {
           $(pwd).css("border-color", 'red');
           errors.push({
             'key': 'pwd',
-            'msg': '<span class="msg">Minimum 8 chatacters required</span>'
+            'msg': '<span class="msg">Please enter your password</span>'
           });
-          // return;
         }
 
         console.log(errors);
@@ -116,7 +109,6 @@ if (isset($_POST['submit'])) {
           $.each(errors, (key, value) => {
             $(value.msg).insertAfter('#' + value.key)
           });
-          // return;
           e.preventDefault();
         }
         
