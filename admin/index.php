@@ -9,7 +9,7 @@ $error = [];
 
 if (isset($_POST['submit'])) {
     if (isset($_POST['email']) && !empty($_POST['email'])) {
-        $AdminObj->email = $_POST['email'];
+        $AdminObj->email = htmlspecialchars(trim($_POST['email']));
     } else {
         $error['msg'] = "Cannot be left empty!!";
     }
@@ -31,18 +31,76 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel-login</title>
     <script src="js/admin1.js"></script>
-    <link rel="stylesheet" href="style/admin1.css">
+    <!-- <link rel="stylesheet" href="style/admin1.css"> -->
 
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
 
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        .head{
+            padding: 10px 0;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .text {
+            margin: 15px 0;
+
+        }
+
+        form{
+            width: 275px;
+        }
+
+        .form-group {
+            margin: 8px 0px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #d9d9d9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type='email'],
+        input[type='password'] {
+            padding: 3px 5px;
+            width: 90%;
+            margin: 5px 0;
+            border: none;
+            background: none;
+            border-bottom: 2px solid #000;
+            outline: none;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="head">
-            <h2> Admin Login Panel</h2>
-        </div>
+    <div class='container'>
         <form action="" id="loginForm" method="post" novalidate>
+            <div class="head">
+                <h2> Admin Login Panel</h2>
+            </div>
             <?php
             if (isset($status)) {
                 echo "<label class='error' >$status</label>";
@@ -55,51 +113,23 @@ if (isset($_POST['submit'])) {
                 <input type="email" placeholder="Email:" class="form-control" name="email" id="email" required>
             </div>
             <div class="form-group">
-                <div class="toggle-password">
+                <!-- <div class="toggle-password"> -->
                     <input type="password" class="form-control pw" placeholder="Password:" name="password" id="pwd" required>
-                    <span class="material-icons-outlined  eye">visibility</span>
-                </div>
+                    <!-- <span class="material-icons-outlined  eye">visibility</span> -->
+                <!-- </div> -->
             </div>
             <!-- <input type="submit" name="submit"  class="btn"> -->
             <button type="submit" class="btn" name="submit">Submit</button>
-            
         </form>
     </div>
-    <style>
-        .error {
-            color: red;
-        }
+    </div>
 
-        .text {
-            margin: 15px 0;
-
-        }
-
-        .form-group {
-            margin: 8px 0px;
-        }
-
-
-        .container {
-            margin: auto;
-            padding: 10px;
-            height: 18rem;
-            width: 16rem;
-            transform: translate(-50%, -50%);
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            background-color: #d9d9d9;
-            text-align: center;
-        }
-    </style>
-    <script src="js/jquery/jquery.validate.min.js"></script>
+    <!-- <script src="js/jquery/jquery.validate.min.js"></script>
     <script src="js/jquery/jquery.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#loginForm').validate();
-        })
-    </script>
+        const modal = document.getElementById('mydialog');
+        modal.showModel();        
+    </script> -->
 </body>
 
 </html>
