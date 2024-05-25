@@ -11,6 +11,16 @@ html {
 
 /* header file css  */
 
+.logo{
+  height: 70px;
+  width: 70px;
+}
+
+.logo img{
+  height: 100%;
+  width: 100%;
+}
+
 .dropdown {
   position: relative;
   cursor: pointer;
@@ -579,25 +589,6 @@ div.desc {
 body {
   background: #0e121f;
 }
-/* 
-.post-head {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 25px 0 0 390px;
-}
-.post-head > span:last-child {
-  border: none;
-}
-
-.post-head span {
-  border-right: 1px solid #eee;
-  padding: 0px 40px 0 0;
-  width: 15%;
-  font-size: 16px;
-  font-weight: 600;
-  font-family: "Nunito";
-} */
 
 .post-syp {
   width: 95%;
@@ -619,8 +610,6 @@ body {
 }
 
 .post-head {
-  /* display: flex; */
-  /* justify-content: space-between; */
   width: 50%;
   padding: 10px 0 0 0px;
 }
@@ -846,5 +835,33 @@ textarea:focus-visible {
 
 .userLogo img {
   height: 100%;
+  background: #05041a;
   width: 100%;
+}
+
+.userName{
+  text-align: center;
+  display: block;
+  background: #000;
+  font-size: 21px;
+  cursor: default;
+}
+
+
+/* ############################Contact Us Page ########################## */
+.contactForm{
+  background: brown;
+  padding: 10px;
+}
+
+.form-group{
+
+}
+
+input[type='text'],input[type='email']{
+
+}
+
+input[type="submit"]{
+
 }

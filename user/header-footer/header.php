@@ -35,9 +35,9 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
 
 <body>
     <nav class="navbar ">
-        <!-- <div class="logo">
-
-        </div> -->
+        <div class="logo">
+            <img src="admin/images/otaku-oasis-logos.png" alt="" srcset="">
+        </div>
         <ul class="nav_list">
             <li><a href="index.php?#home">Home</a></li>
             <li><a href="index.php?#new_release">New Release</a></li>
@@ -59,10 +59,11 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
             <?php  } else { ?>
                 <div class="dropdown">
                     <div class="userLogo">
-                        <img src="admin/images/65f186cc25edeattackontitans.jpg" alt="">
+                        <img src="admin/images/user.png" alt="">
                     </div>
 
                     <div class="dropdown-content user-profile">
+                        <span class="userName"><?php echo $_SESSION['uname']; ?></span>
                         <ul>
                             <li class="dropdown-menu"><a href="wishlist.php">
                                     <span class="material-icons-outlined">favorite_border</span>My Wishlist
@@ -94,16 +95,12 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
                     data: {
                         searchData: val
                     },
-                    // dataType: 'JSON',
                     success: function(response) {
                         // displaySearch(response);
                         $('.search-result').empty();
                         if (response.length > 0) {
                             $('.search-result').append(response);
                         }
-                        // else {
-                        //     $('.search-result').append('<span>No search result found </span>');
-                        // }
                     },
                     error: function(xhr, status, error) {
                         console.log('error:', error);
@@ -135,13 +132,5 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
             }
 
             toggleDisplay(dropdown, dropcontent);
-
-            // document.addEventListener('click', (event) => {
-            //     if (!dropdown.contains(event.target)) {
-            //         dropcontent.style.display = 'none';
-            //     }
-            // });
-
-
         });
     </script>
