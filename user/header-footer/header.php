@@ -20,7 +20,9 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
     <!-- Google font  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Mukta:wght@200;300;400;500;600;700;800&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Mukta:wght@200;300;400;500;600;700;800&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+        rel="stylesheet">
 
     <!-- custom css  -->
     <link rel="stylesheet" type="text/css" href="user/style/sty.css">
@@ -53,84 +55,86 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
                 </div>
             </div>
             <?php if (empty($uname)) { ?>
-                <div class="button ">
-                    <a href="user/login.php">Log in</a>
-                </div>
+            <div class="button ">
+                <a href="user/login.php">Log in</a>
+            </div>
             <?php  } else { ?>
-                <div class="dropdown">
-                    <div class="userLogo">
-                        <img src="admin/images/user.png" alt="">
-                    </div>
-
-                    <div class="dropdown-content user-profile">
-                        <span class="userName"><?php echo $_SESSION['uname']; ?></span>
-                        <ul>
-                            <li class="dropdown-menu"><a href="wishlist.php">
-                                    <span class="material-icons-outlined">favorite_border</span>My Wishlist
-                                </a>
-                            </li>
-                            <li class="dropdown-menu">
-                                <a href="user/changepw.php">
-                                    <span class="material-icons-outlined">change_circle</span> Change Password</a>
-                            </li>
-                            <li class="dropdown-menu">
-                                <a href="user/logout.php">
-                                    <span class="material-icons-outlined">logout</span> Logout</a>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="dropdown">
+                <div class="userLogo">
+                    <img src="admin/images/user.png" alt="">
                 </div>
+
+                <div class="dropdown-content user-profile">
+                    <span class="userName"><?php echo $_SESSION['uname']; ?></span>
+                    <ul>
+                        <li class="dropdown-menu"><a href="wishlist.php">
+                                <span class="material-icons-outlined">favorite_border</span>My Wishlist
+                            </a>
+                        </li>
+                        <li class="dropdown-menu">
+                            <a href="user/changepw.php">
+                                <span class="material-icons-outlined">change_circle</span> Change Password</a>
+                        </li>
+                        <li class="dropdown-menu">
+                            <a href="user/logout.php">
+                                <span class="material-icons-outlined">logout</span> Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <?php } ?>
         </div>
     </nav>
 
     <script>
-        //searchbar 
-        document.addEventListener("DOMContentLoaded", function() {
-            $('#search').keyup(function(event) {
-                var val = $('#search').val().trim();
-                $.ajax({
-                    url: 'user/search.php',
-                    method: 'post',
-                    data: {
-                        searchData: val
-                    },
-                    success: function(response) {
-                        // displaySearch(response);
-                        $('.search-result').empty();
-                        if (response.length > 0) {
-                            $('.search-result').append(response);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.log('error:', error);
+    //searchbar 
+    document.addEventListener("DOMContentLoaded", function() {
+        $('#search').keyup(function(event) {
+            var val = $('#search').val().trim();
+            $.ajax({
+                url: 'user/search.php',
+                method: 'post',
+                data: {
+                    searchData: val
+                },
+                success: function(response) {
+                    // displaySearch(response);
+                    $('.search-result').empty();
+                    if (response.length > 0) {
+                        $('.search-result').append(response);
                     }
-                });
-                
-                var search = document.querySelector('.searchbar');
-                var searchData = document.querySelector('.search-result');
-                toggleDisplay(search, searchData);
-                $('.search-result').css({'display' : 'block'});
-
+                },
+                error: function(xhr, status, error) {
+                    console.log('error:', error);
+                }
             });
 
-            var dropdown = document.querySelector('.dropdown');
-            var dropcontent = dropdown.querySelector('.dropdown-content');
-
-            dropdown.addEventListener("click", (event) => {
-                dropcontent.style.display = dropcontent.style.display === 'block' ? 'none' : 'block';
+            $('.search-result').css({
+                'display': 'block'
             });
+            var search = document.querySelector('.searchbar');
+            var searchData = document.querySelector('.search-result');
+            toggleDisplay(search, searchData);
 
-            function toggleDisplay(className, subClassName) {
-                document.addEventListener('click', (event) => {
-                    if (!className.contains(event.target)) {
-                        subClassName.style.display = 'none';
-                        document.getElementById('search').value = "";
-                    }
-
-                });
-            }
-
-            toggleDisplay(dropdown, dropcontent);
         });
+
+        var dropdown = document.querySelector('.dropdown');
+        var dropcontent = dropdown.querySelector('.dropdown-content');
+
+        dropdown.addEventListener("click", (event) => {
+            dropcontent.style.display = dropcontent.style.display === 'block' ? 'none' : 'block';
+        });
+
+        function toggleDisplay(className, subClassName) {
+            document.addEventListener('click', (event) => {
+                if (!className.contains(event.target)) {
+                    subClassName.style.display = 'none';
+                    document.getElementById('search').value = "";
+                }
+
+            });
+        }
+
+        toggleDisplay(dropdown, dropcontent);
+    });
     </script>

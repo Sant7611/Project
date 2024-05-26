@@ -6,12 +6,6 @@ $searchItem = $_POST['searchData'];
 
 $post->set('searchData', $searchItem);
 $res = $post->search();
-// echo gettype($res);
-// $result = json_encode($res);
-// echo $searchItem;
-// foreach($res as $key=>$value){
-//     echo $value['title'];
-// }
 
 ?>
 <?php
