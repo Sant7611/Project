@@ -11,12 +11,12 @@ html {
 
 /* header file css  */
 
-.logo{
+.logo {
   height: 70px;
   width: 70px;
 }
 
-.logo img{
+.logo img {
   height: 100%;
   width: 100%;
 }
@@ -839,7 +839,7 @@ textarea:focus-visible {
   width: 100%;
 }
 
-.userName{
+.userName {
   text-align: center;
   display: block;
   background: #000;
@@ -847,21 +847,38 @@ textarea:focus-visible {
   cursor: default;
 }
 
-
 /* ############################Contact Us Page ########################## */
-.contactForm{
+.form {
+  width: 45%;
+}
+
+.contactForm {
   background: brown;
   padding: 10px;
+  width: 90%;
 }
 
-.form-group{
-
+.form-group {
 }
 
-input[type='text'],input[type='email']{
-
+input[type="text"],
+input[type="email"] {
+  padding: 10px 5px;
+  margin: 10px 10px;
+  width: 95%;
 }
 
-input[type="submit"]{
+.submit {
+  width: 80%;
+  margin: 10px 0 10px 55px;
+  border-radius: 10px;
+  height: 40px;
+  padding: 8px;
+  font-size: 20px;
+  background: purple;
+  text-decoration: none;
+  text-align: center;
 
+  color: #fff;
+  display: block;
 }

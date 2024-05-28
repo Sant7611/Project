@@ -24,7 +24,8 @@ include('user/header-footer/header.php');
                     <input type="text" name="" id="">
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="">
+                <a href="mailto:sbohara579@gmail.com" class="submit">Submit</a>
+                    <!-- <input type="submit" value="Submit"> -->
                 </div>
             </form>
         </div>
