@@ -45,7 +45,7 @@ $justlist = $post->sortCreatedDate(12);
                                 </div>
                                 <div class="add-btn read">
                                     <a href="post.php?id=<?php echo $post['id']; ?>">
-                                    Read More <i class="material-icons-outlined">keyboard_double_arrow_right</i></a>
+                                    Read More </a>
                                 </div>
                                 <div id="wishlist" class="add-btn">
                                     <?php
@@ -153,7 +153,6 @@ $justlist = $post->sortCreatedDate(12);
                                 <?php $genres = explode(',', $post['genre']);
                                 foreach ($genres as $key => $genre) { ?>
                                     <span class="tags"><?php echo $genre; ?></span>
-
                                 <?php } ?>
                             </div>
                         </div>

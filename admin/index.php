@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
 
     <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
     <style>
-        *{
+        * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
             background-color: #f0f0f0;
         }
 
-        .head{
+        .head {
             padding: 10px 0;
         }
 
@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
 
         }
 
-        form{
+        form {
             width: 275px;
         }
 
@@ -92,6 +92,19 @@ if (isset($_POST['submit'])) {
             border-bottom: 2px solid #000;
             outline: none;
         }
+
+        .btn {
+            width: 90%;
+            height: 30px;
+            background: #d13cd1;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #a521a5;
+        }
     </style>
 </head>
 
@@ -114,8 +127,8 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="form-group">
                 <!-- <div class="toggle-password"> -->
-                    <input type="password" class="form-control pw" placeholder="Password:" name="password" id="pwd" required>
-                    <!-- <span class="material-icons-outlined  eye">visibility</span> -->
+                <input type="password" class="form-control pw" placeholder="Password:" name="password" id="pwd" required>
+                <!-- <span class="material-icons-outlined  eye">visibility</span> -->
                 <!-- </div> -->
             </div>
             <!-- <input type="submit" name="submit"  class="btn"> -->

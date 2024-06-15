@@ -9,7 +9,6 @@ abstract class Common
   public function set($key, $value)
   {
     $this->$key = $this->validate($value);
-    // $this->$key = $this->$value;
   }
 
   public function select($sql)

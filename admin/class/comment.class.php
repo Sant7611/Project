@@ -12,31 +12,15 @@ class Comment
         }
     }
 
-    // public function submitComment($userId, $postId, $parentCommentId = 0, $comment)
-    // {
-    //     $sql = "INSERT INTO comment (post_id, user_id, parent_id, comment, created) VALUES (?, ?, ?, ?, NOW())";
-    //     $stmt = $this->conn->prepare($sql);
-    //     $stmt->bind_param('iiis', $postId, $userId, $parentCommentId, $comment);
-    //     if ($stmt->execute()) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
     public function submitComment($userId, $postId, $comment, $parentCommentId = 0)
     {
-        // Prepare the SQL statement with placeholders for values
         $sql = "INSERT INTO comment (post_id, user_id, parent_id, comment, created) VALUES (?, ?, ?, ?, NOW())";
         $stmt = $this->conn->prepare($sql);
 
-        // Bind the parameters to the prepared statement
         $stmt->bind_param('iiis', $postId, $userId, $parentCommentId, $comment);
 
-        // Execute the prepared statement
         $success = $stmt->execute();
 
-        // Close the statement and database connection
         $stmt->close();
         $this->conn->close();
 

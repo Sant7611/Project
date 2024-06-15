@@ -2,22 +2,17 @@
 include('user/header-footer/header.php');
 include('admin/class/wishlist.class.php');
 
-// $id = $_GET['id'];
 $wishlist = new Wishlist();
-// $datalist = $wishlist->fetchById();
 
 ?>
 <div class="container">
     <div class="box-main">
         <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['id']; ?>">
-        <!-- <h2 class="vcenter">Wishlist</h2>
-        <div class="wishlist-collection">
 
-        </div> -->
         <div class="show">
 
         </div>
-        
+
     </div>
 </div>
 <script>
@@ -31,14 +26,12 @@ $wishlist = new Wishlist();
                 data: {
                     user_id: user_id
                 },
-                // dataType: 'JSON',
                 success: function(response) {
                     $('.show').append(response);
                     console.log(response);
                 },
                 error: function(xhr, status, error) {
                     console.log('error:', error);
-                    // console.log(status);
                 }
             });
         }
@@ -46,3 +39,4 @@ $wishlist = new Wishlist();
         fetchWishlist();
     });
 </script>
+<?php include('user/header-footer/footer.php'); ?>

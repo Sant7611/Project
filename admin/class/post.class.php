@@ -28,9 +28,7 @@ class Post extends Common
         $this->addSource($this->source, $saveId);
         $this->addProducer($this->producers, $saveId);
         $this->addStudio($this->studio_id, $saveId);
-        // echo "<pre>";
-        // print_r($this->conn);
-        // echo "</pre>";
+        
         if ($this->conn->affected_rows >= 1) {
             return 'success';
         } else {
@@ -39,45 +37,12 @@ class Post extends Common
     }
 
 
-    ########################################done by myself
-
-    // public function save()
-    // {
-    //     // genre_id, studio_id,
-    //     $sql = "insert into post (title, type,duration, aired, episodes, status, slider_key, featured, sypnosis,  release_date,image_url) values ('$this->title', 
-    //     '$this->type',
-    //     '$this->duration',
-    //     '$this->aired',
-    //     $this->episodes, 
-    //     '$this->status', 
-    //     '$this->slider_key', 
-    //     '$this->featured', 
-    //      '$this->sypnosis',
-    //      '$this->release_date',
-    //      '$this->image_url'); ";
-    //      //  '$this->genre_id',	
-    //      $this->conn->query($sql);
-    //      $saveId = $this->conn->insert_id;
-    //      //  '$this->studio_id',
-    //      $this->addGenre($this->genre_id, $saveId);
-    //      $this->addSource($this->source,$saveId);
-    //      $this->addProducer($this->producers,$saveId);
-    //      $this->addStudio($this->studio_id,$saveId);
-    //     if ($this->conn->affected_rows == 1 && $this->conn->insert_id > 0) {
-    //         return $this->conn->insert_id;
-    //     }
-    // }
-
     public function delete()
     {
-        // $sql = "delete from post where id = '$this->id';";
-        // Delete associated rows from post_joins
         $this->conn->query("DELETE FROM post_joins WHERE post_id = $this->id");
 
-        // Now delete the post
         $this->conn->query("DELETE FROM post WHERE id = $this->id");
 
-        // $this->conn->query($sql);
         if ($this->conn->affected_rows == 1) {
             $msg = "success";
             return $msg;
@@ -107,24 +72,8 @@ class Post extends Common
                     where id = '$this->id';    ";
 
         $this->conn->query($sql);
-        // if ($genre_res && $source_res && $producer_res && $studio_res) {
-        //     echo "true";
-        // }
-        // $current_genre = "select genre_id from post_joins where post_id = '$this->id';";
-        // $genres = $this->select($current_genre);
 
-
-        // foreach ($this->producers as $producer) {
-        //     $sql = "update post_joins set producer_id = '$producer' where post_id = '$this->id';";
-        //     $this->conn->query($sql);
-        // }
-        // foreach ($this->source as $source) {
-        //     $sql = "update post_joins set source_id = '$source' where post_id = '$this->id';";
-        //     $this->conn->query($sql);
-        // }
         if ($this->conn->affected_rows > 0) {
-            // echo "returned data";
-            // 123;
             return "success";
         } else {
             return false;
@@ -138,26 +87,11 @@ class Post extends Common
         $res = $this->conn->query($sql);
         $currentSource = $res->fetch_all(MYSQLI_ASSOC);
 
-
-        // print_r($currentSource);
-
         $concat = $currentSource[0]['source'];
         $currentSourceId = explode(',', $concat);
 
         $sourceToDelete = array_diff($currentSourceId, $this->source);
         $sourceToAdd = array_diff($this->source, $currentSourceId);
-
-        // echo "<pre>";
-        // echo gettype($currentSource);
-        // echo "this source";
-        // print_r($this->source);
-        // echo "current Source ";
-        // print_r($currentSourceId);
-        // echo "del Source ";
-        // print_r($sourceToDelete);
-        // echo "add Source ";
-        // print_r($sourceToAdd);
-        // echo "</pre>";
 
         if (!empty($sourceToDelete)) {
             foreach ($sourceToDelete as $deleteSource) {
@@ -176,23 +110,13 @@ class Post extends Common
     }
     public function addSource($sourceToAdd, $newId)
     {
-        // if(empty($this->id)){
-        //     $newId = $this->conn->insert_id;
-        // }
-        // $newId = $this->id;
-        // print_r($sourceToAdd);
-        // echo $newId;
+        
         foreach ($sourceToAdd as  $addSource) {
-            // echo $addSource;
+           
             $sql = "insert into post_joins(post_id, source_id) values('$newId',  '$addSource');";
             $this->conn->query($sql);
         }
-        // if ($this->conn->affected_rows > 0) {
-        //     echo 'added 1';
-        //     return true;
-        // } else {
-        //     return false;
-        // }
+       
     }
     public function updateStudio()
     {
@@ -203,18 +127,7 @@ class Post extends Common
         $currentStudioId = explode(',', $concat);
         $studioToDelete = array_diff($currentStudioId, $this->studio_id);
         $studioToAdd = array_diff($this->studio_id, $currentStudioId);
-        // echo "<pre>";
-        // echo 'this studioid';
-        // print_r($this->studio_id);
-        // echo "cur studio";
-        // print_r($currentStudioId);
-        // echo "add";
-
-        // print_r($studioToAdd);
-        // echo "del";
-
-        // print_r($studioToDelete);
-        // echo "<pre>";
+        
         if (!empty($studioToDelete)) {
             foreach ($studioToDelete as $deleteGenre) {
                 $sql = "delete from post_joins where post_id = '$this->id' and studio_id = '$deleteGenre';";
@@ -232,19 +145,10 @@ class Post extends Common
     }
     public function addStudio($studioToAdd, $newId)
     {
-        // if(empty($this->id)){
-        //     $newId = $this->conn->insert_id;
-        // }
-        // $newId = $this->id;
         foreach ($studioToAdd as $addStudio) {
             $sql = "insert into post_joins(post_id, studio_id) values('$newId',  '$addStudio');";
             $this->conn->query($sql);
         }
-        // if ($this->conn->affected_rows > 0) {
-        //     return true;
-        // } else {
-        //     return false;
-        // }
     }
     public function updateGenre()
     {
@@ -307,16 +211,6 @@ class Post extends Common
         $producerToDelete = array_diff($currentProducerId, $this->producers);
         $producerToAdd = array_diff($this->producers, $currentProducerId);
 
-        // echo "<pre> <div style = 'position:relative; background- #fff;'";
-        // echo 'this producerid';
-        // print_r($this->producers);
-        // echo "c producer";
-        // print_r($currentProducerId);
-        // echo "del";
-        // print_r($producerToDelete);
-        // echo "add";
-        // print_r($producerToAdd);
-        // echo "</div><pre>";
         if (!empty($producerToDelete)) {
             foreach ($producerToDelete as $deleteProducer) {
                 $sql = "delete from post_joins where post_id = '$this->id' and producer_id = '$deleteProducer';";
@@ -335,27 +229,17 @@ class Post extends Common
 
     public function addProducer($producerToAdd, $newId)
     {
-        // if(empty($this->id)){
-        //     $newId = $this->conn->insert_id;
-        // }
-        // $newId = $this->id;
+       
         foreach ($producerToAdd as $addProducer) {
             $sql = "insert into post_joins(post_id, producer_id) values('$newId',  '$addProducer');";
             $this->conn->query($sql);
         }
-        // if ($this->conn->affected_rows > 0) {
-        //     return true;
-        // } else {
-        //     return false;
-        // }
+       
     }
 
     public function fetch()
     {
-        // $sql = "select * from post;";
-        // $sql = "SELECT p.*, s.source, pr.producers, st.studio, g.genre FROM post p INNER JOIN post_joins pj ON p.id = pj.post_id LEFT JOIN source s ON pj.source_id = s.id LEFT JOIN producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
-        // $sql = "select p.*, group_concat(s.source) as source, group_concat(s.id) as source_id, group_concat(pr.producers) as producer,group_concat(pr.id) as producer_id, group_concat(st.studio) as studio,group_concat(st.id) as studio_id, group_concat(g.genre) as genre, group_concat(g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
-
+       
         $sql = "SELECT 
         p.*, 
         GROUP_CONCAT(DISTINCT s.source) AS source, 
@@ -397,10 +281,6 @@ class Post extends Common
 
     public function sortCreatedDate($limit)
     {
-        // $sql = "select * from post;";
-        // $sql = "SELECT p.*, s.source, pr.producers, st.studio, g.genre FROM post p INNER JOIN post_joins pj ON p.id = pj.post_id LEFT JOIN source s ON pj.source_id = s.id LEFT JOIN producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
-        // $sql = "select p.*, group_concat(s.source) as source, group_concat(s.id) as source_id, group_concat(pr.producers) as producer,group_concat(pr.id) as producer_id, group_concat(st.studio) as studio,group_concat(st.id) as studio_id, group_concat(g.genre) as genre, group_concat(g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id;";
-
         $sql = "SELECT 
         p.*, 
         GROUP_CONCAT(DISTINCT s.source) AS source, 
@@ -440,7 +320,6 @@ class Post extends Common
             } else {
                 $pg = 1;
             }
-            // echo $pg;
             $start_from = ($pg - 1) * $post_per_page;
 
             $sql .= ' limit ' . $start_from . ' , ' . $post_per_page . ' ;';
@@ -460,8 +339,7 @@ class Post extends Common
 
     public function getById()
     {
-        // $sql = "select p.*, group_concat(s.source) as source, group_concat(pr.producers) as producer, group_concat(st.studio) as studio, group_concat(g.genre) as genre from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id where p.id = '$this->id';";
-
+        
         $sql = "select p.*, group_concat(distinct s.source) as source, group_concat(distinct s.id) as source_id, group_concat(distinct pr.producers) as producer,group_concat(distinct pr.id) as producer_id, group_concat(distinct st.studio) as studio,group_concat(distinct st.id) as studio_id, group_concat(distinct g.genre) as genre, group_concat(distinct g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id where post_id = '$this->id';";
 
         $var = $this->conn->query($sql);
@@ -472,35 +350,6 @@ class Post extends Common
             return [];
         }
     }
-
-    // public function recommendation($limit)
-    // {
-
-    //     // select genre of this id
-    //     $sql = "select group_concat(genre_id) as genres from post_joins where post_id = '$this->id';";
-    //     $genres = $this->conn->query($sql);
-    //     $genreList = explode(',', $genres);
-
-    //     // select post based on the available genres
-    //     foreach ($genreList as $genre) {
-    //         $sql = "select p.*, group_concat(distinct s.source) as source, group_concat(distinct s.id) as source_id, group_concat(distinct pr.producers) as producer,group_concat(distinct pr.id) as producer_id, group_concat(distinct st.studio) as studio,group_concat(distinct st.id) as studio_id, group_concat(distinct g.genre) as genre, group_concat(distinct g.id) as genre_id from post p inner join post_joins pj on p.id = pj.post_id left join source s on pj.source_id = s.id left join producers pr ON pj.producer_id = pr.id LEFT JOIN studio st ON pj.studio_id = st.id LEFT JOIN genre g ON pj.genre_id = g.id where post_id != $this->id and genre_id  = '$genre') ";
-    //         $res = $this->conn->query($sql);
-    //         $res->fetch_all(MYSQLI_ASSOC);
-    //     }
-    //     if ($limit != 0) {
-    //         $sql .= " limit $limit;";
-    //     } else {
-    //         $sql .= ';';
-    //     }
-
-
-    //     $res = $this->conn->query($sql);
-    //     if ($res->num_rows > 0) {
-    //         return $res->fetch_assoc();
-    //     } else {
-    //         return [];
-    //     }
-    // }
 
 
     public function recommendation($limit)
@@ -542,8 +391,7 @@ class Post extends Common
         }
 
         foreach ($post_ids as $key => $postId) {
-            // echo $postId;
-            // Prepare the SQL query for each post ID
+           
             $sql = "SELECT p.*, 
                    GROUP_CONCAT(DISTINCT s.source) AS source, 
                    GROUP_CONCAT(DISTINCT s.id) AS source_id, 
@@ -561,14 +409,12 @@ class Post extends Common
             LEFT JOIN genre g ON pj.genre_id = g.id 
             WHERE post_id = '$postId'";
 
-            // Execute the query
+            
             $result = $conn->query($sql);
 
-            // Check if query executed successfully
             if ($result === FALSE) {
                 echo "Error: ";
             } else {
-                // Fetch the results for the current post ID
                 $postResults[$postId] = array();
                 while ($row = $result->fetch_assoc()) {
                     $postResults[$postId] = $row;
@@ -582,18 +428,6 @@ class Post extends Common
         }
     }
 
-
-    // public function selectPostById()
-    // {
-    //     $sql = "select * from post where id = '$this->id';";
-    //     $result = $this->conn->query($sql);
-    //     if ($result->num_rows == 1) {
-    //         $var = $result->fetch_all(MYSQLI_ASSOC);
-    //         return $var;
-    //     } else {
-    //         return [];
-    //     }
-    // }
     public function selectFeaturedPost()
     {
         $sql = "select * from post where featured = 1 order by created_date desc limit 6;";

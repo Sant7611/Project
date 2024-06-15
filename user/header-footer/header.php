@@ -29,7 +29,7 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
 
     <!-- jquery  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- <script src="../../jquery-3.7.1.min.js"></script> -->
+
     <!-- jquery cookie function  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 
@@ -44,7 +44,6 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
             <li><a href="index.php?#home">Home</a></li>
             <li><a href="index.php?#new_release">New Release</a></li>
             <li><a href="index.php?#just_added">Just Added</a></li>
-            <li> <a href="index.php?#most_popular">Most Popular</a></li>
         </ul>
         <div class="vcenter">
 
@@ -61,7 +60,7 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
             <?php  } else { ?>
             <div class="dropdown">
                 <div class="userLogo">
-                    <img src="admin/images/user.png" alt="">
+                    <img src="admin/images/user.png" alt="<?php echo $_SESSION['uname']; ?>">
                 </div>
 
                 <div class="dropdown-content user-profile">
@@ -71,10 +70,7 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
                                 <span class="material-icons-outlined">favorite_border</span>My Wishlist
                             </a>
                         </li>
-                        <li class="dropdown-menu">
-                            <a href="user/changepw.php">
-                                <span class="material-icons-outlined">change_circle</span> Change Password</a>
-                        </li>
+                        
                         <li class="dropdown-menu">
                             <a href="user/logout.php">
                                 <span class="material-icons-outlined">logout</span> Logout</a>
@@ -98,7 +94,6 @@ if (isset($_SESSION['uname']) && isset($_COOKIE['uname'])) {
                     searchData: val
                 },
                 success: function(response) {
-                    // displaySearch(response);
                     $('.search-result').empty();
                     if (response.length > 0) {
                         $('.search-result').append(response);

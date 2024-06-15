@@ -9,11 +9,8 @@ $datalist = $post->fetch();
 
 
 if (isset($_POST['user_id'])) {
-    // echo gettype($_POST['user_id']);
     if (gettype($_POST['user_id']) === 'string') {
-        // $wishlist->user_id = filter_input(INPUT_POST, "user_id", FILTER_SANITIZE_NUMBER_INT);
         $wishlist->user_id = $_POST['user_id'];
-        // $wishlist->post_id = $_POST['post_id'];
         if (isset($_POST['status'])) {
             $wishlist->post_id = filter_input(INPUT_POST, "post_id", FILTER_SANITIZE_NUMBER_INT);
             $status = $_POST['status'];
@@ -37,8 +34,6 @@ if (isset($_POST['user_id'])) {
             }
             echo json_encode($response);
             return;
-            // exit;
-            // return 'success';
         }
 
         $res = $wishlist->fetchById();
@@ -46,7 +41,6 @@ if (isset($_POST['user_id'])) {
             $result = 1;
         }
         $post_id = $wishlist->getPostId();
-        // echo 'hello';
     }
 } else {
     header('HTTP/1.0 400 Bad Request');
@@ -100,7 +94,7 @@ if (isset($_POST['user_id'])) {
         </div>
     <?php } else { ?>
         <div class="collection">
-            <h2 style="color: #c5afaf;">No items in your Wishlist🙄🙄</h2>
+            <h2 style="color: #c5afaf;">No items in your Wishlist.</h2>
         </div>
     <?php } ?>
 </div>
