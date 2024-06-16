@@ -1,12 +1,10 @@
 <?php
-// include('sidebar.php');
 include('header_footer/header.php');
 include('../class/studio.class.php');
 
 $studio = new Studio();
 
 if (isset($_POST['submit'])) {
-    // echo $_POST['studio'];
     if (isset($_POST['studio']) && !empty($_POST['studio'])) {
         $studio->set('studio', $_POST['studio']);
         $res = $studio->save();

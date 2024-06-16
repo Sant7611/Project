@@ -115,27 +115,20 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    // echo "<pre>";
-    // print_r($_FILES['image']);
-    // echo "</pre>";
+    
         $result = $post->edit();
-        // echo $result;
-        // echo "success";
-        // header('location:listPost.php?msg=Post successfully Updated');
         
             if ($result == 'success') {
-                // $ErrMs = "";
-                
-                // $_SESSION['msg'] = 'Post successfully updated  '; 
+               
                 echo "<script>window.location.href='listPost.php?msg=Post successfully updated'</script>";
-                // $msg = "Post successfully updated  ";
+              
             } else {
                 $Errmsg = "Post cannot be updated";
             }
          
 
 }
-// include('sideBar.php');
+
 ?>
 
 
@@ -336,29 +329,3 @@ if (isset($_POST['submit'])) {
 include('header_footer/footer.php');
 ?>
 <script src="../js/ckeditor/ckeditor.js"></script>
-
-<!-- <script>
-    $(document).ready(function() {
-        $('#name').keyup(function() {
-            const value = $("#name").val();
-            $.ajax({
-                url: "checkCategoryName.php",
-                method: "post",
-                dataType: "text",
-                data: {
-                    'categoryName': value
-                },
-                success: function(res) {
-                    if (res != "success") {
-                        $("#categoryError").text(res);
-                        $("#CategoryEntry").val("");
-                    } else {
-                        $("#categoryError").text("");
-                        $("#CategoryEntry").val("success");
-
-                    }
-                }
-            })
-        })
-    })
-</script> -->

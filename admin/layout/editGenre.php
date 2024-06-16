@@ -10,7 +10,7 @@ if(isset($_GET['id'])){
 }
 
 if (isset($_POST['submit'])) {
-    // echo $_POST['genre'];
+    
     if (isset($_POST['genre']) && !empty($_POST['genre'])) {
         $genre->set('genre', $_POST['genre']);
         $res = $genre->edit();

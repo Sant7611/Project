@@ -1,12 +1,10 @@
 <?php
-// include('sidebar.php');
 include('header_footer/header.php');
 include('../class/source.class.php');
 
 $source = new Source();
 
 if (isset($_POST['submit'])) {
-    // echo $_POST['source'];
     if (isset($_POST['source']) && !empty($_POST['source'])) {
         $source->set('source', $_POST['source']);
         $res = $source->save();

@@ -6,7 +6,6 @@ include('../class/genre.class.php');
 $genre = new Genre();
 
 if (isset($_POST['submit'])) {
-    // echo $_POST['genre'];
     if (isset($_POST['genre']) && !empty($_POST['genre'])) {
         $genre->set('genre', $_POST['genre']);
         $res = $genre->save();

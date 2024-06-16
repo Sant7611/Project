@@ -263,10 +263,10 @@ $(document).ready(function() {
 
     //display comment
     function displayComment(comments) {
-        // console.log(comments);
+        
         var commentArea = $('.comment');
         if (comments != null)
-            commentArea.empty(); // Clear the comment area before adding new comments
+            commentArea.empty();
 
         comments.forEach(comment => {
             var commentHtml = generateComment(comment, blank = 0);
@@ -280,9 +280,7 @@ $(document).ready(function() {
     function displayReplies(replies, p_username) {
         if (replies && replies.length > 0) {
             replies.forEach(reply => {
-                // console.log(reply);
                 var replyHtml = generateComment(reply, p_username);
-                //this only works for reply to primary comment. not reply to reply
                 $('.comment').append(replyHtml);
 
                 displayReplies(reply.replies);
@@ -408,10 +406,8 @@ $(document).ready(function() {
                 $('#favorite').html('favorite_border');
             } else {
                 var status = 'insert';
-                // console.log(status);
                 $('#favorite').html('favorite');
             }
-            // console.log(status, user_ids, post_id);
             $.ajax({
                 url: 'user/checkWishlist.php',
                 method: 'POST',
@@ -420,9 +416,7 @@ $(document).ready(function() {
                     post_id: post_id,
                     user_id: user_ids
                 },
-                // dataType: 'JSON',
                 success: function(response) {
-                    // console.log(response.result);
                     var result = JSON.parse(response);
                     console.log(result.message)
                     alert(result.message);

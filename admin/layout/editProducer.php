@@ -1,5 +1,4 @@
 <?php
-// include('sidebar.php');
 include('header_footer/header.php');
 include('../class/producer.class.php');
 
@@ -10,7 +9,7 @@ if(isset($_GET['id'])){
 }
 
 if (isset($_POST['submit'])) {
-    // echo $_POST['producer'];
+   
     if (isset($_POST['producer']) && !empty($_POST['producer'])) {
         $producer->set('producer', $_POST['producer']);
         $res = $producer->edit();

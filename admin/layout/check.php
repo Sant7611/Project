@@ -16,13 +16,13 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
-  opacity: 0; /* Initially invisible */
-  transition: opacity 0.3s ease; /* Smooth transition effect */
+  background-color: rgba(0, 0, 0, 0.5); 
+  opacity: 0; 
+  transition: opacity 0.3s ease;
 }
 
 .img-container:hover .img-overlay {
-  opacity: 1; /* Show overlay on hover */
+  opacity: 1;
 }
 
 .img-container img {

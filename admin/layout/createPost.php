@@ -6,7 +6,7 @@ include('../class/studio.class.php');
 include('../class/genre.class.php');
 include('../class/source.class.php');
 include('../class/producer.class.php');
-// include('sideBar.php');
+
 
 $post = new Post();
 $genre = new Genre();
@@ -22,9 +22,6 @@ $genreList = $genre->fetch();
 
 if (isset($_POST['submit'])) {
 
-    // echo "<pre><div style = 'position: absolute; left: 0; z-index: 1;'";
-    // print_r($_FILES);
-    // echo "</div></pre>";
     if (!empty($_POST['title']) && !empty($_POST['type']) && !empty($_POST['episodes']) && !empty($_POST['release_date']) && !empty($_POST['producers_id']) && !empty($_POST['duration']) && !empty($_POST['source_id']) && !empty($_POST['genre_id']) && !empty($_POST['studio_id']) && !empty($_POST['aired']) && !empty($_POST['sypnosis'])) {
         $post->set('title', $_POST['title']);
         $post->set('alt_title', $_POST['alt_title']);

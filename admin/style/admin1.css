@@ -36,14 +36,12 @@
 /* User  */
 .user {
   position: absolute;
-  /* z-index: 1; */
   right: 1px;
   width: 200px;
 }
 
 /* body  */
 body {
-  /* background: #e7e7e7; */
   background: rgb(182 177 253);
 }
 
@@ -120,12 +118,6 @@ body {
   color: #5c566e;
 }
 
-/* .create-main th,
-.create-main td {
-  /* border: 2px solid black; */
-/* padding: 3px; */
-/* }  */
-
 .suggest {
   font-size: 12px;
   color: #1c1c1c;
@@ -167,8 +159,6 @@ body {
 
 .page-header {
   margin: 20px 0 0;
-  /* border-bottom: 1px solid #b9afaf;
-  padding-bottom: 20px; */
 }
 
 /*######################## Sidebar ################## */

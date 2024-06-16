@@ -126,23 +126,16 @@ if (isset($_POST['submit'])) {
                 <input type="email" placeholder="Email:" class="form-control" name="email" id="email" required>
             </div>
             <div class="form-group">
-                <!-- <div class="toggle-password"> -->
+               
                 <input type="password" class="form-control pw" placeholder="Password:" name="password" id="pwd" required>
-                <!-- <span class="material-icons-outlined  eye">visibility</span> -->
-                <!-- </div> -->
+                
             </div>
-            <!-- <input type="submit" name="submit"  class="btn"> -->
             <button type="submit" class="btn" name="submit">Submit</button>
         </form>
     </div>
     </div>
 
-    <!-- <script src="js/jquery/jquery.validate.min.js"></script>
-    <script src="js/jquery/jquery.min.js"></script>
-    <script>
-        const modal = document.getElementById('mydialog');
-        modal.showModel();        
-    </script> -->
+   
 </body>
 
 </html>

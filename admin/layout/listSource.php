@@ -2,7 +2,7 @@
 session_start();
 include('../class/source.class.php');
 include('header_footer/header.php');
-// include('sideBar.php');
+
 
 $source = new Source();
 $datalist = $source->fetch();

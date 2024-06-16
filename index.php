@@ -25,7 +25,6 @@ $justlist = $post->sortCreatedDate(12);
 
                     <div class="mySlides fade">
                         <div class="numbertext"><?php echo $key + 1 ?> / 3</div>
-                        <!-- <img src="admin/images/animeimg1.jpg" style="width:100%"> -->
                         <img src="<?php echo 'admin/images/sliderImage/' . $post['slider_img']; ?>" style="width:100%">
                         <div class=" overlay text">
                             <div class="disp">
@@ -217,17 +216,14 @@ $justlist = $post->sortCreatedDate(12);
                     post_id: post_id,
                     user_id: user_id
                 },
-                // dataType: 'JSON',
                 success: function(response) {
-                    // console.log(response.result);
                     var result = JSON.parse(response);
                     console.log(result.message)
                     alert(result.message);
                 },
                 error: function(xhr, status, error) {
                     console.log('error: ', error);
-                    // console.log(xhr.responseText)
-                }
+                    }
             })
         }
     });
