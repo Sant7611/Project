@@ -206,11 +206,11 @@ $(document).ready(function() {
     var cookie = $.cookie('uname');
     console.log(cookie);
 
-    var post_id = $('#post_id').val();
+    
     $('#submit_comment_btn').click(function(e) {
         e.preventDefault();
         var ucomment = $('#comment_Text').val();
-        var post_ids = $('#post_id').val();
+       
         var parent_ids = $('#parent_id').val();
         var user_ids = $('#user_id').val();
 
@@ -357,7 +357,6 @@ $(document).ready(function() {
         ratedIndex = parseInt($(this).data('index'));
         rating();
     });
-
 
     function rating() {
         $.ajax({

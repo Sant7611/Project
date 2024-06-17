@@ -12,7 +12,7 @@ if ($_GET['token']) {
         print_r($row);
 
         echo '</pre>';
-        $sql = "update users set status = 'verified' where token = '503ab24663577320bb8af3664bd693ed';";
+        $sql = "update users set status = 'verified' where token = '$token';";
         mysqli_query($conn, $sql);
         $_SESSION['status'] = 'Your Email has been successfully verified. Login to continue';
         header('location:login.php');

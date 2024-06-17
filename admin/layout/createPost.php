@@ -83,7 +83,7 @@ if (isset($_POST['submit'])) {
         try {
             $result = $post->save();
             if ($result == 'success') {
-                $msg = "Post inserted Successfully with id " . $result;
+                $msg = "Post inserted Successfully";
             }
         } catch (mysqli_sql_exception $e) {
             if(isset($e)) {

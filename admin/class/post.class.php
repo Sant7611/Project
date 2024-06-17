@@ -104,15 +104,13 @@ class Post extends Common
         }
         if ($this->conn->affected_rows > 0) {
             return true;
-        } else {
+        } else {                                                                                            
             return false;
         }
     }
     public function addSource($sourceToAdd, $newId)
     {
-        
         foreach ($sourceToAdd as  $addSource) {
-           
             $sql = "insert into post_joins(post_id, source_id) values('$newId',  '$addSource');";
             $this->conn->query($sql);
         }

@@ -17,7 +17,6 @@ class Wishlist
         } else {
             return 0;
         }
-       
     }
 
     public function delete()
@@ -60,14 +59,14 @@ class Wishlist
         GROUP_CONCAT(DISTINCT st.id) AS studio_id, 
         GROUP_CONCAT(DISTINCT g.genre) AS genre, 
         GROUP_CONCAT(DISTINCT g.id) AS genre_id 
- FROM post p 
- INNER JOIN post_joins pj ON p.id = pj.post_id 
- LEFT JOIN source s ON pj.source_id = s.id 
- LEFT JOIN producers pr ON pj.producer_id = pr.id 
- LEFT JOIN studio st ON pj.studio_id = st.id 
- LEFT JOIN genre g ON pj.genre_id = g.id 
- WHERE p.id IN ($ids) 
- GROUP BY p.id ; ";
+        FROM post p 
+        INNER JOIN post_joins pj ON p.id = pj.post_id 
+        LEFT JOIN source s ON pj.source_id = s.id 
+        LEFT JOIN producers pr ON pj.producer_id = pr.id 
+        LEFT JOIN studio st ON pj.studio_id = st.id 
+        LEFT JOIN genre g ON pj.genre_id = g.id 
+        WHERE p.id IN ($ids) 
+        GROUP BY p.id ; ";
 
         $res = mysqli_query($this->conn, $sql);
         if ($res->num_rows > 0) {
