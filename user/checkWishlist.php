@@ -35,7 +35,6 @@ if (isset($_POST['user_id'])) {
             echo json_encode($response);
             return;
         }
-
         $res = $wishlist->fetchById();
         if (is_array($res)) {
             $result = 1;

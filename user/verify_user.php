@@ -8,10 +8,7 @@ if ($_GET['token']) {
     $result = mysqli_query($conn, $sql);
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        echo '<pre>';
-        print_r($row);
-
-        echo '</pre>';
+        
         $sql = "update users set status = 'verified' where token = '$token';";
         mysqli_query($conn, $sql);
         $_SESSION['status'] = 'Your Email has been successfully verified. Login to continue';
